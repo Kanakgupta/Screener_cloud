@@ -6,8 +6,7 @@
     "enabled": true
   },
   "assets": {
-    "directory": ".",
-    "exclude": [".git/**"]
+    "directory": "./cloud"
   },
   "compatibility_flags": [
     "nodejs_compat"
