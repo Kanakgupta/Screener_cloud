@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "screener",
+  "compatibility_date": "2026-05-27",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": ".",
+    "exclude": [".git/**"]
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
