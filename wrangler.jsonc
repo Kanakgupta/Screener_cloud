@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "screener",
+  "main": "worker.js",
   "compatibility_date": "2026-05-27",
   "observability": {
     "enabled": true
@@ -10,5 +11,14 @@
   },
   "compatibility_flags": [
     "nodejs_compat"
+  ],
+  // Create this KV namespace first:
+  //   npx wrangler kv namespace create ELITE_KV
+  // Then paste the returned id below.
+  "kv_namespaces": [
+    {
+      "binding": "ELITE_KV",
+      "id": "1f45ba0294924143be0485776bb114c0"
+    }
   ]
 }
