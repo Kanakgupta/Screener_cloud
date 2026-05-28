@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://heraiscreener.com/india/sitemap.xml
+Sitemap: https://heraiscreener.com/usa/sitemap.xml
