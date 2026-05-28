@@ -4,7 +4,37 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>All USA Stocks</title>
+<title>All USA Stocks — Complete Stock List | HerAI Screener</title>
+<meta name="description" content="Complete list of all USA stocks with key metrics — price, P/E, market cap, 52-week change. Filter by sector and index.">
+<link rel="canonical" href="https://heraiscreener.com/usa/stocks.html" />
+<meta name="robots" content="index, follow" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="HerAI Screener" />
+<meta property="og:title" content="All USA Stocks — Complete Stock List" />
+<meta property="og:description" content="Free USA stock screener with technical &amp; fundamental screens, earnings, swing setups, and AI analysis." />
+<meta property="og:url" content="https://heraiscreener.com/usa/stocks.html" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="All USA Stocks — Complete Stock List" />
+<meta name="twitter:description" content="Free USA stock screener with technical &amp; fundamental screens, earnings, swing setups, and AI analysis." />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "HerAI Screener",
+  "url": "https://heraiscreener.com/",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://heraiscreener.com/usa/stocks/{search_term_string}.html",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
 <link rel="stylesheet" href="assets/style.css" />
 
 </head>
@@ -87519,7 +87549,7 @@
 
 <footer class="footer">
   <div class="wrap">
-    <div>US-equity explorer · Generated 2026-05-27 16:32 PDT</div>
+    <div>US-equity explorer · Generated 2026-05-27 21:36 PDT</div>
     <div class="muted">For informational use only - not investment advice.</div>
   </div>
 </footer>
@@ -87765,6 +87795,44 @@ function initStickyScrollbars(){
 document.addEventListener('DOMContentLoaded', initStickyScrollbars);
 window.addEventListener('load', initStickyScrollbars);
 window.addEventListener('resize', initStickyScrollbars);
+</script>
+
+<script>
+// Lazy-render: hide rows beyond first 100, reveal on scroll or search
+(function(){
+  const rows = document.querySelectorAll('.data-table tbody tr');
+  if (rows.length <= 100) return;
+  const BATCH = 100;
+  let shown = BATCH;
+  for (let i = BATCH; i < rows.length; i++) rows[i].hidden = true;
+
+  const sentinel = document.createElement('div');
+  sentinel.className = 'lazy-sentinel';
+  sentinel.style.cssText = 'height:1px;';
+  document.querySelector('.table-wrap').after(sentinel);
+
+  function showMore() {
+    const end = Math.min(shown + BATCH, rows.length);
+    for (let i = shown; i < end; i++) rows[i].hidden = false;
+    shown = end;
+    if (shown >= rows.length && obs) { obs.disconnect(); sentinel.remove(); }
+  }
+
+  const obs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) showMore();
+  }, { rootMargin: '200px' });
+  obs.observe(sentinel);
+
+  // If user searches/filters, reveal all so filter works
+  const q = document.getElementById('q');
+  if (q) q.addEventListener('input', function() {
+    if (shown < rows.length) {
+      for (let i = shown; i < rows.length; i++) rows[i].hidden = false;
+      shown = rows.length;
+      if (obs) { obs.disconnect(); sentinel.remove(); }
+    }
+  });
+})();
 </script>
 
 <script src="assets/sort.js" defer></script>
