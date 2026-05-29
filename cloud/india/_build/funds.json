@@ -1,0 +1,51 @@
+{
+  "label": "India-listed ETFs & Funds \u2014 Domestic, Global & Alternatives",
+  "fetched_at": "2026-05-29T22:50:45.615706+00:00",
+  "groups": [
+    {
+      "name": "Broad Market Index ETFs",
+      "blurb": "ETFs tracking India's flagship indices \u2014 Nifty 50 and Nifty Next 50. The most liquid instruments for core equity allocation.",
+      "funds": []
+    },
+    {
+      "name": "Bank & Financial ETFs",
+      "blurb": "ETFs tracking banking and financial services indices \u2014 the heaviest-weighted sectors in Nifty.",
+      "funds": []
+    },
+    {
+      "name": "Sector & Thematic ETFs",
+      "blurb": "Targeted exposure to specific sectors \u2014 IT, pharma, infrastructure, PSU enterprises, consumption, and more.",
+      "funds": []
+    },
+    {
+      "name": "Mid & Small Cap ETFs",
+      "blurb": "ETFs tracking mid-cap and small-cap indices \u2014 higher growth potential with higher volatility.",
+      "funds": []
+    },
+    {
+      "name": "Smart Beta & Factor ETFs",
+      "blurb": "Factor-based ETFs \u2014 quality, value, low volatility, dividend yield. Systematic strategies that tilt towards proven return drivers.",
+      "funds": []
+    },
+    {
+      "name": "US & International Equity",
+      "blurb": "India-listed ETFs and Fund-of-Funds tracking US & global indices \u2014 Nasdaq 100, S&P 500, NYSE FANG+, Hang Seng. Denominated in INR.",
+      "funds": []
+    },
+    {
+      "name": "Debt & Bond ETFs",
+      "blurb": "Government securities, PSU bonds, and target-maturity bond ETFs. Use for fixed-income allocation, duration management, or tactical hedging when rates peak.",
+      "funds": []
+    },
+    {
+      "name": "Gold & Silver ETFs",
+      "blurb": "Physical-backed precious metal ETFs listed on NSE. Core allocation of 5\u201310% helps offset equity drawdowns and INR weakness.",
+      "funds": []
+    },
+    {
+      "name": "Hedging & Safe-Haven ETFs",
+      "blurb": "NSE-listed instruments for hedging equity exposure. Indian exchanges don't offer inverse equity ETFs, so the practical toolkit is gold, silver, liquid funds and G-Sec bond ETFs \u2014 assets that historically hold value or rise when Nifty falls.",
+      "funds": []
+    }
+  ]
+}

@@ -182,7 +182,7 @@
 
 <footer class="footer">
   <div class="wrap">
-    <div>NIFTY stock explorer · Generated 2026-05-29 20:44 IST</div>
+    <div>NIFTY stock explorer · Generated 2026-05-30 04:21 IST</div>
     <div class="muted">For informational use only - not investment advice.</div>
   </div>
 </footer>
@@ -700,9 +700,13 @@ function activeRules() {
 }
 
 function filterStocks(rules) {
-  const u = (function(){ try { return localStorage.getItem('universe') || 'all'; } catch(e) { return 'all'; } })();
+  const _key = 'universe-' + ((window.SCREENER_REGION && SCREENER_REGION.id) || 'x');
+  const raw = (function(){ try { return localStorage.getItem(_key) || 'all'; } catch(e) { return 'all'; } })();
+  const uArr = raw.split(',').map(s => s.trim()).filter(Boolean);
+  const isAll = !uArr.length || uArr.includes('all');
+  const uSet = isAll ? null : new Set(uArr);
   return STOCKS.filter(s => {
-    if (u !== 'all' && !(s.indexes || []).includes(u)) return false;
+    if (uSet && !(s.indexes || []).some(x => uSet.has(x))) return false;
     for (const r of rules) {
       const m = METRICS.find(x => x.id === r.metric);
       if (!m) continue;

@@ -1,0 +1,289 @@
+{
+  "_notes": "Curated business-profile data per US ticker, loaded by build.py and rendered in the stock detail Read More panel. Schema mirrors regions/india/data/company_profiles.json. All fields optional.",
+  "AAPL": {
+    "revenue_segments": {
+      "title": "Revenue by Segment",
+      "as_of": "FY24",
+      "items": [
+        {
+          "label": "iPhone",
+          "pct": 48
+        },
+        {
+          "label": "Services",
+          "pct": 22
+        },
+        {
+          "label": "Mac",
+          "pct": 7
+        },
+        {
+          "label": "iPad",
+          "pct": 6
+        },
+        {
+          "label": "Wearables, Home and Accessories",
+          "pct": 9
+        }
+      ]
+    },
+    "geo_split": {
+      "title": "Revenue by Geography",
+      "as_of": "FY24",
+      "items": [
+        {
+          "label": "Americas",
+          "pct": 42
+        },
+        {
+          "label": "Europe",
+          "pct": 24
+        },
+        {
+          "label": "Greater China",
+          "pct": 19
+        },
+        {
+          "label": "Japan",
+          "pct": 6
+        },
+        {
+          "label": "Rest of Asia Pacific",
+          "pct": 9
+        }
+      ]
+    },
+    "highlights": [
+      {
+        "title": "R&D Investment",
+        "text": "Apple consistently invests heavily in research and development, leading to continuous innovation in hardware, software, and services."
+      },
+      {
+        "title": "Supply Chain Management",
+        "text": "Known for its highly optimized global supply chain, enabling efficient production and distribution of millions of devices annually."
+      },
+      {
+        "title": "Acquisitions",
+        "text": "Apple frequently acquires smaller technology companies to integrate new technologies and talent, particularly in AI, AR/VR, and chip design."
+      },
+      {
+        "title": "Retail Presence",
+        "text": "Operates a global network of Apple Stores, providing direct sales, customer service, and a premium brand experience."
+      }
+    ],
+    "focus": "Apple's forward strategy centers on deepening its ecosystem through integrated hardware, software, and services, expanding its presence in emerging markets, and pioneering new product categories like spatial computing with Apple Vision Pro. The company aims to drive continued growth in its high-margin Services segment while maintaining leadership in its core product lines through innovation and user experience.",
+    "_ai_generated": true
+  },
+  "NVDA": {
+    "revenue_segments": {
+      "title": "Revenue by Segment",
+      "as_of": "FY24",
+      "items": [
+        {
+          "label": "Data Center",
+          "pct": 78
+        },
+        {
+          "label": "Gaming",
+          "pct": 17
+        },
+        {
+          "label": "Professional Visualization",
+          "pct": 2
+        },
+        {
+          "label": "Automotive",
+          "pct": 1
+        },
+        {
+          "label": "OEM & Other",
+          "pct": 2
+        }
+      ]
+    },
+    "geo_split": {
+      "title": "Revenue by Geography",
+      "as_of": "FY24",
+      "items": [
+        {
+          "label": "United States",
+          "pct": 25
+        },
+        {
+          "label": "Taiwan",
+          "pct": 24
+        },
+        {
+          "label": "China (including Hong Kong)",
+          "pct": 17
+        },
+        {
+          "label": "Other",
+          "pct": 34
+        }
+      ]
+    },
+    "highlights": [
+      {
+        "title": "R&D Investment",
+        "text": "NVIDIA consistently invests a significant portion of its revenue into research and development, driving innovation in AI, accelerated computing, and graphics technologies."
+      },
+      {
+        "title": "Strategic Partnerships",
+        "text": "The company forms strategic alliances with various industry leaders, including cloud service providers, automotive manufacturers, and software developers, to expand its ecosystem and market reach."
+      },
+      {
+        "title": "Acquisitions",
+        "text": "NVIDIA has made key acquisitions, such as Mellanox Technologies, to bolster its data center and networking capabilities, enhancing its end-to-end AI infrastructure offerings."
+      },
+      {
+        "title": "Product Leadership",
+        "text": "NVIDIA's GPUs are widely recognized as industry leaders in high-performance computing, AI training and inference, and professional visualization."
+      }
+    ],
+    "focus": "NVIDIA's forward strategy centers on extending its leadership in accelerated computing and AI, particularly within the data center market. The company aims to drive innovation across its hardware and software platforms, expanding its ecosystem, and enabling new applications in areas like generative AI, digital twins, and autonomous systems.",
+    "_ai_generated": true
+  },
+  "GOOGL": {
+    "revenue_segments": {
+      "title": "Revenue by Segment",
+      "as_of": "FY23",
+      "items": [
+        {
+          "label": "Google Services",
+          "pct": 87
+        },
+        {
+          "label": "Google Cloud",
+          "pct": 11
+        },
+        {
+          "label": "Other Bets",
+          "pct": 1
+        }
+      ]
+    },
+    "business_split": {
+      "title": "Google Services Revenue Split",
+      "as_of": "FY23",
+      "items": [
+        {
+          "label": "Google Search & other",
+          "pct": 58
+        },
+        {
+          "label": "YouTube ads",
+          "pct": 10
+        },
+        {
+          "label": "Google Network",
+          "pct": 7
+        },
+        {
+          "label": "Other revenues",
+          "pct": 12
+        }
+      ]
+    },
+    "geo_split": {
+      "title": "Revenue by Geography",
+      "as_of": "FY23",
+      "items": [
+        {
+          "label": "United States",
+          "pct": 46
+        },
+        {
+          "label": "EMEA",
+          "pct": 30
+        },
+        {
+          "label": "Asia-Pacific",
+          "pct": 17
+        },
+        {
+          "label": "Other Americas",
+          "pct": 7
+        }
+      ]
+    },
+    "highlights": [
+      {
+        "title": "Research & Development",
+        "text": "Alphabet consistently invests heavily in R&D across AI, quantum computing, autonomous driving (Waymo), and life sciences (Verily), maintaining its technological leadership."
+      },
+      {
+        "title": "Acquisitions",
+        "text": "Strategic acquisitions have included Mandiant (cybersecurity) to bolster Google Cloud, and Fitbit (wearables) to expand its hardware ecosystem."
+      },
+      {
+        "title": "AI Integration",
+        "text": "AI is deeply integrated across all core products, from Search and YouTube recommendations to Google Cloud's enterprise solutions and Android features."
+      },
+      {
+        "title": "Cloud Expansion",
+        "text": "Google Cloud continues to expand its global infrastructure and service offerings, focusing on enterprise adoption and specialized AI/ML solutions."
+      }
+    ],
+    "focus": "Alphabet's forward strategy centers on leveraging AI to enhance its core advertising and cloud businesses, while also exploring new growth vectors through 'Other Bets' in areas like autonomous technology and life sciences. The company aims to deepen user engagement across its ecosystem of products and services, and to expand its enterprise footprint globally, particularly within Google Cloud.",
+    "_ai_generated": true
+  },
+  "SCHW": {
+    "revenue_segments": {
+      "title": "Revenue by Segment",
+      "as_of": "FY23",
+      "items": [
+        {
+          "label": "Investor Services",
+          "pct": 50
+        },
+        {
+          "label": "Advisor Services",
+          "pct": 50
+        }
+      ]
+    },
+    "business_split": {
+      "title": "Revenue by Business Line",
+      "as_of": "FY23",
+      "items": [
+        {
+          "label": "Net Interest Revenue",
+          "pct": 60
+        },
+        {
+          "label": "Asset Management and Administration Fees",
+          "pct": 25
+        },
+        {
+          "label": "Trading Revenue",
+          "pct": 5
+        },
+        {
+          "label": "Other Revenue",
+          "pct": 10
+        }
+      ]
+    },
+    "highlights": [
+      {
+        "title": "Acquisition",
+        "text": "Completed the acquisition of TD Ameritrade in 2020, significantly expanding client assets and accounts."
+      },
+      {
+        "title": "Client Assets",
+        "text": "Manages trillions in client assets, making it one of the largest investment services firms."
+      },
+      {
+        "title": "Technology Investment",
+        "text": "Continuously invests in digital platforms and technology to enhance client experience and operational efficiency."
+      },
+      {
+        "title": "Banking Services",
+        "text": "Offers a full suite of banking products, including checking, savings, and lending, through Schwab Bank."
+      }
+    ],
+    "focus": "Charles Schwab's strategy is centered on growing its client base and assets by offering a comprehensive suite of wealth management, brokerage, banking, and advisory services. The company aims to leverage its scale, technology, and competitive pricing to attract and retain clients, while also expanding its product offerings and enhancing the client experience across both its direct-to-consumer and advisor platforms.",
+    "_ai_generated": true
+  }
+}

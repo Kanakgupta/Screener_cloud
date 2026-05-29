@@ -153,7 +153,7 @@
 
 <footer class="footer">
   <div class="wrap">
-    <div>NIFTY stock explorer · Generated 2026-05-29 20:44 IST</div>
+    <div>NIFTY stock explorer · Generated 2026-05-30 04:21 IST</div>
     <div class="muted">For informational use only - not investment advice.</div>
   </div>
 </footer>
@@ -412,7 +412,7 @@ const TV_EXCHANGE_PREFIX = "NSE";
 
 let earnWhen = EARN_UPCOMING.length > 0 ? 'upcoming' : (EARN_PAST.length > 0 ? 'past' : 'all');
 let earnSort = { key: 'report_date', dir: 'asc' };
-let earnUniverse = 'all';
+let earnUniverse = ['all'];
 
 function fmtDate(iso) {
   if (!iso) return '';
@@ -465,8 +465,10 @@ function _filtered() {
   let rows = _activeRows();
 
   // Honor top-nav universe (ALL / SPX / NDX / AI / ...)
-  if (earnUniverse !== 'all') {
-    rows = rows.filter(r => (r.indexes || []).includes(earnUniverse));
+  const isAll = earnUniverse.length === 1 && earnUniverse[0] === 'all';
+  if (!isAll) {
+    const uSet = new Set(earnUniverse);
+    rows = rows.filter(r => (r.indexes || []).some(x => uSet.has(x)));
   }
 
   if (q) {
@@ -578,18 +580,29 @@ document.querySelectorAll('#earnTabs .news-tab').forEach(btn => {
 renderEarn();
 
 // Keep earnings rows in sync with global universe toggle from base.html
+function _normalizeUniv(u) {
+  if (!u) return ['all'];
+  if (Array.isArray(u)) {
+    const a = u.filter(Boolean);
+    return (!a.length || a.includes('all')) ? ['all'] : a;
+  }
+  const a = String(u).split(',').map(s => s.trim()).filter(Boolean);
+  return (!a.length || a.includes('all')) ? ['all'] : a;
+}
 document.addEventListener('DOMContentLoaded', () => {
-  const activeBtn = document.querySelector('.u-btn.active');
-  let u = activeBtn ? activeBtn.dataset.univ : 'all';
+  let u = null;
   try {
-    const saved = localStorage.getItem('universe-' + (SCREENER_REGION.id || 'x'));
-    if (saved) u = saved;
+    u = localStorage.getItem('universe-' + (SCREENER_REGION.id || 'x'));
   } catch(e) {}
-  earnUniverse = u || 'all';
+  if (!u) {
+    const activeBtn = document.querySelector('.u-btn.active');
+    u = activeBtn ? activeBtn.dataset.univ : 'all';
+  }
+  earnUniverse = _normalizeUniv(u);
   renderEarn();
 });
 document.addEventListener('universe-changed', (ev) => {
-  earnUniverse = (ev && ev.detail) || 'all';
+  earnUniverse = _normalizeUniv(ev && ev.detail);
   renderEarn();
 });
 </script>
