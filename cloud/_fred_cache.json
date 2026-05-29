@@ -1,0 +1,91 @@
+{
+  "_fetched_at": "2026-05-29T13:30:05.375720+00:00",
+  "FEDFUNDS": {
+    "id": "FEDFUNDS",
+    "label": "Fed Funds Rate",
+    "value": 3.64,
+    "prev": 3.64,
+    "change": 0.0,
+    "change_pct": 0.0,
+    "date": "2026-04-01",
+    "unit": "%",
+    "freq": "monthly"
+  },
+  "CPIAUCSL": {
+    "id": "CPIAUCSL",
+    "label": "CPI (All Urban)",
+    "value": 332.407,
+    "prev": 330.293,
+    "change": 2.11,
+    "change_pct": 0.64,
+    "date": "2026-04-01",
+    "unit": "Index",
+    "freq": "monthly"
+  },
+  "PPIFIS": {
+    "id": "PPIFIS",
+    "label": "PPI (Final Demand)",
+    "value": 156.496,
+    "prev": 154.372,
+    "change": 2.12,
+    "change_pct": 1.38,
+    "date": "2026-04-01",
+    "unit": "Index",
+    "freq": "monthly"
+  },
+  "GDP": {
+    "id": "GDP",
+    "label": "GDP (Nominal)",
+    "value": 31819.464,
+    "prev": 31422.526,
+    "change": 396.94,
+    "change_pct": 1.26,
+    "date": "2026-01-01",
+    "unit": "B USD",
+    "freq": "quarterly"
+  },
+  "UNRATE": {
+    "id": "UNRATE",
+    "label": "Unemployment Rate",
+    "value": 4.3,
+    "prev": 4.3,
+    "change": 0.0,
+    "change_pct": 0.0,
+    "date": "2026-04-01",
+    "unit": "%",
+    "freq": "monthly"
+  },
+  "PAYEMS": {
+    "id": "PAYEMS",
+    "label": "Non-Farm Payrolls",
+    "value": 158736.0,
+    "prev": 158621.0,
+    "change": 115.0,
+    "change_pct": 0.07,
+    "date": "2026-04-01",
+    "unit": "K",
+    "freq": "monthly"
+  },
+  "UMCSENT": {
+    "id": "UMCSENT",
+    "label": "Consumer Confidence",
+    "value": 49.8,
+    "prev": 53.3,
+    "change": -3.5,
+    "change_pct": -6.57,
+    "date": "2026-04-01",
+    "unit": "Index",
+    "freq": "monthly"
+  },
+  "INDPRO": {
+    "id": "INDPRO",
+    "label": "Industrial Production",
+    "value": 102.4963,
+    "prev": 101.806,
+    "change": 0.69,
+    "change_pct": 0.68,
+    "date": "2026-04-01",
+    "unit": "Index",
+    "freq": "monthly"
+  }
+}

@@ -1301,6 +1301,15 @@ i.rec-dot.rec-strongsell  { background: #dc2626; }
 
 /* ---------- Macro/Micro sentiment regime (visual-first) ---------- */
 
+/* Dark container so inner dark cards + light text pop properly */
+#sentimentSection {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border: 1px solid #334155;
+  color: #e2e8f0;
+}
+#sentimentSection .card-head h2 { color: #f1f5f9; }
+#sentimentSection .card-head .muted { color: #94a3b8; }
+
 /* Overall stance strip */
 .overall-strip { display:flex; align-items:center; gap:18px; padding:14px 18px; border-radius:10px;
                  background:linear-gradient(90deg, color-mix(in srgb, var(--c) 22%, transparent), transparent 70%);
@@ -1319,10 +1328,10 @@ i.rec-dot.rec-strongsell  { background: #dc2626; }
 /* Two-up sentiment cards */
 .sentiment-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
 @media (max-width: 720px) { .sentiment-grid { grid-template-columns:1fr; } }
-.sent-card { background:rgba(30,41,59,0.55); border:1px solid var(--border,#2a2f3a); border-radius:12px; padding:16px 18px; }
+.sent-card { background:rgba(30,41,59,0.60); border:1px solid rgba(71,85,105,0.45); border-radius:12px; padding:16px 18px; }
 
-/* Color-coded subheading (replaces the old badge) */
-.sent-h { margin:0; font-size:16px; font-weight:800; letter-spacing:-0.2px; color:#e2e8f0; }
+/* Color-coded subheading */
+.sent-h { margin:0; font-size:16px; font-weight:800; letter-spacing:-0.2px; }
 .sent-sub { margin:2px 0 6px; color:#94a3b8; }
 
 /* SVG half-circle gauge */
@@ -1337,22 +1346,36 @@ i.rec-dot.rec-strongsell  { background: #dc2626; }
 .ichip.tone-warn { border-left-color:#f59e0b; }
 .ichip.tone-bad  { border-left-color:#ef4444; }
 .ichip-head { display:flex; justify-content:space-between; align-items:baseline; gap:6px; }
-.ichip-label { font-size:11px; color:#3b82f6; font-weight:700; text-transform:uppercase; letter-spacing:.04em; }
+.ichip-label { font-size:11px; color:#60a5fa; font-weight:700; text-transform:uppercase; letter-spacing:.04em; }
 .ichip-bump  { font-size:11px; font-weight:800; }
-.ichip-value { font-size:14px; font-weight:700; color:#e2e8f0; margin-top:2px; }
+.ichip-value { font-size:14px; font-weight:700; color:#f1f5f9; margin-top:2px; }
 .ichip-value .ichip-chg { font-size:11px; font-weight:600; margin-left:4px; }
-.ichip-value .ichip-chg.pos { color:#22c55e; }
-.ichip-value .ichip-chg.neg { color:#ef4444; }
+.ichip-value .ichip-chg.pos { color:#4ade80; }
+.ichip-value .ichip-chg.neg { color:#f87171; }
 .ichip-mini { margin:6px 0 4px; }
-.ichip-mini-track { position:relative; height:6px; background:rgba(148,163,184,0.18); border-radius:3px; overflow:hidden; }
+.ichip-mini-track { position:relative; height:6px; background:rgba(148,163,184,0.22); border-radius:3px; overflow:hidden; }
 .ichip-mini-center { position:absolute; left:50%; top:0; bottom:0; width:1px; background:rgba(226,232,240,0.35); z-index:1; }
 .ichip-mini-fill { position:absolute; top:0; bottom:0; border-radius:3px; min-width:2px; }
 .ichip-tag { font-size:11px; font-weight:600; }
 .ichip-why { font-size:11px; color:#94a3b8; line-height:1.4; margin-top:4px; font-style:italic; }
 
+/* Indicator reference list (expandable under each sentiment card) */
+.ind-ref { margin-top:14px; padding-top:10px; border-top:1px dashed rgba(71,85,105,0.4); }
+.ind-ref-title { font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:#60a5fa;
+                 font-weight:700; cursor:pointer; list-style:none; padding:2px 0; }
+.ind-ref-title::-webkit-details-marker { display:none; }
+.ind-ref-title::before { content:"\25B8 "; font-size:10px; }
+details[open] > .ind-ref-title::before { content:"\25BE "; }
+.ind-ref-list { margin:8px 0 0; padding:0 0 0 16px; display:grid; gap:5px; }
+.ind-ref-list li { font-size:11px; color:#94a3b8; line-height:1.45; }
+.ind-ref-list li strong { color:#cbd5e1; font-weight:700; }
+.ind-ref-list li.live { color:#cbd5e1; }
+.ind-ref-list li.live::marker { color:#4ade80; }
+.ind-ref-list li.live strong { color:#4ade80; }
+
 /* Legend strip */
 .legend-row { display:flex; flex-wrap:wrap; gap:14px; margin-top:12px; padding-top:10px;
-              border-top:1px dashed var(--border,#2a2f3a); font-size:11px; color:#94a3b8; }
+              border-top:1px dashed rgba(71,85,105,0.5); font-size:11px; color:#94a3b8; }
 .lg-item { display:inline-flex; align-items:center; gap:6px; }
 .lg-sw { display:inline-block; width:12px; height:12px; border-radius:3px; }
 .card-head { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px; }
