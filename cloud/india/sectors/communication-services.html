@@ -54,6 +54,7 @@
              oninput="updateSuggest()" onkeydown="navSuggest(event)" onfocus="updateSuggest()" onblur="setTimeout(hideSuggest,150)" />
       <div id="suggest" class="suggest" hidden></div>
     </form>
+    <div id="globalAuthBadge" class="global-auth-badge"></div>
   </div>
   <div class="wrap topnav-row2">
     <nav>
@@ -97,20 +98,53 @@
 <div class="table-wrap">
   <table class="data-table sortable">
     <thead><tr>
-      <th>#</th><th>Name</th><th class="num">Price</th><th class="num">Mkt Cap</th>
-      <th class="num">P/E</th><th class="num">Div %</th><th class="num">1Y %</th><th>Industry</th>
+      <th>#</th><th>Ticker</th><th>Name</th>
+      <th>Charts</th>
+      <th class="num">Mkt Cap</th>
+      <th class="num">Price</th>
+      <th class="num">P/E</th>
+      <th class="num">Fwd P/E</th>
+      <th class="num">Δ P/E</th>
+      <th class="num">ROCE %</th>
+      <th class="num">ROA %</th>
+      <th class="num">Rev CAGR 5Y %</th>
+      <th class="num">Profit CAGR 5Y %</th>
+      <th class="num">Div %</th>
+      <th class="num">1Y %</th>
+      <th>Industry</th>
     </tr></thead>
     <tbody>
     
       <tr data-idx="NIFTY50,NSE,AI">
         <td>1</td>
         <td>
-          <a href="../stocks/BHARTIARTL.NS.html"><strong>BHARTIARTL</strong> <span class="muted">Bharti Airtel Limited</span></a>
-          <span class="idx-badge idx-NIFTY50">NIFTY50</span><span class="idx-badge idx-NSE">NSE</span><span class="idx-badge idx-AI">AI</span>
+          <a href="../stocks/BHARTIARTL.NS.html"><strong>BHARTIARTL</strong></a>
+          <span class="idx-badge idx-AI">AI</span>
         </td>
-        <td class="num">1,852.20</td>
+        <td><a href="../stocks/BHARTIARTL.NS.html">Bharti Airtel Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=BHARTIARTL" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:BHARTIARTL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹11.25 L Cr</td>
+        <td class="num">1,852.20</td>
         <td class="num">41.56</td>
+        <td class="num">22.14</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 19.42</td>
+        <td class="num">17.67%</td>
+        <td class="num">7.85%</td>
+        <td class="num pos">14.88%</td>
+        <td class="num pos">47.34%</td>
         <td class="num">0.86%</td>
         <td class="num pos">+0.62%</td>
         <td>Telecom Services</td>
@@ -119,12 +153,33 @@
       <tr data-idx="NIFTY_MID,NSE">
         <td>2</td>
         <td>
-          <a href="../stocks/IDEA.NS.html"><strong>IDEA</strong> <span class="muted">Vodafone Idea Limited</span></a>
-          <span class="idx-badge idx-NIFTY_MID">NIFTY_MID</span><span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/IDEA.NS.html"><strong>IDEA</strong></a>
+          
         </td>
-        <td class="num">14.18</td>
+        <td><a href="../stocks/IDEA.NS.html">Vodafone Idea Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=IDEA" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:IDEA&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹1.54 L Cr</td>
+        <td class="num">14.18</td>
         <td class="num">4.42</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">36.88%</td>
+        <td class="num">-1.02%</td>
+        <td class="num pos">2.05%</td>
+        <td class="num pos">72.64%</td>
         <td class="num">-</td>
         <td class="num pos">+99.16%</td>
         <td>Telecom Services</td>
@@ -133,12 +188,33 @@
       <tr data-idx="NIFTY_MID,NSE">
         <td>3</td>
         <td>
-          <a href="../stocks/INDUSTOWER.NS.html"><strong>INDUSTOWER</strong> <span class="muted">Indus Towers Limited</span></a>
-          <span class="idx-badge idx-NIFTY_MID">NIFTY_MID</span><span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/INDUSTOWER.NS.html"><strong>INDUSTOWER</strong></a>
+          
         </td>
-        <td class="num">436.25</td>
+        <td><a href="../stocks/INDUSTOWER.NS.html">Indus Towers Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=INDUSTOWER" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:INDUSTOWER&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹1.15 L Cr</td>
+        <td class="num">436.25</td>
         <td class="num">16.08</td>
+        <td class="num">13.95</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 2.13</td>
+        <td class="num">18.44%</td>
+        <td class="num">10.07%</td>
+        <td class="num pos">4.61%</td>
+        <td class="num pos">51.86%</td>
         <td class="num">-</td>
         <td class="num pos">+11.49%</td>
         <td>Telecom Services</td>
@@ -147,12 +223,33 @@
       <tr data-idx="NIFTY_MID,NSE">
         <td>4</td>
         <td>
-          <a href="../stocks/BHARTIHEXA.NS.html"><strong>BHARTIHEXA</strong> <span class="muted">BHARTI HEXACOM LIMITED</span></a>
-          <span class="idx-badge idx-NIFTY_MID">NIFTY_MID</span><span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/BHARTIHEXA.NS.html"><strong>BHARTIHEXA</strong></a>
+          
         </td>
-        <td class="num">1,534.00</td>
+        <td><a href="../stocks/BHARTIHEXA.NS.html">BHARTI HEXACOM LIMITED</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=BHARTIHEXA" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:BHARTIHEXA&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹76,650.00 Cr</td>
+        <td class="num">1,534.00</td>
         <td class="num">44.22</td>
+        <td class="num">23.87</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 20.35</td>
+        <td class="num">21.84%</td>
+        <td class="num">9.06%</td>
+        <td class="num pos">12.45%</td>
+        <td class="num pos">46.68%</td>
         <td class="num">0.65%</td>
         <td class="num neg">-13.59%</td>
         <td>Telecom Services</td>
@@ -161,12 +258,33 @@
       <tr data-idx="NIFTY_MID,NSE,AI,TECH">
         <td>5</td>
         <td>
-          <a href="../stocks/NAUKRI.NS.html"><strong>NAUKRI</strong> <span class="muted">Info Edge (India) Limited</span></a>
-          <span class="idx-badge idx-NIFTY_MID">NIFTY_MID</span><span class="idx-badge idx-NSE">NSE</span><span class="idx-badge idx-AI">AI</span><span class="idx-badge idx-TECH">TECH</span>
+          <a href="../stocks/NAUKRI.NS.html"><strong>NAUKRI</strong></a>
+          <span class="idx-badge idx-AI">AI</span>
         </td>
-        <td class="num">1,005.65</td>
+        <td><a href="../stocks/NAUKRI.NS.html">Info Edge (India) Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=NAUKRI" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:NAUKRI&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹65,356.71 Cr</td>
+        <td class="num">1,005.65</td>
         <td class="num">45.19</td>
+        <td class="num">42.06</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 3.12</td>
+        <td class="num">4.71%</td>
+        <td class="num">1.45%</td>
+        <td class="num pos">11.88%</td>
+        <td class="num pos">483.26%</td>
         <td class="num">1.43%</td>
         <td class="num neg">-29.37%</td>
         <td>Internet Content &amp; Information</td>
@@ -175,12 +293,33 @@
       <tr data-idx="NIFTY_MID,NSE,AI">
         <td>6</td>
         <td>
-          <a href="../stocks/TATACOMM.NS.html"><strong>TATACOMM</strong> <span class="muted">Tata Communications Limited</span></a>
-          <span class="idx-badge idx-NIFTY_MID">NIFTY_MID</span><span class="idx-badge idx-NSE">NSE</span><span class="idx-badge idx-AI">AI</span>
+          <a href="../stocks/TATACOMM.NS.html"><strong>TATACOMM</strong></a>
+          <span class="idx-badge idx-AI">AI</span>
         </td>
-        <td class="num">1,966.60</td>
+        <td><a href="../stocks/TATACOMM.NS.html">Tata Communications Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=TATACOMM" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:TATACOMM&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹55,777.35 Cr</td>
+        <td class="num">1,966.60</td>
         <td class="num">53.50</td>
+        <td class="num">24.11</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 29.39</td>
+        <td class="num">15.29%</td>
+        <td class="num">4.54%</td>
+        <td class="num pos">11.61%</td>
+        <td class="num neg">-17.69%</td>
         <td class="num">0.89%</td>
         <td class="num pos">+18.10%</td>
         <td>Telecom Services</td>
@@ -189,12 +328,33 @@
       <tr data-idx="NIFTY_SMALL,NSE,AI">
         <td>7</td>
         <td>
-          <a href="../stocks/AFFLE.NS.html"><strong>AFFLE</strong> <span class="muted">Affle 3i Limited</span></a>
-          <span class="idx-badge idx-NIFTY_SMALL">NIFTY_SMALL</span><span class="idx-badge idx-NSE">NSE</span><span class="idx-badge idx-AI">AI</span>
+          <a href="../stocks/AFFLE.NS.html"><strong>AFFLE</strong></a>
+          <span class="idx-badge idx-AI">AI</span>
         </td>
-        <td class="num">1,477.20</td>
+        <td><a href="../stocks/AFFLE.NS.html">Affle 3i Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=AFFLE" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:AFFLE&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹20,758.56 Cr</td>
+        <td class="num">1,477.20</td>
         <td class="num">45.63</td>
+        <td class="num">29.48</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 16.15</td>
+        <td class="num">15.30%</td>
+        <td class="num">7.55%</td>
+        <td class="num pos">23.64%</td>
+        <td class="num pos">22.97%</td>
         <td class="num">-</td>
         <td class="num neg">-14.94%</td>
         <td>Advertising Agencies</td>
@@ -203,12 +363,33 @@
       <tr data-idx="NIFTY_SMALL,NSE">
         <td>8</td>
         <td>
-          <a href="../stocks/SUNTV.NS.html"><strong>SUNTV</strong> <span class="muted">Sun TV Network Limited</span></a>
-          <span class="idx-badge idx-NIFTY_SMALL">NIFTY_SMALL</span><span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/SUNTV.NS.html"><strong>SUNTV</strong></a>
+          
         </td>
-        <td class="num">512.90</td>
+        <td><a href="../stocks/SUNTV.NS.html">Sun TV Network Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=SUNTV" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:SUNTV&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹20,265.80 Cr</td>
+        <td class="num">512.90</td>
         <td class="num">14.06</td>
+        <td class="num">11.37</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 2.69</td>
+        <td class="num">15.31%</td>
+        <td class="num">7.04%</td>
+        <td class="num pos">4.74%</td>
+        <td class="num neg">-5.51%</td>
         <td class="num">0.97%</td>
         <td class="num neg">-17.01%</td>
         <td>Broadcasting</td>
@@ -217,12 +398,33 @@
       <tr data-idx="NSE">
         <td>9</td>
         <td>
-          <a href="../stocks/PFOCUS.NS.html"><strong>PFOCUS</strong> <span class="muted">Prime Focus Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/PFOCUS.NS.html"><strong>PFOCUS</strong></a>
+          
         </td>
-        <td class="num">239.85</td>
+        <td><a href="../stocks/PFOCUS.NS.html">Prime Focus Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=PFOCUS" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:PFOCUS&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹18,639.29 Cr</td>
+        <td class="num">239.85</td>
         <td class="num">-</td>
+        <td class="num">34.22</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">2.06%</td>
+        <td class="num">-</td>
+        <td class="num pos">1.64%</td>
+        <td class="num neg">-39.93%</td>
         <td class="num">-</td>
         <td class="num pos">+126.68%</td>
         <td>Entertainment</td>
@@ -231,12 +433,33 @@
       <tr data-idx="NIFTY_SMALL,NSE,AI,TECH">
         <td>10</td>
         <td>
-          <a href="../stocks/INDIAMART.NS.html"><strong>INDIAMART</strong> <span class="muted">IndiaMART InterMESH Limited</span></a>
-          <span class="idx-badge idx-NIFTY_SMALL">NIFTY_SMALL</span><span class="idx-badge idx-NSE">NSE</span><span class="idx-badge idx-AI">AI</span><span class="idx-badge idx-TECH">TECH</span>
+          <a href="../stocks/INDIAMART.NS.html"><strong>INDIAMART</strong></a>
+          <span class="idx-badge idx-AI">AI</span>
         </td>
-        <td class="num">2,020.10</td>
+        <td><a href="../stocks/INDIAMART.NS.html">IndiaMART InterMESH Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=INDIAMART" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:INDIAMART&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹12,143.28 Cr</td>
+        <td class="num">2,020.10</td>
         <td class="num">25.64</td>
+        <td class="num">19.59</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 6.05</td>
+        <td class="num">19.97%</td>
+        <td class="num">7.16%</td>
+        <td class="num pos">16.77%</td>
+        <td class="num pos">18.70%</td>
         <td class="num">1.49%</td>
         <td class="num neg">-11.06%</td>
         <td>Internet Content &amp; Information</td>
@@ -245,12 +468,33 @@
       <tr data-idx="NSE">
         <td>11</td>
         <td>
-          <a href="../stocks/NAZARA.NS.html"><strong>NAZARA</strong> <span class="muted">Nazara Technologies Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/NAZARA.NS.html"><strong>NAZARA</strong></a>
+          
         </td>
-        <td class="num">289.50</td>
+        <td><a href="../stocks/NAZARA.NS.html">Nazara Technologies Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=NAZARA" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:NAZARA&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹10,745.34 Cr</td>
+        <td class="num">289.50</td>
         <td class="num">10.66</td>
+        <td class="num">39.20</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #dc2626;">Δ -28.54</td>
+        <td class="num">1.80%</td>
+        <td class="num">0.34%</td>
+        <td class="num pos">18.79%</td>
+        <td class="num pos">34.50%</td>
         <td class="num">-</td>
         <td class="num neg">-9.16%</td>
         <td>Electronic Gaming &amp; Multimedia</td>
@@ -259,12 +503,33 @@
       <tr data-idx="NIFTY_SMALL,NSE,PSU">
         <td>12</td>
         <td>
-          <a href="../stocks/RAILTEL.NS.html"><strong>RAILTEL</strong> <span class="muted">RailTel Corporation of India Limited</span></a>
-          <span class="idx-badge idx-NIFTY_SMALL">NIFTY_SMALL</span><span class="idx-badge idx-NSE">NSE</span><span class="idx-badge idx-PSU">PSU</span>
+          <a href="../stocks/RAILTEL.NS.html"><strong>RAILTEL</strong></a>
+          
         </td>
-        <td class="num">324.30</td>
+        <td><a href="../stocks/RAILTEL.NS.html">RailTel Corporation of India Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=RAILTEL" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:RAILTEL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹10,393.59 Cr</td>
+        <td class="num">324.30</td>
         <td class="num">32.75</td>
+        <td class="num">21.66</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 11.08</td>
+        <td class="num">18.14%</td>
+        <td class="num">5.09%</td>
+        <td class="num pos">30.96%</td>
+        <td class="num pos">12.79%</td>
         <td class="num">1.19%</td>
         <td class="num neg">-18.52%</td>
         <td>Telecom Services</td>
@@ -273,12 +538,33 @@
       <tr data-idx="NIFTY_SMALL,NSE">
         <td>13</td>
         <td>
-          <a href="../stocks/PVRINOX.NS.html"><strong>PVRINOX</strong> <span class="muted">PVR INOX Limited</span></a>
-          <span class="idx-badge idx-NIFTY_SMALL">NIFTY_SMALL</span><span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/PVRINOX.NS.html"><strong>PVRINOX</strong></a>
+          
         </td>
-        <td class="num">957.80</td>
+        <td><a href="../stocks/PVRINOX.NS.html">PVR INOX Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=PVRINOX" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:PVRINOX&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹9,445.85 Cr</td>
+        <td class="num">957.80</td>
         <td class="num">53.41</td>
+        <td class="num">16.26</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 37.15</td>
+        <td class="num">7.24%</td>
+        <td class="num">3.23%</td>
+        <td class="num pos">21.15%</td>
+        <td class="num pos">66.57%</td>
         <td class="num">-</td>
         <td class="num neg">-5.64%</td>
         <td>Entertainment</td>
@@ -287,12 +573,33 @@
       <tr data-idx="NIFTY_SMALL,NSE">
         <td>14</td>
         <td>
-          <a href="../stocks/ZEEL.NS.html"><strong>ZEEL</strong> <span class="muted">Zee Entertainment Enterprises Limited</span></a>
-          <span class="idx-badge idx-NIFTY_SMALL">NIFTY_SMALL</span><span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/ZEEL.NS.html"><strong>ZEEL</strong></a>
+          
         </td>
-        <td class="num">91.46</td>
+        <td><a href="../stocks/ZEEL.NS.html">Zee Entertainment Enterprises Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=ZEEL" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:ZEEL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹8,725.36 Cr</td>
+        <td class="num">91.46</td>
         <td class="num">32.21</td>
+        <td class="num">10.90</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 21.31</td>
+        <td class="num">2.64%</td>
+        <td class="num">-</td>
+        <td class="num pos">0.05%</td>
+        <td class="num pos">78.77%</td>
         <td class="num">2.66%</td>
         <td class="num neg">-27.25%</td>
         <td>Broadcasting</td>
@@ -301,12 +608,33 @@
       <tr data-idx="NSE">
         <td>15</td>
         <td>
-          <a href="../stocks/TIPSMUSIC.NS.html"><strong>TIPSMUSIC</strong> <span class="muted">Tips Music Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/TIPSMUSIC.NS.html"><strong>TIPSMUSIC</strong></a>
+          
         </td>
-        <td class="num">670.60</td>
+        <td><a href="../stocks/TIPSMUSIC.NS.html">Tips Music Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=TIPSMUSIC" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:TIPSMUSIC&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹8,526.37 Cr</td>
+        <td class="num">670.60</td>
         <td class="num">39.30</td>
+        <td class="num">28.79</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 10.51</td>
+        <td class="num">110.18%</td>
+        <td class="num">48.70%</td>
+        <td class="num pos">26.21%</td>
+        <td class="num pos">41.49%</td>
         <td class="num">2.39%</td>
         <td class="num pos">+3.46%</td>
         <td>Entertainment</td>
@@ -315,12 +643,33 @@
       <tr data-idx="NIFTY_SMALL,NSE">
         <td>16</td>
         <td>
-          <a href="../stocks/TTML.NS.html"><strong>TTML</strong> <span class="muted">Tata Teleservices (Maharashtra) Limited</span></a>
-          <span class="idx-badge idx-NIFTY_SMALL">NIFTY_SMALL</span><span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/TTML.NS.html"><strong>TTML</strong></a>
+          
         </td>
-        <td class="num">43.07</td>
+        <td><a href="../stocks/TTML.NS.html">Tata Teleservices (Maharashtra) Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=TTML" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:TTML&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹8,472.66 Cr</td>
+        <td class="num">43.07</td>
         <td class="num">-</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">-6.80%</td>
+        <td class="num">22.83%</td>
+        <td class="num pos">1.46%</td>
+        <td class="num pos">27.06%</td>
         <td class="num">-</td>
         <td class="num neg">-42.08%</td>
         <td>Telecom Services</td>
@@ -329,12 +678,33 @@
       <tr data-idx="NIFTY_SMALL,NSE">
         <td>17</td>
         <td>
-          <a href="../stocks/SAREGAMA.NS.html"><strong>SAREGAMA</strong> <span class="muted">Saregama India Limited</span></a>
-          <span class="idx-badge idx-NIFTY_SMALL">NIFTY_SMALL</span><span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/SAREGAMA.NS.html"><strong>SAREGAMA</strong></a>
+          
         </td>
-        <td class="num">417.30</td>
+        <td><a href="../stocks/SAREGAMA.NS.html">Saregama India Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=SAREGAMA" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:SAREGAMA&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹7,976.88 Cr</td>
+        <td class="num">417.30</td>
         <td class="num">38.76</td>
+        <td class="num">27.19</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 11.58</td>
+        <td class="num">15.98%</td>
+        <td class="num">8.42%</td>
+        <td class="num pos">11.71%</td>
+        <td class="num pos">3.76%</td>
         <td class="num">2.16%</td>
         <td class="num neg">-23.97%</td>
         <td>Entertainment</td>
@@ -343,12 +713,33 @@
       <tr data-idx="NSE">
         <td>18</td>
         <td>
-          <a href="../stocks/NETWORK18.NS.html"><strong>NETWORK18</strong> <span class="muted">Network18 Media &amp; Investments Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/NETWORK18.NS.html"><strong>NETWORK18</strong></a>
+          
         </td>
-        <td class="num">31.27</td>
+        <td><a href="../stocks/NETWORK18.NS.html">Network18 Media &amp; Investments Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=NETWORK18" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:NETWORK18&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹4,818.80 Cr</td>
+        <td class="num">31.27</td>
         <td class="num">31.52</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">6.85%</td>
+        <td class="num">-0.64%</td>
+        <td class="num neg">-29.86%</td>
+        <td class="num pos">93.54%</td>
         <td class="num">-</td>
         <td class="num neg">-40.65%</td>
         <td>Entertainment</td>
@@ -357,12 +748,33 @@
       <tr data-idx="NSE,AI,TECH">
         <td>19</td>
         <td>
-          <a href="../stocks/JUSTDIAL.NS.html"><strong>JUSTDIAL</strong> <span class="muted">Just Dial Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span><span class="idx-badge idx-AI">AI</span><span class="idx-badge idx-TECH">TECH</span>
+          <a href="../stocks/JUSTDIAL.NS.html"><strong>JUSTDIAL</strong></a>
+          <span class="idx-badge idx-AI">AI</span>
         </td>
-        <td class="num">534.50</td>
+        <td><a href="../stocks/JUSTDIAL.NS.html">Just Dial Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=JUSTDIAL" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:JUSTDIAL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹4,564.58 Cr</td>
+        <td class="num">534.50</td>
         <td class="num">9.19</td>
+        <td class="num">7.44</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 1.75</td>
+        <td class="num">11.63%</td>
+        <td class="num">3.38%</td>
+        <td class="num pos">12.84%</td>
+        <td class="num pos">45.09%</td>
         <td class="num">-</td>
         <td class="num neg">-40.35%</td>
         <td>Internet Content &amp; Information</td>
@@ -371,12 +783,33 @@
       <tr data-idx="NSE">
         <td>20</td>
         <td>
-          <a href="../stocks/DBCORP.NS.html"><strong>DBCORP</strong> <span class="muted">D. B. Corp Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/DBCORP.NS.html"><strong>DBCORP</strong></a>
+          
         </td>
-        <td class="num">207.43</td>
+        <td><a href="../stocks/DBCORP.NS.html">D. B. Corp Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=DBCORP" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:DBCORP&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹3,703.95 Cr</td>
+        <td class="num">207.43</td>
         <td class="num">11.15</td>
+        <td class="num">9.96</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 1.20</td>
+        <td class="num">17.13%</td>
+        <td class="num">7.77%</td>
+        <td class="num pos">4.29%</td>
+        <td class="num pos">25.22%</td>
         <td class="num">3.37%</td>
         <td class="num neg">-14.27%</td>
         <td>Publishing</td>
@@ -385,12 +818,33 @@
       <tr data-idx="NSE,AI">
         <td>21</td>
         <td>
-          <a href="../stocks/ROUTE.NS.html"><strong>ROUTE</strong> <span class="muted">Route Mobile Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span><span class="idx-badge idx-AI">AI</span>
+          <a href="../stocks/ROUTE.NS.html"><strong>ROUTE</strong></a>
+          <span class="idx-badge idx-AI">AI</span>
         </td>
-        <td class="num">514.75</td>
+        <td><a href="../stocks/ROUTE.NS.html">Route Mobile Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=ROUTE" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:ROUTE&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹3,237.10 Cr</td>
+        <td class="num">514.75</td>
         <td class="num">13.54</td>
+        <td class="num">8.33</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 5.21</td>
+        <td class="num">12.57%</td>
+        <td class="num">7.30%</td>
+        <td class="num pos">7.29%</td>
+        <td class="num neg">-9.93%</td>
         <td class="num">2.33%</td>
         <td class="num neg">-45.95%</td>
         <td>Telecom Services</td>
@@ -399,12 +853,33 @@
       <tr data-idx="NSE">
         <td>22</td>
         <td>
-          <a href="../stocks/NAVNETEDUL.NS.html"><strong>NAVNETEDUL</strong> <span class="muted">Navneet Education Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/NAVNETEDUL.NS.html"><strong>NAVNETEDUL</strong></a>
+          
         </td>
-        <td class="num">141.63</td>
+        <td><a href="../stocks/NAVNETEDUL.NS.html">Navneet Education Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=NAVNETEDUL" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:NAVNETEDUL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹3,127.95 Cr</td>
+        <td class="num">141.63</td>
         <td class="num">8.84</td>
+        <td class="num">16.25</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #dc2626;">Δ -7.42</td>
+        <td class="num">21.00%</td>
+        <td class="num">4.85%</td>
+        <td class="num pos">0.47%</td>
+        <td class="num pos">19.84%</td>
         <td class="num">2.12%</td>
         <td class="num pos">+1.54%</td>
         <td>Publishing</td>
@@ -413,12 +888,33 @@
       <tr data-idx="NSE">
         <td>23</td>
         <td>
-          <a href="../stocks/MPSLTD.NS.html"><strong>MPSLTD</strong> <span class="muted">MPS Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/MPSLTD.NS.html"><strong>MPSLTD</strong></a>
+          
         </td>
-        <td class="num">1,814.50</td>
+        <td><a href="../stocks/MPSLTD.NS.html">MPS Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=MPSLTD" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:MPSLTD&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹3,111.62 Cr</td>
+        <td class="num">1,814.50</td>
         <td class="num">17.98</td>
+        <td class="num">14.68</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 3.30</td>
+        <td class="num">33.43%</td>
+        <td class="num">15.89%</td>
+        <td class="num pos">15.36%</td>
+        <td class="num pos">16.63%</td>
         <td class="num">4.57%</td>
         <td class="num neg">-29.81%</td>
         <td>Publishing</td>
@@ -427,12 +923,33 @@
       <tr data-idx="NSE">
         <td>24</td>
         <td>
-          <a href="../stocks/IMAGICAA.NS.html"><strong>IMAGICAA</strong> <span class="muted">Imagicaaworld Entertainment Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/IMAGICAA.NS.html"><strong>IMAGICAA</strong></a>
+          
         </td>
-        <td class="num">44.33</td>
+        <td><a href="../stocks/IMAGICAA.NS.html">Imagicaaworld Entertainment Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=IMAGICAA" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:IMAGICAA&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹2,507.90 Cr</td>
+        <td class="num">44.33</td>
         <td class="num">-</td>
+        <td class="num">24.62</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">1.83%</td>
+        <td class="num">0.62%</td>
+        <td class="num pos">16.16%</td>
+        <td class="num neg">-87.88%</td>
         <td class="num">-</td>
         <td class="num neg">-33.07%</td>
         <td>Entertainment</td>
@@ -441,12 +958,33 @@
       <tr data-idx="NSE">
         <td>25</td>
         <td>
-          <a href="../stocks/HATHWAY.NS.html"><strong>HATHWAY</strong> <span class="muted">Hathway Cable and Datacom Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/HATHWAY.NS.html"><strong>HATHWAY</strong></a>
+          
         </td>
-        <td class="num">10.98</td>
+        <td><a href="../stocks/HATHWAY.NS.html">Hathway Cable and Datacom Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=HATHWAY" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:HATHWAY&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹1,950.66 Cr</td>
+        <td class="num">10.98</td>
         <td class="num">23.96</td>
+        <td class="num">24.49</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #dc2626;">Δ -0.53</td>
+        <td class="num">2.51%</td>
+        <td class="num">0.16%</td>
+        <td class="num pos">5.00%</td>
+        <td class="num pos">8.03%</td>
         <td class="num">-</td>
         <td class="num neg">-29.25%</td>
         <td>Entertainment</td>
@@ -455,12 +993,33 @@
       <tr data-idx="NSE">
         <td>26</td>
         <td>
-          <a href="../stocks/MTNL.NS.html"><strong>MTNL</strong> <span class="muted">Mahanagar Telephone Nigam Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/MTNL.NS.html"><strong>MTNL</strong></a>
+          
         </td>
-        <td class="num">30.97</td>
+        <td><a href="../stocks/MTNL.NS.html">Mahanagar Telephone Nigam Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=MTNL" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:MTNL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹1,946.70 Cr</td>
+        <td class="num">30.97</td>
         <td class="num">-</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">2.01%</td>
+        <td class="num">-0.77%</td>
+        <td class="num pos">2.95%</td>
+        <td class="num neg">-2.20%</td>
         <td class="num">-</td>
         <td class="num neg">-37.47%</td>
         <td>Telecom Services</td>
@@ -469,12 +1028,33 @@
       <tr data-idx="NSE">
         <td>27</td>
         <td>
-          <a href="../stocks/SIGNPOST.NS.html"><strong>SIGNPOST</strong> <span class="muted">Signpost India Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/SIGNPOST.NS.html"><strong>SIGNPOST</strong></a>
+          
         </td>
-        <td class="num">301.75</td>
+        <td><a href="../stocks/SIGNPOST.NS.html">Signpost India Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=SIGNPOST" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:SIGNPOST&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹1,618.47 Cr</td>
+        <td class="num">301.75</td>
         <td class="num">32.28</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">17.97%</td>
+        <td class="num">-</td>
+        <td class="num pos">39.39%</td>
+        <td class="num pos">63.01%</td>
         <td class="num">0.17%</td>
         <td class="num pos">+41.21%</td>
         <td>Advertising Agencies</td>
@@ -483,12 +1063,33 @@
       <tr data-idx="NSE">
         <td>28</td>
         <td>
-          <a href="../stocks/AQYLON.NS.html"><strong>AQYLON</strong> <span class="muted">Aqylon Nexus Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/AQYLON.NS.html"><strong>AQYLON</strong></a>
+          
         </td>
-        <td class="num">61.37</td>
+        <td><a href="../stocks/AQYLON.NS.html">Aqylon Nexus Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=AQYLON" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:AQYLON&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹1,564.00 Cr</td>
+        <td class="num">61.37</td>
         <td class="num">268.00</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">-</td>
+        <td class="num">1.09%</td>
+        <td class="num pos">-</td>
+        <td class="num pos">42.36%</td>
         <td class="num">-</td>
         <td class="num neg">-89.63%</td>
         <td>Broadcasting</td>
@@ -497,12 +1098,33 @@
       <tr data-idx="NSE">
         <td>29</td>
         <td>
-          <a href="../stocks/JAGRAN.NS.html"><strong>JAGRAN</strong> <span class="muted">Jagran Prakashan Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/JAGRAN.NS.html"><strong>JAGRAN</strong></a>
+          
         </td>
-        <td class="num">70.05</td>
+        <td><a href="../stocks/JAGRAN.NS.html">Jagran Prakashan Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=JAGRAN" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:JAGRAN&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹1,529.02 Cr</td>
+        <td class="num">70.05</td>
         <td class="num">9.30</td>
+        <td class="num">6.81</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 2.50</td>
+        <td class="num">7.10%</td>
+        <td class="num">-</td>
+        <td class="num pos">4.71%</td>
+        <td class="num neg">-16.20%</td>
         <td class="num">8.57%</td>
         <td class="num neg">-8.96%</td>
         <td>Publishing</td>
@@ -511,12 +1133,33 @@
       <tr data-idx="NSE">
         <td>30</td>
         <td>
-          <a href="../stocks/STLNETWORK.NS.html"><strong>STLNETWORK</strong> <span class="muted">STL NETWORKS LIMITED</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/STLNETWORK.NS.html"><strong>STLNETWORK</strong></a>
+          
         </td>
-        <td class="num">28.93</td>
+        <td><a href="../stocks/STLNETWORK.NS.html">STL NETWORKS LIMITED</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=STLNETWORK" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:STLNETWORK&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹1,412.01 Cr</td>
+        <td class="num">28.93</td>
         <td class="num">-</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">0.47%</td>
+        <td class="num">0.23%</td>
+        <td class="num neg">-18.71%</td>
+        <td class="num neg">-210.20%</td>
         <td class="num">-</td>
         <td class="num pos">+33.01%</td>
         <td>Telecom Services</td>
@@ -525,12 +1168,33 @@
       <tr data-idx="NSE">
         <td>31</td>
         <td>
-          <a href="../stocks/DEN.NS.html"><strong>DEN</strong> <span class="muted">DEN Networks Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/DEN.NS.html"><strong>DEN</strong></a>
+          
         </td>
-        <td class="num">27.85</td>
+        <td><a href="../stocks/DEN.NS.html">DEN Networks Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=DEN" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:DEN&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹1,326.84 Cr</td>
+        <td class="num">27.85</td>
         <td class="num">8.00</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">5.44%</td>
+        <td class="num">-0.34%</td>
+        <td class="num neg">-4.09%</td>
+        <td class="num neg">-11.95%</td>
         <td class="num">-</td>
         <td class="num neg">-21.70%</td>
         <td>Entertainment</td>
@@ -539,12 +1203,33 @@
       <tr data-idx="NSE">
         <td>32</td>
         <td>
-          <a href="../stocks/BALAJITELE.NS.html"><strong>BALAJITELE</strong> <span class="muted">Balaji Telefilms Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/BALAJITELE.NS.html"><strong>BALAJITELE</strong></a>
+          
         </td>
-        <td class="num">91.94</td>
+        <td><a href="../stocks/BALAJITELE.NS.html">Balaji Telefilms Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=BALAJITELE" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:BALAJITELE&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹1,121.26 Cr</td>
+        <td class="num">91.94</td>
         <td class="num">15.08</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">-1.06%</td>
+        <td class="num">-4.69%</td>
+        <td class="num pos">10.40%</td>
+        <td class="num pos">55.27%</td>
         <td class="num">-</td>
         <td class="num pos">+9.18%</td>
         <td>Entertainment</td>
@@ -553,12 +1238,33 @@
       <tr data-idx="NSE">
         <td>33</td>
         <td>
-          <a href="../stocks/NDTV.NS.html"><strong>NDTV</strong> <span class="muted">New Delhi Television Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/NDTV.NS.html"><strong>NDTV</strong></a>
+          
         </td>
-        <td class="num">86.77</td>
+        <td><a href="../stocks/NDTV.NS.html">New Delhi Television Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=NDTV" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:NDTV&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹975.93 Cr</td>
+        <td class="num">86.77</td>
         <td class="num">-</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">-50.24%</td>
+        <td class="num">-26.36%</td>
+        <td class="num pos">5.47%</td>
+        <td class="num neg">-123.55%</td>
         <td class="num">-</td>
         <td class="num neg">-46.87%</td>
         <td>Broadcasting</td>
@@ -567,12 +1273,33 @@
       <tr data-idx="NSE">
         <td>34</td>
         <td>
-          <a href="../stocks/SUYOG.NS.html"><strong>SUYOG</strong> <span class="muted">Suyog Telematics Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/SUYOG.NS.html"><strong>SUYOG</strong></a>
+          
         </td>
-        <td class="num">758.15</td>
+        <td><a href="../stocks/SUYOG.NS.html">Suyog Telematics Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=SUYOG" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:SUYOG&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹884.64 Cr</td>
+        <td class="num">758.15</td>
         <td class="num">33.75</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">12.89%</td>
+        <td class="num">8.26%</td>
+        <td class="num pos">15.09%</td>
+        <td class="num neg">-0.67%</td>
         <td class="num">0.24%</td>
         <td class="num neg">-9.28%</td>
         <td>Telecom Services</td>
@@ -581,12 +1308,33 @@
       <tr data-idx="NSE,TECH">
         <td>35</td>
         <td>
-          <a href="../stocks/MATRIMONY.NS.html"><strong>MATRIMONY</strong> <span class="muted">Matrimony.com Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span><span class="idx-badge idx-TECH">TECH</span>
+          <a href="../stocks/MATRIMONY.NS.html"><strong>MATRIMONY</strong></a>
+          
         </td>
-        <td class="num">423.05</td>
+        <td><a href="../stocks/MATRIMONY.NS.html">Matrimony.com Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=MATRIMONY" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:MATRIMONY&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹870.22 Cr</td>
+        <td class="num">423.05</td>
         <td class="num">26.46</td>
+        <td class="num">15.20</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 11.26</td>
+        <td class="num">19.71%</td>
+        <td class="num">3.41%</td>
+        <td class="num pos">0.31%</td>
+        <td class="num neg">-9.87%</td>
         <td class="num">1.18%</td>
         <td class="num neg">-15.08%</td>
         <td>Internet Content &amp; Information</td>
@@ -595,12 +1343,33 @@
       <tr data-idx="NSE">
         <td>36</td>
         <td>
-          <a href="../stocks/SANDESH.NS.html"><strong>SANDESH</strong> <span class="muted">The Sandesh Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/SANDESH.NS.html"><strong>SANDESH</strong></a>
+          
         </td>
-        <td class="num">1,010.50</td>
+        <td><a href="../stocks/SANDESH.NS.html">The Sandesh Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=SANDESH" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:SANDESH&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹775.11 Cr</td>
+        <td class="num">1,010.50</td>
         <td class="num">7.07</td>
+        <td class="num">8.70</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #dc2626;">Δ -1.63</td>
+        <td class="num">7.11%</td>
+        <td class="num">-</td>
+        <td class="num neg">-1.51%</td>
+        <td class="num neg">-4.96%</td>
         <td class="num">0.49%</td>
         <td class="num neg">-17.73%</td>
         <td>Publishing</td>
@@ -609,12 +1378,33 @@
       <tr data-idx="NSE">
         <td>37</td>
         <td>
-          <a href="../stocks/GTPL.NS.html"><strong>GTPL</strong> <span class="muted">GTPL Hathway Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/GTPL.NS.html"><strong>GTPL</strong></a>
+          
         </td>
-        <td class="num">64.55</td>
+        <td><a href="../stocks/GTPL.NS.html">GTPL Hathway Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=GTPL" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:GTPL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹730.56 Cr</td>
+        <td class="num">64.55</td>
         <td class="num">46.40</td>
+        <td class="num">5.51</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 40.89</td>
+        <td class="num">3.31%</td>
+        <td class="num">0.55%</td>
+        <td class="num pos">11.94%</td>
+        <td class="num neg">-48.28%</td>
         <td class="num">3.10%</td>
         <td class="num neg">-40.64%</td>
         <td>Entertainment</td>
@@ -623,12 +1413,33 @@
       <tr data-idx="NSE">
         <td>38</td>
         <td>
-          <a href="../stocks/TVTODAY.NS.html"><strong>TVTODAY</strong> <span class="muted">T.V. Today Network Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/TVTODAY.NS.html"><strong>TVTODAY</strong></a>
+          
         </td>
-        <td class="num">114.75</td>
+        <td><a href="../stocks/TVTODAY.NS.html">T.V. Today Network Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=TVTODAY" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:TVTODAY&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹683.50 Cr</td>
+        <td class="num">114.75</td>
         <td class="num">33.79</td>
+        <td class="num">5.79</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 28.01</td>
+        <td class="num">3.50%</td>
+        <td class="num">0.03%</td>
+        <td class="num neg">-2.04%</td>
+        <td class="num neg">-45.42%</td>
         <td class="num">2.61%</td>
         <td class="num neg">-31.65%</td>
         <td>Broadcasting</td>
@@ -637,12 +1448,33 @@
       <tr data-idx="NSE">
         <td>39</td>
         <td>
-          <a href="../stocks/SCHAND.NS.html"><strong>SCHAND</strong> <span class="muted">S Chand And Company Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/SCHAND.NS.html"><strong>SCHAND</strong></a>
+          
         </td>
-        <td class="num">171.29</td>
+        <td><a href="../stocks/SCHAND.NS.html">S Chand And Company Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=SCHAND" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:SCHAND&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹605.62 Cr</td>
+        <td class="num">171.29</td>
         <td class="num">12.58</td>
+        <td class="num">6.60</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 5.97</td>
+        <td class="num">9.99%</td>
+        <td class="num">4.71%</td>
+        <td class="num pos">14.56%</td>
+        <td class="num pos">78.43%</td>
         <td class="num">2.34%</td>
         <td class="num neg">-20.13%</td>
         <td>Publishing</td>
@@ -651,12 +1483,33 @@
       <tr data-idx="NSE">
         <td>40</td>
         <td>
-          <a href="../stocks/ONMOBILE.NS.html"><strong>ONMOBILE</strong> <span class="muted">OnMobile Global Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/ONMOBILE.NS.html"><strong>ONMOBILE</strong></a>
+          
         </td>
-        <td class="num">51.55</td>
+        <td><a href="../stocks/ONMOBILE.NS.html">OnMobile Global Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=ONMOBILE" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:ONMOBILE&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹544.90 Cr</td>
+        <td class="num">51.55</td>
         <td class="num">-</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">-0.28%</td>
+        <td class="num">-3.80%</td>
+        <td class="num neg">-0.53%</td>
+        <td class="num neg">-89.17%</td>
         <td class="num">-</td>
         <td class="num neg">-7.20%</td>
         <td>Telecom Services</td>
@@ -665,12 +1518,33 @@
       <tr data-idx="NSE">
         <td>41</td>
         <td>
-          <a href="../stocks/ENIL.NS.html"><strong>ENIL</strong> <span class="muted">Entertainment Network (India) Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/ENIL.NS.html"><strong>ENIL</strong></a>
+          
         </td>
-        <td class="num">109.89</td>
+        <td><a href="../stocks/ENIL.NS.html">Entertainment Network (India) Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=ENIL" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:ENIL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹524.37 Cr</td>
+        <td class="num">109.89</td>
         <td class="num">-</td>
+        <td class="num">11.00</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">-1.83%</td>
+        <td class="num">-2.07%</td>
+        <td class="num pos">3.48%</td>
+        <td class="num pos">31.78%</td>
         <td class="num">1.82%</td>
         <td class="num neg">-22.88%</td>
         <td>Broadcasting</td>
@@ -679,12 +1553,33 @@
       <tr data-idx="NSE">
         <td>42</td>
         <td>
-          <a href="../stocks/HTMEDIA.NS.html"><strong>HTMEDIA</strong> <span class="muted">HT Media Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/HTMEDIA.NS.html"><strong>HTMEDIA</strong></a>
+          
         </td>
-        <td class="num">22.36</td>
+        <td><a href="../stocks/HTMEDIA.NS.html">HT Media Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=HTMEDIA" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:HTMEDIA&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹519.78 Cr</td>
+        <td class="num">22.36</td>
         <td class="num">-</td>
+        <td class="num">2.03</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">3.71%</td>
+        <td class="num">-</td>
+        <td class="num pos">6.83%</td>
+        <td class="num neg">-52.14%</td>
         <td class="num">-</td>
         <td class="num pos">+11.13%</td>
         <td>Publishing</td>
@@ -693,12 +1588,33 @@
       <tr data-idx="NSE">
         <td>43</td>
         <td>
-          <a href="../stocks/RKSWAMY.NS.html"><strong>RKSWAMY</strong> <span class="muted">R K SWAMY LIMITED</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/RKSWAMY.NS.html"><strong>RKSWAMY</strong></a>
+          
         </td>
-        <td class="num">97.59</td>
+        <td><a href="../stocks/RKSWAMY.NS.html">R K SWAMY LIMITED</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=RKSWAMY" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:RKSWAMY&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹497.10 Cr</td>
+        <td class="num">97.59</td>
         <td class="num">22.48</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">10.90%</td>
+        <td class="num">3.74%</td>
+        <td class="num pos">5.21%</td>
+        <td class="num neg">-10.91%</td>
         <td class="num">1.54%</td>
         <td class="num neg">-49.51%</td>
         <td>Advertising Agencies</td>
@@ -707,12 +1623,33 @@
       <tr data-idx="NSE">
         <td>44</td>
         <td>
-          <a href="../stocks/HMVL.NS.html"><strong>HMVL</strong> <span class="muted">Hindustan Media Ventures Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/HMVL.NS.html"><strong>HMVL</strong></a>
+          
         </td>
-        <td class="num">63.67</td>
+        <td><a href="../stocks/HMVL.NS.html">Hindustan Media Ventures Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=HMVL" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:HMVL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹467.55 Cr</td>
+        <td class="num">63.67</td>
         <td class="num">7.04</td>
+        <td class="num">2.16</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 4.87</td>
+        <td class="num">5.58%</td>
+        <td class="num">-</td>
+        <td class="num pos">3.47%</td>
+        <td class="num pos">24.21%</td>
         <td class="num">-</td>
         <td class="num neg">-29.45%</td>
         <td>Publishing</td>
@@ -721,12 +1658,33 @@
       <tr data-idx="NSE">
         <td>45</td>
         <td>
-          <a href="../stocks/NDLVENTURE.NS.html"><strong>NDLVENTURE</strong> <span class="muted">NDL Ventures Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/NDLVENTURE.NS.html"><strong>NDLVENTURE</strong></a>
+          
         </td>
-        <td class="num">130.36</td>
+        <td><a href="../stocks/NDLVENTURE.NS.html">NDL Ventures Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=NDLVENTURE" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:NDLVENTURE&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹436.92 Cr</td>
+        <td class="num">130.36</td>
         <td class="num">480.59</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">2.05%</td>
+        <td class="num">-3.49%</td>
+        <td class="num pos">-</td>
+        <td class="num pos">49.21%</td>
         <td class="num">0.38%</td>
         <td class="num pos">+98.27%</td>
         <td>Entertainment</td>
@@ -735,12 +1693,33 @@
       <tr data-idx="NSE">
         <td>46</td>
         <td>
-          <a href="../stocks/SHEMAROO.NS.html"><strong>SHEMAROO</strong> <span class="muted">Shemaroo Entertainment Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/SHEMAROO.NS.html"><strong>SHEMAROO</strong></a>
+          
         </td>
-        <td class="num">105.18</td>
+        <td><a href="../stocks/SHEMAROO.NS.html">Shemaroo Entertainment Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=SHEMAROO" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:SHEMAROO&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹299.51 Cr</td>
+        <td class="num">105.18</td>
         <td class="num">-</td>
+        <td class="num">3.25</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">-95.58%</td>
+        <td class="num">-21.81%</td>
+        <td class="num pos">1.56%</td>
+        <td class="num neg">-811.51%</td>
         <td class="num">-</td>
         <td class="num neg">-0.88%</td>
         <td>Entertainment</td>
@@ -749,12 +1728,33 @@
       <tr data-idx="NSE">
         <td>47</td>
         <td>
-          <a href="../stocks/UFO.NS.html"><strong>UFO</strong> <span class="muted">UFO Moviez India Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/UFO.NS.html"><strong>UFO</strong></a>
+          
         </td>
-        <td class="num">75.08</td>
+        <td><a href="../stocks/UFO.NS.html">UFO Moviez India Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=UFO" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:UFO&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹293.05 Cr</td>
+        <td class="num">75.08</td>
         <td class="num">14.89</td>
+        <td class="num">2.58</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 12.31</td>
+        <td class="num">6.87%</td>
+        <td class="num">-</td>
+        <td class="num pos">40.53%</td>
+        <td class="num pos">37.01%</td>
         <td class="num">-</td>
         <td class="num pos">+9.21%</td>
         <td>Entertainment</td>
@@ -763,12 +1763,33 @@
       <tr data-idx="NSE">
         <td>48</td>
         <td>
-          <a href="../stocks/CINELINE.NS.html"><strong>CINELINE</strong> <span class="muted">Cineline India Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/CINELINE.NS.html"><strong>CINELINE</strong></a>
+          
         </td>
-        <td class="num">80.00</td>
+        <td><a href="../stocks/CINELINE.NS.html">Cineline India Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=CINELINE" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:CINELINE&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹276.53 Cr</td>
+        <td class="num">80.00</td>
         <td class="num">24.02</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">10.38%</td>
+        <td class="num">3.87%</td>
+        <td class="num pos">18.97%</td>
+        <td class="num pos">87.35%</td>
         <td class="num">-</td>
         <td class="num neg">-12.93%</td>
         <td>Entertainment</td>
@@ -777,12 +1798,33 @@
       <tr data-idx="NSE,TECH">
         <td>49</td>
         <td>
-          <a href="../stocks/DGCONTENT.NS.html"><strong>DGCONTENT</strong> <span class="muted">Digicontent Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span><span class="idx-badge idx-TECH">TECH</span>
+          <a href="../stocks/DGCONTENT.NS.html"><strong>DGCONTENT</strong></a>
+          
         </td>
-        <td class="num">27.84</td>
+        <td><a href="../stocks/DGCONTENT.NS.html">Digicontent Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=DGCONTENT" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:DGCONTENT&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹162.17 Cr</td>
+        <td class="num">27.84</td>
         <td class="num">215.00</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">11.23%</td>
+        <td class="num">7.31%</td>
+        <td class="num pos">11.85%</td>
+        <td class="num pos">35.43%</td>
         <td class="num">-</td>
         <td class="num neg">-36.74%</td>
         <td>Internet Content &amp; Information</td>
@@ -791,12 +1833,33 @@
       <tr data-idx="NSE">
         <td>50</td>
         <td>
-          <a href="../stocks/MUKTAARTS.NS.html"><strong>MUKTAARTS</strong> <span class="muted">Mukta Arts Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/MUKTAARTS.NS.html"><strong>MUKTAARTS</strong></a>
+          
         </td>
-        <td class="num">67.56</td>
+        <td><a href="../stocks/MUKTAARTS.NS.html">Mukta Arts Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=MUKTAARTS" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:MUKTAARTS&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹153.01 Cr</td>
+        <td class="num">67.56</td>
         <td class="num">-</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">-1.11%</td>
+        <td class="num">-2.93%</td>
+        <td class="num pos">6.52%</td>
+        <td class="num neg">-126.10%</td>
         <td class="num">-</td>
         <td class="num neg">-17.59%</td>
         <td>Entertainment</td>
@@ -805,12 +1868,33 @@
       <tr data-idx="NSE">
         <td>51</td>
         <td>
-          <a href="../stocks/TIPSFILMS.NS.html"><strong>TIPSFILMS</strong> <span class="muted">Tips Films Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/TIPSFILMS.NS.html"><strong>TIPSFILMS</strong></a>
+          
         </td>
-        <td class="num">356.30</td>
+        <td><a href="../stocks/TIPSFILMS.NS.html">Tips Films Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=TIPSFILMS" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:TIPSFILMS&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹152.64 Cr</td>
+        <td class="num">356.30</td>
         <td class="num">-</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">-46.68%</td>
+        <td class="num">-</td>
+        <td class="num pos">37.08%</td>
+        <td class="num neg">-55.04%</td>
         <td class="num">-</td>
         <td class="num neg">-31.95%</td>
         <td>Entertainment</td>
@@ -819,12 +1903,33 @@
       <tr data-idx="NSE">
         <td>52</td>
         <td>
-          <a href="../stocks/BTML.NS.html"><strong>BTML</strong> <span class="muted">Bodhi Tree Multimedia Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/BTML.NS.html"><strong>BTML</strong></a>
+          
         </td>
-        <td class="num">6.56</td>
+        <td><a href="../stocks/BTML.NS.html">Bodhi Tree Multimedia Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=BTML" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:BTML&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹119.92 Cr</td>
+        <td class="num">6.56</td>
         <td class="num">132.00</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">29.28%</td>
+        <td class="num">-</td>
+        <td class="num pos">14.67%</td>
+        <td class="num pos">14.77%</td>
         <td class="num">-</td>
         <td class="num neg">-12.42%</td>
         <td>Entertainment</td>
@@ -833,12 +1938,33 @@
       <tr data-idx="NSE">
         <td>53</td>
         <td>
-          <a href="../stocks/BAGFILMS.NS.html"><strong>BAGFILMS</strong> <span class="muted">B.A.G. Films and Media Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/BAGFILMS.NS.html"><strong>BAGFILMS</strong></a>
+          
         </td>
-        <td class="num">5.03</td>
+        <td><a href="../stocks/BAGFILMS.NS.html">B.A.G. Films and Media Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=BAGFILMS" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:BAGFILMS&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹104.27 Cr</td>
+        <td class="num">5.03</td>
         <td class="num">22.82</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">7.88%</td>
+        <td class="num">-</td>
+        <td class="num pos">4.03%</td>
+        <td class="num pos">30.77%</td>
         <td class="num">-</td>
         <td class="num neg">-24.36%</td>
         <td>Broadcasting</td>
@@ -847,12 +1973,33 @@
       <tr data-idx="NSE">
         <td>54</td>
         <td>
-          <a href="../stocks/RAJTV.NS.html"><strong>RAJTV</strong> <span class="muted">Raj Television Network Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/RAJTV.NS.html"><strong>RAJTV</strong></a>
+          
         </td>
-        <td class="num">18.99</td>
+        <td><a href="../stocks/RAJTV.NS.html">Raj Television Network Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=RAJTV" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:RAJTV&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹98.12 Cr</td>
+        <td class="num">18.99</td>
         <td class="num">126.00</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">2.76%</td>
+        <td class="num">1.15%</td>
+        <td class="num neg">-6.17%</td>
+        <td class="num neg">-11.08%</td>
         <td class="num">-</td>
         <td class="num neg">-59.72%</td>
         <td>Broadcasting</td>
@@ -861,12 +2008,33 @@
       <tr data-idx="NSE">
         <td>55</td>
         <td>
-          <a href="../stocks/CINEVISTA.NS.html"><strong>CINEVISTA</strong> <span class="muted">Cinevista Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/CINEVISTA.NS.html"><strong>CINEVISTA</strong></a>
+          
         </td>
-        <td class="num">15.64</td>
+        <td><a href="../stocks/CINEVISTA.NS.html">Cinevista Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=CINEVISTA" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:CINEVISTA&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹89.08 Cr</td>
+        <td class="num">15.64</td>
         <td class="num">inf</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">14.83%</td>
+        <td class="num">4.66%</td>
+        <td class="num pos">210.61%</td>
+        <td class="num pos">40.60%</td>
         <td class="num">-</td>
         <td class="num pos">+6.25%</td>
         <td>Entertainment</td>
@@ -875,12 +2043,33 @@
       <tr data-idx="NSE">
         <td>56</td>
         <td>
-          <a href="../stocks/TOUCHWOOD.NS.html"><strong>TOUCHWOOD</strong> <span class="muted">Touchwood Entertainment Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/TOUCHWOOD.NS.html"><strong>TOUCHWOOD</strong></a>
+          
         </td>
-        <td class="num">69.79</td>
+        <td><a href="../stocks/TOUCHWOOD.NS.html">Touchwood Entertainment Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=TOUCHWOOD" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:TOUCHWOOD&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹76.47 Cr</td>
+        <td class="num">69.79</td>
         <td class="num">15.97</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">17.00%</td>
+        <td class="num">-</td>
+        <td class="num pos">37.26%</td>
+        <td class="num pos">34.93%</td>
         <td class="num">-</td>
         <td class="num neg">-20.31%</td>
         <td>Advertising Agencies</td>
@@ -889,12 +2078,33 @@
       <tr data-idx="NSE">
         <td>57</td>
         <td>
-          <a href="../stocks/CYBERMEDIA.NS.html"><strong>CYBERMEDIA</strong> <span class="muted">Cyber Media (India) Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/CYBERMEDIA.NS.html"><strong>CYBERMEDIA</strong></a>
+          
         </td>
-        <td class="num">17.55</td>
+        <td><a href="../stocks/CYBERMEDIA.NS.html">Cyber Media (India) Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=CYBERMEDIA" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:CYBERMEDIA&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹36.31 Cr</td>
+        <td class="num">17.55</td>
         <td class="num">7.23</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">38.13%</td>
+        <td class="num">7.05%</td>
+        <td class="num pos">9.61%</td>
+        <td class="num neg">-1.15%</td>
         <td class="num">-</td>
         <td class="num pos">+15.31%</td>
         <td>Publishing</td>
@@ -903,12 +2113,33 @@
       <tr data-idx="NSE">
         <td>58</td>
         <td>
-          <a href="../stocks/DNAMEDIA.NS.html"><strong>DNAMEDIA</strong> <span class="muted">Diligent Media Corporation Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/DNAMEDIA.NS.html"><strong>DNAMEDIA</strong></a>
+          
         </td>
-        <td class="num">2.99</td>
+        <td><a href="../stocks/DNAMEDIA.NS.html">Diligent Media Corporation Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=DNAMEDIA" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:DNAMEDIA&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹35.31 Cr</td>
+        <td class="num">2.99</td>
         <td class="num">30.00</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">7.55%</td>
+        <td class="num">-</td>
+        <td class="num pos">26.72%</td>
+        <td class="num neg">-17.15%</td>
         <td class="num">-</td>
         <td class="num neg">-40.67%</td>
         <td>Publishing</td>
@@ -917,12 +2148,33 @@
       <tr data-idx="NSE">
         <td>59</td>
         <td>
-          <a href="../stocks/NEXTMEDIA.NS.html"><strong>NEXTMEDIA</strong> <span class="muted">Next Mediaworks Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/NEXTMEDIA.NS.html"><strong>NEXTMEDIA</strong></a>
+          
         </td>
-        <td class="num">4.00</td>
+        <td><a href="../stocks/NEXTMEDIA.NS.html">Next Mediaworks Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=NEXTMEDIA" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:NEXTMEDIA&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹26.42 Cr</td>
+        <td class="num">4.00</td>
         <td class="num">0.41</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">-</td>
+        <td class="num">-2.25%</td>
+        <td class="num pos">5.49%</td>
+        <td class="num pos">157.89%</td>
         <td class="num">-</td>
         <td class="num neg">-43.10%</td>
         <td>Broadcasting</td>
@@ -931,12 +2183,33 @@
       <tr data-idx="NSE">
         <td>60</td>
         <td>
-          <a href="../stocks/TVVISION.NS.html"><strong>TVVISION</strong> <span class="muted">TV Vision Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/TVVISION.NS.html"><strong>TVVISION</strong></a>
+          
         </td>
-        <td class="num">5.27</td>
+        <td><a href="../stocks/TVVISION.NS.html">TV Vision Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=TVVISION" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:TVVISION&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹20.22 Cr</td>
+        <td class="num">5.27</td>
         <td class="num">-</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">18.67%</td>
+        <td class="num">-57.55%</td>
+        <td class="num neg">-12.79%</td>
+        <td class="num pos">4.99%</td>
         <td class="num">-</td>
         <td class="num neg">-27.21%</td>
         <td>Broadcasting</td>
@@ -945,12 +2218,33 @@
       <tr data-idx="NSE">
         <td>61</td>
         <td>
-          <a href="../stocks/SILLYMONKS.NS.html"><strong>SILLYMONKS</strong> <span class="muted">Silly Monks Entertainment Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/SILLYMONKS.NS.html"><strong>SILLYMONKS</strong></a>
+          
         </td>
-        <td class="num">16.95</td>
+        <td><a href="../stocks/SILLYMONKS.NS.html">Silly Monks Entertainment Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=SILLYMONKS" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:SILLYMONKS&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹17.18 Cr</td>
+        <td class="num">16.95</td>
         <td class="num">-</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">2.41%</td>
+        <td class="num">-</td>
+        <td class="num neg">-0.55%</td>
+        <td class="num pos">36.45%</td>
         <td class="num">-</td>
         <td class="num pos">+3.29%</td>
         <td>Entertainment</td>
@@ -959,12 +2253,33 @@
       <tr data-idx="NSE">
         <td>62</td>
         <td>
-          <a href="../stocks/RADAAN.NS.html"><strong>RADAAN</strong> <span class="muted">Radaan Mediaworks India Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/RADAAN.NS.html"><strong>RADAAN</strong></a>
+          
         </td>
-        <td class="num">3.16</td>
+        <td><a href="../stocks/RADAAN.NS.html">Radaan Mediaworks India Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=RADAAN" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:RADAAN&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹17.12 Cr</td>
+        <td class="num">3.16</td>
         <td class="num">-</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">48.68%</td>
+        <td class="num">-</td>
+        <td class="num pos">32.22%</td>
+        <td class="num pos">35.85%</td>
         <td class="num">-</td>
         <td class="num neg">-19.59%</td>
         <td>Entertainment</td>
@@ -973,12 +2288,33 @@
       <tr data-idx="NSE">
         <td>63</td>
         <td>
-          <a href="../stocks/CREATIVEYE.NS.html"><strong>CREATIVEYE</strong> <span class="muted">Creative Eye Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/CREATIVEYE.NS.html"><strong>CREATIVEYE</strong></a>
+          
         </td>
-        <td class="num">6.94</td>
+        <td><a href="../stocks/CREATIVEYE.NS.html">Creative Eye Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=CREATIVEYE" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:CREATIVEYE&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹13.94 Cr</td>
+        <td class="num">6.94</td>
         <td class="num">-</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">0.73%</td>
+        <td class="num">-2.67%</td>
+        <td class="num neg">-5.38%</td>
+        <td class="num pos">7.95%</td>
         <td class="num">-</td>
         <td class="num pos">+2.66%</td>
         <td>Entertainment</td>
@@ -987,12 +2323,33 @@
       <tr data-idx="NSE">
         <td>64</td>
         <td>
-          <a href="../stocks/MMWL.NS.html"><strong>MMWL</strong> <span class="muted">Media Matrix Worldwide Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/MMWL.NS.html"><strong>MMWL</strong></a>
+          
         </td>
-        <td class="num">13.17</td>
+        <td><a href="../stocks/MMWL.NS.html">Media Matrix Worldwide Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=MMWL" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:MMWL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">-</td>
+        <td class="num">13.17</td>
         <td class="num">262.40</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">11.29%</td>
+        <td class="num">4.14%</td>
+        <td class="num pos">10.62%</td>
+        <td class="num pos">62.72%</td>
         <td class="num">-</td>
         <td class="num pos">+27.25%</td>
         <td>Entertainment</td>
@@ -1032,7 +2389,7 @@
 
 <footer class="footer">
   <div class="wrap">
-    <div>NIFTY stock explorer · Generated 2026-05-28 20:54 IST</div>
+    <div>NIFTY stock explorer · Generated 2026-05-29 05:02 IST</div>
     <div class="muted">For informational use only - not investment advice.</div>
   </div>
 </footer>
@@ -1282,5 +2639,26 @@ window.addEventListener('resize', initStickyScrollbars);
 
 <script src="../assets/sort.js" defer></script>
 <script src="../assets/filter.js" defer></script>
+<script>
+// Global auth badge — shows signed-in user on all pages from localStorage
+(function(){
+  var b = document.getElementById('globalAuthBadge');
+  if (!b) return;
+  function render(){
+    var raw = localStorage.getItem('herai_user');
+    if (!raw) { b.innerHTML = ''; return; }
+    try { var u = JSON.parse(raw); } catch(e) { b.innerHTML = ''; return; }
+    var name = u.name || u.email || 'User';
+    var initial = name[0].toUpperCase();
+    b.innerHTML = '<a href="' + '../' + 'elite.html" class="gab-link" title="' + name + '">' +
+      (u.photo
+        ? '<img src="' + u.photo + '" alt="" class="gab-avatar" referrerpolicy="no-referrer">'
+        : '<span class="gab-letter">' + initial + '</span>') +
+      '</a>';
+  }
+  render();
+  window.addEventListener('storage', render);
+})();
+</script>
 </body>
 </html>

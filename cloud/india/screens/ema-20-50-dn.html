@@ -54,6 +54,7 @@
              oninput="updateSuggest()" onkeydown="navSuggest(event)" onfocus="updateSuggest()" onblur="setTimeout(hideSuggest,150)" />
       <div id="suggest" class="suggest" hidden></div>
     </form>
+    <div id="globalAuthBadge" class="global-auth-badge"></div>
   </div>
   <div class="wrap topnav-row2">
     <nav>
@@ -2094,7 +2095,7 @@
         
           
           
-            <td><span class="ago-badge ago-fresh">2026-05-25</span></td>
+            <td><span class="ago-badge ago-old">2026-05-25</span></td>
           
         
         <td class="num">46.70</td>
@@ -2136,7 +2137,7 @@
         
           
           
-            <td><span class="ago-badge ago-fresh">2026-05-25</span></td>
+            <td><span class="ago-badge ago-old">2026-05-25</span></td>
           
         
         <td class="num">7.98</td>
@@ -2178,7 +2179,7 @@
         
           
           
-            <td><span class="ago-badge ago-fresh">2026-05-25</span></td>
+            <td><span class="ago-badge ago-old">2026-05-25</span></td>
           
         
         <td class="num">68.29</td>
@@ -2220,7 +2221,7 @@
         
           
           
-            <td><span class="ago-badge ago-fresh">2026-05-25</span></td>
+            <td><span class="ago-badge ago-old">2026-05-25</span></td>
           
         
         <td class="num">16.15</td>
@@ -2262,7 +2263,7 @@
         
           
           
-            <td><span class="ago-badge ago-fresh">2026-05-25</span></td>
+            <td><span class="ago-badge ago-old">2026-05-25</span></td>
           
         
         <td class="num">19.62</td>
@@ -2304,7 +2305,7 @@
         
           
           
-            <td><span class="ago-badge ago-fresh">2026-05-25</span></td>
+            <td><span class="ago-badge ago-old">2026-05-25</span></td>
           
         
         <td class="num">2.46</td>
@@ -2346,7 +2347,7 @@
         
           
           
-            <td><span class="ago-badge ago-fresh">2026-05-25</span></td>
+            <td><span class="ago-badge ago-old">2026-05-25</span></td>
           
         
         <td class="num">8.58</td>
@@ -2388,7 +2389,7 @@
         
           
           
-            <td><span class="ago-badge ago-fresh">2026-05-25</span></td>
+            <td><span class="ago-badge ago-old">2026-05-25</span></td>
           
         
         <td class="num">19.51</td>
@@ -2430,7 +2431,7 @@
         
           
           
-            <td><span class="ago-badge ago-fresh">2026-05-25</span></td>
+            <td><span class="ago-badge ago-old">2026-05-25</span></td>
           
         
         <td class="num">6.65</td>
@@ -2472,7 +2473,7 @@
         
           
           
-            <td><span class="ago-badge ago-fresh">2026-05-25</span></td>
+            <td><span class="ago-badge ago-old">2026-05-25</span></td>
           
         
         <td class="num">68.03</td>
@@ -2514,7 +2515,7 @@
         
           
           
-            <td><span class="ago-badge ago-fresh">2026-05-25</span></td>
+            <td><span class="ago-badge ago-old">2026-05-25</span></td>
           
         
         <td class="num">-</td>
@@ -2556,7 +2557,7 @@
         
           
           
-            <td><span class="ago-badge ago-fresh">2026-05-25</span></td>
+            <td><span class="ago-badge ago-old">2026-05-25</span></td>
           
         
         <td class="num">105.34</td>
@@ -2598,7 +2599,7 @@
         
           
           
-            <td><span class="ago-badge ago-fresh">2026-05-25</span></td>
+            <td><span class="ago-badge ago-old">2026-05-25</span></td>
           
         
         <td class="num">16.88</td>
@@ -2640,7 +2641,7 @@
         
           
           
-            <td><span class="ago-badge ago-fresh">2026-05-25</span></td>
+            <td><span class="ago-badge ago-old">2026-05-25</span></td>
           
         
         <td class="num">27.32</td>
@@ -4334,7 +4335,7 @@
 
 <footer class="footer">
   <div class="wrap">
-    <div>NIFTY stock explorer · Generated 2026-05-28 20:54 IST</div>
+    <div>NIFTY stock explorer · Generated 2026-05-29 05:02 IST</div>
     <div class="muted">For informational use only - not investment advice.</div>
   </div>
 </footer>
@@ -4584,5 +4585,26 @@ window.addEventListener('resize', initStickyScrollbars);
 
 <script src="../assets/sort.js" defer></script>
 <script src="../assets/filter.js" defer></script>
+<script>
+// Global auth badge — shows signed-in user on all pages from localStorage
+(function(){
+  var b = document.getElementById('globalAuthBadge');
+  if (!b) return;
+  function render(){
+    var raw = localStorage.getItem('herai_user');
+    if (!raw) { b.innerHTML = ''; return; }
+    try { var u = JSON.parse(raw); } catch(e) { b.innerHTML = ''; return; }
+    var name = u.name || u.email || 'User';
+    var initial = name[0].toUpperCase();
+    b.innerHTML = '<a href="' + '../' + 'elite.html" class="gab-link" title="' + name + '">' +
+      (u.photo
+        ? '<img src="' + u.photo + '" alt="" class="gab-avatar" referrerpolicy="no-referrer">'
+        : '<span class="gab-letter">' + initial + '</span>') +
+      '</a>';
+  }
+  render();
+  window.addEventListener('storage', render);
+})();
+</script>
 </body>
 </html>

@@ -54,6 +54,7 @@
              oninput="updateSuggest()" onkeydown="navSuggest(event)" onfocus="updateSuggest()" onblur="setTimeout(hideSuggest,150)" />
       <div id="suggest" class="suggest" hidden></div>
     </form>
+    <div id="globalAuthBadge" class="global-auth-badge"></div>
   </div>
   <div class="wrap topnav-row2">
     <nav>
@@ -154,9 +155,9 @@
           <thead><tr>
             <th>#</th><th>Ticker</th><th>Name</th>
             <th>Charts</th>
-            <th class="num">Price</th><th class="num">Mkt Cap</th>
-            <th class="num">P/E</th><th class="num">Fwd P/E</th>
-            <th class="num">ROCE %</th><th class="num">ROE %</th>
+            <th class="num">Mkt Cap</th><th class="num">Price</th>
+            <th class="num">P/E</th><th class="num">Fwd P/E</th><th class="num">Δ P/E</th>
+            <th class="num">ROCE %</th><th class="num">ROA %</th>
             <th class="num">Rev CAGR 5Y %</th><th class="num">Profit CAGR 5Y %</th>
             <th class="num">Div %</th><th class="num">1Y %</th>
             <th>Sector</th>
@@ -181,7 +182,7 @@
 
 <footer class="footer">
   <div class="wrap">
-    <div>NIFTY stock explorer · Generated 2026-05-28 20:54 IST</div>
+    <div>NIFTY stock explorer · Generated 2026-05-29 05:02 IST</div>
     <div class="muted">For informational use only - not investment advice.</div>
   </div>
 </footer>
@@ -764,7 +765,7 @@ function render() {
 
   const body = document.getElementById('resultsBody');
   if (!rows.length) {
-    body.innerHTML = '<tr><td colspan="15" class="empty" style="padding:30px;">No stocks match the current filters.</td></tr>';
+    body.innerHTML = '<tr><td colspan="16" class="empty" style="padding:30px;">No stocks match the current filters.</td></tr>';
     if (typeof initStickyScrollbars === 'function') {
       try { initStickyScrollbars(); } catch (e) {}
     }
@@ -794,12 +795,13 @@ function render() {
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
         </a>
       </td>
-      <td class="num">${fmtNum(d.price)}</td>
       <td class="num">${fmtMoney(s.market_cap)}</td>
+      <td class="num">${fmtNum(d.price)}</td>
       <td class="num">${fmtNum(s.pe_trailing)}</td>
       <td class="num">${fmtNum(s.pe_forward)}</td>
+      <td class="num" style="font-weight:700; color:${s.pe_trailing!=null && s.pe_forward!=null ? (s.pe_trailing-s.pe_forward>=0 ? '#16a34a' : '#dc2626') : '#6b7280'}">${s.pe_trailing!=null && s.pe_forward!=null ? 'Δ '+fmtNum(s.pe_trailing-s.pe_forward) : '-'}</td>
       <td class="num">${fmtPct(s.roce, 100)}</td>
-      <td class="num">${fmtPct(s.roe, 100)}</td>
+      <td class="num">${fmtPct(s.roa, 100)}</td>
       <td class="num">${fmtPct(s.rev_growth_5y, 100)}</td>
       <td class="num">${fmtPct(s.profit_growth_5y, 100)}</td>
       <td class="num">${fmtPct(s.dividend_yield, 100)}</td>
@@ -833,5 +835,26 @@ if (_origApply) {
 
 <script src="assets/sort.js" defer></script>
 <script src="assets/filter.js" defer></script>
+<script>
+// Global auth badge — shows signed-in user on all pages from localStorage
+(function(){
+  var b = document.getElementById('globalAuthBadge');
+  if (!b) return;
+  function render(){
+    var raw = localStorage.getItem('herai_user');
+    if (!raw) { b.innerHTML = ''; return; }
+    try { var u = JSON.parse(raw); } catch(e) { b.innerHTML = ''; return; }
+    var name = u.name || u.email || 'User';
+    var initial = name[0].toUpperCase();
+    b.innerHTML = '<a href="' + '' + 'elite.html" class="gab-link" title="' + name + '">' +
+      (u.photo
+        ? '<img src="' + u.photo + '" alt="" class="gab-avatar" referrerpolicy="no-referrer">'
+        : '<span class="gab-letter">' + initial + '</span>') +
+      '</a>';
+  }
+  render();
+  window.addEventListener('storage', render);
+})();
+</script>
 </body>
 </html>

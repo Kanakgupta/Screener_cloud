@@ -40,11 +40,25 @@
     }).catch(e => { console.error('apiGet', path, e); return {}; });
   }
   function apiPost(path, body){
-    return fetch(`${API}/${path}`, {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({region: REGION, ...body}),
+    // Get Firebase ID token for server-side verification
+    const tokenPromise = (window.HeraiAuth && window.HeraiAuth.getIdToken)
+      ? window.HeraiAuth.getIdToken()
+      : Promise.resolve(null);
+
+    return tokenPromise.then(token => {
+      const headers = {'Content-Type': 'application/json'};
+      if (token) headers['Authorization'] = 'Bearer ' + token;
+      return fetch(`${API}/${path}`, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify({region: REGION, ...body}),
+      });
     }).then(r => {
+      if (r.status === 401) {
+        // Token expired or invalid — force re-auth
+        if (window.HeraiAuth) window.HeraiAuth.logout();
+        throw new Error('Session expired. Please sign in again.');
+      }
       if (!r.ok) throw new Error(`Server error (${r.status})`);
       return r.json();
     }).catch(e => { console.error('apiPost', path, e); return {error: e.message}; });
@@ -157,11 +171,13 @@
 
   // ---------- Thread detail ----------
   function openThread(id){
-    apiGet(`thread?region=${REGION}&id=${encodeURIComponent(id)}`).then(d => {
-      if (!d || !d.thread) return;
-      STATE.currentThread = d.thread;
-      renderDetail();
-      window.scrollTo({top: 0, behavior: 'smooth'});
+    window.HeraiAuth.requireAuth().then(() => {
+      apiGet(`thread?region=${REGION}&id=${encodeURIComponent(id)}`).then(d => {
+        if (!d || !d.thread) return;
+        STATE.currentThread = d.thread;
+        renderDetail();
+        window.scrollTo({top: 0, behavior: 'smooth'});
+      });
     });
   }
 
@@ -198,7 +214,6 @@
 
       <div class="ec-reply-form">
         <h3 class="ec-form-title">✍ Add your reply</h3>
-        <input id="ecReplyAuthor" placeholder="Your name (or leave blank for Anonymous)" value="${esc(STATE.author)}">
         <textarea id="ecReplyBody" placeholder="Share your thoughts, evidence, or counter-arguments…"></textarea>
         <div class="ec-form-actions">
           <button class="ec-submit" id="ecReplySubmit">Post Reply</button>
@@ -234,33 +249,42 @@
 
   // ---------- Voting ----------
   function voteThread(dir){
-    const t = STATE.currentThread; if (!t) return;
-    apiPost('vote', {id: t.id, dir: parseInt(dir,10)}).then(r => {
-      if (r && typeof r.votes === 'number') {
-        t.votes = r.votes;
-        const el = $('ecThreadVotes'); if (el) el.textContent = r.votes;
-      }
+    window.HeraiAuth.requireAuth().then(user => {
+      const t = STATE.currentThread; if (!t) return;
+      apiPost('vote', {id: t.id, dir: parseInt(dir,10), uid: user.uid}).then(r => {
+        if (r && typeof r.votes === 'number') {
+          t.votes = r.votes;
+          const el = $('ecThreadVotes'); if (el) el.textContent = r.votes;
+        }
+      });
     });
   }
   function votePost(pid, dir){
-    const t = STATE.currentThread; if (!t) return;
-    apiPost('vote', {id: t.id, postId: pid, dir: parseInt(dir,10)}).then(r => {
-      if (r && typeof r.votes === 'number') {
-        document.querySelectorAll('.ec-pv-'+CSS.escape(pid)).forEach(el => el.textContent = r.votes);
-      }
+    window.HeraiAuth.requireAuth().then(user => {
+      const t = STATE.currentThread; if (!t) return;
+      apiPost('vote', {id: t.id, postId: pid, dir: parseInt(dir,10), uid: user.uid}).then(r => {
+        if (r && typeof r.votes === 'number') {
+          document.querySelectorAll('.ec-pv-'+CSS.escape(pid)).forEach(el => el.textContent = r.votes);
+        }
+      });
     });
   }
 
   // ---------- Submit reply ----------
   function submitReply(){
+    window.HeraiAuth.requireAuth().then(user => {
+      _doSubmitReply(user);
+    });
+  }
+  function _doSubmitReply(user){
     const t = STATE.currentThread; if (!t) return;
     const body = $('ecReplyBody').value.trim();
-    const author = $('ecReplyAuthor').value.trim();
+    const author = user.name || 'Anonymous';
     const err = $('ecReplyError');
     if (!body) { err.textContent = 'Please write a reply.'; err.hidden = false; return; }
     err.hidden = true;
-    if (author) { STATE.author = author; localStorage.setItem('ec_author', author); }
-    apiPost('post', {id: t.id, body, author, parent: null}).then(r => {
+    STATE.author = author;
+    apiPost('post', {id: t.id, body, author, parent: null, uid: user.uid}).then(r => {
       if (r && r.post) {
         t.posts = t.posts || [];
         t.posts.push(r.post);
@@ -281,7 +305,6 @@
       <div class="ec-new-form">
         <h3 class="ec-form-title">✎ Start a new discussion</h3>
         <div class="ec-form-row">
-          <input id="ecNewAuthor" placeholder="Your name (optional)" value="${esc(STATE.author)}">
           <select id="ecNewCat">
             ${STATE.categories.map(c => `<option value="${esc(c)}"${c==='Suggestion'?' selected':''}>${esc(c)}${c==='Suggestion'?' ★ (top priority)':''}</option>`).join('')}
           </select>
@@ -303,16 +326,21 @@
   }
 
   function submitNew(){
+    window.HeraiAuth.requireAuth().then(user => {
+      _doSubmitNew(user);
+    });
+  }
+  function _doSubmitNew(user){
     const title = $('ecNewTitle').value.trim();
     const body  = $('ecNewBody').value.trim();
-    const author = $('ecNewAuthor').value.trim();
+    const author = user.name || 'Anonymous';
     const category = $('ecNewCat').value;
     const tags = $('ecNewTags').value.split(',').map(s => s.trim()).filter(Boolean);
     const err = $('ecNewError');
     if (!title || !body) { err.textContent = 'Title and body are required.'; err.hidden = false; return; }
     err.hidden = true;
-    if (author) { STATE.author = author; localStorage.setItem('ec_author', author); }
-    apiPost('thread', {title, body, author, category, tags}).then(r => {
+    STATE.author = author;
+    apiPost('thread', {title, body, author, category, tags, uid: user.uid}).then(r => {
       if (r && r.thread) {
         loadList();
         loadSummary();
@@ -353,7 +381,9 @@
 
   // ---------- Init ----------
   document.addEventListener('DOMContentLoaded', () => {
-    $('ecNewBtn').addEventListener('click', showNewForm);
+    $('ecNewBtn').addEventListener('click', () => {
+      window.HeraiAuth.requireAuth().then(() => showNewForm());
+    });
     $('ecSearch').addEventListener('input', e => {
       STATE.query = e.target.value;
       clearTimeout(window._ecSearchT);

@@ -54,6 +54,7 @@
              oninput="updateSuggest()" onkeydown="navSuggest(event)" onfocus="updateSuggest()" onblur="setTimeout(hideSuggest,150)" />
       <div id="suggest" class="suggest" hidden></div>
     </form>
+    <div id="globalAuthBadge" class="global-auth-badge"></div>
   </div>
   <div class="wrap topnav-row2">
     <nav>
@@ -97,20 +98,53 @@
 <div class="table-wrap">
   <table class="data-table sortable">
     <thead><tr>
-      <th>#</th><th>Name</th><th class="num">Price</th><th class="num">Mkt Cap</th>
-      <th class="num">P/E</th><th class="num">Div %</th><th class="num">1Y %</th><th>Industry</th>
+      <th>#</th><th>Ticker</th><th>Name</th>
+      <th>Charts</th>
+      <th class="num">Mkt Cap</th>
+      <th class="num">Price</th>
+      <th class="num">P/E</th>
+      <th class="num">Fwd P/E</th>
+      <th class="num">Δ P/E</th>
+      <th class="num">ROCE %</th>
+      <th class="num">ROA %</th>
+      <th class="num">Rev CAGR 5Y %</th>
+      <th class="num">Profit CAGR 5Y %</th>
+      <th class="num">Div %</th>
+      <th class="num">1Y %</th>
+      <th>Industry</th>
     </tr></thead>
     <tbody>
     
       <tr data-idx="NSE">
         <td>1</td>
         <td>
-          <a href="../stocks/DLF.NS.html"><strong>DLF</strong> <span class="muted">DLF Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/DLF.NS.html"><strong>DLF</strong></a>
+          
         </td>
-        <td class="num">593.90</td>
+        <td><a href="../stocks/DLF.NS.html">DLF Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=DLF" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:DLF&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹1.47 L Cr</td>
+        <td class="num">593.90</td>
         <td class="num">33.43</td>
+        <td class="num">22.26</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 11.17</td>
+        <td class="num">6.35%</td>
+        <td class="num">1.13%</td>
+        <td class="num pos">12.98%</td>
+        <td class="num pos">29.44%</td>
         <td class="num">1.01%</td>
         <td class="num neg">-22.51%</td>
         <td>Real Estate - Development</td>
@@ -119,12 +153,33 @@
       <tr data-idx="NSE">
         <td>2</td>
         <td>
-          <a href="../stocks/LODHA.NS.html"><strong>LODHA</strong> <span class="muted">Lodha Developers Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/LODHA.NS.html"><strong>LODHA</strong></a>
+          
         </td>
-        <td class="num">923.65</td>
+        <td><a href="../stocks/LODHA.NS.html">Lodha Developers Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=LODHA" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:LODHA&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹91,970.12 Cr</td>
+        <td class="num">923.65</td>
         <td class="num">26.87</td>
+        <td class="num">19.36</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 7.50</td>
+        <td class="num">18.07%</td>
+        <td class="num">5.26%</td>
+        <td class="num pos">21.34%</td>
+        <td class="num pos">91.69%</td>
         <td class="num">0.46%</td>
         <td class="num neg">-36.87%</td>
         <td>Real Estate - Development</td>
@@ -133,12 +188,33 @@
       <tr data-idx="NIFTY_MID,NSE">
         <td>3</td>
         <td>
-          <a href="../stocks/PHOENIXLTD.NS.html"><strong>PHOENIXLTD</strong> <span class="muted">The Phoenix Mills Limited</span></a>
-          <span class="idx-badge idx-NIFTY_MID">NIFTY_MID</span><span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/PHOENIXLTD.NS.html"><strong>PHOENIXLTD</strong></a>
+          
         </td>
-        <td class="num">1,771.80</td>
+        <td><a href="../stocks/PHOENIXLTD.NS.html">The Phoenix Mills Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=PHOENIXLTD" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:PHOENIXLTD&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹63,073.47 Cr</td>
+        <td class="num">1,771.80</td>
         <td class="num">50.27</td>
+        <td class="num">34.13</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 16.14</td>
+        <td class="num">11.84%</td>
+        <td class="num">6.41%</td>
+        <td class="num pos">19.36%</td>
+        <td class="num neg">-2.86%</td>
         <td class="num">0.14%</td>
         <td class="num pos">+11.61%</td>
         <td>Real Estate - Diversified</td>
@@ -147,12 +223,33 @@
       <tr data-idx="NIFTY_MID,NSE">
         <td>4</td>
         <td>
-          <a href="../stocks/OBEROIRLTY.NS.html"><strong>OBEROIRLTY</strong> <span class="muted">Oberoi Realty Limited</span></a>
-          <span class="idx-badge idx-NIFTY_MID">NIFTY_MID</span><span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/OBEROIRLTY.NS.html"><strong>OBEROIRLTY</strong></a>
+          
         </td>
-        <td class="num">1,692.60</td>
+        <td><a href="../stocks/OBEROIRLTY.NS.html">Oberoi Realty Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=OBEROIRLTY" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:OBEROIRLTY&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹61,514.23 Cr</td>
+        <td class="num">1,692.60</td>
         <td class="num">24.56</td>
+        <td class="num">15.98</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 8.58</td>
+        <td class="num">16.74%</td>
+        <td class="num">8.39%</td>
+        <td class="num pos">12.92%</td>
+        <td class="num pos">9.60%</td>
         <td class="num">0.47%</td>
         <td class="num neg">-1.45%</td>
         <td>Real Estate - Development</td>
@@ -161,12 +258,33 @@
       <tr data-idx="NIFTY_MID,NSE">
         <td>5</td>
         <td>
-          <a href="../stocks/PRESTIGE.NS.html"><strong>PRESTIGE</strong> <span class="muted">Prestige Estates Projects Limited</span></a>
-          <span class="idx-badge idx-NIFTY_MID">NIFTY_MID</span><span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/PRESTIGE.NS.html"><strong>PRESTIGE</strong></a>
+          
         </td>
-        <td class="num">1,399.80</td>
+        <td><a href="../stocks/PRESTIGE.NS.html">Prestige Estates Projects Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=PRESTIGE" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:PRESTIGE&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹60,086.87 Cr</td>
+        <td class="num">1,399.80</td>
         <td class="num">50.32</td>
+        <td class="num">24.37</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 25.95</td>
+        <td class="num">12.91%</td>
+        <td class="num">2.65%</td>
+        <td class="num pos">15.58%</td>
+        <td class="num pos">8.28%</td>
         <td class="num">0.13%</td>
         <td class="num neg">-3.47%</td>
         <td>Real Estate - Diversified</td>
@@ -175,12 +293,33 @@
       <tr data-idx="NIFTY_MID,NSE">
         <td>6</td>
         <td>
-          <a href="../stocks/GODREJPROP.NS.html"><strong>GODREJPROP</strong> <span class="muted">Godrej Properties Limited</span></a>
-          <span class="idx-badge idx-NIFTY_MID">NIFTY_MID</span><span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/GODREJPROP.NS.html"><strong>GODREJPROP</strong></a>
+          
         </td>
-        <td class="num">1,788.60</td>
+        <td><a href="../stocks/GODREJPROP.NS.html">Godrej Properties Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=GODREJPROP" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:GODREJPROP&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹54,066.79 Cr</td>
+        <td class="num">1,788.60</td>
         <td class="num">29.26</td>
+        <td class="num">16.95</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 12.31</td>
+        <td class="num">12.01%</td>
+        <td class="num">-0.48%</td>
+        <td class="num pos">33.30%</td>
+        <td class="num pos">47.94%</td>
         <td class="num">0.56%</td>
         <td class="num neg">-19.87%</td>
         <td>Real Estate - Development</td>
@@ -189,12 +328,33 @@
       <tr data-idx="NIFTY_SMALL,NSE">
         <td>7</td>
         <td>
-          <a href="../stocks/ANANTRAJ.NS.html"><strong>ANANTRAJ</strong> <span class="muted">Anant Raj Limited</span></a>
-          <span class="idx-badge idx-NIFTY_SMALL">NIFTY_SMALL</span><span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/ANANTRAJ.NS.html"><strong>ANANTRAJ</strong></a>
+          
         </td>
-        <td class="num">508.30</td>
+        <td><a href="../stocks/ANANTRAJ.NS.html">Anant Raj Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=ANANTRAJ" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:ANANTRAJ&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹18,270.95 Cr</td>
+        <td class="num">508.30</td>
         <td class="num">32.11</td>
+        <td class="num">17.78</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 14.33</td>
+        <td class="num">10.39%</td>
+        <td class="num">6.27%</td>
+        <td class="num pos">37.94%</td>
+        <td class="num pos">54.27%</td>
         <td class="num">0.14%</td>
         <td class="num neg">-1.51%</td>
         <td>Real Estate - Development</td>
@@ -203,12 +363,33 @@
       <tr data-idx="NIFTY_SMALL,NSE">
         <td>8</td>
         <td>
-          <a href="../stocks/BRIGADE.NS.html"><strong>BRIGADE</strong> <span class="muted">Brigade Enterprises Limited</span></a>
-          <span class="idx-badge idx-NIFTY_SMALL">NIFTY_SMALL</span><span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/BRIGADE.NS.html"><strong>BRIGADE</strong></a>
+          
         </td>
-        <td class="num">659.75</td>
+        <td><a href="../stocks/BRIGADE.NS.html">Brigade Enterprises Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=BRIGADE" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:BRIGADE&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹16,120.58 Cr</td>
+        <td class="num">659.75</td>
         <td class="num">-</td>
+        <td class="num">13.52</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">9.89%</td>
+        <td class="num">2.88%</td>
+        <td class="num pos">18.81%</td>
+        <td class="num pos">30.28%</td>
         <td class="num">0.38%</td>
         <td class="num neg">-39.13%</td>
         <td>Real Estate - Development</td>
@@ -217,12 +398,33 @@
       <tr data-idx="NIFTY_SMALL,NSE">
         <td>9</td>
         <td>
-          <a href="../stocks/SOBHA.NS.html"><strong>SOBHA</strong> <span class="muted">Sobha Limited</span></a>
-          <span class="idx-badge idx-NIFTY_SMALL">NIFTY_SMALL</span><span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/SOBHA.NS.html"><strong>SOBHA</strong></a>
+          
         </td>
-        <td class="num">1,395.00</td>
+        <td><a href="../stocks/SOBHA.NS.html">Sobha Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=SOBHA" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:SOBHA&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹14,909.36 Cr</td>
+        <td class="num">1,395.00</td>
         <td class="num">104.11</td>
+        <td class="num">19.29</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 84.82</td>
+        <td class="num">5.80%</td>
+        <td class="num">0.69%</td>
+        <td class="num pos">16.27%</td>
+        <td class="num neg">-18.23%</td>
         <td class="num">0.43%</td>
         <td class="num pos">+0.59%</td>
         <td>Real Estate - Development</td>
@@ -231,12 +433,33 @@
       <tr data-idx="NIFTY_SMALL,NSE">
         <td>10</td>
         <td>
-          <a href="../stocks/ABREL.NS.html"><strong>ABREL</strong> <span class="muted">Aditya Birla Real Estate Limited</span></a>
-          <span class="idx-badge idx-NIFTY_SMALL">NIFTY_SMALL</span><span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/ABREL.NS.html"><strong>ABREL</strong></a>
+          
         </td>
-        <td class="num">1,252.80</td>
+        <td><a href="../stocks/ABREL.NS.html">Aditya Birla Real Estate Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=ABREL" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:ABREL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹13,800.11 Cr</td>
+        <td class="num">1,252.80</td>
         <td class="num">-</td>
+        <td class="num">23.45</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">-5.19%</td>
+        <td class="num">-1.45%</td>
+        <td class="num neg">-52.60%</td>
+        <td class="num neg">-45.99%</td>
         <td class="num">0.16%</td>
         <td class="num neg">-43.57%</td>
         <td>Real Estate Services</td>
@@ -245,12 +468,33 @@
       <tr data-idx="NIFTY_SMALL,NSE">
         <td>11</td>
         <td>
-          <a href="../stocks/SIGNATURE.NS.html"><strong>SIGNATURE</strong> <span class="muted">Signatureglobal (India) Limited</span></a>
-          <span class="idx-badge idx-NIFTY_SMALL">NIFTY_SMALL</span><span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/SIGNATURE.NS.html"><strong>SIGNATURE</strong></a>
+          
         </td>
-        <td class="num">801.40</td>
+        <td><a href="../stocks/SIGNATURE.NS.html">Signatureglobal (India) Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=SIGNATURE" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:SIGNATURE&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹11,259.12 Cr</td>
+        <td class="num">801.40</td>
         <td class="num">10.30</td>
+        <td class="num">14.43</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #dc2626;">Δ -4.13</td>
+        <td class="num">36.34%</td>
+        <td class="num">-0.33%</td>
+        <td class="num pos">18.87%</td>
+        <td class="num pos">604.67%</td>
         <td class="num">-</td>
         <td class="num neg">-33.94%</td>
         <td>Real Estate - Development</td>
@@ -259,12 +503,33 @@
       <tr data-idx="NSE">
         <td>12</td>
         <td>
-          <a href="../stocks/WEWORK.NS.html"><strong>WEWORK</strong> <span class="muted">WEWORK INDIA MANAGEMENT L</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/WEWORK.NS.html"><strong>WEWORK</strong></a>
+          
         </td>
-        <td class="num">590.95</td>
+        <td><a href="../stocks/WEWORK.NS.html">WEWORK INDIA MANAGEMENT L</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=WEWORK" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:WEWORK&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹8,094.44 Cr</td>
+        <td class="num">590.95</td>
         <td class="num">109.67</td>
+        <td class="num">33.71</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 75.96</td>
+        <td class="num">12.33%</td>
+        <td class="num">6.07%</td>
+        <td class="num pos">-</td>
+        <td class="num pos">-</td>
         <td class="num">-</td>
         <td class="num neg">-6.00%</td>
         <td>Real Estate Services</td>
@@ -273,12 +538,33 @@
       <tr data-idx="NSE">
         <td>13</td>
         <td>
-          <a href="../stocks/MAXESTATES.NS.html"><strong>MAXESTATES</strong> <span class="muted">MAX ESTATES LIMITED</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/MAXESTATES.NS.html"><strong>MAXESTATES</strong></a>
+          
         </td>
-        <td class="num">453.40</td>
+        <td><a href="../stocks/MAXESTATES.NS.html">MAX ESTATES LIMITED</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=MAXESTATES" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:MAXESTATES&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹7,446.86 Cr</td>
+        <td class="num">453.40</td>
         <td class="num">479.47</td>
+        <td class="num">16.77</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 462.71</td>
+        <td class="num">1.16%</td>
+        <td class="num">-</td>
+        <td class="num pos">22.94%</td>
+        <td class="num neg">-6.20%</td>
         <td class="num">-</td>
         <td class="num neg">-11.73%</td>
         <td>Real Estate - Development</td>
@@ -287,12 +573,33 @@
       <tr data-idx="NSE">
         <td>14</td>
         <td>
-          <a href="../stocks/MAHLIFE.NS.html"><strong>MAHLIFE</strong> <span class="muted">Mahindra Lifespace Developers Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/MAHLIFE.NS.html"><strong>MAHLIFE</strong></a>
+          
         </td>
-        <td class="num">342.10</td>
+        <td><a href="../stocks/MAHLIFE.NS.html">Mahindra Lifespace Developers Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=MAHLIFE" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:MAHLIFE&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹7,312.32 Cr</td>
+        <td class="num">342.10</td>
         <td class="num">23.46</td>
+        <td class="num">20.49</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 2.97</td>
+        <td class="num">8.68%</td>
+        <td class="num">-1.24%</td>
+        <td class="num pos">24.78%</td>
+        <td class="num pos">43.26%</td>
         <td class="num">1.02%</td>
         <td class="num pos">+2.14%</td>
         <td>Real Estate - Development</td>
@@ -301,12 +608,33 @@
       <tr data-idx="NSE">
         <td>15</td>
         <td>
-          <a href="../stocks/KALPATARU.NS.html"><strong>KALPATARU</strong> <span class="muted">KALPATARU LIMITED</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/KALPATARU.NS.html"><strong>KALPATARU</strong></a>
+          
         </td>
-        <td class="num">334.15</td>
+        <td><a href="../stocks/KALPATARU.NS.html">KALPATARU LIMITED</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=KALPATARU" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:KALPATARU&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹6,906.36 Cr</td>
+        <td class="num">334.15</td>
         <td class="num">70.76</td>
+        <td class="num">50.82</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 19.94</td>
+        <td class="num">2.32%</td>
+        <td class="num">-</td>
+        <td class="num pos">0.09%</td>
+        <td class="num pos">48.69%</td>
         <td class="num">-</td>
         <td class="num neg">-22.82%</td>
         <td>Real Estate - Development</td>
@@ -315,12 +643,33 @@
       <tr data-idx="NSE">
         <td>16</td>
         <td>
-          <a href="../stocks/DBREALTY.NS.html"><strong>DBREALTY</strong> <span class="muted">Valor Estate Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/DBREALTY.NS.html"><strong>DBREALTY</strong></a>
+          
         </td>
-        <td class="num">120.28</td>
+        <td><a href="../stocks/DBREALTY.NS.html">Valor Estate Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=DBREALTY" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:DBREALTY&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹6,519.73 Cr</td>
+        <td class="num">120.28</td>
         <td class="num">61.96</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">-1.47%</td>
+        <td class="num">-</td>
+        <td class="num pos">71.55%</td>
+        <td class="num neg">-188.80%</td>
         <td class="num">-</td>
         <td class="num neg">-37.03%</td>
         <td>Real Estate - Development</td>
@@ -329,12 +678,33 @@
       <tr data-idx="NSE">
         <td>17</td>
         <td>
-          <a href="../stocks/GANESHHOU.NS.html"><strong>GANESHHOU</strong> <span class="muted">Ganesh Housing Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/GANESHHOU.NS.html"><strong>GANESHHOU</strong></a>
+          
         </td>
-        <td class="num">703.00</td>
+        <td><a href="../stocks/GANESHHOU.NS.html">Ganesh Housing Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=GANESHHOU" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:GANESHHOU&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹5,870.45 Cr</td>
+        <td class="num">703.00</td>
         <td class="num">13.99</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">38.54%</td>
+        <td class="num">-</td>
+        <td class="num pos">37.28%</td>
+        <td class="num pos">103.82%</td>
         <td class="num">0.71%</td>
         <td class="num neg">-30.67%</td>
         <td>Real Estate - Development</td>
@@ -343,12 +713,33 @@
       <tr data-idx="NSE">
         <td>18</td>
         <td>
-          <a href="../stocks/NIRLON.NS.html"><strong>NIRLON</strong> <span class="muted">Nirlon Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/NIRLON.NS.html"><strong>NIRLON</strong></a>
+          
         </td>
-        <td class="num">615.60</td>
+        <td><a href="../stocks/NIRLON.NS.html">Nirlon Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=NIRLON" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:NIRLON&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹5,542.26 Cr</td>
+        <td class="num">615.60</td>
         <td class="num">16.01</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">23.30%</td>
+        <td class="num">13.35%</td>
+        <td class="num pos">5.65%</td>
+        <td class="num pos">29.88%</td>
         <td class="num">-</td>
         <td class="num pos">+12.88%</td>
         <td>Real Estate Services</td>
@@ -357,12 +748,33 @@
       <tr data-idx="NSE">
         <td>19</td>
         <td>
-          <a href="../stocks/PURVA.NS.html"><strong>PURVA</strong> <span class="muted">Puravankara Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/PURVA.NS.html"><strong>PURVA</strong></a>
+          
         </td>
-        <td class="num">220.84</td>
+        <td><a href="../stocks/PURVA.NS.html">Puravankara Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=PURVA" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:PURVA&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹5,259.98 Cr</td>
+        <td class="num">220.84</td>
         <td class="num">82.45</td>
+        <td class="num">15.96</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 66.50</td>
+        <td class="num">35.63%</td>
+        <td class="num">2.58%</td>
+        <td class="num pos">46.62%</td>
+        <td class="num neg">-1.41%</td>
         <td class="num">-</td>
         <td class="num neg">-15.68%</td>
         <td>Real Estate - Development</td>
@@ -371,12 +783,33 @@
       <tr data-idx="NSE">
         <td>20</td>
         <td>
-          <a href="../stocks/SMARTWORKS.NS.html"><strong>SMARTWORKS</strong> <span class="muted">SMARTWORKS COWORKING SP L</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/SMARTWORKS.NS.html"><strong>SMARTWORKS</strong></a>
+          
         </td>
-        <td class="num">450.20</td>
+        <td><a href="../stocks/SMARTWORKS.NS.html">SMARTWORKS COWORKING SP L</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=SMARTWORKS" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:SMARTWORKS&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹5,130.37 Cr</td>
+        <td class="num">450.20</td>
         <td class="num">-</td>
+        <td class="num">40.27</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">7.47%</td>
+        <td class="num">3.67%</td>
+        <td class="num pos">56.24%</td>
+        <td class="num pos">3.21%</td>
         <td class="num">-</td>
         <td class="num pos">+1.16%</td>
         <td>Real Estate Services</td>
@@ -385,12 +818,33 @@
       <tr data-idx="NSE">
         <td>21</td>
         <td>
-          <a href="../stocks/RUSTOMJEE.NS.html"><strong>RUSTOMJEE</strong> <span class="muted">Keystone Realtors Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/RUSTOMJEE.NS.html"><strong>RUSTOMJEE</strong></a>
+          
         </td>
-        <td class="num">397.20</td>
+        <td><a href="../stocks/RUSTOMJEE.NS.html">Keystone Realtors Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=RUSTOMJEE" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:RUSTOMJEE&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹5,009.72 Cr</td>
+        <td class="num">397.20</td>
         <td class="num">64.01</td>
+        <td class="num">13.32</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 50.69</td>
+        <td class="num">5.35%</td>
+        <td class="num">-</td>
+        <td class="num pos">59.76%</td>
+        <td class="num neg">-1.27%</td>
         <td class="num">0.36%</td>
         <td class="num neg">-24.05%</td>
         <td>Real Estate - Development</td>
@@ -399,12 +853,33 @@
       <tr data-idx="NSE">
         <td>22</td>
         <td>
-          <a href="../stocks/AGIIL.NS.html"><strong>AGIIL</strong> <span class="muted">AGI Infra Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/AGIIL.NS.html"><strong>AGIIL</strong></a>
+          
         </td>
-        <td class="num">365.00</td>
+        <td><a href="../stocks/AGIIL.NS.html">AGI Infra Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=AGIIL" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:AGIIL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹4,569.90 Cr</td>
+        <td class="num">365.00</td>
         <td class="num">47.05</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">18.14%</td>
+        <td class="num">5.00%</td>
+        <td class="num pos">13.50%</td>
+        <td class="num pos">25.39%</td>
         <td class="num">0.03%</td>
         <td class="num pos">+122.14%</td>
         <td>Real Estate - Development</td>
@@ -413,12 +888,33 @@
       <tr data-idx="NSE">
         <td>23</td>
         <td>
-          <a href="../stocks/IBULLSLTD.NS.html"><strong>IBULLSLTD</strong> <span class="muted">INDIABULLS LIMITED</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/IBULLSLTD.NS.html"><strong>IBULLSLTD</strong></a>
+          
         </td>
-        <td class="num">20.09</td>
+        <td><a href="../stocks/IBULLSLTD.NS.html">INDIABULLS LIMITED</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=IBULLSLTD" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:IBULLSLTD&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹4,480.16 Cr</td>
+        <td class="num">20.09</td>
         <td class="num">15.92</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">5.55%</td>
+        <td class="num">8.56%</td>
+        <td class="num pos">1,390.55%</td>
+        <td class="num pos">42.40%</td>
         <td class="num">-</td>
         <td class="num pos">+25.25%</td>
         <td>Real Estate - Development</td>
@@ -427,12 +923,33 @@
       <tr data-idx="NSE">
         <td>24</td>
         <td>
-          <a href="../stocks/SUNTECK.NS.html"><strong>SUNTECK</strong> <span class="muted">Sunteck Realty Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/SUNTECK.NS.html"><strong>SUNTECK</strong></a>
+          
         </td>
-        <td class="num">300.20</td>
+        <td><a href="../stocks/SUNTECK.NS.html">Sunteck Realty Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=SUNTECK" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:SUNTECK&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹4,412.60 Cr</td>
+        <td class="num">300.20</td>
         <td class="num">21.57</td>
+        <td class="num">13.36</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 8.21</td>
+        <td class="num">6.73%</td>
+        <td class="num">1.99%</td>
+        <td class="num pos">47.21%</td>
+        <td class="num pos">425.43%</td>
         <td class="num">0.50%</td>
         <td class="num neg">-26.54%</td>
         <td>Real Estate - Development</td>
@@ -441,12 +958,33 @@
       <tr data-idx="NSE">
         <td>25</td>
         <td>
-          <a href="../stocks/HEMIPROP.NS.html"><strong>HEMIPROP</strong> <span class="muted">Hemisphere Properties India Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/HEMIPROP.NS.html"><strong>HEMIPROP</strong></a>
+          
         </td>
-        <td class="num">142.78</td>
+        <td><a href="../stocks/HEMIPROP.NS.html">Hemisphere Properties India Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=HEMIPROP" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:HEMIPROP&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹4,078.71 Cr</td>
+        <td class="num">142.78</td>
         <td class="num">-</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">-1.08%</td>
+        <td class="num">-0.53%</td>
+        <td class="num neg">-20.86%</td>
+        <td class="num neg">-24.44%</td>
         <td class="num">-</td>
         <td class="num pos">+0.13%</td>
         <td>Real Estate - Diversified</td>
@@ -455,12 +993,33 @@
       <tr data-idx="NSE">
         <td>26</td>
         <td>
-          <a href="../stocks/TARC.NS.html"><strong>TARC</strong> <span class="muted">TARC Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/TARC.NS.html"><strong>TARC</strong></a>
+          
         </td>
-        <td class="num">130.38</td>
+        <td><a href="../stocks/TARC.NS.html">TARC Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=TARC" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:TARC&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹3,824.45 Cr</td>
+        <td class="num">130.38</td>
         <td class="num">-</td>
+        <td class="num">64.80</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">-6.89%</td>
+        <td class="num">-</td>
+        <td class="num neg">-33.69%</td>
+        <td class="num pos">0.22%</td>
         <td class="num">-</td>
         <td class="num neg">-22.60%</td>
         <td>Real Estate - Development</td>
@@ -469,12 +1028,33 @@
       <tr data-idx="NSE">
         <td>27</td>
         <td>
-          <a href="../stocks/RAYMONDREL.NS.html"><strong>RAYMONDREL</strong> <span class="muted">Raymond Realty Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/RAYMONDREL.NS.html"><strong>RAYMONDREL</strong></a>
+          
         </td>
-        <td class="num">573.95</td>
+        <td><a href="../stocks/RAYMONDREL.NS.html">Raymond Realty Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=RAYMONDREL" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:RAYMONDREL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹3,820.05 Cr</td>
+        <td class="num">573.95</td>
         <td class="num">-</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">-</td>
+        <td class="num">6.33%</td>
+        <td class="num pos">-</td>
+        <td class="num pos">-</td>
         <td class="num">0.35%</td>
         <td class="num neg">-40.78%</td>
         <td>Real Estate - Development</td>
@@ -483,12 +1063,33 @@
       <tr data-idx="NSE">
         <td>28</td>
         <td>
-          <a href="../stocks/ASHIANA.NS.html"><strong>ASHIANA</strong> <span class="muted">Ashiana Housing Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/ASHIANA.NS.html"><strong>ASHIANA</strong></a>
+          
         </td>
-        <td class="num">377.90</td>
+        <td><a href="../stocks/ASHIANA.NS.html">Ashiana Housing Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=ASHIANA" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:ASHIANA&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹3,814.92 Cr</td>
+        <td class="num">377.90</td>
         <td class="num">31.97</td>
+        <td class="num">22.06</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 9.91</td>
+        <td class="num">0.24%</td>
+        <td class="num">1.97%</td>
+        <td class="num pos">37.03%</td>
+        <td class="num pos">119.66%</td>
         <td class="num">0.66%</td>
         <td class="num pos">+25.08%</td>
         <td>Real Estate - Development</td>
@@ -497,12 +1098,33 @@
       <tr data-idx="NSE">
         <td>29</td>
         <td>
-          <a href="../stocks/INDIQUBE.NS.html"><strong>INDIQUBE</strong> <span class="muted">INDIQUBE SPACES LIMITED</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/INDIQUBE.NS.html"><strong>INDIQUBE</strong></a>
+          
         </td>
-        <td class="num">163.77</td>
+        <td><a href="../stocks/INDIQUBE.NS.html">INDIQUBE SPACES LIMITED</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=INDIQUBE" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:INDIQUBE&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹3,455.56 Cr</td>
+        <td class="num">163.77</td>
         <td class="num">-</td>
+        <td class="num">41.79</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">5.67%</td>
+        <td class="num">3.49%</td>
+        <td class="num pos">35.77%</td>
+        <td class="num pos">15.44%</td>
         <td class="num">-</td>
         <td class="num neg">-24.87%</td>
         <td>Real Estate Services</td>
@@ -511,12 +1133,33 @@
       <tr data-idx="NSE">
         <td>30</td>
         <td>
-          <a href="../stocks/KOLTEPATIL.NS.html"><strong>KOLTEPATIL</strong> <span class="muted">Kolte-Patil Developers Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/KOLTEPATIL.NS.html"><strong>KOLTEPATIL</strong></a>
+          
         </td>
-        <td class="num">377.10</td>
+        <td><a href="../stocks/KOLTEPATIL.NS.html">Kolte-Patil Developers Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=KOLTEPATIL" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:KOLTEPATIL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹3,370.73 Cr</td>
+        <td class="num">377.10</td>
         <td class="num">64.97</td>
+        <td class="num">9.23</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 55.75</td>
+        <td class="num">23.88%</td>
+        <td class="num">-0.09%</td>
+        <td class="num pos">15.40%</td>
+        <td class="num pos">10.30%</td>
         <td class="num">-</td>
         <td class="num neg">-7.23%</td>
         <td>Real Estate - Development</td>
@@ -525,12 +1168,33 @@
       <tr data-idx="NSE">
         <td>31</td>
         <td>
-          <a href="../stocks/MARATHON.NS.html"><strong>MARATHON</strong> <span class="muted">Marathon Nextgen Realty Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/MARATHON.NS.html"><strong>MARATHON</strong></a>
+          
         </td>
-        <td class="num">490.95</td>
+        <td><a href="../stocks/MARATHON.NS.html">Marathon Nextgen Realty Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=MARATHON" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:MARATHON&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹3,287.43 Cr</td>
+        <td class="num">490.95</td>
         <td class="num">13.37</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">16.51%</td>
+        <td class="num">-</td>
+        <td class="num pos">21.94%</td>
+        <td class="num pos">69.19%</td>
         <td class="num">0.20%</td>
         <td class="num pos">+0.99%</td>
         <td>Real Estate - Development</td>
@@ -539,12 +1203,33 @@
       <tr data-idx="NSE">
         <td>32</td>
         <td>
-          <a href="../stocks/HUBTOWN.NS.html"><strong>HUBTOWN</strong> <span class="muted">Hubtown Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/HUBTOWN.NS.html"><strong>HUBTOWN</strong></a>
+          
         </td>
-        <td class="num">205.93</td>
+        <td><a href="../stocks/HUBTOWN.NS.html">Hubtown Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=HUBTOWN" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:HUBTOWN&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹2,922.30 Cr</td>
+        <td class="num">205.93</td>
         <td class="num">19.35</td>
+        <td class="num">13.90</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 5.45</td>
+        <td class="num">9.17%</td>
+        <td class="num">1.60%</td>
+        <td class="num pos">30.16%</td>
+        <td class="num pos">69.48%</td>
         <td class="num">-</td>
         <td class="num pos">+14.95%</td>
         <td>Real Estate - Development</td>
@@ -553,12 +1238,33 @@
       <tr data-idx="NSE">
         <td>33</td>
         <td>
-          <a href="../stocks/ARVSMART.NS.html"><strong>ARVSMART</strong> <span class="muted">Arvind SmartSpaces Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/ARVSMART.NS.html"><strong>ARVSMART</strong></a>
+          
         </td>
-        <td class="num">608.25</td>
+        <td><a href="../stocks/ARVSMART.NS.html">Arvind SmartSpaces Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=ARVSMART" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:ARVSMART&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹2,793.30 Cr</td>
+        <td class="num">608.25</td>
         <td class="num">29.11</td>
+        <td class="num">17.19</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 11.92</td>
+        <td class="num">11.80%</td>
+        <td class="num">2.90%</td>
+        <td class="num pos">31.91%</td>
+        <td class="num pos">55.59%</td>
         <td class="num">0.99%</td>
         <td class="num neg">-11.01%</td>
         <td>Real Estate - Development</td>
@@ -567,12 +1273,33 @@
       <tr data-idx="NSE">
         <td>34</td>
         <td>
-          <a href="../stocks/EFCIL.NS.html"><strong>EFCIL</strong> <span class="muted">EFC (I) Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/EFCIL.NS.html"><strong>EFCIL</strong></a>
+          
         </td>
-        <td class="num">191.10</td>
+        <td><a href="../stocks/EFCIL.NS.html">EFC (I) Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=EFCIL" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:EFCIL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹2,662.96 Cr</td>
+        <td class="num">191.10</td>
         <td class="num">12.13</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">17.67%</td>
+        <td class="num">-</td>
+        <td class="num pos">-</td>
+        <td class="num pos">1,976.55%</td>
         <td class="num">-</td>
         <td class="num neg">-44.58%</td>
         <td>Real Estate Services</td>
@@ -581,12 +1308,33 @@
       <tr data-idx="NSE">
         <td>35</td>
         <td>
-          <a href="../stocks/AJMERA.NS.html"><strong>AJMERA</strong> <span class="muted">Ajmera Realty &amp; Infra India Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/AJMERA.NS.html"><strong>AJMERA</strong></a>
+          
         </td>
-        <td class="num">121.40</td>
+        <td><a href="../stocks/AJMERA.NS.html">Ajmera Realty &amp; Infra India Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=AJMERA" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:AJMERA&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹2,393.03 Cr</td>
+        <td class="num">121.40</td>
         <td class="num">15.98</td>
+        <td class="num">5.00</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 10.98</td>
+        <td class="num">12.57%</td>
+        <td class="num">7.78%</td>
+        <td class="num pos">15.20%</td>
+        <td class="num pos">40.52%</td>
         <td class="num">0.74%</td>
         <td class="num neg">-22.40%</td>
         <td>Real Estate - Development</td>
@@ -595,12 +1343,33 @@
       <tr data-idx="NSE">
         <td>36</td>
         <td>
-          <a href="../stocks/ARKADE.NS.html"><strong>ARKADE</strong> <span class="muted">ARKADE DEVELOPERS LIMITED</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/ARKADE.NS.html"><strong>ARKADE</strong></a>
+          
         </td>
-        <td class="num">123.26</td>
+        <td><a href="../stocks/ARKADE.NS.html">ARKADE DEVELOPERS LIMITED</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=ARKADE" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:ARKADE&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹2,256.74 Cr</td>
+        <td class="num">123.26</td>
         <td class="num">15.33</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">22.06%</td>
+        <td class="num">10.02%</td>
+        <td class="num pos">44.21%</td>
+        <td class="num pos">45.95%</td>
         <td class="num">1.62%</td>
         <td class="num neg">-33.49%</td>
         <td>Real Estate - Development</td>
@@ -609,12 +1378,33 @@
       <tr data-idx="NSE">
         <td>37</td>
         <td>
-          <a href="../stocks/ALEMBICLTD.NS.html"><strong>ALEMBICLTD</strong> <span class="muted">Alembic Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/ALEMBICLTD.NS.html"><strong>ALEMBICLTD</strong></a>
+          
         </td>
-        <td class="num">87.13</td>
+        <td><a href="../stocks/ALEMBICLTD.NS.html">Alembic Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=ALEMBICLTD" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:ALEMBICLTD&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹2,236.57 Cr</td>
+        <td class="num">87.13</td>
         <td class="num">7.05</td>
+        <td class="num">1.75</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 5.30</td>
+        <td class="num">6.07%</td>
+        <td class="num">1.92%</td>
+        <td class="num pos">26.58%</td>
+        <td class="num pos">18.52%</td>
         <td class="num">2.75%</td>
         <td class="num neg">-20.39%</td>
         <td>Real Estate - Development</td>
@@ -623,12 +1413,33 @@
       <tr data-idx="NSE">
         <td>38</td>
         <td>
-          <a href="../stocks/SCILAL.NS.html"><strong>SCILAL</strong> <span class="muted">Shipping Corporation of India Land and Assets Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/SCILAL.NS.html"><strong>SCILAL</strong></a>
+          
         </td>
-        <td class="num">46.47</td>
+        <td><a href="../stocks/SCILAL.NS.html">Shipping Corporation of India Land and Assets Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=SCILAL" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:SCILAL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹2,151.99 Cr</td>
+        <td class="num">46.47</td>
         <td class="num">74.52</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">1.21%</td>
+        <td class="num">-0.78%</td>
+        <td class="num pos">23.07%</td>
+        <td class="num neg">-6.76%</td>
         <td class="num">1.18%</td>
         <td class="num neg">-13.37%</td>
         <td>Real Estate Services</td>
@@ -637,12 +1448,33 @@
       <tr data-idx="NSE">
         <td>39</td>
         <td>
-          <a href="../stocks/SHRIRAMPPS.NS.html"><strong>SHRIRAMPPS</strong> <span class="muted">Shriram Properties Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/SHRIRAMPPS.NS.html"><strong>SHRIRAMPPS</strong></a>
+          
         </td>
-        <td class="num">90.85</td>
+        <td><a href="../stocks/SHRIRAMPPS.NS.html">Shriram Properties Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=SHRIRAMPPS" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:SHRIRAMPPS&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹1,546.13 Cr</td>
+        <td class="num">90.85</td>
         <td class="num">22.04</td>
+        <td class="num">6.86</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 15.18</td>
+        <td class="num">12.50%</td>
+        <td class="num">2.79%</td>
+        <td class="num pos">30.40%</td>
+        <td class="num pos">99.10%</td>
         <td class="num">-</td>
         <td class="num neg">-3.84%</td>
         <td>Real Estate - Development</td>
@@ -651,12 +1483,33 @@
       <tr data-idx="NSE">
         <td>40</td>
         <td>
-          <a href="../stocks/OMAXE.NS.html"><strong>OMAXE</strong> <span class="muted">Omaxe Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/OMAXE.NS.html"><strong>OMAXE</strong></a>
+          
         </td>
-        <td class="num">77.72</td>
+        <td><a href="../stocks/OMAXE.NS.html">Omaxe Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=OMAXE" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:OMAXE&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹1,420.20 Cr</td>
+        <td class="num">77.72</td>
         <td class="num">-</td>
+        <td class="num">11.05</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">-75.20%</td>
+        <td class="num">-2.91%</td>
+        <td class="num pos">19.71%</td>
+        <td class="num neg">-33.43%</td>
         <td class="num">-</td>
         <td class="num neg">-11.50%</td>
         <td>Real Estate - Development</td>
@@ -665,12 +1518,33 @@
       <tr data-idx="NSE">
         <td>41</td>
         <td>
-          <a href="../stocks/AURUM.NS.html"><strong>AURUM</strong> <span class="muted">Aurum PropTech Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/AURUM.NS.html"><strong>AURUM</strong></a>
+          
         </td>
-        <td class="num">180.12</td>
+        <td><a href="../stocks/AURUM.NS.html">Aurum PropTech Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=AURUM" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:AURUM&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹1,359.53 Cr</td>
+        <td class="num">180.12</td>
         <td class="num">713.24</td>
+        <td class="num">44.58</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 668.66</td>
+        <td class="num">1.62%</td>
+        <td class="num">-1.20%</td>
+        <td class="num pos">44.29%</td>
+        <td class="num pos">21.28%</td>
         <td class="num">-</td>
         <td class="num neg">-9.12%</td>
         <td>Real Estate Services</td>
@@ -679,12 +1553,33 @@
       <tr data-idx="NSE">
         <td>42</td>
         <td>
-          <a href="../stocks/UNITECH.NS.html"><strong>UNITECH</strong> <span class="muted">Unitech Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/UNITECH.NS.html"><strong>UNITECH</strong></a>
+          
         </td>
-        <td class="num">5.18</td>
+        <td><a href="../stocks/UNITECH.NS.html">Unitech Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=UNITECH" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:UNITECH&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹1,355.24 Cr</td>
+        <td class="num">5.18</td>
         <td class="num">-</td>
+        <td class="num">2.24</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">17.11%</td>
+        <td class="num">-</td>
+        <td class="num neg">-17.16%</td>
+        <td class="num neg">-52.09%</td>
         <td class="num">-</td>
         <td class="num neg">-18.68%</td>
         <td>Real Estate - Diversified</td>
@@ -693,12 +1588,33 @@
       <tr data-idx="NSE">
         <td>43</td>
         <td>
-          <a href="../stocks/TEXINFRA.NS.html"><strong>TEXINFRA</strong> <span class="muted">Texmaco Infrastructure &amp; Holdings Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/TEXINFRA.NS.html"><strong>TEXINFRA</strong></a>
+          
         </td>
-        <td class="num">96.41</td>
+        <td><a href="../stocks/TEXINFRA.NS.html">Texmaco Infrastructure &amp; Holdings Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=TEXINFRA" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:TEXINFRA&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹1,231.96 Cr</td>
+        <td class="num">96.41</td>
         <td class="num">112.42</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">1.44%</td>
+        <td class="num">-0.31%</td>
+        <td class="num pos">1.85%</td>
+        <td class="num pos">52.17%</td>
         <td class="num">0.16%</td>
         <td class="num neg">-4.98%</td>
         <td>Real Estate Services</td>
@@ -707,12 +1623,33 @@
       <tr data-idx="NSE">
         <td>44</td>
         <td>
-          <a href="../stocks/ARIHANTSUP.NS.html"><strong>ARIHANTSUP</strong> <span class="muted">Arihant Superstructures Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/ARIHANTSUP.NS.html"><strong>ARIHANTSUP</strong></a>
+          
         </td>
-        <td class="num">258.85</td>
+        <td><a href="../stocks/ARIHANTSUP.NS.html">Arihant Superstructures Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=ARIHANTSUP" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:ARIHANTSUP&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹1,124.50 Cr</td>
+        <td class="num">258.85</td>
         <td class="num">24.44</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">10.65%</td>
+        <td class="num">-</td>
+        <td class="num pos">12.33%</td>
+        <td class="num pos">13.61%</td>
         <td class="num">0.58%</td>
         <td class="num neg">-29.15%</td>
         <td>Real Estate - Development</td>
@@ -721,12 +1658,33 @@
       <tr data-idx="NSE">
         <td>45</td>
         <td>
-          <a href="../stocks/SURAJEST.NS.html"><strong>SURAJEST</strong> <span class="muted">SURAJ ESTATE DEVELOPERS L</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/SURAJEST.NS.html"><strong>SURAJEST</strong></a>
+          
         </td>
-        <td class="num">223.78</td>
+        <td><a href="../stocks/SURAJEST.NS.html">SURAJ ESTATE DEVELOPERS L</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=SURAJEST" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:SURAJEST&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹1,078.30 Cr</td>
+        <td class="num">223.78</td>
         <td class="num">11.77</td>
+        <td class="num">11.84</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #dc2626;">Δ -0.07</td>
+        <td class="num">15.89%</td>
+        <td class="num">-</td>
+        <td class="num pos">25.50%</td>
+        <td class="num pos">56.02%</td>
         <td class="num">-</td>
         <td class="num neg">-30.22%</td>
         <td>Real Estate - Development</td>
@@ -735,12 +1693,33 @@
       <tr data-idx="NSE">
         <td>46</td>
         <td>
-          <a href="../stocks/ARIHANT.NS.html"><strong>ARIHANT</strong> <span class="muted">Arihant Foundations &amp; Housing Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/ARIHANT.NS.html"><strong>ARIHANT</strong></a>
+          
         </td>
-        <td class="num">893.20</td>
+        <td><a href="../stocks/ARIHANT.NS.html">Arihant Foundations &amp; Housing Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=ARIHANT" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:ARIHANT&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹974.31 Cr</td>
+        <td class="num">893.20</td>
         <td class="num">13.91</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">18.15%</td>
+        <td class="num">-</td>
+        <td class="num pos">35.60%</td>
+        <td class="num pos">1,458.00%</td>
         <td class="num">-</td>
         <td class="num pos">+2,152.71%</td>
         <td>Real Estate - Development</td>
@@ -749,12 +1728,33 @@
       <tr data-idx="NSE">
         <td>47</td>
         <td>
-          <a href="../stocks/PROZONER.NS.html"><strong>PROZONER</strong> <span class="muted">Prozone Realty Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/PROZONER.NS.html"><strong>PROZONER</strong></a>
+          
         </td>
-        <td class="num">53.86</td>
+        <td><a href="../stocks/PROZONER.NS.html">Prozone Realty Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=PROZONER" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:PROZONER&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹827.87 Cr</td>
+        <td class="num">53.86</td>
         <td class="num">-</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">2.91%</td>
+        <td class="num">-</td>
+        <td class="num pos">24.16%</td>
+        <td class="num neg">-326.88%</td>
         <td class="num">-</td>
         <td class="num pos">+53.93%</td>
         <td>Real Estate - Diversified</td>
@@ -763,12 +1763,33 @@
       <tr data-idx="NSE">
         <td>48</td>
         <td>
-          <a href="../stocks/ELDEHSG.NS.html"><strong>ELDEHSG</strong> <span class="muted">Eldeco Housing and Industries Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/ELDEHSG.NS.html"><strong>ELDEHSG</strong></a>
+          
         </td>
-        <td class="num">784.85</td>
+        <td><a href="../stocks/ELDEHSG.NS.html">Eldeco Housing and Industries Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=ELDEHSG" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:ELDEHSG&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹772.87 Cr</td>
+        <td class="num">784.85</td>
         <td class="num">34.07</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">7.13%</td>
+        <td class="num">-</td>
+        <td class="num pos">2.81%</td>
+        <td class="num neg">-24.91%</td>
         <td class="num">1.12%</td>
         <td class="num neg">-2.42%</td>
         <td>Real Estate Services</td>
@@ -777,12 +1798,33 @@
       <tr data-idx="NSE">
         <td>49</td>
         <td>
-          <a href="../stocks/GEECEE.NS.html"><strong>GEECEE</strong> <span class="muted">GeeCee Ventures Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/GEECEE.NS.html"><strong>GEECEE</strong></a>
+          
         </td>
-        <td class="num">322.75</td>
+        <td><a href="../stocks/GEECEE.NS.html">GeeCee Ventures Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=GEECEE" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:GEECEE&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹681.72 Cr</td>
+        <td class="num">322.75</td>
         <td class="num">16.21</td>
+        <td class="num">53.18</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #dc2626;">Δ -36.97</td>
+        <td class="num">5.74%</td>
+        <td class="num">2.45%</td>
+        <td class="num pos">23.15%</td>
+        <td class="num pos">53.54%</td>
         <td class="num">0.62%</td>
         <td class="num neg">-16.17%</td>
         <td>Real Estate - Development</td>
@@ -791,12 +1833,33 @@
       <tr data-idx="NSE">
         <td>50</td>
         <td>
-          <a href="../stocks/MODIS.NS.html"><strong>MODIS</strong> <span class="muted">Modi&#39;s Navnirman Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/MODIS.NS.html"><strong>MODIS</strong></a>
+          
         </td>
-        <td class="num">339.80</td>
+        <td><a href="../stocks/MODIS.NS.html">Modi&#39;s Navnirman Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=MODIS" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:MODIS&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹665.12 Cr</td>
+        <td class="num">339.80</td>
         <td class="num">22.82</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">23.59%</td>
+        <td class="num">10.25%</td>
+        <td class="num pos">69.75%</td>
+        <td class="num pos">71.71%</td>
         <td class="num">-</td>
         <td class="num neg">-13.85%</td>
         <td>Real Estate - Development</td>
@@ -805,12 +1868,33 @@
       <tr data-idx="NSE">
         <td>51</td>
         <td>
-          <a href="../stocks/TREL.NS.html"><strong>TREL</strong> <span class="muted">Transindia Real Estate Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/TREL.NS.html"><strong>TREL</strong></a>
+          
         </td>
-        <td class="num">24.82</td>
+        <td><a href="../stocks/TREL.NS.html">Transindia Real Estate Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=TREL" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:TREL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹616.45 Cr</td>
+        <td class="num">24.82</td>
         <td class="num">15.68</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">3.80%</td>
+        <td class="num">1.30%</td>
+        <td class="num neg">-14.99%</td>
+        <td class="num pos">10.16%</td>
         <td class="num">-</td>
         <td class="num neg">-26.94%</td>
         <td>Real Estate Services</td>
@@ -819,12 +1903,33 @@
       <tr data-idx="NSE">
         <td>52</td>
         <td>
-          <a href="../stocks/PTL.NS.html"><strong>PTL</strong> <span class="muted">PTL Enterprises Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/PTL.NS.html"><strong>PTL</strong></a>
+          
         </td>
-        <td class="num">39.35</td>
+        <td><a href="../stocks/PTL.NS.html">PTL Enterprises Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=PTL" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:PTL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹521.43 Cr</td>
+        <td class="num">39.35</td>
         <td class="num">11.29</td>
+        <td class="num">6.74</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 4.54</td>
+        <td class="num">6.40%</td>
+        <td class="num">3.32%</td>
+        <td class="num pos">0.00%</td>
+        <td class="num pos">25.65%</td>
         <td class="num">8.26%</td>
         <td class="num pos">+3.02%</td>
         <td>Real Estate Services</td>
@@ -833,12 +1938,33 @@
       <tr data-idx="NSE">
         <td>53</td>
         <td>
-          <a href="../stocks/PANSARI.NS.html"><strong>PANSARI</strong> <span class="muted">Pansari Developers Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/PANSARI.NS.html"><strong>PANSARI</strong></a>
+          
         </td>
-        <td class="num">296.70</td>
+        <td><a href="../stocks/PANSARI.NS.html">Pansari Developers Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=PANSARI" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:PANSARI&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹511.63 Cr</td>
+        <td class="num">296.70</td>
         <td class="num">30.05</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">9.69%</td>
+        <td class="num">-</td>
+        <td class="num neg">-20.25%</td>
+        <td class="num pos">27.23%</td>
         <td class="num">-</td>
         <td class="num pos">+18.97%</td>
         <td>Real Estate - Development</td>
@@ -847,12 +1973,33 @@
       <tr data-idx="NSE">
         <td>54</td>
         <td>
-          <a href="../stocks/NILASPACES.NS.html"><strong>NILASPACES</strong> <span class="muted">Nila Spaces Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/NILASPACES.NS.html"><strong>NILASPACES</strong></a>
+          
         </td>
-        <td class="num">12.83</td>
+        <td><a href="../stocks/NILASPACES.NS.html">Nila Spaces Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=NILASPACES" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:NILASPACES&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹503.39 Cr</td>
+        <td class="num">12.83</td>
         <td class="num">17.51</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">26.76%</td>
+        <td class="num">9.61%</td>
+        <td class="num pos">467.78%</td>
+        <td class="num pos">267.54%</td>
         <td class="num">-</td>
         <td class="num pos">+16.00%</td>
         <td>Real Estate - Development</td>
@@ -861,12 +2008,33 @@
       <tr data-idx="NSE">
         <td>55</td>
         <td>
-          <a href="../stocks/SBGLP.NS.html"><strong>SBGLP</strong> <span class="muted">Suratwwala Business Group Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/SBGLP.NS.html"><strong>SBGLP</strong></a>
+          
         </td>
-        <td class="num">26.27</td>
+        <td><a href="../stocks/SBGLP.NS.html">Suratwwala Business Group Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=SBGLP" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:SBGLP&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹456.09 Cr</td>
+        <td class="num">26.27</td>
         <td class="num">14.86</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">10.48%</td>
+        <td class="num">-</td>
+        <td class="num pos">255.41%</td>
+        <td class="num pos">67.40%</td>
         <td class="num">0.38%</td>
         <td class="num neg">-36.38%</td>
         <td>Real Estate - Development</td>
@@ -875,12 +2043,33 @@
       <tr data-idx="NSE">
         <td>56</td>
         <td>
-          <a href="../stocks/DEVX.NS.html"><strong>DEVX</strong> <span class="muted">Dev Accelerator Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/DEVX.NS.html"><strong>DEVX</strong></a>
+          
         </td>
-        <td class="num">38.28</td>
+        <td><a href="../stocks/DEVX.NS.html">Dev Accelerator Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=DEVX" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:DEVX&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹349.48 Cr</td>
+        <td class="num">38.28</td>
         <td class="num">34.91</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">12.31%</td>
+        <td class="num">5.32%</td>
+        <td class="num pos">47.84%</td>
+        <td class="num pos">56.21%</td>
         <td class="num">-</td>
         <td class="num neg">-40.23%</td>
         <td>Real Estate Services</td>
@@ -889,12 +2078,33 @@
       <tr data-idx="NSE">
         <td>57</td>
         <td>
-          <a href="../stocks/MODIRUBBER.NS.html"><strong>MODIRUBBER</strong> <span class="muted">Modi Rubber Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/MODIRUBBER.NS.html"><strong>MODIRUBBER</strong></a>
+          
         </td>
-        <td class="num">128.83</td>
+        <td><a href="../stocks/MODIRUBBER.NS.html">Modi Rubber Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=MODIRUBBER" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:MODIRUBBER&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹325.53 Cr</td>
+        <td class="num">128.83</td>
         <td class="num">19.35</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">3.24%</td>
+        <td class="num">-1.74%</td>
+        <td class="num pos">78.58%</td>
+        <td class="num neg">-7.24%</td>
         <td class="num">-</td>
         <td class="num neg">-2.08%</td>
         <td>Real Estate Services</td>
@@ -903,12 +2113,33 @@
       <tr data-idx="NSE">
         <td>58</td>
         <td>
-          <a href="../stocks/ASHIMASYN.NS.html"><strong>ASHIMASYN</strong> <span class="muted">Ashima Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/ASHIMASYN.NS.html"><strong>ASHIMASYN</strong></a>
+          
         </td>
-        <td class="num">16.49</td>
+        <td><a href="../stocks/ASHIMASYN.NS.html">Ashima Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=ASHIMASYN" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:ASHIMASYN&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹320.84 Cr</td>
+        <td class="num">16.49</td>
         <td class="num">-</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">1.55%</td>
+        <td class="num">-</td>
+        <td class="num neg">-63.07%</td>
+        <td class="num neg">-68.68%</td>
         <td class="num">-</td>
         <td class="num neg">-48.06%</td>
         <td>Real Estate - Development</td>
@@ -917,12 +2148,33 @@
       <tr data-idx="NSE">
         <td>59</td>
         <td>
-          <a href="../stocks/NILAINFRA.NS.html"><strong>NILAINFRA</strong> <span class="muted">Nila Infrastructures Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/NILAINFRA.NS.html"><strong>NILAINFRA</strong></a>
+          
         </td>
-        <td class="num">8.10</td>
+        <td><a href="../stocks/NILAINFRA.NS.html">Nila Infrastructures Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=NILAINFRA" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:NILAINFRA&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹320.23 Cr</td>
+        <td class="num">8.10</td>
         <td class="num">13.78</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">20.32%</td>
+        <td class="num">2.18%</td>
+        <td class="num pos">41.53%</td>
+        <td class="num pos">1,759.92%</td>
         <td class="num">-</td>
         <td class="num neg">-26.63%</td>
         <td>Real Estate - Development</td>
@@ -931,12 +2183,33 @@
       <tr data-idx="NSE">
         <td>60</td>
         <td>
-          <a href="../stocks/RVHL.NS.html"><strong>RVHL</strong> <span class="muted">Ravinder Heights Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/RVHL.NS.html"><strong>RVHL</strong></a>
+          
         </td>
-        <td class="num">39.14</td>
+        <td><a href="../stocks/RVHL.NS.html">Ravinder Heights Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=RVHL" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:RVHL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹240.76 Cr</td>
+        <td class="num">39.14</td>
         <td class="num">4.72</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">-1.31%</td>
+        <td class="num">-</td>
+        <td class="num pos">157.40%</td>
+        <td class="num neg">-3,864.36%</td>
         <td class="num">-</td>
         <td class="num neg">-28.52%</td>
         <td>Real Estate - Development</td>
@@ -945,12 +2218,33 @@
       <tr data-idx="NSE">
         <td>61</td>
         <td>
-          <a href="../stocks/SHRADHA.NS.html"><strong>SHRADHA</strong> <span class="muted">Shradha Realty Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/SHRADHA.NS.html"><strong>SHRADHA</strong></a>
+          
         </td>
-        <td class="num">35.00</td>
+        <td><a href="../stocks/SHRADHA.NS.html">Shradha Realty Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=SHRADHA" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:SHRADHA&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹205.22 Cr</td>
+        <td class="num">35.00</td>
         <td class="num">11.11</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">15.26%</td>
+        <td class="num">-</td>
+        <td class="num pos">289.67%</td>
+        <td class="num pos">132.27%</td>
         <td class="num">1.23%</td>
         <td class="num neg">-40.01%</td>
         <td>Real Estate - Development</td>
@@ -959,12 +2253,33 @@
       <tr data-idx="NSE">
         <td>62</td>
         <td>
-          <a href="../stocks/SUPREME.NS.html"><strong>SUPREME</strong> <span class="muted">Supreme Holdings &amp; Hospitality (India) Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/SUPREME.NS.html"><strong>SUPREME</strong></a>
+          
         </td>
-        <td class="num">47.76</td>
+        <td><a href="../stocks/SUPREME.NS.html">Supreme Holdings &amp; Hospitality (India) Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=SUPREME" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:SUPREME&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹184.70 Cr</td>
+        <td class="num">47.76</td>
         <td class="num">528.89</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">0.11%</td>
+        <td class="num">0.07%</td>
+        <td class="num neg">-62.66%</td>
+        <td class="num neg">-67.98%</td>
         <td class="num">-</td>
         <td class="num neg">-53.86%</td>
         <td>Real Estate - Development</td>
@@ -973,12 +2288,33 @@
       <tr data-idx="NSE">
         <td>63</td>
         <td>
-          <a href="../stocks/PRAENG.NS.html"><strong>PRAENG</strong> <span class="muted">Prajay Engineers Syndicate Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/PRAENG.NS.html"><strong>PRAENG</strong></a>
+          
         </td>
-        <td class="num">22.96</td>
+        <td><a href="../stocks/PRAENG.NS.html">Prajay Engineers Syndicate Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=PRAENG" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:PRAENG&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹158.75 Cr</td>
+        <td class="num">22.96</td>
         <td class="num">-</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">-4.42%</td>
+        <td class="num">-1.28%</td>
+        <td class="num neg">-14.85%</td>
+        <td class="num neg">-341.21%</td>
         <td class="num">-</td>
         <td class="num pos">+8.51%</td>
         <td>Real Estate - Development</td>
@@ -987,12 +2323,33 @@
       <tr data-idx="NSE">
         <td>64</td>
         <td>
-          <a href="../stocks/UMIYA-MRO.NS.html"><strong>UMIYA-MRO</strong> <span class="muted">Umiya Buildcon Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/UMIYA-MRO.NS.html"><strong>UMIYA-MRO</strong></a>
+          
         </td>
-        <td class="num">83.70</td>
+        <td><a href="../stocks/UMIYA-MRO.NS.html">Umiya Buildcon Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=UMIYA-MRO" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:UMIYA-MRO&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹156.48 Cr</td>
+        <td class="num">83.70</td>
         <td class="num">3.71</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">28.03%</td>
+        <td class="num">5.47%</td>
+        <td class="num pos">29.47%</td>
+        <td class="num pos">389.41%</td>
         <td class="num">-</td>
         <td class="num pos">+23.49%</td>
         <td>Real Estate - Development</td>
@@ -1001,12 +2358,33 @@
       <tr data-idx="NSE">
         <td>65</td>
         <td>
-          <a href="../stocks/AMJLAND.NS.html"><strong>AMJLAND</strong> <span class="muted">AMJ Land Holdings Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/AMJLAND.NS.html"><strong>AMJLAND</strong></a>
+          
         </td>
-        <td class="num">37.18</td>
+        <td><a href="../stocks/AMJLAND.NS.html">AMJ Land Holdings Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=AMJLAND" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:AMJLAND&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹153.75 Cr</td>
+        <td class="num">37.18</td>
         <td class="num">10.39</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">9.93%</td>
+        <td class="num">5.22%</td>
+        <td class="num pos">14.11%</td>
+        <td class="num pos">29.50%</td>
         <td class="num">0.54%</td>
         <td class="num neg">-34.01%</td>
         <td>Real Estate - Development</td>
@@ -1015,12 +2393,33 @@
       <tr data-idx="NSE">
         <td>66</td>
         <td>
-          <a href="../stocks/CORALFINAC.NS.html"><strong>CORALFINAC</strong> <span class="muted">Coral India Finance and Housing Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/CORALFINAC.NS.html"><strong>CORALFINAC</strong></a>
+          
         </td>
-        <td class="num">32.21</td>
+        <td><a href="../stocks/CORALFINAC.NS.html">Coral India Finance and Housing Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=CORALFINAC" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:CORALFINAC&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹131.39 Cr</td>
+        <td class="num">32.21</td>
         <td class="num">9.11</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">9.21%</td>
+        <td class="num">4.71%</td>
+        <td class="num neg">-3.17%</td>
+        <td class="num pos">0.23%</td>
         <td class="num">1.24%</td>
         <td class="num neg">-31.22%</td>
         <td>Real Estate Services</td>
@@ -1029,12 +2428,33 @@
       <tr data-idx="NSE">
         <td>67</td>
         <td>
-          <a href="../stocks/MOTOGENFIN.NS.html"><strong>MOTOGENFIN</strong> <span class="muted">The Motor &amp; General Finance Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/MOTOGENFIN.NS.html"><strong>MOTOGENFIN</strong></a>
+          
         </td>
-        <td class="num">27.35</td>
+        <td><a href="../stocks/MOTOGENFIN.NS.html">The Motor &amp; General Finance Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=MOTOGENFIN" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:MOTOGENFIN&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹107.30 Cr</td>
+        <td class="num">27.35</td>
         <td class="num">80.88</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">0.86%</td>
+        <td class="num">-</td>
+        <td class="num pos">18.64%</td>
+        <td class="num pos">44.14%</td>
         <td class="num">-</td>
         <td class="num neg">-3.05%</td>
         <td>Real Estate Services</td>
@@ -1043,12 +2463,33 @@
       <tr data-idx="NSE">
         <td>68</td>
         <td>
-          <a href="../stocks/FMNL.NS.html"><strong>FMNL</strong> <span class="muted">Future Market Networks Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/FMNL.NS.html"><strong>FMNL</strong></a>
+          
         </td>
-        <td class="num">10.24</td>
+        <td><a href="../stocks/FMNL.NS.html">Future Market Networks Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=FMNL" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:FMNL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹67.27 Cr</td>
+        <td class="num">10.24</td>
         <td class="num">-</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">35.83%</td>
+        <td class="num">2.36%</td>
+        <td class="num pos">5.81%</td>
+        <td class="num pos">111.20%</td>
         <td class="num">-</td>
         <td class="num neg">-30.76%</td>
         <td>Real Estate Services</td>
@@ -1057,12 +2498,33 @@
       <tr data-idx="NSE">
         <td>69</td>
         <td>
-          <a href="../stocks/ROLLT.NS.html"><strong>ROLLT</strong> <span class="muted">Rollatainers Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/ROLLT.NS.html"><strong>ROLLT</strong></a>
+          
         </td>
-        <td class="num">1.87</td>
+        <td><a href="../stocks/ROLLT.NS.html">Rollatainers Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=ROLLT" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:ROLLT&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹46.77 Cr</td>
+        <td class="num">1.87</td>
         <td class="num">2.79</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">-2.01%</td>
+        <td class="num">-</td>
+        <td class="num neg">-33.33%</td>
+        <td class="num pos">32.53%</td>
         <td class="num">-</td>
         <td class="num neg">-16.52%</td>
         <td>Real Estate Services</td>
@@ -1071,12 +2533,33 @@
       <tr data-idx="NSE">
         <td>70</td>
         <td>
-          <a href="../stocks/COUNCODOS.NS.html"><strong>COUNCODOS</strong> <span class="muted">Country Condo&#39;s Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/COUNCODOS.NS.html"><strong>COUNCODOS</strong></a>
+          
         </td>
-        <td class="num">4.85</td>
+        <td><a href="../stocks/COUNCODOS.NS.html">Country Condo&#39;s Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=COUNCODOS" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:COUNCODOS&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹37.09 Cr</td>
+        <td class="num">4.85</td>
         <td class="num">68.29</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">3.62%</td>
+        <td class="num">-</td>
+        <td class="num neg">-8.67%</td>
+        <td class="num neg">-38.17%</td>
         <td class="num">-</td>
         <td class="num neg">-36.10%</td>
         <td>Real Estate - Development</td>
@@ -1085,12 +2568,33 @@
       <tr data-idx="NSE">
         <td>71</td>
         <td>
-          <a href="../stocks/EUROTEXIND.NS.html"><strong>EUROTEXIND</strong> <span class="muted">Eurotex Industries and Exports Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/EUROTEXIND.NS.html"><strong>EUROTEXIND</strong></a>
+          
         </td>
-        <td class="num">15.50</td>
+        <td><a href="../stocks/EUROTEXIND.NS.html">Eurotex Industries and Exports Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=EUROTEXIND" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:EUROTEXIND&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">₹18.22 Cr</td>
+        <td class="num">15.50</td>
         <td class="num">7.56</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">3.24%</td>
+        <td class="num">-</td>
+        <td class="num neg">-23.04%</td>
+        <td class="num pos">28.37%</td>
         <td class="num">-</td>
         <td class="num pos">+19.05%</td>
         <td>Real Estate - Development</td>
@@ -1099,12 +2603,33 @@
       <tr data-idx="NSE">
         <td>72</td>
         <td>
-          <a href="../stocks/MAJESAUT.NS.html"><strong>MAJESAUT</strong> <span class="muted">Majestic Auto Limited</span></a>
-          <span class="idx-badge idx-NSE">NSE</span>
+          <a href="../stocks/MAJESAUT.NS.html"><strong>MAJESAUT</strong></a>
+          
         </td>
-        <td class="num">335.90</td>
+        <td><a href="../stocks/MAJESAUT.NS.html">Majestic Auto Limited</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=MAJESAUT" target="_blank" rel="noopener" title="NSE Quote">
+            <span class="chart-icon-letter">N</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:MAJESAUT&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
         <td class="num">-</td>
+        <td class="num">335.90</td>
         <td class="num">4.06</td>
+        <td class="num">-</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #6b7280;">-</td>
+        <td class="num">3.89%</td>
+        <td class="num">-0.26%</td>
+        <td class="num pos">9.54%</td>
+        <td class="num neg">-9.07%</td>
         <td class="num">14.89%</td>
         <td class="num pos">+6.30%</td>
         <td>Real Estate Services</td>
@@ -1144,7 +2669,7 @@
 
 <footer class="footer">
   <div class="wrap">
-    <div>NIFTY stock explorer · Generated 2026-05-28 20:54 IST</div>
+    <div>NIFTY stock explorer · Generated 2026-05-29 05:02 IST</div>
     <div class="muted">For informational use only - not investment advice.</div>
   </div>
 </footer>
@@ -1394,5 +2919,26 @@ window.addEventListener('resize', initStickyScrollbars);
 
 <script src="../assets/sort.js" defer></script>
 <script src="../assets/filter.js" defer></script>
+<script>
+// Global auth badge — shows signed-in user on all pages from localStorage
+(function(){
+  var b = document.getElementById('globalAuthBadge');
+  if (!b) return;
+  function render(){
+    var raw = localStorage.getItem('herai_user');
+    if (!raw) { b.innerHTML = ''; return; }
+    try { var u = JSON.parse(raw); } catch(e) { b.innerHTML = ''; return; }
+    var name = u.name || u.email || 'User';
+    var initial = name[0].toUpperCase();
+    b.innerHTML = '<a href="' + '../' + 'elite.html" class="gab-link" title="' + name + '">' +
+      (u.photo
+        ? '<img src="' + u.photo + '" alt="" class="gab-avatar" referrerpolicy="no-referrer">'
+        : '<span class="gab-letter">' + initial + '</span>') +
+      '</a>';
+  }
+  render();
+  window.addEventListener('storage', render);
+})();
+</script>
 </body>
 </html>

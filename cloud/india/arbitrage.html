@@ -54,6 +54,7 @@
              oninput="updateSuggest()" onkeydown="navSuggest(event)" onfocus="updateSuggest()" onblur="setTimeout(hideSuggest,150)" />
       <div id="suggest" class="suggest" hidden></div>
     </form>
+    <div id="globalAuthBadge" class="global-auth-badge"></div>
   </div>
   <div class="wrap topnav-row2">
     <nav>
@@ -96,315 +97,45 @@
 <section class="hero">
   <h1>Cash &amp; Futures Arbitrage</h1>
   <p class="muted">
-    Live spread between NSE cash price (spot) and the most-active stock-futures
-    contract. <strong>Premium</strong> (futures &gt; spot) typically signals bullish
-    positioning by carry traders; <strong>discount</strong> (futures &lt; spot) signals
-    bearish positioning, dividend impact, or arbitrage opportunity.
+    Spread between NSE closing price and the stock-futures
+    contract. Sort by <em>Δ %</em> to find the biggest premiums (top) and discounts (bottom), then match against the strategies below.
   </p>
-
-  <div class="quick-rules">
-    <div class="qr-row">
-      <span class="qr-when pos">Futures premium &ge; <strong>+1.0%</strong> &middot; &ge; 10 days to expiry</span>
-      <span class="qr-do">
-        <span class="strat-pill buy">BUY</span> stock in cash &nbsp;+&nbsp;
-        <span class="strat-pill sell">SELL</span> same-month futures
-      </span>
-      <span class="qr-why muted">Cash-and-carry &mdash; lock the spread to expiry (market-neutral).</span>
-    </div>
-    <div class="qr-row">
-      <span class="qr-when neg">Futures discount &le; <strong>&minus;0.8%</strong> &middot; no upcoming dividend</span>
-      <span class="qr-do">
-        <span class="strat-pill sell">SELL</span> stock you hold &nbsp;+&nbsp;
-        <span class="strat-pill buy">BUY</span> same-month futures
-      </span>
-      <span class="qr-why muted">Reverse cash-and-carry &mdash; keep exposure, pocket the discount.</span>
-    </div>
-    <div class="qr-row">
-      <span class="qr-when">(Next Δ % &minus; Curr Δ %) outside &plusmn;0.5&ndash;1.0%</span>
-      <span class="qr-do">
-        <span class="strat-pill buy">BUY</span> cheaper month &nbsp;+&nbsp;
-        <span class="strat-pill sell">SELL</span> richer month (futures only)
-      </span>
-      <span class="qr-why muted">Calendar spread &mdash; bets that term-structure normalises.</span>
-    </div>
-    <div class="qr-row">
-      <span class="qr-when pos">Premium persists across sessions &middot; OI rising</span>
-      <span class="qr-do">
-        <span class="strat-pill buy">BUY</span> futures (leveraged) <em>or</em> stock (safer)
-      </span>
-      <span class="qr-why muted">Directional long &mdash; bullish confirmation, pair with technicals.</span>
-    </div>
-    <div class="qr-row">
-      <span class="qr-when neg">Discount persists across sessions &middot; OI rising</span>
-      <span class="qr-do">
-        <span class="strat-pill sell">SELL</span> futures &nbsp;or trim cash holdings
-      </span>
-      <span class="qr-why muted">Directional short &mdash; bearish confirmation, use a hard stop.</span>
-    </div>
-  </div>
-
-  <p class="muted small" style="margin-top:10px;">
-    <strong>How to use the table below:</strong> sort by <em>Curr Δ %</em> to find the biggest premiums (top of list) and discounts (bottom). Match each row against the rules above to pick a strategy. Full mechanics, entry/exit triggers and risks are in the <a href="#strategies">strategy details</a> section.
-  </p>
-
   <div class="meta-pills">
     <span class="pill">As of 27-May-2026 15:30:00</span>
     <span class="pill">Normal Market is Closed</span>
-    <span class="pill">15 symbols</span>
-    <span class="pill">Updated 2026-05-28 20:54 IST</span>
+    <span class="pill">20 symbols</span>
+    <span class="pill">Updated 2026-05-29 05:02 IST</span>
   </div>
 </section>
 
 <style>
-  /* Hero quick-rules + pill styling (always rendered, even if no live data). */
-  .quick-rules { display:flex; flex-direction:column; gap:6px; margin: 14px 0 8px; border:1px solid var(--border, #2a3142); border-radius:8px; padding: 8px 10px; background: rgba(255,255,255,0.02); }
-  .qr-row { display:grid; grid-template-columns: minmax(220px, 1.1fr) minmax(260px, 1.4fr) minmax(180px, 1.5fr); gap: 10px; align-items:center; padding: 6px 4px; border-bottom: 1px dashed rgba(127,127,127,0.18); font-size: 13px; }
-  .qr-row:last-child { border-bottom: 0; }
-  @media (max-width: 880px) { .qr-row { grid-template-columns: 1fr; gap:4px; padding:8px 4px; } }
-  .qr-when { font-weight: 600; }
-  .qr-when.pos { color: #4caf6a; }
-  .qr-when.neg { color: #e36a6a; }
-  .qr-do { font-size: 12.5px; }
-  .qr-why { font-size: 12px; font-style: italic; }
   .strat-pill { display:inline-block; font-size:11px; font-weight:700; padding: 2px 8px; border-radius: 4px; letter-spacing:0.5px; }
   .strat-pill.buy  { background:#1f6d3a; color:#fff; }
   .strat-pill.sell { background:#8a2b2b; color:#fff; }
 </style>
 
-
 <section class="card section">
-  <div class="card-head">
-    <h2>Spot vs Stock Futures Spread</h2>
-    <span class="muted small">NSE F&amp;O most-active</span>
-  </div>
-  <p class="muted small" style="margin:6px 0 14px;">
-    Top 15 symbols by absolute current-month spread. Current = ongoing-month contract; Next = following-month contract.
-  </p>
-  <div class="table-wrap">
-    <table class="data-table compact sortable">
-      <thead>
-        <tr>
-          <th>Symbol</th>
-          <th class="r">Spot</th>
-          <th class="r">Curr Fut</th>
-          <th class="r">Curr Δ</th>
-          <th class="r">Curr Δ %</th>
-          <th class="r">Next Fut</th>
-          <th class="r">Next Δ</th>
-          <th class="r">Next Δ %</th>
-          <th>Expiry</th>
-        </tr>
-      </thead>
-      <tbody>
-        
-        <tr>
-          
-          <td><a href="stocks/ADANIPOWER.NS.html"><strong>ADANIPOWER</strong></a></td>
-          <td class="r">249.43</td>
-          <td class="r">252.00</td>
-          <td class="r pos">+2.57</td>
-          <td class="r pos">+1.03%</td>
-          <td class="r">—</td>
-          <td class="r pos">—</td>
-          <td class="r pos">—</td>
-          <td class="muted small">30-Jun-2026</td>
-        </tr>
-        
-        <tr>
-          
-          <td><a href="stocks/TATASTEEL.NS.html"><strong>TATASTEEL</strong></a></td>
-          <td class="r">214.51</td>
-          <td class="r">212.35</td>
-          <td class="r neg">-2.16</td>
-          <td class="r neg">-1.01%</td>
-          <td class="r">—</td>
-          <td class="r pos">—</td>
-          <td class="r pos">—</td>
-          <td class="muted small">30-Jun-2026</td>
-        </tr>
-        
-        <tr>
-          
-          <td><a href="stocks/ETERNAL.NS.html"><strong>ETERNAL</strong></a></td>
-          <td class="r">255.71</td>
-          <td class="r">258.29</td>
-          <td class="r pos">+2.58</td>
-          <td class="r pos">+1.01%</td>
-          <td class="r">—</td>
-          <td class="r pos">—</td>
-          <td class="r pos">—</td>
-          <td class="muted small">30-Jun-2026</td>
-        </tr>
-        
-        <tr>
-          
-          <td><a href="stocks/BHARTIARTL.NS.html"><strong>BHARTIARTL</strong></a></td>
-          <td class="r">1,847.40</td>
-          <td class="r">1,865.20</td>
-          <td class="r pos">+17.80</td>
-          <td class="r pos">+0.96%</td>
-          <td class="r">—</td>
-          <td class="r pos">—</td>
-          <td class="r pos">—</td>
-          <td class="muted small">30-Jun-2026</td>
-        </tr>
-        
-        <tr>
-          
-          <td><a href="stocks/RELIANCE.NS.html"><strong>RELIANCE</strong></a></td>
-          <td class="r">1,352.00</td>
-          <td class="r">1,364.70</td>
-          <td class="r pos">+12.70</td>
-          <td class="r pos">+0.94%</td>
-          <td class="r">—</td>
-          <td class="r pos">—</td>
-          <td class="r pos">—</td>
-          <td class="muted small">30-Jun-2026</td>
-        </tr>
-        
-        <tr>
-          
-          <td><a href="stocks/ICICIBANK.NS.html"><strong>ICICIBANK</strong></a></td>
-          <td class="r">1,272.50</td>
-          <td class="r">1,284.00</td>
-          <td class="r pos">+11.50</td>
-          <td class="r pos">+0.90%</td>
-          <td class="r">—</td>
-          <td class="r pos">—</td>
-          <td class="r pos">—</td>
-          <td class="muted small">30-Jun-2026</td>
-        </tr>
-        
-        <tr>
-          
-          <td><a href="stocks/EXIDEIND.NS.html"><strong>EXIDEIND</strong></a></td>
-          <td class="r">394.60</td>
-          <td class="r">398.00</td>
-          <td class="r pos">+3.40</td>
-          <td class="r pos">+0.86%</td>
-          <td class="r">—</td>
-          <td class="r pos">—</td>
-          <td class="r pos">—</td>
-          <td class="muted small">30-Jun-2026</td>
-        </tr>
-        
-        <tr>
-          
-          <td><a href="stocks/ADANIGREEN.NS.html"><strong>ADANIGREEN</strong></a></td>
-          <td class="r">1,490.20</td>
-          <td class="r">1,502.00</td>
-          <td class="r pos">+11.80</td>
-          <td class="r pos">+0.79%</td>
-          <td class="r">—</td>
-          <td class="r pos">—</td>
-          <td class="r pos">—</td>
-          <td class="muted small">30-Jun-2026</td>
-        </tr>
-        
-        <tr>
-          
-          <td><a href="stocks/COALINDIA.NS.html"><strong>COALINDIA</strong></a></td>
-          <td class="r">463.60</td>
-          <td class="r">460.00</td>
-          <td class="r neg">-3.60</td>
-          <td class="r neg">-0.78%</td>
-          <td class="r">—</td>
-          <td class="r pos">—</td>
-          <td class="r pos">—</td>
-          <td class="muted small">30-Jun-2026</td>
-        </tr>
-        
-        <tr>
-          
-          <td><a href="stocks/ADANIENSOL.NS.html"><strong>ADANIENSOL</strong></a></td>
-          <td class="r">1,546.00</td>
-          <td class="r">1,558.00</td>
-          <td class="r pos">+12.00</td>
-          <td class="r pos">+0.78%</td>
-          <td class="r">—</td>
-          <td class="r pos">—</td>
-          <td class="r pos">—</td>
-          <td class="muted small">30-Jun-2026</td>
-        </tr>
-        
-        <tr>
-          
-          <td><a href="stocks/HDFCBANK.NS.html"><strong>HDFCBANK</strong></a></td>
-          <td class="r">759.15</td>
-          <td class="r">753.35</td>
-          <td class="r neg">-5.80</td>
-          <td class="r neg">-0.76%</td>
-          <td class="r">—</td>
-          <td class="r pos">—</td>
-          <td class="r pos">—</td>
-          <td class="muted small">30-Jun-2026</td>
-        </tr>
-        
-        <tr>
-          
-          <td><a href="stocks/ADANIENT.NS.html"><strong>ADANIENT</strong></a></td>
-          <td class="r">2,972.80</td>
-          <td class="r">2,995.00</td>
-          <td class="r pos">+22.20</td>
-          <td class="r pos">+0.75%</td>
-          <td class="r">—</td>
-          <td class="r pos">—</td>
-          <td class="r pos">—</td>
-          <td class="muted small">30-Jun-2026</td>
-        </tr>
-        
-        <tr>
-          
-          <td><a href="stocks/HINDALCO.NS.html"><strong>HINDALCO</strong></a></td>
-          <td class="r">1,150.50</td>
-          <td class="r">1,158.10</td>
-          <td class="r pos">+7.60</td>
-          <td class="r pos">+0.66%</td>
-          <td class="r">—</td>
-          <td class="r pos">—</td>
-          <td class="r pos">—</td>
-          <td class="muted small">30-Jun-2026</td>
-        </tr>
-        
-        <tr>
-          
-          <td><a href="stocks/CUMMINSIND.NS.html"><strong>CUMMINSIND</strong></a></td>
-          <td class="r">6,069.00</td>
-          <td class="r">6,108.00</td>
-          <td class="r pos">+39.00</td>
-          <td class="r pos">+0.64%</td>
-          <td class="r">—</td>
-          <td class="r pos">—</td>
-          <td class="r pos">—</td>
-          <td class="muted small">30-Jun-2026</td>
-        </tr>
-        
-        <tr>
-          
-          <td><a href="stocks/NATIONALUM.NS.html"><strong>NATIONALUM</strong></a></td>
-          <td class="r">433.50</td>
-          <td class="r">436.20</td>
-          <td class="r pos">+2.70</td>
-          <td class="r pos">+0.62%</td>
-          <td class="r">—</td>
-          <td class="r pos">—</td>
-          <td class="r pos">—</td>
-          <td class="muted small">30-Jun-2026</td>
-        </tr>
-        
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<section class="card section">
-  <h3 style="margin-top:0;">How to read this</h3>
-  <ul class="muted" style="line-height:1.7;">
-    <li><strong>Premium (Δ &gt; 0)</strong>: Futures trade above spot. Reflects positive cost-of-carry and/or bullish positioning. Wide premium can indicate over-extended bullish bets.</li>
-    <li><strong>Discount (Δ &lt; 0)</strong>: Futures trade below spot. Reflects upcoming dividends, short positioning, or arbitrage demand. Persistent discounts may flag bearish sentiment.</li>
-    <li><strong>Current → Next term-structure</strong>: A widening spread between current and next-month contracts (contango) signals strong forward demand; a narrowing or inverted curve (backwardation) is unusual and worth attention.</li>
-    <li>This view refreshes daily and uses NSE's live derivatives feed for the 20 most-active single-stock futures.</li>
+  <h3 style="margin-top:0;">How to read this table</h3>
+  <ul class="muted" style="line-height:1.8;">
+    <li><strong>Close</strong> &mdash; Previous trading day&rsquo;s closing price of the stock in the cash (equity) segment.</li>
+    <li><strong>Futures</strong> &mdash; Last traded price of the current-month stock-futures contract on NSE.</li>
+    <li><strong>Δ / Δ %</strong> &mdash; Difference between Futures and Close in absolute (₹) and percentage terms.
+      <ul style="margin:4px 0 2px;line-height:1.6;">
+        <li><span style="color:#4caf6a;font-weight:600;">Premium (Δ &gt; 0)</span>: Futures trade above close &mdash; reflects cost-of-carry and/or bullish positioning. A wide premium can signal over-extended longs.</li>
+        <li><span style="color:#e36a6a;font-weight:600;">Discount (Δ &lt; 0)</span>: Futures trade below close &mdash; often due to upcoming dividends, heavy short interest, or arbitrage demand. Persistent discounts flag bearish sentiment.</li>
+      </ul>
+    </li>
+    <li><strong>OI (Open Interest)</strong> &mdash; Total number of outstanding (unsettled) futures contracts for this stock. OI is <em>not</em> volume &mdash; it measures how many contracts are still open.
+      <ul style="margin:4px 0 2px;line-height:1.6;">
+        <li><span style="color:#4caf6a;font-weight:600;">Rising OI + rising price</span> &rarr; Fresh long build-up (bullish conviction).</li>
+        <li><span style="color:#e36a6a;font-weight:600;">Rising OI + falling price</span> &rarr; Fresh short build-up (bearish conviction).</li>
+        <li><span style="color:#f0ad4e;font-weight:600;">Falling OI + rising price</span> &rarr; Short covering (bears exiting, weaker rally).</li>
+        <li><span style="color:#f0ad4e;font-weight:600;">Falling OI + falling price</span> &rarr; Long unwinding (bulls exiting, weaker selloff).</li>
+      </ul>
+    </li>
+    <li><strong>Expiry</strong> &mdash; Expiry date of the current-month contract. As expiry nears, futures <em>must</em> converge to the cash price, making wide spreads tradable.</li>
   </ul>
+  <p class="muted small" style="margin-top:8px;">This view refreshes daily using NSE&rsquo;s derivatives feed. During market hours all F&amp;O stocks are covered; outside hours the 20 most-active are shown.</p>
 </section>
 
 <section class="card section" id="strategies">
@@ -425,9 +156,9 @@
         <span class="strat-pill buy">BUY</span> stock in cash &nbsp;·&nbsp;
         <span class="strat-pill sell">SELL</span> same-month futures
       </div>
-      <p>When the futures contract trades at a meaningful premium to spot, you can lock in the spread as risk-free yield. Buy the stock today, simultaneously short an equal lot in futures. At expiry both legs settle to the same price &mdash; you pocket the premium minus brokerage and STT.</p>
+      <p>When the futures contract trades at a meaningful premium to the closing price, you can lock in the spread as risk-free yield. Buy the stock today, simultaneously short an equal lot in futures. At expiry both legs settle to the same price &mdash; you pocket the premium minus brokerage and STT.</p>
       <ul>
-        <li><strong>When to enter:</strong> Curr Δ % &ge; <strong>+1.0%</strong> with &ge; 10 days to expiry (annualised return &gt; risk-free rate).</li>
+        <li><strong>When to enter:</strong> Δ % &ge; <strong>+1.0%</strong> with &ge; 10 days to expiry (annualised return &gt; risk-free rate). High OI adds confidence the spread is liquid and tradable.</li>
         <li><strong>When to exit:</strong> Hold to expiry (auto-converges), or close both legs early if spread compresses to &lt; 0.2%.</li>
         <li><strong>Risk:</strong> Very low &mdash; market-neutral. Main risks are margin calls on the short futures leg and corporate actions.</li>
       </ul>
@@ -443,29 +174,11 @@
         <span class="strat-pill sell">SELL</span> stock from holdings &nbsp;·&nbsp;
         <span class="strat-pill buy">BUY</span> same-month futures
       </div>
-      <p>When futures trade at a discount to spot (rare, often due to expected dividends or heavy short interest), existing shareholders can sell their cash holding and buy futures. At expiry, repurchase via the futures leg at the lower price &mdash; you keep the discount as profit while maintaining the same exposure.</p>
+      <p>When futures trade at a discount to the closing price (rare, often due to expected dividends or heavy short interest), existing shareholders can sell their cash holding and buy futures. At expiry, repurchase via the futures leg at the lower price &mdash; you keep the discount as profit while maintaining the same exposure.</p>
       <ul>
-        <li><strong>When to enter:</strong> Curr Δ % &le; <strong>-0.8%</strong> <em>after</em> adjusting for any known upcoming dividend.</li>
+        <li><strong>When to enter:</strong> Δ % &le; <strong>-0.8%</strong> <em>after</em> adjusting for any known upcoming dividend. Rising OI alongside the discount confirms genuine short positioning, not just dividend pricing.</li>
         <li><strong>When to exit:</strong> At expiry, or earlier if spread reverts toward zero.</li>
         <li><strong>Risk:</strong> Requires existing cash holding (no short-sell in India). Watch for dividend dates &mdash; the discount often just prices in the upcoming ex-dividend drop.</li>
-      </ul>
-    </div>
-
-    <!-- Calendar Spread -->
-    <div class="strat-card strat-calendar">
-      <div class="strat-head">
-        <span class="strat-tag">Curr vs Next Δ unusual</span>
-        <h4>Calendar Spread</h4>
-      </div>
-      <div class="strat-act">
-        <span class="strat-pill buy">BUY</span> cheap month &nbsp;·&nbsp;
-        <span class="strat-pill sell">SELL</span> expensive month
-      </div>
-      <p>If the next-month contract trades at a much wider premium than the current-month (steep contango) or, conversely, the curve is inverted (backwardation), the gap will normalise. Long the underpriced leg, short the overpriced leg, both in futures &mdash; pure spread trade.</p>
-      <ul>
-        <li><strong>When to enter:</strong> (Next Δ %) &minus; (Curr Δ %) &gt; +1.0% or &lt; &minus;0.5% on liquid names.</li>
-        <li><strong>When to exit:</strong> Roll/close before current-month expiry as gap converges.</li>
-        <li><strong>Risk:</strong> Lower margin requirement than two outright trades. Liquidity in next-month can be thin &mdash; check OI.</li>
       </ul>
     </div>
 
@@ -478,10 +191,10 @@
       <div class="strat-act">
         <span class="strat-pill buy">BUY</span> futures (or stock)
       </div>
-      <p>A persistent and rising premium with growing open interest indicates traders are paying up to be long. Use as a confirmation signal alongside technical setups &mdash; not a standalone entry. Buying futures gives leverage; buying spot is safer.</p>
+      <p>A persistent and rising premium with growing open interest indicates traders are paying up to be long &mdash; fresh money entering bullish bets. Use as a confirmation signal alongside technical setups, not a standalone entry. Buying futures gives leverage; buying cash is safer.</p>
       <ul>
-        <li><strong>When to enter:</strong> Curr Δ % stays positive across multiple sessions <em>and</em> price closes above key MAs.</li>
-        <li><strong>When to exit:</strong> Premium starts compressing or technical setup invalidates.</li>
+        <li><strong>When to enter:</strong> Δ % stays positive across multiple sessions, <strong>OI rising</strong>, and price closes above key MAs. Rising OI with rising price = fresh long build-up.</li>
+        <li><strong>When to exit:</strong> Premium compresses, OI starts declining (long unwinding), or technical setup invalidates.</li>
         <li><strong>Risk:</strong> Directional &mdash; you can lose principal. Use stops.</li>
       </ul>
     </div>
@@ -496,10 +209,10 @@
         <span class="strat-pill sell">SELL</span> futures &nbsp;·&nbsp;
         or exit cash holdings
       </div>
-      <p>A widening discount combined with rising open interest often reveals heavy short positioning &mdash; smart money expecting downside. Existing holders should consider trimming; aggressive traders can short futures with a clear stop above recent highs.</p>
+      <p>A widening discount combined with rising open interest often reveals heavy short positioning &mdash; smart money expecting downside. Rising OI with falling price = fresh short build-up. Existing holders should consider trimming; aggressive traders can short futures with a clear stop above recent highs.</p>
       <ul>
-        <li><strong>When to enter:</strong> Curr Δ % &lt; 0 for &ge; 3 sessions, OI building, no upcoming dividend explaining it.</li>
-        <li><strong>When to exit:</strong> Cover when discount narrows to flat or price tags a key support.</li>
+        <li><strong>When to enter:</strong> Δ % &lt; 0 for &ge; 3 sessions, <strong>OI building</strong> (fresh shorts), no upcoming dividend explaining the discount.</li>
+        <li><strong>When to exit:</strong> Cover when discount narrows to flat, OI starts dropping (short covering), or price tags a key support.</li>
         <li><strong>Risk:</strong> Shorts have unlimited theoretical loss. Always use a hard stop.</li>
       </ul>
     </div>
@@ -524,11 +237,505 @@
   .strat-act  { font-size: 13px; margin: 8px 0 6px; padding: 8px 10px; background: rgba(0,0,0,0.18); border-radius: 6px; }
   .strat-card.strat-premium  { border-top: 3px solid #4caf6a; }
   .strat-card.strat-discount { border-top: 3px solid #e36a6a; }
-  .strat-card.strat-calendar { border-top: 3px solid #6a8ad8; }
   .strat-card.strat-bull     { border-top: 3px solid #4caf6a; }
   .strat-card.strat-bear     { border-top: 3px solid #e36a6a; }
   .strat-foot { margin-top: 14px; padding: 10px 12px; border-top: 1px dashed var(--border, #2a3142); line-height:1.6; }
+
+  /* Arbitrage table spacing */
+  #arb-table th, #arb-table td { padding: 6px 12px; }
+  #arb-table th.r, #arb-table td.r { text-align: right; }
+  #arb-table th:last-child, #arb-table td:last-child { padding-left: 18px; text-align: center; }
 </style>
+
+
+<section class="card section">
+  <div class="card-head">
+    <h2>Close vs Stock Futures Spread</h2>
+    <span class="muted small">NSE F&amp;O most-active</span>
+  </div>
+  <p class="muted small" style="margin:6px 0 14px;">
+    20 symbols sorted by absolute current-month spread.
+  </p>
+  <div class="table-wrap">
+    <table class="data-table compact sortable" id="arb-table">
+      <thead>
+        <tr>
+          <th>Symbol</th>
+          <th>Charts</th>
+          <th class="r">Close</th>
+          <th class="r">Futures</th>
+          <th class="r">Δ</th>
+          <th class="r">Δ %</th>
+          <th class="r">OI</th>
+          <th>Expiry</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        
+        <tr data-idx="NSE,INFRA">
+          
+          
+          
+          <td><a href="stocks/ADANIPOWER.NS.html"><strong>ADANIPOWER</strong></a></td>
+          <td class="chart-links-cell">
+            <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=ADANIPOWER" target="_blank" rel="noopener" title="NSE Quote">
+              <span class="chart-icon-letter">N</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+            </a>
+            <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:ADANIPOWER&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+            </a>
+          </td>
+          <td class="r">249.43</td>
+          <td class="r">252.00</td>
+          <td class="r pos">+2.57</td>
+          <td class="r pos">+1.03%</td>
+          <td class="r muted">26,517</td>
+          <td class="muted small">30-Jun-2026</td>
+        </tr>
+        
+        
+        <tr data-idx="NIFTY50,NSE,AI,INFRA">
+          
+          
+          
+          <td><a href="stocks/TATASTEEL.NS.html"><strong>TATASTEEL</strong></a></td>
+          <td class="chart-links-cell">
+            <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=TATASTEEL" target="_blank" rel="noopener" title="NSE Quote">
+              <span class="chart-icon-letter">N</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+            </a>
+            <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:TATASTEEL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+            </a>
+          </td>
+          <td class="r">214.51</td>
+          <td class="r">212.35</td>
+          <td class="r neg">-2.16</td>
+          <td class="r neg">-1.01%</td>
+          <td class="r muted">58,289</td>
+          <td class="muted small">30-Jun-2026</td>
+        </tr>
+        
+        
+        <tr data-idx="NSE,AI,TECH">
+          
+          
+          
+          <td><a href="stocks/ETERNAL.NS.html"><strong>ETERNAL</strong></a></td>
+          <td class="chart-links-cell">
+            <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=ETERNAL" target="_blank" rel="noopener" title="NSE Quote">
+              <span class="chart-icon-letter">N</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+            </a>
+            <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:ETERNAL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+            </a>
+          </td>
+          <td class="r">255.71</td>
+          <td class="r">258.29</td>
+          <td class="r pos">+2.58</td>
+          <td class="r pos">+1.01%</td>
+          <td class="r muted">80,981</td>
+          <td class="muted small">30-Jun-2026</td>
+        </tr>
+        
+        
+        <tr data-idx="NIFTY50,NSE,AI">
+          
+          
+          
+          <td><a href="stocks/BHARTIARTL.NS.html"><strong>BHARTIARTL</strong></a></td>
+          <td class="chart-links-cell">
+            <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=BHARTIARTL" target="_blank" rel="noopener" title="NSE Quote">
+              <span class="chart-icon-letter">N</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+            </a>
+            <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:BHARTIARTL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+            </a>
+          </td>
+          <td class="r">1,847.40</td>
+          <td class="r">1,865.20</td>
+          <td class="r pos">+17.80</td>
+          <td class="r pos">+0.96%</td>
+          <td class="r muted">123,674</td>
+          <td class="muted small">30-Jun-2026</td>
+        </tr>
+        
+        
+        <tr data-idx="NIFTY50,NSE,AI,INFRA">
+          
+          
+          
+          <td><a href="stocks/RELIANCE.NS.html"><strong>RELIANCE</strong></a></td>
+          <td class="chart-links-cell">
+            <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=RELIANCE" target="_blank" rel="noopener" title="NSE Quote">
+              <span class="chart-icon-letter">N</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+            </a>
+            <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:RELIANCE&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+            </a>
+          </td>
+          <td class="r">1,352.00</td>
+          <td class="r">1,364.70</td>
+          <td class="r pos">+12.70</td>
+          <td class="r pos">+0.94%</td>
+          <td class="r muted">214,221</td>
+          <td class="muted small">30-Jun-2026</td>
+        </tr>
+        
+        
+        <tr data-idx="NIFTY50,NSE,AI,FINANCIAL">
+          
+          
+          
+          <td><a href="stocks/ICICIBANK.NS.html"><strong>ICICIBANK</strong></a></td>
+          <td class="chart-links-cell">
+            <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=ICICIBANK" target="_blank" rel="noopener" title="NSE Quote">
+              <span class="chart-icon-letter">N</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+            </a>
+            <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:ICICIBANK&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+            </a>
+          </td>
+          <td class="r">1,272.50</td>
+          <td class="r">1,284.00</td>
+          <td class="r pos">+11.50</td>
+          <td class="r pos">+0.90%</td>
+          <td class="r muted">221,386</td>
+          <td class="muted small">30-Jun-2026</td>
+        </tr>
+        
+        
+        <tr data-idx="NIFTY_MID,NSE">
+          
+          
+          
+          <td><a href="stocks/EXIDEIND.NS.html"><strong>EXIDEIND</strong></a></td>
+          <td class="chart-links-cell">
+            <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=EXIDEIND" target="_blank" rel="noopener" title="NSE Quote">
+              <span class="chart-icon-letter">N</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+            </a>
+            <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:EXIDEIND&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+            </a>
+          </td>
+          <td class="r">394.60</td>
+          <td class="r">398.00</td>
+          <td class="r pos">+3.40</td>
+          <td class="r pos">+0.86%</td>
+          <td class="r muted">14,595</td>
+          <td class="muted small">30-Jun-2026</td>
+        </tr>
+        
+        
+        <tr data-idx="NSE,INFRA">
+          
+          
+          
+          <td><a href="stocks/ADANIGREEN.NS.html"><strong>ADANIGREEN</strong></a></td>
+          <td class="chart-links-cell">
+            <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=ADANIGREEN" target="_blank" rel="noopener" title="NSE Quote">
+              <span class="chart-icon-letter">N</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+            </a>
+            <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:ADANIGREEN&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+            </a>
+          </td>
+          <td class="r">1,490.20</td>
+          <td class="r">1,502.00</td>
+          <td class="r pos">+11.80</td>
+          <td class="r pos">+0.79%</td>
+          <td class="r muted">35,117</td>
+          <td class="muted small">30-Jun-2026</td>
+        </tr>
+        
+        
+        <tr data-idx="NIFTY50,NSE,INFRA,PSU">
+          
+          
+          
+          <td><a href="stocks/COALINDIA.NS.html"><strong>COALINDIA</strong></a></td>
+          <td class="chart-links-cell">
+            <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=COALINDIA" target="_blank" rel="noopener" title="NSE Quote">
+              <span class="chart-icon-letter">N</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+            </a>
+            <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:COALINDIA&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+            </a>
+          </td>
+          <td class="r">463.60</td>
+          <td class="r">460.00</td>
+          <td class="r neg">-3.60</td>
+          <td class="r neg">-0.78%</td>
+          <td class="r muted">62,900</td>
+          <td class="muted small">30-Jun-2026</td>
+        </tr>
+        
+        
+        <tr data-idx="NSE,INFRA">
+          
+          
+          
+          <td><a href="stocks/ADANIENSOL.NS.html"><strong>ADANIENSOL</strong></a></td>
+          <td class="chart-links-cell">
+            <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=ADANIENSOL" target="_blank" rel="noopener" title="NSE Quote">
+              <span class="chart-icon-letter">N</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+            </a>
+            <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:ADANIENSOL&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+            </a>
+          </td>
+          <td class="r">1,546.00</td>
+          <td class="r">1,558.00</td>
+          <td class="r pos">+12.00</td>
+          <td class="r pos">+0.78%</td>
+          <td class="r muted">27,684</td>
+          <td class="muted small">30-Jun-2026</td>
+        </tr>
+        
+        
+        <tr data-idx="NIFTY50,NSE,AI,FINANCIAL">
+          
+          
+          
+          <td><a href="stocks/HDFCBANK.NS.html"><strong>HDFCBANK</strong></a></td>
+          <td class="chart-links-cell">
+            <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=HDFCBANK" target="_blank" rel="noopener" title="NSE Quote">
+              <span class="chart-icon-letter">N</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+            </a>
+            <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:HDFCBANK&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+            </a>
+          </td>
+          <td class="r">759.15</td>
+          <td class="r">753.35</td>
+          <td class="r neg">-5.80</td>
+          <td class="r neg">-0.76%</td>
+          <td class="r muted">608,503</td>
+          <td class="muted small">30-Jun-2026</td>
+        </tr>
+        
+        
+        <tr data-idx="NIFTY50,NSE,AI,INFRA">
+          
+          
+          
+          <td><a href="stocks/ADANIENT.NS.html"><strong>ADANIENT</strong></a></td>
+          <td class="chart-links-cell">
+            <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=ADANIENT" target="_blank" rel="noopener" title="NSE Quote">
+              <span class="chart-icon-letter">N</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+            </a>
+            <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:ADANIENT&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+            </a>
+          </td>
+          <td class="r">2,972.80</td>
+          <td class="r">2,995.00</td>
+          <td class="r pos">+22.20</td>
+          <td class="r pos">+0.75%</td>
+          <td class="r muted">61,159</td>
+          <td class="muted small">30-Jun-2026</td>
+        </tr>
+        
+        
+        <tr data-idx="NIFTY50,NSE,AI,INFRA">
+          
+          
+          
+          <td><a href="stocks/HINDALCO.NS.html"><strong>HINDALCO</strong></a></td>
+          <td class="chart-links-cell">
+            <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=HINDALCO" target="_blank" rel="noopener" title="NSE Quote">
+              <span class="chart-icon-letter">N</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+            </a>
+            <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:HINDALCO&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+            </a>
+          </td>
+          <td class="r">1,150.50</td>
+          <td class="r">1,158.10</td>
+          <td class="r pos">+7.60</td>
+          <td class="r pos">+0.66%</td>
+          <td class="r muted">44,677</td>
+          <td class="muted small">30-Jun-2026</td>
+        </tr>
+        
+        
+        <tr data-idx="NSE,INFRA">
+          
+          
+          
+          <td><a href="stocks/CUMMINSIND.NS.html"><strong>CUMMINSIND</strong></a></td>
+          <td class="chart-links-cell">
+            <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=CUMMINSIND" target="_blank" rel="noopener" title="NSE Quote">
+              <span class="chart-icon-letter">N</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+            </a>
+            <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:CUMMINSIND&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+            </a>
+          </td>
+          <td class="r">6,069.00</td>
+          <td class="r">6,108.00</td>
+          <td class="r pos">+39.00</td>
+          <td class="r pos">+0.64%</td>
+          <td class="r muted">17,196</td>
+          <td class="muted small">30-Jun-2026</td>
+        </tr>
+        
+        
+        <tr data-idx="NIFTY_MID,NSE,INFRA">
+          
+          
+          
+          <td><a href="stocks/NATIONALUM.NS.html"><strong>NATIONALUM</strong></a></td>
+          <td class="chart-links-cell">
+            <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=NATIONALUM" target="_blank" rel="noopener" title="NSE Quote">
+              <span class="chart-icon-letter">N</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+            </a>
+            <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:NATIONALUM&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+            </a>
+          </td>
+          <td class="r">433.50</td>
+          <td class="r">436.20</td>
+          <td class="r pos">+2.70</td>
+          <td class="r pos">+0.62%</td>
+          <td class="r muted">23,803</td>
+          <td class="muted small">30-Jun-2026</td>
+        </tr>
+        
+        
+        <tr data-idx="NIFTY_MID,NSE,INFRA">
+          
+          
+          
+          <td><a href="stocks/POWERINDIA.NS.html"><strong>POWERINDIA</strong></a></td>
+          <td class="chart-links-cell">
+            <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=POWERINDIA" target="_blank" rel="noopener" title="NSE Quote">
+              <span class="chart-icon-letter">N</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+            </a>
+            <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:POWERINDIA&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+            </a>
+          </td>
+          <td class="r">37,430.00</td>
+          <td class="r">37,655.00</td>
+          <td class="r pos">+225.00</td>
+          <td class="r pos">+0.60%</td>
+          <td class="r muted">16,703</td>
+          <td class="muted small">30-Jun-2026</td>
+        </tr>
+        
+        
+        <tr data-idx="NIFTY_MID,NSE,FINANCIAL">
+          
+          
+          
+          <td><a href="stocks/MCX.NS.html"><strong>MCX</strong></a></td>
+          <td class="chart-links-cell">
+            <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=MCX" target="_blank" rel="noopener" title="NSE Quote">
+              <span class="chart-icon-letter">N</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+            </a>
+            <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:MCX&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+            </a>
+          </td>
+          <td class="r">3,155.00</td>
+          <td class="r">3,172.00</td>
+          <td class="r pos">+17.00</td>
+          <td class="r pos">+0.54%</td>
+          <td class="r muted">17,411</td>
+          <td class="muted small">30-Jun-2026</td>
+        </tr>
+        
+        
+        <tr data-idx="NIFTY_MID,NSE,FINANCIAL">
+          
+          
+          
+          <td><a href="stocks/BSE.NS.html"><strong>BSE</strong></a></td>
+          <td class="chart-links-cell">
+            <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=BSE" target="_blank" rel="noopener" title="NSE Quote">
+              <span class="chart-icon-letter">N</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+            </a>
+            <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:BSE&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+            </a>
+          </td>
+          <td class="r">4,249.90</td>
+          <td class="r">4,269.50</td>
+          <td class="r pos">+19.60</td>
+          <td class="r pos">+0.46%</td>
+          <td class="r muted">19,540</td>
+          <td class="muted small">30-Jun-2026</td>
+        </tr>
+        
+        
+        <tr data-idx="NSE">
+          
+          
+          
+          <td><a href="stocks/TMPV.NS.html"><strong>TMPV</strong></a></td>
+          <td class="chart-links-cell">
+            <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=TMPV" target="_blank" rel="noopener" title="NSE Quote">
+              <span class="chart-icon-letter">N</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+            </a>
+            <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:TMPV&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+            </a>
+          </td>
+          <td class="r">403.05</td>
+          <td class="r">404.35</td>
+          <td class="r pos">+1.30</td>
+          <td class="r pos">+0.32%</td>
+          <td class="r muted">80,529</td>
+          <td class="muted small">30-Jun-2026</td>
+        </tr>
+        
+        
+        <tr data-idx="NSE,AI,INFRA">
+          
+          
+          
+          <td><a href="stocks/SIEMENS.NS.html"><strong>SIEMENS</strong></a></td>
+          <td class="chart-links-cell">
+            <a class="chart-icon chart-icon-rh" href="https://www.nseindia.com/get-quotes/equity?symbol=SIEMENS" target="_blank" rel="noopener" title="NSE Quote">
+              <span class="chart-icon-letter">N</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+            </a>
+            <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NSE:SIEMENS&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+            </a>
+          </td>
+          <td class="r">3,897.90</td>
+          <td class="r">3,905.00</td>
+          <td class="r pos">+7.10</td>
+          <td class="r pos">+0.18%</td>
+          <td class="r muted">16,049</td>
+          <td class="muted small">30-Jun-2026</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</section>
 
 
 
@@ -544,7 +751,7 @@
 
 <footer class="footer">
   <div class="wrap">
-    <div>NIFTY stock explorer · Generated 2026-05-28 20:54 IST</div>
+    <div>NIFTY stock explorer · Generated 2026-05-29 05:02 IST</div>
     <div class="muted">For informational use only - not investment advice.</div>
   </div>
 </footer>
@@ -794,5 +1001,26 @@ window.addEventListener('resize', initStickyScrollbars);
 
 <script src="assets/sort.js" defer></script>
 <script src="assets/filter.js" defer></script>
+<script>
+// Global auth badge — shows signed-in user on all pages from localStorage
+(function(){
+  var b = document.getElementById('globalAuthBadge');
+  if (!b) return;
+  function render(){
+    var raw = localStorage.getItem('herai_user');
+    if (!raw) { b.innerHTML = ''; return; }
+    try { var u = JSON.parse(raw); } catch(e) { b.innerHTML = ''; return; }
+    var name = u.name || u.email || 'User';
+    var initial = name[0].toUpperCase();
+    b.innerHTML = '<a href="' + '' + 'elite.html" class="gab-link" title="' + name + '">' +
+      (u.photo
+        ? '<img src="' + u.photo + '" alt="" class="gab-avatar" referrerpolicy="no-referrer">'
+        : '<span class="gab-letter">' + initial + '</span>') +
+      '</a>';
+  }
+  render();
+  window.addEventListener('storage', render);
+})();
+</script>
 </body>
 </html>

@@ -13,14 +13,13 @@
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
-html { overflow-y: scroll; } /* always reserve scrollbar gutter so vw math is symmetric */
+html { overflow-y: scroll; overflow-x: hidden; } /* reserve scrollbar gutter + prevent horizontal scroll */
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
   font-size: 16px;
   line-height: 1.55;
-  overflow-x: hidden; /* never let stray wide content scroll the whole page */
 }
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
@@ -46,7 +45,7 @@ main.wrap.content > * { min-width: 0; max-width: 100%; }
 .topnav {
   background: #fff;
   border-bottom: 1px solid var(--border);
-  position: sticky; top: 0; z-index: 50;
+  position: -webkit-sticky; position: sticky; top: 0; z-index: 50;
 }
 .topnav .wrap {
   display: flex; align-items: center; gap: 28px;
@@ -1320,11 +1319,11 @@ i.rec-dot.rec-strongsell  { background: #dc2626; }
 /* Two-up sentiment cards */
 .sentiment-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
 @media (max-width: 720px) { .sentiment-grid { grid-template-columns:1fr; } }
-.sent-card { background:rgba(15,23,42,0.45); border:1px solid var(--border,#2a2f3a); border-radius:12px; padding:16px 18px; }
+.sent-card { background:rgba(30,41,59,0.55); border:1px solid var(--border,#2a2f3a); border-radius:12px; padding:16px 18px; }
 
 /* Color-coded subheading (replaces the old badge) */
-.sent-h { margin:0; font-size:16px; font-weight:800; letter-spacing:-0.2px; }
-.sent-sub { margin:2px 0 6px; }
+.sent-h { margin:0; font-size:16px; font-weight:800; letter-spacing:-0.2px; color:#e2e8f0; }
+.sent-sub { margin:2px 0 6px; color:#94a3b8; }
 
 /* SVG half-circle gauge */
 .sent-viz { display:flex; justify-content:center; padding:6px 0 4px; }
@@ -1333,7 +1332,7 @@ i.rec-dot.rec-strongsell  { background: #dc2626; }
 /* Indicator chip grid — visual bars instead of text walls */
 .ichip-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px; }
 @media (max-width: 600px) { .ichip-grid { grid-template-columns:1fr; } }
-.ichip { padding:9px 11px; border-radius:8px; background:rgba(30,41,59,0.55); border-left:3px solid #475569; }
+.ichip { padding:9px 11px; border-radius:8px; background:rgba(51,65,85,0.50); border-left:3px solid #475569; }
 .ichip.tone-good { border-left-color:#22c55e; }
 .ichip.tone-warn { border-left-color:#f59e0b; }
 .ichip.tone-bad  { border-left-color:#ef4444; }
@@ -1388,19 +1387,27 @@ i.rec-dot.rec-strongsell  { background: #dc2626; }
 .breadth-bar-fill { height:100%; background:#22c55e; }
 
 /* Exchange holiday calendar */
+#marketCalendar {
+  background:linear-gradient(180deg, #fffdf6 0%, #fff8e8 100%);
+  border:1px solid #f3dcc0;
+  box-shadow:0 14px 32px rgba(161, 98, 7, .08);
+}
+#marketCalendar .card-head h2 { color:#7c2d12; }
+#marketCalendar .card-head .muted.small { color:#9a3412; }
 .cal-closed-banner { display:flex; align-items:center; gap:8px; padding:10px 16px; margin-bottom:14px;
   border-radius:8px; background:rgba(245,158,11,.12); border:1px solid rgba(245,158,11,.35);
   color:#fbbf24; font-weight:600; font-size:14px; }
 .cal-closed-icon { font-size:18px; }
 .cal-list { display:flex; flex-direction:column; gap:8px; }
 .cal-tile { display:flex; align-items:center; gap:12px; padding:10px 14px;
-  border:1px solid var(--border,#2a2f3a); border-radius:8px; background:var(--card-bg,#181b22); }
-.cal-tile.cal-today { border-color:#f59e0b; background:rgba(245,158,11,.08); }
-.cal-date { min-width:44px; text-align:center; font-size:22px; font-weight:800; line-height:1.1; color:#e5e7eb; }
+  border:1px solid #efd7bb; border-radius:10px; background:linear-gradient(180deg, #fffaf0 0%, #fff4df 100%);
+  box-shadow:0 8px 18px rgba(120, 53, 15, .06); }
+.cal-tile.cal-today { border-color:#f59e0b; background:linear-gradient(180deg, #fff2cc 0%, #ffe6ad 100%); }
+.cal-date { min-width:44px; text-align:center; font-size:22px; font-weight:800; line-height:1.1; color:#9a3412; }
 .cal-date .cal-month { display:block; font-size:11px; font-weight:600; text-transform:uppercase;
-  letter-spacing:.06em; color:var(--muted,#8a93a4); margin-top:2px; }
-.cal-name { font-size:13px; font-weight:600; color:#e5e7eb; }
-.cal-day { font-size:11px; }
+  letter-spacing:.06em; color:#b45309; margin-top:2px; }
+.cal-name { font-size:13px; font-weight:600; color:#7c2d12; }
+.cal-day { font-size:11px; color:#9a3412; }
 
 /* Ad slot placeholder (replace inner content with AdSense code) */
 .ad-slot { display:flex; align-items:center; justify-content:center; min-height:280px; }
@@ -1418,6 +1425,13 @@ i.rec-dot.rec-strongsell  { background: #dc2626; }
 /* Footer leaderboard ad */
 .ad-footer { margin:24px auto 0; }
 .ad-leaderboard { min-height:90px; }
+
+/* Global auth badge (top-right, all pages) */
+.global-auth-badge { display:flex; align-items:center; margin-left:10px; flex-shrink:0; }
+.gab-link { display:flex; align-items:center; text-decoration:none; }
+.gab-avatar { width:30px; height:30px; border-radius:50%; object-fit:cover; border:2px solid #3b82f6; }
+.gab-letter { width:30px; height:30px; border-radius:50%; background:#3b82f6; color:#fff;
+  display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; }
 .ad-leaderboard .ad-placeholder { min-height:90px; }
 
 /* Generic small badge (used by IPO calendar, etc.) */
@@ -1425,6 +1439,12 @@ i.rec-dot.rec-strongsell  { background: #dc2626; }
   font-weight:600; letter-spacing:.04em; background:#374151; color:#e5e7eb; }
 .badge.pos { background:#16a34a; color:#fff; }
 .badge.neg { background:#dc2626; color:#fff; }
+
+/* Participant-wise table net-highlight cells */
+.net-hi.pos { background:rgba(34,197,94,0.18); color:#22c55e; border-radius:4px; }
+.net-hi.neg { background:rgba(239,68,68,0.18); color:#ef4444; border-radius:4px; }
+.grp-l { border-left:2.5px solid rgba(100,116,139,0.45) !important; }
+#participant-oi th, #participant-oi td { position:static !important; box-shadow:none !important; }
 
 /* ============== Earnings Calendar ============== */
 .earn-toolbar { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:12px; }

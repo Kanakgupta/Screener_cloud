@@ -54,6 +54,7 @@
              oninput="updateSuggest()" onkeydown="navSuggest(event)" onfocus="updateSuggest()" onblur="setTimeout(hideSuggest,150)" />
       <div id="suggest" class="suggest" hidden></div>
     </form>
+    <div id="globalAuthBadge" class="global-auth-badge"></div>
   </div>
   <div class="wrap topnav-row2">
     <nav>
@@ -98,7 +99,7 @@
   <h1>India Stock Screener — Market Dashboard</h1>
   <p class="muted">Snapshot of broad indices, sectoral performance, gainers/losers and volume leaders. Cached EOD data.
     <span class="pill">EOD: 2026-05-27</span>
-    <span class="pill">Updated 2026-05-28 20:54 IST</span>
+    <span class="pill">Updated 2026-05-29 05:02 IST</span>
   </p>
 </section>
 
@@ -563,121 +564,13 @@
 
   
   
-  <div class="card section">
-    <div class="card-head">
-      <h2>Sectoral Indices</h2>
-      
-      <a href="https://www.nseindia.com/market-data/live-equity-market" class="muted small" target="_blank" rel="noopener">NSE &rsaquo;</a>
-      
-    </div>
-    <table class="data-table compact">
-      <thead><tr><th>Index</th><th class="r">Last</th><th class="r">Change</th><th class="r">% Chg</th><th class="r">P/E</th></tr></thead>
-      <tbody>
-      
-        <tr class="clickable" onclick="openIdxChart('BANK')">
-          <td>Nifty Bank</td>
-          <td class="r">54,853.85</td>
-          <td class="r neg">-239.05</td>
-          <td class="r neg">-0.43%</td>
-          <td class="r">13.85</td>
-        </tr>
-      
-        <tr class="clickable" onclick="openIdxChart('IT')">
-          <td>Nifty IT</td>
-          <td class="r">28,906.70</td>
-          <td class="r neg">-71.80</td>
-          <td class="r neg">-0.25%</td>
-          <td class="r">19.67</td>
-        </tr>
-      
-        <tr class="clickable" onclick="openIdxChart('AUTO')">
-          <td>Nifty Auto</td>
-          <td class="r">26,864.20</td>
-          <td class="r pos">+383.70</td>
-          <td class="r pos">+1.45%</td>
-          <td class="r">31.04</td>
-        </tr>
-      
-        <tr class="clickable" onclick="openIdxChart('FMCG')">
-          <td>Nifty FMCG</td>
-          <td class="r">50,141.90</td>
-          <td class="r neg">-85.45</td>
-          <td class="r neg">-0.17%</td>
-          <td class="r">34.56</td>
-        </tr>
-      
-        <tr class="clickable" onclick="openIdxChart('PHARMA')">
-          <td>Nifty Pharma</td>
-          <td class="r">24,716.00</td>
-          <td class="r pos">+56.80</td>
-          <td class="r pos">+0.23%</td>
-          <td class="r">38.18</td>
-        </tr>
-      
-        <tr class="clickable" onclick="openIdxChart('METAL')">
-          <td>Nifty Metal</td>
-          <td class="r">13,718.30</td>
-          <td class="r pos">+225.75</td>
-          <td class="r pos">+1.67%</td>
-          <td class="r">20.48</td>
-        </tr>
-      
-        <tr class="clickable" onclick="openIdxChart('ENERGY')">
-          <td>Nifty Energy</td>
-          <td class="r">41,535.75</td>
-          <td class="r pos">+721.15</td>
-          <td class="r pos">+1.77%</td>
-          <td class="r">15.79</td>
-        </tr>
-      
-        <tr class="clickable" onclick="openIdxChart('REALTY')">
-          <td>Nifty Realty</td>
-          <td class="r">784.55</td>
-          <td class="r pos">+2.55</td>
-          <td class="r pos">+0.33%</td>
-          <td class="r">34.41</td>
-        </tr>
-      
-        <tr class="clickable" onclick="openIdxChart('PSUBANK')">
-          <td>Nifty PSU Bank</td>
-          <td class="r">8,225.45</td>
-          <td class="r pos">+25.25</td>
-          <td class="r pos">+0.31%</td>
-          <td class="r">7.99</td>
-        </tr>
-      
-      </tbody>
-    </table>
-  </div>
-  
-</section>
-
-
-
-
-
-<section class="dashboard-grid">
-  
   <div class="card section" id="marketCalendar">
     <div class="card-head">
       <h2>Exchange Holidays</h2>
       <span class="muted small">NSE — upcoming closures</span>
     </div>
     
-    <div class="cal-closed-banner">
-      <span class="cal-closed-icon">&#9888;</span>
-      Market closed today — Bakri Id (Eid al-Adha)
-    </div>
-    
     <div class="cal-list">
-      
-      <div class="cal-tile cal-today">
-        <div class="cal-date">28<span class="cal-month">May</span></div>
-        <div class="cal-info">
-          <div class="cal-name">Bakri Id (Eid al-Adha)</div>
-          <div class="cal-day muted small">Thursday</div>
-        </div>
-      </div>
       
       <div class="cal-tile ">
         <div class="cal-date">15<span class="cal-month">Aug</span></div>
@@ -735,7 +628,81 @@
         </div>
       </div>
       
+      <div class="cal-tile ">
+        <div class="cal-date">10<span class="cal-month">Nov</span></div>
+        <div class="cal-info">
+          <div class="cal-name">Diwali Balipratipada</div>
+          <div class="cal-day muted small">Tuesday</div>
+        </div>
+      </div>
+      
     </div>
+  </div>
+  
+</section>
+
+
+
+
+
+<section class="dashboard-grid">
+  
+  <div class="card section">
+    <div class="card-head"><h2>Currencies & Commodities</h2><span class="muted small">latest</span></div>
+    <table class="data-table compact">
+      <thead><tr><th>Asset</th><th class="r">Price</th><th class="r">% Chg</th></tr></thead>
+      <tbody>
+      
+        <tr class="clickable" onclick="openIdxChart('USDINR')">
+          <td>USD / INR</td>
+          <td class="r">95.90</td>
+          <td class="r pos">+0.00%</td>
+        </tr>
+      
+        <tr class="clickable" onclick="openIdxChart('EURINR')">
+          <td>EUR / INR</td>
+          <td class="r">111.53</td>
+          <td class="r pos">+0.22%</td>
+        </tr>
+      
+        <tr class="clickable" onclick="openIdxChart('GBPINR')">
+          <td>GBP / INR</td>
+          <td class="r">128.55</td>
+          <td class="r pos">+0.24%</td>
+        </tr>
+      
+        <tr class="clickable" onclick="openIdxChart('DXY')">
+          <td>Dollar Index (DXY)</td>
+          <td class="r">99.00</td>
+          <td class="r neg">-0.21%</td>
+        </tr>
+      
+        <tr class="clickable" onclick="openIdxChart('US10Y')">
+          <td>US 10Y Yield</td>
+          <td class="r">4.46</td>
+          <td class="r neg">-0.45%</td>
+        </tr>
+      
+        <tr class="clickable" onclick="openIdxChart('GOLD')">
+          <td>Gold (USD/oz)</td>
+          <td class="r">4,503.40</td>
+          <td class="r pos">+1.26%</td>
+        </tr>
+      
+        <tr class="clickable" onclick="openIdxChart('SILVER')">
+          <td>Silver (USD/oz)</td>
+          <td class="r">74.99</td>
+          <td class="r pos">+0.52%</td>
+        </tr>
+      
+        <tr class="clickable" onclick="openIdxChart('CRUDE')">
+          <td>Crude (Brent USD/bbl)</td>
+          <td class="r">93.08</td>
+          <td class="r neg">-1.28%</td>
+        </tr>
+      
+      </tbody>
+    </table>
   </div>
   
   <div class="card section ad-slot" id="adSlotDashboard">
@@ -1095,8 +1062,13 @@
   </div>
 </section>
 
-<section class="card section">
-  <p class="muted small">Tip: Click any index tile/row above for the 1-year chart. Data refreshes every 30 minutes.</p>
+<section class="card section ad-slot">
+  <div class="ad-placeholder">
+    <div class="ad-placeholder-inner">
+      <span class="ad-placeholder-icon">&#9881;</span>
+      <span>Ad space</span>
+    </div>
+  </div>
 </section>
 
 
@@ -1105,6 +1077,94 @@
 
 
 <section class="dashboard-grid">
+  
+  <div class="card section">
+    <div class="card-head">
+      <h2>Sectoral Indices</h2>
+      
+      <a href="https://www.nseindia.com/market-data/live-equity-market" class="muted small" target="_blank" rel="noopener">NSE &rsaquo;</a>
+      
+    </div>
+    <table class="data-table compact">
+      <thead><tr><th>Index</th><th class="r">Last</th><th class="r">Change</th><th class="r">% Chg</th><th class="r">P/E</th></tr></thead>
+      <tbody>
+      
+        <tr class="clickable" onclick="openIdxChart('BANK')">
+          <td>Nifty Bank</td>
+          <td class="r">54,853.85</td>
+          <td class="r neg">-239.05</td>
+          <td class="r neg">-0.43%</td>
+          <td class="r">13.85</td>
+        </tr>
+      
+        <tr class="clickable" onclick="openIdxChart('IT')">
+          <td>Nifty IT</td>
+          <td class="r">28,906.70</td>
+          <td class="r neg">-71.80</td>
+          <td class="r neg">-0.25%</td>
+          <td class="r">19.67</td>
+        </tr>
+      
+        <tr class="clickable" onclick="openIdxChart('AUTO')">
+          <td>Nifty Auto</td>
+          <td class="r">26,864.20</td>
+          <td class="r pos">+383.70</td>
+          <td class="r pos">+1.45%</td>
+          <td class="r">31.04</td>
+        </tr>
+      
+        <tr class="clickable" onclick="openIdxChart('FMCG')">
+          <td>Nifty FMCG</td>
+          <td class="r">50,141.90</td>
+          <td class="r neg">-85.45</td>
+          <td class="r neg">-0.17%</td>
+          <td class="r">34.56</td>
+        </tr>
+      
+        <tr class="clickable" onclick="openIdxChart('PHARMA')">
+          <td>Nifty Pharma</td>
+          <td class="r">24,716.00</td>
+          <td class="r pos">+56.80</td>
+          <td class="r pos">+0.23%</td>
+          <td class="r">38.18</td>
+        </tr>
+      
+        <tr class="clickable" onclick="openIdxChart('METAL')">
+          <td>Nifty Metal</td>
+          <td class="r">13,718.30</td>
+          <td class="r pos">+225.75</td>
+          <td class="r pos">+1.67%</td>
+          <td class="r">20.48</td>
+        </tr>
+      
+        <tr class="clickable" onclick="openIdxChart('ENERGY')">
+          <td>Nifty Energy</td>
+          <td class="r">41,535.75</td>
+          <td class="r pos">+721.15</td>
+          <td class="r pos">+1.77%</td>
+          <td class="r">15.79</td>
+        </tr>
+      
+        <tr class="clickable" onclick="openIdxChart('REALTY')">
+          <td>Nifty Realty</td>
+          <td class="r">784.55</td>
+          <td class="r pos">+2.55</td>
+          <td class="r pos">+0.33%</td>
+          <td class="r">34.41</td>
+        </tr>
+      
+        <tr class="clickable" onclick="openIdxChart('PSUBANK')">
+          <td>Nifty PSU Bank</td>
+          <td class="r">8,225.45</td>
+          <td class="r pos">+25.25</td>
+          <td class="r pos">+0.31%</td>
+          <td class="r">7.99</td>
+        </tr>
+      
+      </tbody>
+    </table>
+  </div>
+  
   
   <div class="card section">
     <div class="card-head"><h2>Global Indices</h2><span class="muted small">latest close</span></div>
@@ -1146,65 +1206,6 @@
           <td>Hang Seng</td>
           <td class="r">25,006.16</td>
           <td class="r neg">-1.27%</td>
-        </tr>
-      
-      </tbody>
-    </table>
-  </div>
-  
-  
-  <div class="card section">
-    <div class="card-head"><h2>Currencies & Commodities</h2><span class="muted small">latest</span></div>
-    <table class="data-table compact">
-      <thead><tr><th>Asset</th><th class="r">Price</th><th class="r">% Chg</th></tr></thead>
-      <tbody>
-      
-        <tr class="clickable" onclick="openIdxChart('USDINR')">
-          <td>USD / INR</td>
-          <td class="r">95.90</td>
-          <td class="r pos">+0.00%</td>
-        </tr>
-      
-        <tr class="clickable" onclick="openIdxChart('EURINR')">
-          <td>EUR / INR</td>
-          <td class="r">111.53</td>
-          <td class="r pos">+0.22%</td>
-        </tr>
-      
-        <tr class="clickable" onclick="openIdxChart('GBPINR')">
-          <td>GBP / INR</td>
-          <td class="r">128.55</td>
-          <td class="r pos">+0.24%</td>
-        </tr>
-      
-        <tr class="clickable" onclick="openIdxChart('DXY')">
-          <td>Dollar Index (DXY)</td>
-          <td class="r">99.00</td>
-          <td class="r neg">-0.21%</td>
-        </tr>
-      
-        <tr class="clickable" onclick="openIdxChart('US10Y')">
-          <td>US 10Y Yield</td>
-          <td class="r">4.46</td>
-          <td class="r neg">-0.45%</td>
-        </tr>
-      
-        <tr class="clickable" onclick="openIdxChart('GOLD')">
-          <td>Gold (USD/oz)</td>
-          <td class="r">4,503.40</td>
-          <td class="r pos">+1.26%</td>
-        </tr>
-      
-        <tr class="clickable" onclick="openIdxChart('SILVER')">
-          <td>Silver (USD/oz)</td>
-          <td class="r">74.99</td>
-          <td class="r pos">+0.52%</td>
-        </tr>
-      
-        <tr class="clickable" onclick="openIdxChart('CRUDE')">
-          <td>Crude (Brent USD/bbl)</td>
-          <td class="r">93.08</td>
-          <td class="r neg">-1.28%</td>
         </tr>
       
       </tbody>
@@ -1269,28 +1270,147 @@
   <canvas id="fiiDiiHistoryChart" height="110"></canvas>
   <p id="fiiDiiHistoryMeta" class="muted small" style="margin:6px 0 12px 0;"></p>
   
-  <table class="data-table compact">
-    <thead><tr><th>Category</th><th>Date</th><th class="r">Buy</th><th class="r">Sell</th><th class="r">Net</th></tr></thead>
+</section>
+
+<section class="dashboard-grid">
+  <div class="card section">
+    <table class="data-table compact">
+      <thead><tr><th>Category</th><th>Date</th><th class="r">Buy</th><th class="r">Sell</th><th class="r">Net</th></tr></thead>
+      <tbody>
+      
+        <tr>
+          <td><strong>DII</strong></td>
+          <td class="muted">27-May-2026</td>
+          <td class="r">16,893.10</td>
+          <td class="r">13,072.10</td>
+          <td class="r pos"><strong>+3,821.00</strong></td>
+        </tr>
+      
+        <tr>
+          <td><strong>FII/FPI</strong></td>
+          <td class="muted">27-May-2026</td>
+          <td class="r">11,418.65</td>
+          <td class="r">12,461.35</td>
+          <td class="r neg"><strong>-1,042.70</strong></td>
+        </tr>
+      
+      </tbody>
+    </table>
+  </div>
+  <div class="card section ad-slot">
+    <div class="ad-placeholder">
+      <div class="ad-placeholder-inner">
+        <span class="ad-placeholder-icon">&#9881;</span>
+        <span>Ad space</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+  
+    
+      
+    
+  
+    
+      
+    
+  
+
+<section class="card section">
+  <div class="card-head">
+    <h2>Participant-wise Positions</h2>
+    <span class="muted small">NSE &middot; Cash (₹ Cr) + F&amp;O (contracts) &middot; 27052026</span>
+  </div>
+  <table class="data-table compact" id="participant-oi">
+    <thead>
+      <tr>
+        <th>Participant</th>
+        <th class="r grp-l">Cash Buy</th><th class="r">Cash Sell</th><th class="r">Cash Net</th>
+        <th class="r grp-l">Fut Long</th><th class="r">Fut Short</th><th class="r">Fut Net</th>
+        <th class="r grp-l">Opt Long</th><th class="r">Opt Short</th><th class="r">Opt Net</th>
+        <th class="r grp-l">Total F&amp;O Net</th>
+      </tr>
+    </thead>
     <tbody>
     
+      
+      
       <tr>
-        <td><strong>DII</strong></td>
-        <td class="muted">27-May-2026</td>
-        <td class="r">16,893.10</td>
-        <td class="r">13,072.10</td>
-        <td class="r pos"><strong>+3,821.00</strong></td>
+        <td><strong>Retail + HNI</strong></td>
+        
+        <td class="r muted grp-l">&mdash;</td><td class="r muted">&mdash;</td><td class="r muted">&mdash;</td>
+        
+        <td class="r grp-l">3,284,769</td>
+        <td class="r">297,695</td>
+        <td class="r net-hi pos"><strong>+2,987,074</strong></td>
+        <td class="r grp-l">5,513,001</td>
+        <td class="r">5,997,262</td>
+        <td class="r net-hi neg"><strong>-484,261</strong></td>
+        <td class="r net-hi grp-l pos"><strong>+2,502,813</strong></td>
       </tr>
     
+      
+      
       <tr>
-        <td><strong>FII/FPI</strong></td>
-        <td class="muted">27-May-2026</td>
-        <td class="r">11,418.65</td>
-        <td class="r">12,461.35</td>
-        <td class="r neg"><strong>-1,042.70</strong></td>
+        <td><strong>DII</strong></td>
+        
+        <td class="r grp-l">16,893.1</td>
+        <td class="r">13,072.1</td>
+        <td class="r net-hi pos"><strong>+3,821.0</strong></td>
+        
+        <td class="r grp-l">354,863</td>
+        <td class="r">4,250,390</td>
+        <td class="r net-hi neg"><strong>-3,895,527</strong></td>
+        <td class="r grp-l">68,690</td>
+        <td class="r">91,342</td>
+        <td class="r net-hi neg"><strong>-22,652</strong></td>
+        <td class="r net-hi grp-l neg"><strong>-3,918,179</strong></td>
+      </tr>
+    
+      
+      
+      <tr>
+        <td><strong>FII</strong></td>
+        
+        <td class="r grp-l">11,418.6</td>
+        <td class="r">12,461.4</td>
+        <td class="r net-hi neg"><strong>-1,042.7</strong></td>
+        
+        <td class="r grp-l">4,084,240</td>
+        <td class="r">3,608,784</td>
+        <td class="r net-hi pos"><strong>+475,456</strong></td>
+        <td class="r grp-l">1,354,920</td>
+        <td class="r">1,151,147</td>
+        <td class="r net-hi pos"><strong>+203,773</strong></td>
+        <td class="r net-hi grp-l pos"><strong>+679,229</strong></td>
+      </tr>
+    
+      
+      
+      <tr>
+        <td><strong>Pro</strong></td>
+        
+        <td class="r muted grp-l">&mdash;</td><td class="r muted">&mdash;</td><td class="r muted">&mdash;</td>
+        
+        <td class="r grp-l">803,295</td>
+        <td class="r">370,298</td>
+        <td class="r net-hi pos"><strong>+432,997</strong></td>
+        <td class="r grp-l">2,879,593</td>
+        <td class="r">2,576,454</td>
+        <td class="r net-hi pos"><strong>+303,139</strong></td>
+        <td class="r net-hi grp-l pos"><strong>+736,137</strong></td>
       </tr>
     
     </tbody>
   </table>
+  <p class="muted small" style="margin-top:8px;">Retail + HNI = non-institutional clients &middot; Pro = broker proprietary desks &middot; Cash in ₹ Cr &middot; F&amp;O in contracts (Net = Long − Short)</p>
 </section>
 
 
@@ -1763,7 +1883,7 @@
 
 <footer class="footer">
   <div class="wrap">
-    <div>NIFTY stock explorer · Generated 2026-05-28 20:54 IST</div>
+    <div>NIFTY stock explorer · Generated 2026-05-29 05:02 IST</div>
     <div class="muted">For informational use only - not investment advice.</div>
   </div>
 </footer>
@@ -2417,5 +2537,26 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeIdxChar
 
 <script src="assets/sort.js" defer></script>
 <script src="assets/filter.js" defer></script>
+<script>
+// Global auth badge — shows signed-in user on all pages from localStorage
+(function(){
+  var b = document.getElementById('globalAuthBadge');
+  if (!b) return;
+  function render(){
+    var raw = localStorage.getItem('herai_user');
+    if (!raw) { b.innerHTML = ''; return; }
+    try { var u = JSON.parse(raw); } catch(e) { b.innerHTML = ''; return; }
+    var name = u.name || u.email || 'User';
+    var initial = name[0].toUpperCase();
+    b.innerHTML = '<a href="' + '' + 'elite.html" class="gab-link" title="' + name + '">' +
+      (u.photo
+        ? '<img src="' + u.photo + '" alt="" class="gab-avatar" referrerpolicy="no-referrer">'
+        : '<span class="gab-letter">' + initial + '</span>') +
+      '</a>';
+  }
+  render();
+  window.addEventListener('storage', render);
+})();
+</script>
 </body>
 </html>
