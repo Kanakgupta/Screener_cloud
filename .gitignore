@@ -1,6 +1,6 @@
+# Build cache - never push, only deploy HTML files
+cloud/usa/_build/
+cloud/india/_build/
+
+# Windows reserved filenames
 cloud/usa/stocks/CON.html
-
-cloud/usa/_build/cache/CON.json
-
-cloud/usa/_build/summary.json
-cloud/india/_build/summary.json
