@@ -1,13 +1,13 @@
 {
-  "_fetched_at": "2026-06-01T13:30:04.941707+00:00",
+  "_fetched_at": "2026-06-01T21:08:03.957074+00:00",
   "FEDFUNDS": {
     "id": "FEDFUNDS",
     "label": "Fed Funds Rate",
-    "value": 3.64,
+    "value": 3.63,
     "prev": 3.64,
-    "change": 0.0,
-    "change_pct": 0.0,
-    "date": "2026-04-01",
+    "change": -0.01,
+    "change_pct": -0.27,
+    "date": "2026-05-01",
     "unit": "%",
     "freq": "monthly"
   },

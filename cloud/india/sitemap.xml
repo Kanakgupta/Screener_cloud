@@ -1,20 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://heraiscreener.com/india/IND_Stock_Screener.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
-  <url><loc>https://heraiscreener.com/india/stocks.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>
-  <url><loc>https://heraiscreener.com/india/screens.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://heraiscreener.com/india/screens-technical.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
-  <url><loc>https://heraiscreener.com/india/screens-fundamental.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://heraiscreener.com/india/arbitrage.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://heraiscreener.com/india/custom.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
   <url><loc>https://heraiscreener.com/india/earnings.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://heraiscreener.com/india/elite.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://heraiscreener.com/india/funds.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://heraiscreener.com/india/hedging.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://heraiscreener.com/india/heraiai.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://heraiscreener.com/india/learn.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
   <url><loc>https://heraiscreener.com/india/news.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens-fundamental.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens-technical.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
+  <url><loc>https://heraiscreener.com/india/stocks.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
   <url><loc>https://heraiscreener.com/india/swing.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
   <url><loc>https://heraiscreener.com/india/technical.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-  <url><loc>https://heraiscreener.com/india/custom.html</loc><lastmod>2026-06-01</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://heraiscreener.com/india/funds.html</loc><lastmod>2026-06-01</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://heraiscreener.com/india/learn.html</loc><lastmod>2026-06-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://heraiscreener.com/india/elite.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/ai-stocks.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/clean-energy.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/cybersecurity.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/data-center.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/death-cross.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/ema-10-100-dn.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/ema-10-100-up.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/ema-10-20-dn.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/ema-10-20-up.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/ema-10-200-dn.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/ema-10-200-up.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/ema-10-50-dn.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/ema-10-50-up.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/ema-100-200-dn.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/ema-100-200-up.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/ema-20-100-dn.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/ema-20-100-up.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/ema-20-200-dn.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/ema-20-200-up.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/ema-20-50-dn.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/ema-20-50-up.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/ema-50-100-dn.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/ema-50-100-up.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/ema-multi-dn-5d.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/ema-multi-up-5d.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/ev-battery.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/fintech-digital.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/genomics-biotech.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/golden-cross.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/high-dividend.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
   <url><loc>https://heraiscreener.com/india/screens/high-earnings-growth.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/high-fcf.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/high-margin.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/high-momentum.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/high-rev-growth.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/high-roe.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/low-debt.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/low-ev-ebitda.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/low-pb.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/low-pe.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
   <url><loc>https://heraiscreener.com/india/screens/mega-cap.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/momentum-3m.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/near-52w-high.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/near-52w-low.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/nuclear-power.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/quantum-computing.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/robotics-automation.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/rsi-overbought.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/rsi-oversold.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/semiconductors.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/smallest.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/space-defense.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/top-ytd.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
+  <url><loc>https://heraiscreener.com/india/screens/worst-ytd.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url>
   <url><loc>https://heraiscreener.com/india/stocks/20MICRONS.NS.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/india/stocks/21STCENMGM.NS.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/india/stocks/360ONE.NS.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
@@ -2162,16 +2217,16 @@
   <url><loc>https://heraiscreener.com/india/stocks/ZUARIIND.NS.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/india/stocks/ZYDUSLIFE.NS.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/india/stocks/ZYDUSWELL.NS.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
-  <url><loc>https://heraiscreener.com/india/sectors/industrials.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
-  <url><loc>https://heraiscreener.com/india/sectors/consumer-cyclical.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/india/sectors/basic-materials.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
-  <url><loc>https://heraiscreener.com/india/sectors/financial-services.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
-  <url><loc>https://heraiscreener.com/india/sectors/technology.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
-  <url><loc>https://heraiscreener.com/india/sectors/healthcare.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
-  <url><loc>https://heraiscreener.com/india/sectors/consumer-defensive.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
-  <url><loc>https://heraiscreener.com/india/sectors/unknown.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
-  <url><loc>https://heraiscreener.com/india/sectors/real-estate.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/india/sectors/communication-services.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
-  <url><loc>https://heraiscreener.com/india/sectors/utilities.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/india/sectors/consumer-cyclical.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/india/sectors/consumer-defensive.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/india/sectors/energy.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/india/sectors/financial-services.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/india/sectors/healthcare.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/india/sectors/industrials.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/india/sectors/real-estate.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/india/sectors/technology.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/india/sectors/unknown.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/india/sectors/utilities.html</loc><lastmod>2026-06-01</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
 </urlset>
