@@ -1,5 +1,5 @@
 {
-  "_fetched_at": "2026-06-02T22:46:49.702443+00:00",
+  "_fetched_at": "2026-06-06T15:47:29.043036+00:00",
   "FEDFUNDS": {
     "id": "FEDFUNDS",
     "label": "Fed Funds Rate",
@@ -51,18 +51,18 @@
     "prev": 4.3,
     "change": 0.0,
     "change_pct": 0.0,
-    "date": "2026-04-01",
+    "date": "2026-05-01",
     "unit": "%",
     "freq": "monthly"
   },
   "PAYEMS": {
     "id": "PAYEMS",
     "label": "Non-Farm Payrolls",
-    "value": 158736.0,
-    "prev": 158621.0,
-    "change": 115.0,
-    "change_pct": 0.07,
-    "date": "2026-04-01",
+    "value": 159001.0,
+    "prev": 158829.0,
+    "change": 172.0,
+    "change_pct": 0.11,
+    "date": "2026-05-01",
     "unit": "K",
     "freq": "monthly"
   },
