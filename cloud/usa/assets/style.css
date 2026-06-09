@@ -781,10 +781,6 @@ i.rec-dot.rec-strongsell  { background: #dc2626; }
   background: #2962ff; color: #fff;
 }
 .chart-icon-tv:hover { background: #1e54e8; color: #fff; }
-.chart-icon-sc {
-  background: #f59e0b; color: #fff;
-}
-.chart-icon-sc:hover { background: #d97706; color: #fff; }
 @media (max-width: 600px) {
   .chart-icon span { display: none; }
   .chart-icon { padding: 5px 7px; }
