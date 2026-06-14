@@ -959,7 +959,7 @@
       </div>
     </nav>
     <div class="footer-bottom">
-      <span>US-equity explorer · Generated 2026-06-12 20:04 PDT</span>
+      <span>US-equity explorer · Generated 2026-06-13 17:32 PDT</span>
       <span class="muted">© 2026 HeRAI Screener · For informational use only · Not investment advice · <a href="/">heraiscreener.com</a></span>
     </div>
   </div>
@@ -1262,6 +1262,13 @@ function renderPriceChart() {
   const lineFill  = up ? 'rgba(22,163,74,0.10)' : 'rgba(220,38,38,0.10)';
   const isWeekly  = tf === '5Y' && HIST_5Y.length;
 
+  // Match the x-axis unit to the ACTUAL data span so funds with limited history
+  // still render x-axis tick labels instead of an empty axis.
+  const spanDays = (toMs(bars[bars.length - 1].date) - toMs(bars[0].date)) / 86400000;
+  let dailyUnit = 'month';
+  if (spanDays <= 14) dailyUnit = 'day';
+  else if (spanDays <= 120) dailyUnit = 'week';
+
   meta.innerHTML = `<span class="muted small">${tf} &middot; ${bars.length} ${isWeekly ? 'weekly' : 'daily'} bars</span> &nbsp; ${fmtChange(first, last)}`;
 
   if (priceChart) priceChart.destroy();
@@ -1288,7 +1295,7 @@ function renderPriceChart() {
       scales: {
         x: {
           type: 'time',
-          time: { unit: (tf === '1M' || tf === '3M') ? 'week' : (tf === '5Y' ? 'year' : 'month') },
+          time: { unit: (tf === '1M' || tf === '3M') ? 'week' : (tf === '5Y' ? 'year' : dailyUnit) },
           ticks: { maxTicksLimit: 8, autoSkip: true },
           grid: { display: false },
         },
