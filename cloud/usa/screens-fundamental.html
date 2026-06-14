@@ -116,7 +116,7 @@
   <div class="meta-pills">
     <span class="pill">2486 companies tracked</span>
     <span class="pill">24 screens</span>
-    <span class="pill">Updated 2026-06-13 17:32 PDT</span>
+    <span class="pill">Updated 2026-06-13 21:38 PDT</span>
   </div>
 </section>
 
@@ -224,10 +224,10 @@
     <div class="screen-grid">
       
         <a class="screen-card screen-card-low-pe" href="screens/low-pe.html"
-           data-counts='{"AI": 6, "NDX": 7, "R2K": 40, "SPX": 20, "all": 60}'>
+           data-counts='{"AI": 121, "NDX": 92, "R2K": 1121, "SPX": 476, "all": 1628}'>
           <div class="screen-card-name">Low P/E (Value) screener</div>
           <div class="screen-card-desc">Listed stocks trading at the lowest trailing P/E ratios.</div>
-          <div class="screen-card-count">60 stocks</div>
+          <div class="screen-card-count">1628 stocks</div>
         </a>
       
         <a class="screen-card screen-card-high-dividend" href="screens/high-dividend.html"
@@ -327,17 +327,17 @@
     <div class="screen-grid">
       
         <a class="screen-card screen-card-mega-cap" href="screens/mega-cap.html"
-           data-counts='{"AI": 0, "NDX": 1, "R2K": 0, "SPX": 1, "all": 1}'>
+           data-counts='{"AI": 13, "NDX": 12, "R2K": 0, "SPX": 19, "all": 21}'>
           <div class="screen-card-name">Mega Cap screener</div>
           <div class="screen-card-desc">Largest companies by market capitalization.</div>
-          <div class="screen-card-count">1 stocks</div>
+          <div class="screen-card-count">21 stocks</div>
         </a>
       
         <a class="screen-card screen-card-smallest" href="screens/smallest.html"
-           data-counts='{"AI": 11, "NDX": 7, "R2K": 77, "SPX": 20, "all": 97}'>
+           data-counts='{"AI": 220, "NDX": 101, "R2K": 1899, "SPX": 501, "all": 2464}'>
           <div class="screen-card-name">Smallest by Market Cap screener</div>
           <div class="screen-card-desc">Smallest listed stocks by market capitalization.</div>
-          <div class="screen-card-count">97 stocks</div>
+          <div class="screen-card-count">2464 stocks</div>
         </a>
       
     </div>
@@ -441,7 +441,7 @@
       </div>
     </nav>
     <div class="footer-bottom">
-      <span>US-equity explorer · Generated 2026-06-13 17:32 PDT</span>
+      <span>US-equity explorer · Generated 2026-06-13 21:38 PDT</span>
       <span class="muted">© 2026 HeRAI Screener · For informational use only · Not investment advice · <a href="/">heraiscreener.com</a></span>
     </div>
   </div>
@@ -645,6 +645,36 @@ function setUniverse(id, evt){
   });
 })();
 
+// ---- Highlight the active top-nav item for the current page ----
+// Mirrors the universe-button active styling: the nav link (or its parent
+// dropdown trigger) for the page you're on gets the same gradient highlight.
+(function highlightActiveNav(){
+  function fileName(href){
+    try {
+      const u = String(href || '').split('#')[0].split('?')[0];
+      const parts = u.split('/');
+      return (parts[parts.length - 1] || '').toLowerCase();
+    } catch(e){ return ''; }
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    const here = fileName(location.pathname) || 'index.html';
+    // Direct nav links (All Stocks, News, Learn).
+    document.querySelectorAll('.topnav nav > a').forEach(a => {
+      if (fileName(a.getAttribute('href')) === here) a.classList.add('nav-active');
+    });
+    // Dropdown groups (Technical Screens / Fundamental Screens): highlight the
+    // trigger when the current page is the trigger target or any menu child.
+    document.querySelectorAll('.topnav nav .nav-dd').forEach(dd => {
+      const trigger = dd.querySelector('.nav-dd-trigger');
+      if (!trigger) return;
+      const links = [trigger, ...dd.querySelectorAll('.nav-dd-menu a')];
+      if (links.some(a => fileName(a.getAttribute('href')) === here)) {
+        trigger.classList.add('nav-active');
+      }
+    });
+  });
+})();
+
 // ---- Sticky top horizontal scrollbar for wide tables ----
 // For every .table-wrap that overflows horizontally, attach a thin
 // scrollbar that floats at the top of the visible viewport area of the
@@ -688,7 +718,101 @@ function initStickyScrollbars(){
 document.addEventListener('DOMContentLoaded', initStickyScrollbars);
 window.addEventListener('load', initStickyScrollbars);
 window.addEventListener('resize', initStickyScrollbars);
-</script>
+// ---- Background NEWS preloader: silently load news feeds when page opens ----
+// This allows NEWS page to display immediately when user clicks "News" instead of showing "Loading..."
+(function(){
+  // Check if we're not already on the news page (avoid double-loading)
+  if (window.location.pathname.includes('/news.html')) return;
+  
+  // Check if news is already cached and fresh (within 15 minutes)
+  try {
+    const cached = sessionStorage.getItem('herai_news_cache');
+    const timestamp = sessionStorage.getItem('herai_news_cache_time');
+    if (cached && timestamp) {
+      const age = Date.now() - parseInt(timestamp, 10);
+      if (age < 15 * 60 * 1000) return; // Cache still fresh
+    }
+  } catch(e) {}
+  
+  // Start background preload (fire and forget)
+  setTimeout(() => {
+    const region = SCREENER_REGION.id || 'india';
+    const feedsUrl = ''.replace(/\/$/, '') + '/../_news_feeds_' + region + '.json';
+    
+    // Simple background fetch: if it succeeds, cache in sessionStorage
+    fetch(feedsUrl)
+      .then(r => r.ok ? r.json() : null)
+      .then(feedsData => {
+        if (!feedsData || !Array.isArray(feedsData)) return;
+        
+        // Fetch all feeds in parallel (simplified version of news.html logic)
+        const RSS_PROXIES = [
+          "https://api.rss2json.com/v1/api.json?rss_url=",
+          "https://api.allorigins.win/get?url=",
+        ];
+        
+        const fetchFeed = async (feed) => {
+          for (let i = 0; i < RSS_PROXIES.length; i++) {
+            try {
+              const r = await fetch(RSS_PROXIES[i] + encodeURIComponent(feed.url), { cache: 'no-store' });
+              if (!r.ok) continue;
+              const j = await r.json();
+              if (j && j.status === 'ok' && Array.isArray(j.items)) {
+                return j.items.slice(0, 20).map(it => ({
+                  cat: feed.cat || 'markets',
+                  source: feed.source || feed.label || 'News',
+                  title: it.title,
+                  link: it.link,
+                  desc: (it.description || '').replace(/<[^>]+>/g, '').slice(0, 220),
+                  pub: it.pubDate
+                }));
+              }
+              if (j && typeof j.contents === 'string') {
+                const doc = new DOMParser().parseFromString(j.contents, 'application/xml');
+                if (doc.querySelector('parsererror')) continue;
+                const items = Array.from(doc.querySelectorAll('item, entry')).slice(0, 20);
+                return items.map(node => {
+                  const get = sel => { const el = node.querySelector(sel); return el ? el.textContent : ''; };
+                  const linkEl = node.querySelector('link');
+                  const link = linkEl ? (linkEl.textContent || linkEl.getAttribute('href') || '') : '';
+                  return {
+                    cat: feed.cat || 'markets',
+                    source: feed.source || feed.label || 'News',
+                    title: get('title'),
+                    link: link.trim(),
+                    desc: (get('description') || get('summary') || '').replace(/<[^>]+>/g, '').slice(0, 220),
+                    pub: get('pubDate') || get('published') || get('updated') || ''
+                  };
+                }).filter(it => it.title && it.link);
+              }
+            } catch(e) {}
+          }
+          return [];
+        };
+        
+        // Fetch all feeds and cache result
+        Promise.all(feedsData.map(fetchFeed))
+          .then(lists => {
+            const allItems = [].concat(...lists);
+            const seen = new Set();
+            const unique = allItems.filter(it => {
+              if (!it.link || seen.has(it.link)) return false;
+              seen.add(it.link);
+              return true;
+            });
+            unique.sort((a, b) => new Date(b.pub || 0) - new Date(a.pub || 0));
+            
+            // Store in sessionStorage for immediate use on news page
+            try {
+              sessionStorage.setItem('herai_news_cache', JSON.stringify(unique));
+              sessionStorage.setItem('herai_news_cache_time', Date.now().toString());
+            } catch(e) {}
+          })
+          .catch(e => {}); // Silent failure
+      })
+      .catch(e => {}); // Silent failure
+  }, 2000); // Delay by 2s to not block initial page render
+})();</script>
 
 <script src="assets/sort.js" defer></script>
 <script src="assets/filter.js" defer></script>

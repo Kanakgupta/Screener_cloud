@@ -92,6 +92,14 @@ main.wrap.content > * { min-width: 0; max-width: 100%; }
   text-decoration: none;
 }
 
+/* Active page highlight — mirrors the universe-button active gradient. */
+.topnav nav > a.nav-active,
+.topnav nav .nav-dd-trigger.nav-active {
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+  color: #fff;
+}
+.topnav nav .nav-dd-trigger.nav-active .dd-caret { color: #fff; }
+
 /* Screens dropdown */
 .nav-dd { position: relative; }
 .nav-dd-trigger { cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }

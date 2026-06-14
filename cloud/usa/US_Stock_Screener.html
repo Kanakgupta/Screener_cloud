@@ -232,7 +232,7 @@
 
   
   <div class="overall-strip" style="--c:#84cc16">
-    <div class="overall-score">+22</div>
+    <div class="overall-score">+28</div>
     <div class="overall-meta">
       <div class="overall-kicker">Today's Stance</div>
       <div class="overall-label" style="color:#84cc16">Constructive</div>
@@ -625,13 +625,13 @@
     
     <path d="M 20 110 A 90 90 0 0 1 200 110" fill="none" stroke="url(#ggrad)" stroke-width="18" stroke-linecap="round"/>
     
-    <g transform="translate(110 110) rotate(30.42)">
+    <g transform="translate(110 110) rotate(39.420000000000016)">
       <line x1="0" y1="0" x2="0" y2="-78" stroke="#0b1220" stroke-width="6" stroke-linecap="round"/>
       <line x1="0" y1="0" x2="0" y2="-76" stroke="#22c55e" stroke-width="3" stroke-linecap="round"/>
       <circle cx="0" cy="0" r="8" fill="#22c55e" stroke="#0b1220" stroke-width="3"/>
     </g>
     
-    <text x="110" y="100" text-anchor="middle" fill="#e2e8f0" font-size="26" font-weight="800">+33</text>
+    <text x="110" y="100" text-anchor="middle" fill="#e2e8f0" font-size="26" font-weight="800">+43</text>
     <text x="110" y="122" text-anchor="middle" fill="#22c55e" font-size="11" font-weight="700" letter-spacing="1">BULLISH</text>
     
     <text x="14" y="128" fill="#dc2626" font-size="9" font-weight="700">-100</text>
@@ -882,7 +882,7 @@
       <span class="ichip-label">Median P/E</span>
       <span class="ichip-bump" style="color:#94a3b8">+0 pts</span>
     </div>
-    <div class="ichip-value">21.1x
+    <div class="ichip-value">21.4x
       
     </div>
     <div class="ichip-mini">
@@ -896,7 +896,7 @@
       </div>
     </div>
     <div class="ichip-tag" style="color:#94a3b8">moderate</div>
-    <div class="ichip-why">Median trailing P/E of 60 stocks. Higher = more expensive market.</div>
+    <div class="ichip-why">Median trailing P/E of 1,618 stocks. Higher = more expensive market.</div>
   </div>
   
   <div class="ichip tone-warn">
@@ -904,7 +904,7 @@
       <span class="ichip-label">Corporate ROCE</span>
       <span class="ichip-bump" style="color:#f59e0b">-5 pts</span>
     </div>
-    <div class="ichip-value">0.0%
+    <div class="ichip-value">0.1%
       
     </div>
     <div class="ichip-mini">
@@ -918,15 +918,15 @@
       </div>
     </div>
     <div class="ichip-tag" style="color:#f59e0b">weak</div>
-    <div class="ichip-why">Median Return on Capital Employed across 196 companies.</div>
+    <div class="ichip-why">Median Return on Capital Employed across 1,862 companies.</div>
   </div>
   
-  <div class="ichip tone-bad">
+  <div class="ichip tone-warn">
     <div class="ichip-head">
       <span class="ichip-label">Concentration Risk</span>
-      <span class="ichip-bump" style="color:#f59e0b">-10 pts</span>
+      <span class="ichip-bump" style="color:#94a3b8">+0 pts</span>
     </div>
-    <div class="ichip-value">Top 10 = 92%
+    <div class="ichip-value">Top 10 = 34%
       
     </div>
     <div class="ichip-mini">
@@ -934,13 +934,13 @@
       <div class="ichip-mini-track">
         <div class="ichip-mini-center"></div>
         <div class="ichip-mini-fill" style="
-          left: 0.0%;
-          width: 50.0%;
-          background:#f59e0b;"></div>
+          left: 50%;
+          width: 0.0%;
+          background:#94a3b8;"></div>
       </div>
     </div>
-    <div class="ichip-tag" style="color:#f59e0b">very concentrated</div>
-    <div class="ichip-why">Top 10 stocks hold 92% of total market cap. High = narrow, fragile rally.</div>
+    <div class="ichip-tag" style="color:#94a3b8">moderate</div>
+    <div class="ichip-why">Top 10 stocks hold 34% of total market cap. High = narrow, fragile rally.</div>
   </div>
       </div>
     </div>
@@ -1929,7 +1929,7 @@
       </div>
     </nav>
     <div class="footer-bottom">
-      <span>US-equity explorer · Generated 2026-06-13 17:32 PDT</span>
+      <span>US-equity explorer · Generated 2026-06-13 21:38 PDT</span>
       <span class="muted">© 2026 HeRAI Screener · For informational use only · Not investment advice · <a href="/">heraiscreener.com</a></span>
     </div>
   </div>
@@ -2133,6 +2133,36 @@ function setUniverse(id, evt){
   });
 })();
 
+// ---- Highlight the active top-nav item for the current page ----
+// Mirrors the universe-button active styling: the nav link (or its parent
+// dropdown trigger) for the page you're on gets the same gradient highlight.
+(function highlightActiveNav(){
+  function fileName(href){
+    try {
+      const u = String(href || '').split('#')[0].split('?')[0];
+      const parts = u.split('/');
+      return (parts[parts.length - 1] || '').toLowerCase();
+    } catch(e){ return ''; }
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    const here = fileName(location.pathname) || 'index.html';
+    // Direct nav links (All Stocks, News, Learn).
+    document.querySelectorAll('.topnav nav > a').forEach(a => {
+      if (fileName(a.getAttribute('href')) === here) a.classList.add('nav-active');
+    });
+    // Dropdown groups (Technical Screens / Fundamental Screens): highlight the
+    // trigger when the current page is the trigger target or any menu child.
+    document.querySelectorAll('.topnav nav .nav-dd').forEach(dd => {
+      const trigger = dd.querySelector('.nav-dd-trigger');
+      if (!trigger) return;
+      const links = [trigger, ...dd.querySelectorAll('.nav-dd-menu a')];
+      if (links.some(a => fileName(a.getAttribute('href')) === here)) {
+        trigger.classList.add('nav-active');
+      }
+    });
+  });
+})();
+
 // ---- Sticky top horizontal scrollbar for wide tables ----
 // For every .table-wrap that overflows horizontally, attach a thin
 // scrollbar that floats at the top of the visible viewport area of the
@@ -2176,7 +2206,101 @@ function initStickyScrollbars(){
 document.addEventListener('DOMContentLoaded', initStickyScrollbars);
 window.addEventListener('load', initStickyScrollbars);
 window.addEventListener('resize', initStickyScrollbars);
-</script>
+// ---- Background NEWS preloader: silently load news feeds when page opens ----
+// This allows NEWS page to display immediately when user clicks "News" instead of showing "Loading..."
+(function(){
+  // Check if we're not already on the news page (avoid double-loading)
+  if (window.location.pathname.includes('/news.html')) return;
+  
+  // Check if news is already cached and fresh (within 15 minutes)
+  try {
+    const cached = sessionStorage.getItem('herai_news_cache');
+    const timestamp = sessionStorage.getItem('herai_news_cache_time');
+    if (cached && timestamp) {
+      const age = Date.now() - parseInt(timestamp, 10);
+      if (age < 15 * 60 * 1000) return; // Cache still fresh
+    }
+  } catch(e) {}
+  
+  // Start background preload (fire and forget)
+  setTimeout(() => {
+    const region = SCREENER_REGION.id || 'india';
+    const feedsUrl = ''.replace(/\/$/, '') + '/../_news_feeds_' + region + '.json';
+    
+    // Simple background fetch: if it succeeds, cache in sessionStorage
+    fetch(feedsUrl)
+      .then(r => r.ok ? r.json() : null)
+      .then(feedsData => {
+        if (!feedsData || !Array.isArray(feedsData)) return;
+        
+        // Fetch all feeds in parallel (simplified version of news.html logic)
+        const RSS_PROXIES = [
+          "https://api.rss2json.com/v1/api.json?rss_url=",
+          "https://api.allorigins.win/get?url=",
+        ];
+        
+        const fetchFeed = async (feed) => {
+          for (let i = 0; i < RSS_PROXIES.length; i++) {
+            try {
+              const r = await fetch(RSS_PROXIES[i] + encodeURIComponent(feed.url), { cache: 'no-store' });
+              if (!r.ok) continue;
+              const j = await r.json();
+              if (j && j.status === 'ok' && Array.isArray(j.items)) {
+                return j.items.slice(0, 20).map(it => ({
+                  cat: feed.cat || 'markets',
+                  source: feed.source || feed.label || 'News',
+                  title: it.title,
+                  link: it.link,
+                  desc: (it.description || '').replace(/<[^>]+>/g, '').slice(0, 220),
+                  pub: it.pubDate
+                }));
+              }
+              if (j && typeof j.contents === 'string') {
+                const doc = new DOMParser().parseFromString(j.contents, 'application/xml');
+                if (doc.querySelector('parsererror')) continue;
+                const items = Array.from(doc.querySelectorAll('item, entry')).slice(0, 20);
+                return items.map(node => {
+                  const get = sel => { const el = node.querySelector(sel); return el ? el.textContent : ''; };
+                  const linkEl = node.querySelector('link');
+                  const link = linkEl ? (linkEl.textContent || linkEl.getAttribute('href') || '') : '';
+                  return {
+                    cat: feed.cat || 'markets',
+                    source: feed.source || feed.label || 'News',
+                    title: get('title'),
+                    link: link.trim(),
+                    desc: (get('description') || get('summary') || '').replace(/<[^>]+>/g, '').slice(0, 220),
+                    pub: get('pubDate') || get('published') || get('updated') || ''
+                  };
+                }).filter(it => it.title && it.link);
+              }
+            } catch(e) {}
+          }
+          return [];
+        };
+        
+        // Fetch all feeds and cache result
+        Promise.all(feedsData.map(fetchFeed))
+          .then(lists => {
+            const allItems = [].concat(...lists);
+            const seen = new Set();
+            const unique = allItems.filter(it => {
+              if (!it.link || seen.has(it.link)) return false;
+              seen.add(it.link);
+              return true;
+            });
+            unique.sort((a, b) => new Date(b.pub || 0) - new Date(a.pub || 0));
+            
+            // Store in sessionStorage for immediate use on news page
+            try {
+              sessionStorage.setItem('herai_news_cache', JSON.stringify(unique));
+              sessionStorage.setItem('herai_news_cache_time', Date.now().toString());
+            } catch(e) {}
+          })
+          .catch(e => {}); // Silent failure
+      })
+      .catch(e => {}); // Silent failure
+  }, 2000); // Delay by 2s to not block initial page render
+})();</script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
