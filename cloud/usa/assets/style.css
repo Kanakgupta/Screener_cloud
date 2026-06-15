@@ -228,6 +228,10 @@ main.wrap.content > * { min-width: 0; max-width: 100%; }
 .data-table th.sort-desc::after { content: " ▼"; color: var(--accent); }
 .data-table td.num, .data-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
 .data-table tbody tr:hover td { background: var(--hover); }
+.est-tag {
+  font-size: 8.5px; font-weight: 600; color: #9aa3b2; margin-left: 2px;
+  text-transform: uppercase; letter-spacing: 0.2px; cursor: help; vertical-align: super;
+}
 
 /* Freeze first two columns: # and Ticker */
 .data-table thead th:nth-child(1),
