@@ -795,14 +795,11 @@ if (preloadedNews) {
         status.textContent = cached.length + ' headlines · preloaded in background';
       }
       render();
-      // Still refresh in background for freshest data
-      loadAllFeeds(false);
-      return; // Early exit to skip immediate loadAllFeeds below
     }
   } catch(e) {}
 }
 
-// No preloaded cache, fetch fresh
+// Always fetch fresh data
 loadAllFeeds(false);
 </script>
 
