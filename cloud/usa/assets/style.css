@@ -314,6 +314,33 @@ main.wrap.content > * { min-width: 0; max-width: 100%; }
 }
 .footer-bottom a { color: #5a6a80; text-decoration: none; }
 .footer-bottom a:hover { color: #9aa4b6; }
+.footer-disclaimer {
+  margin-top: 16px;
+  padding: 18px 18px 14px;
+  background: #111622;
+  border: 1px solid #2a3450;
+  border-radius: 12px;
+}
+.footer-disclaimer-title {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #f59e0b;
+  margin: 0 0 10px;
+}
+.footer-disclaimer-list {
+  list-style: decimal;
+  padding-left: 18px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 11.5px;
+  color: #c8d0de;
+  line-height: 1.6;
+}
+.footer-disclaimer-list strong { color: #e2e8f0; }
 
 @media (max-width: 700px) {
   .topnav .wrap { flex-wrap: wrap; height: auto; padding: 10px 16px; gap: 12px; }
