@@ -278,14 +278,26 @@ function normalizeRoute(r) {
 // Rule-based fallback if LLM classification fails
 function ruleRoute(message) {
   const m = message.toLowerCase();
+  const tickers = Array.from(new Set((message.match(/\b[A-Z]{1,5}\b/g) || []).slice(0, 4)));
   const needs = [];
   if (/\b(rsi|sma|ema|support|resistance|breakout|chart|trend|momentum|moving average)\b/.test(m)) needs.push("technical");
   if (/\b(pe|p\/e|valuation|revenue|earnings|profit|roe|margin|debt|growth|fundamental)\b/.test(m)) needs.push("fundamental");
   if (/\b(news|announce|headline|catalyst|report|result)\b/.test(m)) needs.push("news");
   if (/\b(market|macro|fed|rate|inflation|sentiment|mood|economy)\b/.test(m)) needs.push("macro");
+
+  if (tickers.length && !needs.length) {
+    needs.push("technical", "fundamental", "news");
+  }
+
+  const intent = tickers.length
+    ? (/(overview|about|analy[sz]e|analysis|deep\s*dive|look\s*at)/i.test(message)
+      ? "STOCK_DEEP_DIVE"
+      : "GENERAL_QUERY")
+    : "GENERAL_QUERY";
+
   return {
-    intent: "GENERAL_QUERY",
-    tickers: [],
+    intent,
+    tickers,
     sectors: [],
     timeframe: "unspecified",
     needs: needs.length ? needs : ["fundamental", "news"],
@@ -416,6 +428,9 @@ async function synthesize(env, question, notes, sources) {
 // ── Verifier / guardrails (rule-based, cheap; upgradeable to LLM) ────────────
 function verify(answer) {
   let out = String(answer || "").trim();
+  // Trim accidental assistant self-dialogue to first complete answer.
+  out = out.split(/\n\nIs that\b/i)[0];
+  out = out.split(/\n\nNow, let's\b/i)[0];
   // Soften any accidental direct advice phrasing.
   out = out.replace(/\byou should (buy|sell)\b/gi, "the data suggests you might consider researching");
   return out;
@@ -522,7 +537,7 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
     // No grounding available — general answer, clearly framed.
     const { text } = await callLLM(
       env,
-      "You are HerAI, a careful stock-market educator. Answer clearly and generally. Never give direct buy/sell advice. Do not invent specific prices or figures.",
+      "You are HerAI, a careful stock-market educator. Answer once in 1-3 short paragraphs or bullets. Never role-play both sides, never ask follow-up questions, never continue into a dialogue. Never give direct buy/sell advice. Do not invent specific prices or figures.",
       message,
       { maxTokens: 700 }
     );
