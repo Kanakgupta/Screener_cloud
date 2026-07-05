@@ -83,18 +83,23 @@ function stripHtml(html) {
 // ── Unified LLM call across the free chain ──────────────────────────────────
 async function callLLM(env, system, user, { wantJson = false, maxTokens = 900 } = {}) {
   const providers = availableProviders(env);
+  let workersAiErr = null;
 
   // Primary path: Workers AI binding
   if (hasWorkersAI(env)) {
     try {
       const text = await callWorkersAI(env, system, user, wantJson, maxTokens);
       if (text && text.trim()) return { text: text.trim(), provider: "workers-ai" };
-    } catch {
+    } catch (e) {
+      workersAiErr = e;
       // fall through to provider-chain fallback
     }
   }
 
-  if (!providers.length) throw new Error("NO_LLM_KEYS");
+  if (!providers.length) {
+    if (workersAiErr) throw new Error(`WORKERS_AI_FAILED: ${workersAiErr.message || workersAiErr}`);
+    throw new Error("NO_LLM_KEYS");
+  }
 
   let lastErr = null;
   for (const p of providers) {
@@ -550,6 +555,9 @@ export async function handleHeraiRequest(request, env, ctx) {
       const msg = String(e && e.message);
       if (msg.includes("NO_LLM_KEYS")) {
         return json({ error: "HerAI is not configured yet (no Workers AI binding or provider key set)." }, 503);
+      }
+      if (msg.includes("WORKERS_AI_FAILED")) {
+        return json({ error: "Workers AI inference failed", detail: msg.slice(0, 500) }, 502);
       }
       return json({ error: "HerAI hit an error. Please try again." }, 500);
     }
