@@ -9,6 +9,10 @@
   "assets": {
     "directory": "./cloud"
   },
+  // Cloudflare Workers AI binding for HerAI runtime analysis.
+  "ai": {
+    "binding": "AI"
+  },
   "compatibility_flags": [
     "nodejs_compat"
   ],
@@ -20,5 +24,25 @@
       "binding": "ELITE_KV",
       "id": "1f45ba0294924143be0485776bb114c0"
     }
+    // ── HerAI answer cache (OPTIONAL) ──────────────────────────────────────
+    // HerAI works without this; it just skips caching if unbound.
+    // To enable:
+    //   npx wrangler kv namespace create HERAI_KV
+    // then add:
+    // ,{ "binding": "HERAI_KV", "id": "<paste-id-here>" }
   ]
+
+  // ── HerAI LLM provider secrets (set at least ONE) ────────────────────────
+  // Workers AI is primary now (via the AI binding above), so these are optional
+  // fallbacks only.
+  // These are Worker SECRETS, not committed here. Set with:
+  //   npx wrangler secret put GEMINI_API_KEY
+  //   npx wrangler secret put GROQ_API_KEY
+  //   npx wrangler secret put CEREBRAS_API_KEY
+  //   npx wrangler secret put OPENROUTER_API_KEY
+  // The free chain tries them in order: Gemini -> Groq -> Cerebras -> OpenRouter.
+
+  // Optional override for Workers AI model used by HerAI:
+  //   npx wrangler secret put HERAI_AI_MODEL
+  // Example value: @cf/meta/llama-3.1-8b-instruct
 }

@@ -2,11 +2,14 @@
  * Elite Club Discussion Forum — Cloudflare Worker
  *
  * Handles /api/elite/* routes using KV for storage.
+ * Handles /api/herai/* routes via the HerAI multi-agent orchestrator.
  * All other requests fall through to static assets.
  *
  * KV key scheme:
  *   {region}:{thread_id}  →  full thread JSON
  */
+
+import { handleHeraiRequest } from "./herai.js";
 
 const ALLOWED_REGIONS = new Set(["usa", "india", "global"]);
 const ALLOWED_CATEGORIES = [
@@ -277,8 +280,13 @@ async function handleVote(kv, body) {
 // ── Main fetch handler ───────────────────────────────────────────────────────
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
+
+    // HerAI multi-agent assistant routes
+    if (url.pathname.startsWith("/api/herai/")) {
+      return handleHeraiRequest(request, env, ctx);
+    }
 
     // CORS preflight
     if (request.method === "OPTIONS" && url.pathname.startsWith("/api/elite/")) {
