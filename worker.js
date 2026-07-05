@@ -285,7 +285,12 @@ export default {
 
     // HerAI multi-agent assistant routes
     if (url.pathname.startsWith("/api/herai/")) {
-      return handleHeraiRequest(request, env, ctx);
+      try {
+        return await handleHeraiRequest(request, env, ctx);
+      } catch (e) {
+        const msg = String(e && (e.stack || e.message || e));
+        return json({ error: "herai route crash", detail: msg.slice(0, 1200) }, 500);
+      }
     }
 
     // CORS preflight
