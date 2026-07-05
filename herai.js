@@ -116,12 +116,12 @@ async function callWorkersAI(env, system, user, wantJson, maxTokens) {
     ? "\n\nReturn ONLY a valid JSON object. Do not add markdown fences or extra text."
     : "";
   const promptUser = `${user}${jsonTail}`;
+  const prompt = `System:\n${system}\n\nUser:\n${promptUser}`;
 
+  // Workers AI text models are most consistently supported with `prompt`.
+  // Some models also accept `messages`, but prompt keeps compatibility broad.
   const out = await env.AI.run(model, {
-    messages: [
-      { role: "system", content: system },
-      { role: "user", content: promptUser },
-    ],
+    prompt,
     max_tokens: maxTokens,
     temperature: 0.3,
   });
