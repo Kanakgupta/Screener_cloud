@@ -255,11 +255,30 @@ async function routeQuery(env, message, history, region) {
   try {
     const { text } = await callLLM(env, ROUTER_SYSTEM, user, { wantJson: true, maxTokens: 300 });
     const parsed = parseJsonLoose(text);
-    if (parsed) return normalizeRoute(parsed);
+    if (parsed) return enrichRouteWithTicker(normalizeRoute(parsed), message);
   } catch (e) {
     if (String(e.message).includes("NO_LLM_KEYS")) throw e;
   }
-  return ruleRoute(message);
+  return enrichRouteWithTicker(ruleRoute(message), message);
+}
+
+function enrichRouteWithTicker(route, message) {
+  const out = { ...route };
+  const tokens = Array.from(new Set((message.match(/\b[A-Z]{1,5}\b/g) || []).slice(0, 4)));
+  if (!out.tickers || !out.tickers.length) {
+    out.tickers = tokens;
+  }
+  if (out.tickers && out.tickers.length && (!out.needs || !out.needs.length)) {
+    out.needs = ["technical", "fundamental", "news"];
+  }
+  if (
+    out.tickers && out.tickers.length &&
+    (!out.intent || out.intent === "GENERAL_QUERY") &&
+    /(overview|about|analy[sz]e|analysis|deep\s*dive|look\s*at)/i.test(message)
+  ) {
+    out.intent = "STOCK_DEEP_DIVE";
+  }
+  return out;
 }
 
 function normalizeRoute(r) {
@@ -431,6 +450,8 @@ function verify(answer) {
   // Trim accidental assistant self-dialogue to first complete answer.
   out = out.split(/\n\nIs that\b/i)[0];
   out = out.split(/\n\nNow, let's\b/i)[0];
+  out = out.split(/\n\nWould you like\b/i)[0];
+  out = out.replace(/^HerAI:\s*/i, "");
   // Soften any accidental direct advice phrasing.
   out = out.replace(/\byou should (buy|sell)\b/gi, "the data suggests you might consider researching");
   return out;
