@@ -33,7 +33,12 @@ const DISCLAIMER =
   "This is informational analysis generated from HeRAI's own data, not investment advice. " +
   "Data may be delayed or incomplete. Always do your own research.";
 
-const DEFAULT_CF_MODEL = "@cf/meta/llama-3.1-8b-instruct";
+const DEFAULT_CF_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
+const CF_MODEL_FALLBACKS = [
+  "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+  "@cf/meta/llama-3.2-3b-instruct",
+  "@cf/meta/llama-3.1-8b-instruct",
+];
 
 // ── Small helpers ───────────────────────────────────────────────────────────
 function cors() {
@@ -64,6 +69,11 @@ function hasWorkersAI(env) {
 function workersAiModel(env) {
   const m = String(env?.HERAI_AI_MODEL || "").trim();
   return m || DEFAULT_CF_MODEL;
+}
+function workersAiModelCandidates(env) {
+  const cfg = String(env?.HERAI_AI_MODEL || "").trim();
+  const ordered = [cfg, ...CF_MODEL_FALLBACKS].filter(Boolean);
+  return Array.from(new Set(ordered));
 }
 function clip(s, n) {
   s = String(s || "");
@@ -116,29 +126,47 @@ async function callLLM(env, system, user, { wantJson = false, maxTokens = 900 } 
 }
 
 async function callWorkersAI(env, system, user, wantJson, maxTokens) {
-  const model = workersAiModel(env);
+  const models = workersAiModelCandidates(env);
   const jsonTail = wantJson
     ? "\n\nReturn ONLY a valid JSON object. Do not add markdown fences or extra text."
     : "";
   const promptUser = `${user}${jsonTail}`;
   const prompt = `System:\n${system}\n\nUser:\n${promptUser}`;
 
-  // Workers AI text models are most consistently supported with `prompt`.
-  // Some models also accept `messages`, but prompt keeps compatibility broad.
-  const out = await env.AI.run(model, {
-    prompt,
-    max_tokens: maxTokens,
-    temperature: 0.3,
-  });
+  let lastErr = null;
+  for (const model of models) {
+    try {
+      // Workers AI text models are most consistently supported with `prompt`.
+      const out = await env.AI.run(model, {
+        prompt,
+        max_tokens: maxTokens,
+        temperature: 0.3,
+      });
 
-  const text =
-    out?.response ||
-    out?.result?.response ||
-    out?.output_text ||
-    (Array.isArray(out?.result)
-      ? out.result.map((x) => x?.text || x?.response || "").join("\n")
-      : "");
-  return String(text || "");
+      const text =
+        out?.response ||
+        out?.result?.response ||
+        out?.output_text ||
+        (Array.isArray(out?.result)
+          ? out.result.map((x) => x?.text || x?.response || "").join("\n")
+          : "");
+      if (String(text || "").trim()) return String(text || "");
+    } catch (e) {
+      lastErr = e;
+      const msg = String(e?.message || e || "").toLowerCase();
+      // Auto-try the next model when current one is deprecated/unavailable.
+      if (
+        msg.includes("deprecated") ||
+        msg.includes("unknown model") ||
+        msg.includes("not found") ||
+        msg.includes("invalid model")
+      ) {
+        continue;
+      }
+      throw e;
+    }
+  }
+  throw lastErr || new Error("workers ai returned empty output");
 }
 
 async function callOne(p, key, system, user, wantJson, maxTokens) {
@@ -526,7 +554,12 @@ export async function handleHeraiRequest(request, env, ctx) {
     const providers = [];
     if (hasWorkersAI(env)) providers.push("workers-ai");
     providers.push(...availableProviders(env).map((p) => p.id));
-    return json({ ok: true, providers, model: hasWorkersAI(env) ? workersAiModel(env) : null });
+    return json({
+      ok: true,
+      providers,
+      model: hasWorkersAI(env) ? workersAiModel(env) : null,
+      modelCandidates: hasWorkersAI(env) ? workersAiModelCandidates(env) : [],
+    });
   }
 
   if (url.pathname === "/api/herai/chat" && request.method === "POST") {
