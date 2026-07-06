@@ -1,0 +1,507 @@
+{
+  "region": "india",
+  "updated": "2026-07-06",
+  "top": [
+    "buy-today",
+    "reversal",
+    "breakout",
+    "ai-bubble",
+    "ai-stocks-worth",
+    "ai-strongest",
+    "undervalued",
+    "quality",
+    "momentum",
+    "good-entry"
+  ],
+  "questions": [
+    {
+      "id": "buy-today",
+      "q": "Which stocks look attractive to buy right now?",
+      "cat": "market",
+      "added": "2026-07-05",
+      "dynamic": true,
+      "mode": "analysis",
+      "source": [
+        "buy"
+      ],
+      "followups": [
+        "good-entry",
+        "reversal",
+        "undervalued"
+      ],
+      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **SPARC**\n  Setup: High momentum, 3-month momentum\n  Also strong on: High ROE, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **GAYAPROJ**\n  Setup: Top YTD\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **KAUSHALYA**\n  Setup: High momentum, Multi-EMA breakout\n  Also strong on: Low debt, High revenue growth, Low P/B\n- **CUPID**\n  Setup: High momentum, 3-month momentum, Top YTD\n  Also strong on: High revenue growth\n- **CALSOFT**\n  Setup: 3-month momentum\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value)\n- **ANDHRSUGAR**\n  Setup: High momentum, Multi-EMA breakout\n  Also strong on: Low debt, Low EV/EBITDA\n- **KERNEX**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **RAYMONDREL**\n  Setup: High momentum, 3-month momentum\n  Also strong on: High earnings growth, High revenue growth\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Reference levels above come directly from HeRAI's own screeners — open a ticker for the full picture before acting.",
+      "sources": [
+        {
+          "title": "High momentum",
+          "url": "/india/screens/high-momentum.html"
+        },
+        {
+          "title": "3-month momentum",
+          "url": "/india/screens/momentum-3m.html"
+        },
+        {
+          "title": "High ROE",
+          "url": "/india/screens/high-roe.html"
+        },
+        {
+          "title": "High revenue growth",
+          "url": "/india/screens/high-rev-growth.html"
+        },
+        {
+          "title": "Low P/E (value)",
+          "url": "/india/screens/low-pe.html"
+        },
+        {
+          "title": "Low EV/EBITDA",
+          "url": "/india/screens/low-ev-ebitda.html"
+        },
+        {
+          "title": "Top YTD",
+          "url": "/india/screens/top-ytd.html"
+        },
+        {
+          "title": "High earnings growth",
+          "url": "/india/screens/high-earnings-growth.html"
+        },
+        {
+          "title": "Multi-EMA breakout",
+          "url": "/india/screens/ema-multi-up-5d.html"
+        },
+        {
+          "title": "Low debt",
+          "url": "/india/screens/low-debt.html"
+        },
+        {
+          "title": "Low P/B",
+          "url": "/india/screens/low-pb.html"
+        }
+      ]
+    },
+    {
+      "id": "reversal",
+      "q": "Which stocks are showing signs of a reversal?",
+      "cat": "technical",
+      "added": "2026-07-05",
+      "dynamic": true,
+      "mode": "analysis",
+      "source": [
+        "reversal"
+      ],
+      "followups": [
+        "reversal-oversold",
+        "breakout",
+        "buy-today"
+      ],
+      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**RSI oversold**\n- **TECHNVISN** — TechNVision Ventures Limited · Mkt Cap: ₹2,367.87 Cr · Price: 3,770.20 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: 12.90%\n- **KPITTECH** — KPIT Technologies Limited · Mkt Cap: ₹15,297.22 Cr · Price: 558.00 · P/E: 18.18 · PEG: 0.97 · Fwd P/E: 15.29 · Δ P/E: Δ 2.89\n- **TICL** — Twamev Construction and Infrastructure Limited · Mkt Cap: ₹201.66 Cr · Price: 13.01 · P/E: 26.02 · PEG: 0.19 · Fwd P/E: 52.04 · Δ P/E: Δ -26.02\n\n**Near 52-week low**\n- **AFSL** — Abans Financial Services Limited · Mkt Cap: ₹1,018.29 Cr · Price: 201.01 · P/E: 9.38 · PEG: 0.85 · Fwd P/E: 9.92 · Δ P/E: Δ -0.54\n- **ASIANTILES** — Asian Granito India Limited · Mkt Cap: ₹1,463.99 Cr · Price: 49.38 · P/E: 102.88 · PEG: 2.4 · Fwd P/E: 2.62 · Δ P/E: Δ 100.26\n- **CIGNITITEC** — Cigniti Technologies Limited · Mkt Cap: ₹3,440.08 Cr · Price: 1,260.10 · P/E: 17.32 · PEG: 0.58 · Fwd P/E: 14.33 · Δ P/E: Δ 2.99\n- **ELCIDIN** — Elcid Investments Limited · Mkt Cap: ₹2,267.20 Cr · Price: 113,360.00 · P/E: 20.89 · PEG: 1.68 · Fwd P/E: 29.32 · Δ P/E: Δ -8.43\n- **ELITECON** — Elitecon International Limited · Mkt Cap: ₹4,106.86 Cr · Price: 25.70 · P/E: 58.41 · Fwd P/E: 116.82 · Δ P/E: Δ -58.41 · ROCE %: -\n- **GSPL** — Gujarat State Petronet Limited · Mkt Cap: ₹15,628.66 Cr · Price: 277.00 · P/E: 14.07 · Fwd P/E: 13.69 · Δ P/E: Δ 0.38 · ROCE %: 13.15%\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
+      "sources": [
+        {
+          "title": "RSI oversold",
+          "url": "/india/screens/rsi-oversold.html"
+        },
+        {
+          "title": "Near 52-week low",
+          "url": "/india/screens/near-52w-low.html"
+        }
+      ]
+    },
+    {
+      "id": "breakout",
+      "q": "Which stocks are breaking out today?",
+      "cat": "technical",
+      "added": "2026-07-05",
+      "dynamic": true,
+      "mode": "analysis",
+      "source": [
+        "breakout"
+      ],
+      "followups": [
+        "momentum",
+        "buy-today",
+        "reversal"
+      ],
+      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**Golden cross**\n- **CYBERTECH** — CyberTech Systems and Software Limited · Mkt Cap: ₹447.16 Cr · Price: 143.64 · Signal Date: 2026-07-06 · P/E: 12.82 · PEG: 1.07 · Fwd P/E: 14.72\n- **GATEWAY** — Gateway Distriparks Limited · Mkt Cap: ₹3,076.31 Cr · Price: 61.57 · Signal Date: 2026-07-06 · P/E: 8.30 · PEG: 3.88 · Fwd P/E: 9.76\n- **MAXESTATES** — MAX ESTATES LIMITED · Mkt Cap: ₹7,788.18 Cr · Price: 476.50 · Signal Date: 2026-07-06 · P/E: 280.29 · Fwd P/E: 17.54 · Δ P/E: Δ 262.75\n- **ORIENTHOT** — Oriental Hotels Limited · Mkt Cap: ₹2,469.49 Cr · Price: 138.27 · Signal Date: 2026-07-06 · P/E: 36.39 · PEG: 4.67 · Fwd P/E: 21.00\n- **RAMCOSYS** — Ramco Systems Limited · Mkt Cap: ₹3,294.94 Cr · Price: 879.55 · Signal Date: 2026-07-06 · P/E: -94.07 · PEG: -2.35 · Fwd P/E: 40.16\n- **SEMAC** — Semac Construction Limited · Mkt Cap: ₹108.39 Cr · Price: 347.70 · Signal Date: 2026-07-06 · P/E: 14.90 · Fwd P/E: 7.45 · Δ P/E: Δ 7.45\n\n**Near 52-week high**\n- **AADHARHFC** — AADHAR HOUSING FINANCE L · Mkt Cap: ₹24,246.91 Cr · Price: 556.50 · P/E: 22.47 · PEG: 0.86 · Fwd P/E: 14.90 · Δ P/E: Δ 7.57\n- **ABCAPITAL** — Aditya Birla Capital Limited · Mkt Cap: ₹1.07 L Cr · Price: 409.75 · P/E: 28.77 · Fwd P/E: 16.72 · Δ P/E: Δ 12.05 · ROCE %: -\n- **ABDL** — ALLIED BLEND N DISTILS L · Mkt Cap: ₹19,655.23 Cr · Price: 702.70 · P/E: 97.73 · PEG: 0.23 · Fwd P/E: 44.28 · Δ P/E: Δ 53.45\n- **ACSTECH** — ACS Technologies Limited · Mkt Cap: - · Price: 44.94 · P/E: 34.31 · Fwd P/E: 19.06 · Δ P/E: Δ 15.25 · ROCE %: -\n- **ADANIENSOL** — Adani Energy Solutions Limited · Mkt Cap: ₹1.95 L Cr · Price: 1,622.80 · P/E: 179.31 · PEG: 8.14 · Fwd P/E: 47.69 · Δ P/E: Δ 131.62\n- **ADOR** — Ador Welding Limited · Mkt Cap: ₹2,297.35 Cr · Price: 1,320.10 · P/E: 28.05 · PEG: 2.46 · Fwd P/E: 17.70 · Δ P/E: Δ 10.35\n\n**Multi-EMA breakout**\n- **KAUSHALYA** — Kaushalya Infrastructure Development Corporation Limited · Mkt Cap: ₹41.84 Cr · Price: 1,208.20 · P/E: 127.72 · Fwd P/E: 255.44 · Δ P/E: Δ -127.72 · ROCE %: 0.59%\n- **MODTHREAD** — Modern Threads (India) Limited · Mkt Cap: ₹164.31 Cr · Price: 47.25 · P/E: 13.46 · Fwd P/E: 6.73 · Δ P/E: Δ 6.73 · ROCE %: 13.83%\n- **NAVNETEDUL** — Navneet Education Limited · Mkt Cap: ₹3,299.17 Cr · Price: 149.14 · P/E: 9.32 · PEG: 0.47 · Fwd P/E: 17.14 · Δ P/E: Δ -7.82\n- **PICCADIL** — Piccadily Agro Industries Limited · Mkt Cap: ₹6,599.72 Cr · Price: 669.55 · P/E: 47.12 · PEG: 0.57 · Fwd P/E: 35.22 · Δ P/E: Δ 11.90\n- **BEML** — BEML Limited · Mkt Cap: ₹15,451.78 Cr · Price: 1,855.20 · P/E: 109.32 · Fwd P/E: 34.94 · Δ P/E: Δ 74.38 · ROCE %: 5.91%\n- **HTMEDIA** — HT Media Limited · Mkt Cap: ₹588.02 Cr · Price: 25.42 · P/E: 317.75 · PEG: 12.52 · Fwd P/E: 2.30 · Δ P/E: Δ 315.45\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
+      "sources": [
+        {
+          "title": "Golden cross",
+          "url": "/india/screens/golden-cross.html"
+        },
+        {
+          "title": "Near 52-week high",
+          "url": "/india/screens/near-52w-high.html"
+        },
+        {
+          "title": "Multi-EMA breakout",
+          "url": "/india/screens/ema-multi-up-5d.html"
+        }
+      ]
+    },
+    {
+      "id": "ai-bubble",
+      "q": "Are we in an AI bubble?",
+      "cat": "market",
+      "added": "2026-07-04",
+      "dynamic": true,
+      "mode": "news",
+      "source": [
+        "news",
+        "macro"
+      ],
+      "followups": [
+        "ai-stocks-worth",
+        "ai-strongest",
+        "sectors-leading"
+      ],
+      "answer": "",
+      "sources": []
+    },
+    {
+      "id": "ai-stocks-worth",
+      "q": "Are AI stocks still worth buying?",
+      "cat": "market",
+      "added": "2026-07-04",
+      "dynamic": true,
+      "mode": "news",
+      "source": [
+        "news",
+        "macro"
+      ],
+      "followups": [
+        "ai-strongest",
+        "ai-bubble",
+        "sectors-leading"
+      ],
+      "answer": "",
+      "sources": []
+    },
+    {
+      "id": "ai-strongest",
+      "q": "Which AI stocks look strongest right now?",
+      "cat": "stock",
+      "added": "2026-07-04",
+      "dynamic": true,
+      "mode": "analysis",
+      "source": [
+        "ai"
+      ],
+      "followups": [
+        "ai-stocks-worth",
+        "momentum",
+        "buy-today"
+      ],
+      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**AI stocks**\n- **RELIANCE** — Reliance Industries Limited · Mkt Cap: ₹17.88 L Cr · Price: 1,321.30 · P/E: 25.67 · PEG: 3.9 · Fwd P/E: 18.34 · Δ P/E: Δ 7.33\n- **HDFCBANK** — HDFC Bank Limited · Mkt Cap: ₹12.70 L Cr · Price: 829.85 · P/E: 16.80 · PEG: 0.82 · Fwd P/E: 13.21 · Δ P/E: Δ 3.59\n- **BHARTIARTL** — Bharti Airtel Limited · Mkt Cap: ₹11.74 L Cr · Price: 1,925.70 · P/E: 43.40 · PEG: 0.92 · Fwd P/E: 23.23 · Δ P/E: Δ 20.17\n- **ICICIBANK** — ICICI Bank Limited · Mkt Cap: ₹10.22 L Cr · Price: 1,426.90 · P/E: 19.08 · PEG: 1.14 · Fwd P/E: 15.69 · Δ P/E: Δ 3.39\n- **SBIN** — State Bank of India · Mkt Cap: ₹9.58 L Cr · Price: 1,037.70 · P/E: 11.38 · PEG: 0.79 · Fwd P/E: 10.16 · Δ P/E: Δ 1.22\n- **TCS** — Tata Consultancy Services Limited · Mkt Cap: ₹7.44 L Cr · Price: 2,057.60 · P/E: 15.33 · PEG: 2.89 · Fwd P/E: 12.44 · Δ P/E: Δ 2.89\n\n**Semiconductors**\n- **DIXON** — Dixon Technologies (India) Limited · Mkt Cap: ₹80,890.84 Cr · Price: 13,304.00 · P/E: 49.39 · PEG: 0.63 · Fwd P/E: 52.01 · Δ P/E: Δ -2.62\n- **SYRMA** — Syrma SGS Technology Limited · Mkt Cap: ₹26,824.65 Cr · Price: 1,391.10 · P/E: 146.12 · PEG: 3.78 · Fwd P/E: 48.57 · Δ P/E: Δ 97.55\n- **TATAELXSI** — Tata Elxsi Limited · Mkt Cap: ₹22,791.86 Cr · Price: 3,658.60 · P/E: 29.03 · Fwd P/E: 23.30 · Δ P/E: Δ 5.73 · ROCE %: 26.25%\n- **KAYNES** — Kaynes Technology India Limited · Mkt Cap: ₹22,518.28 Cr · Price: 3,359.20 · P/E: 61.69 · PEG: 1.09 · Fwd P/E: 36.71 · Δ P/E: Δ 24.98\n- **MOSCHIP** — MOSCHIP TECHNOLOGIES LTD · Mkt Cap: ₹4,497.51 Cr · Price: 231.99 · P/E: 127.62 · PEG: 1.62 · Fwd P/E: 120.92 · Δ P/E: Δ 6.70\n- **CYIENTDLM** — Cyient DLM Limited · Mkt Cap: ₹3,984.09 Cr · Price: 502.00 · P/E: 54.39 · PEG: 1.69 · Fwd P/E: 30.46 · Δ P/E: Δ 23.93\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
+      "sources": [
+        {
+          "title": "AI stocks",
+          "url": "/india/screens/ai-stocks.html"
+        },
+        {
+          "title": "Semiconductors",
+          "url": "/india/screens/semiconductors.html"
+        }
+      ]
+    },
+    {
+      "id": "undervalued",
+      "q": "Which stocks look undervalued right now?",
+      "cat": "valuation",
+      "added": "2026-07-03",
+      "dynamic": true,
+      "mode": "analysis",
+      "source": [
+        "value"
+      ],
+      "followups": [
+        "quality",
+        "dividend",
+        "buy-today"
+      ],
+      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**Low P/E (value)**\n- **KESORAMIND** — Kesoram Industries Limited · Mkt Cap: ₹334.90 Cr · Price: 10.78 · P/E: 0.06 · PEG: 0.0 · Fwd P/E: 0.12 · Δ P/E: Δ -0.06\n- **FLEXITUFF** — Flexituff Ventures International Limited · Mkt Cap: ₹18.22 Cr · Price: 5.55 · P/E: 0.08 · Fwd P/E: 0.16 · Δ P/E: Δ -0.08 · ROCE %: 47.48%\n- **GTL** — GTL Limited · Mkt Cap: ₹119.55 Cr · Price: 7.60 · P/E: 0.21 · PEG: 0.0 · Fwd P/E: 0.10 · Δ P/E: Δ 0.11\n- **KRIDHANINF** — Kridhan Infra Limited · Mkt Cap: ₹27.78 Cr · Price: 2.79 · P/E: 0.37 · PEG: 0.01 · Fwd P/E: 0.74 · Δ P/E: Δ -0.37\n- **KIRIINDUS** — Kiri Industries Limited · Mkt Cap: ₹2,297.96 Cr · Price: 382.85 · P/E: 0.42 · PEG: 0.0 · Fwd P/E: 0.21 · Δ P/E: Δ 0.21\n- **RAYMOND** — Raymond Limited · Mkt Cap: ₹4,146.54 Cr · Price: 622.85 · P/E: 0.54 · PEG: 0.0 · Fwd P/E: 27.44 · Δ P/E: Δ -26.90\n\n**Low P/B**\n- **AVAILFC** — Available Finance Limited · Mkt Cap: ₹160.82 Cr · Price: 157.73 · P/E: 1.50 · PEG: 0.05 · Fwd P/E: 1.46 · Δ P/E: Δ 0.04\n- **OSIAHYPER** — Osia Hyper Retail Limited · Mkt Cap: ₹53.32 Cr · Price: 3.24 · P/E: 2.22 · PEG: 0.08 · Fwd P/E: 2.08 · Δ P/E: Δ 0.14\n- **MAHAPEXLTD** — Maha Rashtra Apex Corporation Limited · Mkt Cap: ₹121.98 Cr · Price: 46.73 · P/E: -9.60 · PEG: -0.34 · Fwd P/E: - · Δ P/E: -\n- **SUMMITSEC** — Summit Securities Limited · Mkt Cap: ₹1,686.51 Cr · Price: 1,547.00 · P/E: 16.12 · PEG: 0.39 · Fwd P/E: 10.57 · Δ P/E: Δ 5.55\n- **AVROIND** — Avro India Limited · Mkt Cap: ₹134.71 Cr · Price: 10.12 · P/E: 36.67 · PEG: 10.6 · Fwd P/E: 24.27 · Δ P/E: Δ 12.40\n- **ATLASCYCLE** — Atlas Cycles (Haryana) Limited · Mkt Cap: ₹62.64 Cr · Price: 96.31 · P/E: 6.58 · PEG: 0.3 · Fwd P/E: 13.16 · Δ P/E: Δ -6.58\n\n**Low EV/EBITDA**\n- **MANAKSIA** — Manaksia Limited · Mkt Cap: ₹377.41 Cr · Price: 57.59 · P/E: 7.21 · Fwd P/E: 7.71 · Δ P/E: Δ -0.50 · ROCE %: 9.75%\n- **AVROIND** — Avro India Limited · Mkt Cap: ₹134.71 Cr · Price: 10.12 · P/E: 36.67 · PEG: 10.6 · Fwd P/E: 24.27 · Δ P/E: Δ 12.40\n- **BCG** — Brightcom Group Limited · Mkt Cap: ₹1,980.17 Cr · Price: 9.81 · P/E: 2.06 · Fwd P/E: 1.52 · Δ P/E: Δ 0.54 · ROCE %: 13.53%\n- **GATECHDVR** — GACM Technologies Limited · Mkt Cap: ₹59.45 Cr · Price: 0.46 · P/E: 6.38 · PEG: 0.02 · Fwd P/E: 3.19 · Δ P/E: Δ 3.19\n- **HATHWAY** — Hathway Cable and Datacom Limited · Mkt Cap: ₹1,973.67 Cr · Price: 11.15 · P/E: 21.44 · PEG: 2.67 · Fwd P/E: 24.78 · Δ P/E: Δ -3.34\n- **MOTOGENFIN** — The Motor & General Finance Limited · Mkt Cap: ₹112.15 Cr · Price: 28.96 · P/E: 0.76 · PEG: 0.0 · Fwd P/E: 0.38 · Δ P/E: Δ 0.38\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
+      "sources": [
+        {
+          "title": "Low P/E (value)",
+          "url": "/india/screens/low-pe.html"
+        },
+        {
+          "title": "Low P/B",
+          "url": "/india/screens/low-pb.html"
+        },
+        {
+          "title": "Low EV/EBITDA",
+          "url": "/india/screens/low-ev-ebitda.html"
+        }
+      ]
+    },
+    {
+      "id": "quality",
+      "q": "Which stocks have the best fundamentals?",
+      "cat": "valuation",
+      "added": "2026-07-03",
+      "dynamic": true,
+      "mode": "analysis",
+      "source": [
+        "quality"
+      ],
+      "followups": [
+        "undervalued",
+        "dividend",
+        "buy-today"
+      ],
+      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**High ROE**\n- **KSOLVES** — Ksolves India Limited · Mkt Cap: ₹688.13 Cr · Price: 290.10 · P/E: 20.03 · PEG: 1.73 · Fwd P/E: 20.02 · Δ P/E: Δ 0.01\n- **SPARC** — Sun Pharma Advanced Research Company Limited · Mkt Cap: ₹8,493.05 Cr · Price: 261.71 · P/E: 5.47 · PEG: 0.02 · Fwd P/E: 4.72 · Δ P/E: Δ 0.75\n- **PGHH** — Procter & Gamble Hygiene and Health Care Limited · Mkt Cap: ₹29,091.31 Cr · Price: 8,962.00 · P/E: 43.10 · PEG: 3.04 · Fwd P/E: 28.23 · Δ P/E: Δ 14.87\n- **FLEXITUFF** — Flexituff Ventures International Limited · Mkt Cap: ₹18.22 Cr · Price: 5.55 · P/E: 0.08 · Fwd P/E: 0.16 · Δ P/E: Δ -0.08 · ROCE %: 47.48%\n- **CORDELIA** — WATERWAYS LEISURE TOUR L · Mkt Cap: ₹5,544.70 Cr · Price: 765.90 · P/E: 100.24 · Fwd P/E: 200.48 · Δ P/E: Δ -100.24 · ROCE %: -45.17%\n- **TARAPUR** — Tarapur Transformers Limited · Mkt Cap: ₹35.10 Cr · Price: 18.00 · P/E: 2.17 · PEG: 0.07 · Fwd P/E: 4.34 · Δ P/E: Δ -2.17\n\n**High margin**\n- **MAHSCOOTER** — Maharashtra Scooters Ltd. · Mkt Cap: ₹14,891.42 Cr · Price: 13,030.00 · P/E: 47.96 · PEG: 2.87 · Fwd P/E: 33.10 · Δ P/E: Δ 14.86\n- **IRIS** — IRIS RegTech Solutions Limited · Mkt Cap: ₹548.14 Cr · Price: 266.50 · P/E: 4.37 · PEG: 0.02 · Fwd P/E: 2.19 · Δ P/E: Δ 2.18\n- **JAYKAY** — Jaykay Enterprises Limited · Mkt Cap: ₹2,247.32 Cr · Price: 172.49 · P/E: 218.34 · PEG: 0.99 · Fwd P/E: 109.17 · Δ P/E: Δ 109.17\n- **CORALFINAC** — Coral India Finance and Housing Limited · Mkt Cap: ₹141.02 Cr · Price: 34.99 · P/E: 8.06 · Fwd P/E: 9.53 · Δ P/E: Δ -1.47 · ROCE %: 7.84%\n- **BAJAJHLDNG** — Bajaj Holdings & Investment Limited · Mkt Cap: ₹1.20 L Cr · Price: 10,819.00 · P/E: 12.49 · PEG: 0.49 · Fwd P/E: 8.45 · Δ P/E: Δ 4.04\n- **TATAINVEST** — Tata Investment Corporation Limited · Mkt Cap: ₹33,607.93 Cr · Price: 664.25 · P/E: 107.66 · PEG: 5.42 · Fwd P/E: 77.48 · Δ P/E: Δ 30.18\n\n**High free cash flow**\n- **MADHAV** — Madhav Marbles and Granites Limited · Mkt Cap: ₹32.20 Cr · Price: 35.99 · P/E: 81.80 · PEG: 2.23 · Fwd P/E: 59.84 · Δ P/E: Δ 21.96\n- **HDFCBANK** — HDFC Bank Limited · Mkt Cap: ₹12.70 L Cr · Price: 829.85 · P/E: 16.80 · PEG: 0.82 · Fwd P/E: 13.21 · Δ P/E: Δ 3.59\n- **BHARTIARTL** — Bharti Airtel Limited · Mkt Cap: ₹11.74 L Cr · Price: 1,925.70 · P/E: 43.40 · PEG: 0.92 · Fwd P/E: 23.23 · Δ P/E: Δ 20.17\n- **RELIANCE** — Reliance Industries Limited · Mkt Cap: ₹17.88 L Cr · Price: 1,321.30 · P/E: 25.67 · PEG: 3.9 · Fwd P/E: 18.34 · Δ P/E: Δ 7.33\n- **ICICIBANK** — ICICI Bank Limited · Mkt Cap: ₹10.22 L Cr · Price: 1,426.90 · P/E: 19.08 · PEG: 1.14 · Fwd P/E: 15.69 · Δ P/E: Δ 3.39\n- **ONGC** — Oil and Natural Gas Corporation Limited · Mkt Cap: ₹3.07 L Cr · Price: 243.90 · P/E: 7.41 · PEG: 1.8 · Fwd P/E: 5.65 · Δ P/E: Δ 1.76\n\n**Low debt**\n- **21STCENMGM** — Twentyfirst Century Management Services Limited · Mkt Cap: ₹32.54 Cr · Price: 30.99 · P/E: 2.64 · Fwd P/E: 5.28 · Δ P/E: Δ -2.64 · ROCE %: -72.17%\n- **3PLAND** — 3P Land Holdings Ltd · Mkt Cap: ₹59.40 Cr · Price: 33.00 · P/E: 27.27 · PEG: 2.2 · Fwd P/E: 26.14 · Δ P/E: Δ 1.13\n- **AAATECH** — AAA Technologies Limited · Mkt Cap: ₹122.05 Cr · Price: 95.15 · P/E: 59.10 · Fwd P/E: 100.56 · Δ P/E: Δ -41.46 · ROCE %: 8.91%\n- **ABMKNO** — ABM Knowledgeware Limited · Mkt Cap: - · Price: 219.96 · P/E: 46.60 · Fwd P/E: 79.22 · Δ P/E: Δ -32.62 · ROCE %: -\n- **AGRITECH** — Agri-tech (India) Limited · Mkt Cap: ₹69.03 Cr · Price: 116.22 · P/E: -80.15 · Fwd P/E: - · Δ P/E: - · ROCE %: -0.95%\n- **ALPHAGEO** — Alphageo (India) Limited · Mkt Cap: ₹126.74 Cr · Price: 199.13 · P/E: -9.12 · Fwd P/E: - · Δ P/E: - · ROCE %: -7.23%\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
+      "sources": [
+        {
+          "title": "High ROE",
+          "url": "/india/screens/high-roe.html"
+        },
+        {
+          "title": "High margin",
+          "url": "/india/screens/high-margin.html"
+        },
+        {
+          "title": "High free cash flow",
+          "url": "/india/screens/high-fcf.html"
+        },
+        {
+          "title": "Low debt",
+          "url": "/india/screens/low-debt.html"
+        }
+      ]
+    },
+    {
+      "id": "momentum",
+      "q": "Which stocks have the strongest momentum?",
+      "cat": "technical",
+      "added": "2026-07-03",
+      "dynamic": true,
+      "mode": "analysis",
+      "source": [
+        "momentum"
+      ],
+      "followups": [
+        "breakout",
+        "buy-today",
+        "reversal"
+      ],
+      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**High momentum**\n- **AARTECH** — Aartech Solonics Limited · Mkt Cap: ₹182.62 Cr · Price: 57.48 · Day %: +20.00% · Vol ×: 7.82× · Setup: 🚀 20D Breakout 📈 SMA200 Bounce · P/E: 66.07\n- **KAUSHALYA** — Kaushalya Infrastructure Development Corporation Limited · Mkt Cap: ₹41.84 Cr · Price: 1,208.20 · Day %: +20.00% · Vol ×: 35.28× · Setup: 🚀 20D Breakout · P/E: 127.72\n- **MAZDA** — Mazda Limited · Mkt Cap: ₹548.75 Cr · Price: 274.03 · Day %: +19.41% · Vol ×: 50.28× · Setup: 🚀 20D Breakout · P/E: 19.94\n- **DIGITIDE** — Digitide Solutions Limited · Mkt Cap: ₹1,796.34 Cr · Price: 120.55 · Day %: +17.93% · Vol ×: 70.45× · Setup: 🚀 20D Breakout 📈 SMA200 Bounce · P/E: -109.59\n- **IVP** — IVP Limited · Mkt Cap: ₹195.87 Cr · Price: 189.68 · Day %: +17.33% · Vol ×: 44.71× · Setup: 🚀 20D Breakout 📈 SMA50 Bounce · P/E: 10.49\n- **OMAXE** — Omaxe Limited · Mkt Cap: ₹1,644.28 Cr · Price: 89.90 · Day %: +13.08% · Vol ×: 12.21× · Setup: 🚀 20D Breakout 📈 SMA50 Bounce · P/E: -2.36\n\n**3-month momentum**\n- **SIGMAADV** — Sigma Advanced Systems Limited · Mkt Cap: ₹9,505.49 Cr · Price: 539.35 · P/E: 35.46 · PEG: 0.17 · Fwd P/E: 70.92 · Δ P/E: Δ -35.46\n- **UFBL** — UNITED FOODBRANDS LIMITED · Mkt Cap: ₹2,765.56 Cr · Price: 707.55 · P/E: -46.76 · Fwd P/E: 589.62 · Δ P/E: Δ -636.38 · ROCE %: 1.64%\n- **HFCL** — HFCL Limited · Mkt Cap: ₹34,430.90 Cr · Price: 224.95 · P/E: 105.61 · PEG: 89.5 · Fwd P/E: 43.26 · Δ P/E: Δ 62.35\n- **STLTECH** — Sterlite Technologies Limited · Mkt Cap: ₹28,563.08 Cr · Price: 585.15 · P/E: 508.83 · Fwd P/E: 38.75 · Δ P/E: Δ 470.08 · ROCE %: 9.13%\n- **IBULLSLTD** — INDIABULLS LIMITED · Mkt Cap: ₹7,010.34 Cr · Price: 30.16 · P/E: 23.94 · PEG: 0.56 · Fwd P/E: 47.88 · Δ P/E: Δ -23.94\n- **CEMPRO** — Cemindia Projects Limited · Mkt Cap: ₹26,135.76 Cr · Price: 1,521.40 · P/E: 43.73 · PEG: 0.64 · Fwd P/E: 25.70 · Δ P/E: Δ 18.03\n\n**Top YTD**\n- **ARIHANT** — Arihant Foundations & Housing Limited · Mkt Cap: ₹786.94 Cr · Price: 789.65 · P/E: 16.85 · PEG: 0.21 · Fwd P/E: 12.20 · Δ P/E: Δ 4.65\n- **SWANDEF** — SWAN DEFENCE N HEVY IND L · Mkt Cap: ₹12,087.92 Cr · Price: 2,294.50 · P/E: -53.51 · Fwd P/E: - · Δ P/E: - · ROCE %: -7.52%\n- **CUPID** — Cupid Limited · Mkt Cap: ₹28,653.37 Cr · Price: 213.09 · P/E: 269.73 · PEG: 5.31 · Fwd P/E: 134.87 · Δ P/E: Δ 134.86\n- **SIGMAADV** — Sigma Advanced Systems Limited · Mkt Cap: ₹9,505.49 Cr · Price: 539.35 · P/E: 35.46 · PEG: 0.17 · Fwd P/E: 70.92 · Δ P/E: Δ -35.46\n- **BATLIBOI** — Batliboi Limited · Mkt Cap: ₹390.68 Cr · Price: 82.89 · P/E: 61.40 · Fwd P/E: 122.80 · Δ P/E: Δ -61.40 · ROCE %: 4.24%\n- **STLTECH** — Sterlite Technologies Limited · Mkt Cap: ₹28,563.08 Cr · Price: 585.15 · P/E: 508.83 · Fwd P/E: 38.75 · Δ P/E: Δ 470.08 · ROCE %: 9.13%\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
+      "sources": [
+        {
+          "title": "High momentum",
+          "url": "/india/screens/high-momentum.html"
+        },
+        {
+          "title": "3-month momentum",
+          "url": "/india/screens/momentum-3m.html"
+        },
+        {
+          "title": "Top YTD",
+          "url": "/india/screens/top-ytd.html"
+        }
+      ]
+    },
+    {
+      "id": "good-entry",
+      "q": "Which stocks are near a good entry price?",
+      "cat": "technical",
+      "added": "2026-07-02",
+      "dynamic": true,
+      "mode": "analysis",
+      "source": [
+        "buy"
+      ],
+      "followups": [
+        "buy-today",
+        "reversal",
+        "undervalued"
+      ],
+      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **SPARC**\n  Setup: High momentum, 3-month momentum\n  Also strong on: High ROE, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **GAYAPROJ**\n  Setup: Top YTD\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **KAUSHALYA**\n  Setup: High momentum, Multi-EMA breakout\n  Also strong on: Low debt, High revenue growth, Low P/B\n- **CUPID**\n  Setup: High momentum, 3-month momentum, Top YTD\n  Also strong on: High revenue growth\n- **CALSOFT**\n  Setup: 3-month momentum\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value)\n- **ANDHRSUGAR**\n  Setup: High momentum, Multi-EMA breakout\n  Also strong on: Low debt, Low EV/EBITDA\n- **KERNEX**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **RAYMONDREL**\n  Setup: High momentum, 3-month momentum\n  Also strong on: High earnings growth, High revenue growth\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Reference levels above come directly from HeRAI's own screeners — open a ticker for the full picture before acting.",
+      "sources": [
+        {
+          "title": "High momentum",
+          "url": "/india/screens/high-momentum.html"
+        },
+        {
+          "title": "3-month momentum",
+          "url": "/india/screens/momentum-3m.html"
+        },
+        {
+          "title": "High ROE",
+          "url": "/india/screens/high-roe.html"
+        },
+        {
+          "title": "High revenue growth",
+          "url": "/india/screens/high-rev-growth.html"
+        },
+        {
+          "title": "Low P/E (value)",
+          "url": "/india/screens/low-pe.html"
+        },
+        {
+          "title": "Low EV/EBITDA",
+          "url": "/india/screens/low-ev-ebitda.html"
+        },
+        {
+          "title": "Top YTD",
+          "url": "/india/screens/top-ytd.html"
+        },
+        {
+          "title": "High earnings growth",
+          "url": "/india/screens/high-earnings-growth.html"
+        },
+        {
+          "title": "Multi-EMA breakout",
+          "url": "/india/screens/ema-multi-up-5d.html"
+        },
+        {
+          "title": "Low debt",
+          "url": "/india/screens/low-debt.html"
+        },
+        {
+          "title": "Low P/B",
+          "url": "/india/screens/low-pb.html"
+        }
+      ]
+    },
+    {
+      "id": "dividend",
+      "q": "Which stocks offer attractive dividends?",
+      "cat": "valuation",
+      "added": "2026-07-02",
+      "dynamic": true,
+      "mode": "analysis",
+      "source": [
+        "dividend"
+      ],
+      "followups": [
+        "quality",
+        "undervalued",
+        "buy-today"
+      ],
+      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**High dividend**\n- **MAJESAUT** — Majestic Auto Limited · Mkt Cap: ₹353.67 Cr · Price: 340.15 · P/E: 3.81 · PEG: 0.02 · Fwd P/E: 1.91 · Δ P/E: Δ 1.90\n- **ALLCARGO** — Allcargo Logistics Limited · Mkt Cap: ₹1,219.19 Cr · Price: 8.14 · P/E: 18.93 · Fwd P/E: 8.14 · Δ P/E: Δ 10.79 · ROCE %: 5.97%\n- **VEDL** — Vedanta Limited · Mkt Cap: ₹1.10 L Cr · Price: 282.00 · P/E: 6.38 · PEG: 0.35 · Fwd P/E: 12.66 · Δ P/E: Δ -6.28\n- **JAGRAN** — Jagran Prakashan Limited · Mkt Cap: ₹1,396.03 Cr · Price: 64.14 · P/E: 7.09 · Fwd P/E: 6.35 · Δ P/E: Δ 0.74 · ROCE %: 12.60%\n- **DCMSRIND** — DCM Shriram Industries Limited · Mkt Cap: ₹356.49 Cr · Price: 40.98 · P/E: 8.57 · Fwd P/E: 6.22 · Δ P/E: Δ 2.35 · ROCE %: 17.73%\n- **WIPRO** — Wipro Limited · Mkt Cap: ₹1.83 L Cr · Price: 174.32 · P/E: 13.88 · PEG: 2.69 · Fwd P/E: 12.15 · Δ P/E: Δ 1.73\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
+      "sources": [
+        {
+          "title": "High dividend",
+          "url": "/india/screens/high-dividend.html"
+        }
+      ]
+    },
+    {
+      "id": "sectors-leading",
+      "q": "Which sectors are leading right now?",
+      "cat": "market",
+      "added": "2026-07-02",
+      "dynamic": true,
+      "mode": "news",
+      "source": [
+        "news",
+        "macro"
+      ],
+      "followups": [
+        "market-mood",
+        "momentum",
+        "buy-today"
+      ],
+      "answer": "",
+      "sources": []
+    },
+    {
+      "id": "reversal-oversold",
+      "q": "Which oversold stocks may be due for a bounce?",
+      "cat": "technical",
+      "added": "2026-07-01",
+      "dynamic": true,
+      "mode": "analysis",
+      "source": [
+        "oversold"
+      ],
+      "followups": [
+        "reversal",
+        "good-entry",
+        "buy-today"
+      ],
+      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**RSI oversold**\n- **TECHNVISN** — TechNVision Ventures Limited · Mkt Cap: ₹2,367.87 Cr · Price: 3,770.20 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: 12.90%\n- **KPITTECH** — KPIT Technologies Limited · Mkt Cap: ₹15,297.22 Cr · Price: 558.00 · P/E: 18.18 · PEG: 0.97 · Fwd P/E: 15.29 · Δ P/E: Δ 2.89\n- **TICL** — Twamev Construction and Infrastructure Limited · Mkt Cap: ₹201.66 Cr · Price: 13.01 · P/E: 26.02 · PEG: 0.19 · Fwd P/E: 52.04 · Δ P/E: Δ -26.02\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
+      "sources": [
+        {
+          "title": "RSI oversold",
+          "url": "/india/screens/rsi-oversold.html"
+        }
+      ]
+    },
+    {
+      "id": "52w-low-value",
+      "q": "Which quality stocks are near 52-week lows?",
+      "cat": "valuation",
+      "added": "2026-07-01",
+      "dynamic": true,
+      "mode": "analysis",
+      "source": [
+        "near52low",
+        "value"
+      ],
+      "followups": [
+        "undervalued",
+        "reversal-oversold",
+        "quality"
+      ],
+      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**Near 52-week low**\n- **AFSL** — Abans Financial Services Limited · Mkt Cap: ₹1,018.29 Cr · Price: 201.01 · P/E: 9.38 · PEG: 0.85 · Fwd P/E: 9.92 · Δ P/E: Δ -0.54\n- **ASIANTILES** — Asian Granito India Limited · Mkt Cap: ₹1,463.99 Cr · Price: 49.38 · P/E: 102.88 · PEG: 2.4 · Fwd P/E: 2.62 · Δ P/E: Δ 100.26\n- **CIGNITITEC** — Cigniti Technologies Limited · Mkt Cap: ₹3,440.08 Cr · Price: 1,260.10 · P/E: 17.32 · PEG: 0.58 · Fwd P/E: 14.33 · Δ P/E: Δ 2.99\n- **ELCIDIN** — Elcid Investments Limited · Mkt Cap: ₹2,267.20 Cr · Price: 113,360.00 · P/E: 20.89 · PEG: 1.68 · Fwd P/E: 29.32 · Δ P/E: Δ -8.43\n- **ELITECON** — Elitecon International Limited · Mkt Cap: ₹4,106.86 Cr · Price: 25.70 · P/E: 58.41 · Fwd P/E: 116.82 · Δ P/E: Δ -58.41 · ROCE %: -\n- **GSPL** — Gujarat State Petronet Limited · Mkt Cap: ₹15,628.66 Cr · Price: 277.00 · P/E: 14.07 · Fwd P/E: 13.69 · Δ P/E: Δ 0.38 · ROCE %: 13.15%\n\n**Low P/E (value)**\n- **KESORAMIND** — Kesoram Industries Limited · Mkt Cap: ₹334.90 Cr · Price: 10.78 · P/E: 0.06 · PEG: 0.0 · Fwd P/E: 0.12 · Δ P/E: Δ -0.06\n- **FLEXITUFF** — Flexituff Ventures International Limited · Mkt Cap: ₹18.22 Cr · Price: 5.55 · P/E: 0.08 · Fwd P/E: 0.16 · Δ P/E: Δ -0.08 · ROCE %: 47.48%\n- **GTL** — GTL Limited · Mkt Cap: ₹119.55 Cr · Price: 7.60 · P/E: 0.21 · PEG: 0.0 · Fwd P/E: 0.10 · Δ P/E: Δ 0.11\n- **KRIDHANINF** — Kridhan Infra Limited · Mkt Cap: ₹27.78 Cr · Price: 2.79 · P/E: 0.37 · PEG: 0.01 · Fwd P/E: 0.74 · Δ P/E: Δ -0.37\n- **KIRIINDUS** — Kiri Industries Limited · Mkt Cap: ₹2,297.96 Cr · Price: 382.85 · P/E: 0.42 · PEG: 0.0 · Fwd P/E: 0.21 · Δ P/E: Δ 0.21\n- **RAYMOND** — Raymond Limited · Mkt Cap: ₹4,146.54 Cr · Price: 622.85 · P/E: 0.54 · PEG: 0.0 · Fwd P/E: 27.44 · Δ P/E: Δ -26.90\n\n**Low P/B**\n- **AVAILFC** — Available Finance Limited · Mkt Cap: ₹160.82 Cr · Price: 157.73 · P/E: 1.50 · PEG: 0.05 · Fwd P/E: 1.46 · Δ P/E: Δ 0.04\n- **OSIAHYPER** — Osia Hyper Retail Limited · Mkt Cap: ₹53.32 Cr · Price: 3.24 · P/E: 2.22 · PEG: 0.08 · Fwd P/E: 2.08 · Δ P/E: Δ 0.14\n- **MAHAPEXLTD** — Maha Rashtra Apex Corporation Limited · Mkt Cap: ₹121.98 Cr · Price: 46.73 · P/E: -9.60 · PEG: -0.34 · Fwd P/E: - · Δ P/E: -\n- **SUMMITSEC** — Summit Securities Limited · Mkt Cap: ₹1,686.51 Cr · Price: 1,547.00 · P/E: 16.12 · PEG: 0.39 · Fwd P/E: 10.57 · Δ P/E: Δ 5.55\n- **AVROIND** — Avro India Limited · Mkt Cap: ₹134.71 Cr · Price: 10.12 · P/E: 36.67 · PEG: 10.6 · Fwd P/E: 24.27 · Δ P/E: Δ 12.40\n- **ATLASCYCLE** — Atlas Cycles (Haryana) Limited · Mkt Cap: ₹62.64 Cr · Price: 96.31 · P/E: 6.58 · PEG: 0.3 · Fwd P/E: 13.16 · Δ P/E: Δ -6.58\n\n**Low EV/EBITDA**\n- **MANAKSIA** — Manaksia Limited · Mkt Cap: ₹377.41 Cr · Price: 57.59 · P/E: 7.21 · Fwd P/E: 7.71 · Δ P/E: Δ -0.50 · ROCE %: 9.75%\n- **AVROIND** — Avro India Limited · Mkt Cap: ₹134.71 Cr · Price: 10.12 · P/E: 36.67 · PEG: 10.6 · Fwd P/E: 24.27 · Δ P/E: Δ 12.40\n- **BCG** — Brightcom Group Limited · Mkt Cap: ₹1,980.17 Cr · Price: 9.81 · P/E: 2.06 · Fwd P/E: 1.52 · Δ P/E: Δ 0.54 · ROCE %: 13.53%\n- **GATECHDVR** — GACM Technologies Limited · Mkt Cap: ₹59.45 Cr · Price: 0.46 · P/E: 6.38 · PEG: 0.02 · Fwd P/E: 3.19 · Δ P/E: Δ 3.19\n- **HATHWAY** — Hathway Cable and Datacom Limited · Mkt Cap: ₹1,973.67 Cr · Price: 11.15 · P/E: 21.44 · PEG: 2.67 · Fwd P/E: 24.78 · Δ P/E: Δ -3.34\n- **MOTOGENFIN** — The Motor & General Finance Limited · Mkt Cap: ₹112.15 Cr · Price: 28.96 · P/E: 0.76 · PEG: 0.0 · Fwd P/E: 0.38 · Δ P/E: Δ 0.38\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
+      "sources": [
+        {
+          "title": "Near 52-week low",
+          "url": "/india/screens/near-52w-low.html"
+        },
+        {
+          "title": "Low P/E (value)",
+          "url": "/india/screens/low-pe.html"
+        },
+        {
+          "title": "Low P/B",
+          "url": "/india/screens/low-pb.html"
+        },
+        {
+          "title": "Low EV/EBITDA",
+          "url": "/india/screens/low-ev-ebitda.html"
+        }
+      ]
+    },
+    {
+      "id": "smallcap-ideas",
+      "q": "Which small-cap stocks show strong setups?",
+      "cat": "technical",
+      "added": "2026-07-01",
+      "dynamic": true,
+      "mode": "analysis",
+      "source": [
+        "smallcap"
+      ],
+      "followups": [
+        "breakout",
+        "momentum",
+        "buy-today"
+      ],
+      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**Small caps**\n- **SHANTI** — Shanti Overseas (India) Limited · Mkt Cap: ₹7.59 Cr · Price: 6.83 · P/E: -1.01 · Fwd P/E: - · Δ P/E: - · ROCE %: -27.05%\n- **ARENTERP** — Rajdarshan Industries Limited · Mkt Cap: ₹10.58 Cr · Price: 34.05 · P/E: 44.80 · Fwd P/E: 89.60 · Δ P/E: Δ -44.80 · ROCE %: 0.21%\n- **ANTGRAPHIC** — Antarctica Limited · Mkt Cap: ₹11.94 Cr · Price: 0.77 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -2.23%\n- **CREATIVEYE** — Creative Eye Limited · Mkt Cap: ₹12.60 Cr · Price: 6.28 · P/E: -17.44 · Fwd P/E: - · Δ P/E: - · ROCE %: -29.90%\n- **LYPSAGEMS** — Aurus Gem Corporation Limited · Mkt Cap: ₹13.47 Cr · Price: 4.57 · P/E: 7.75 · PEG: 0.22 · Fwd P/E: 15.50 · Δ P/E: Δ -7.75\n- **EUROTEXIND** — Eurotex Industries and Exports Limited · Mkt Cap: ₹13.71 Cr · Price: 15.67 · P/E: -17.22 · PEG: -0.75 · Fwd P/E: - · Δ P/E: -\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
+      "sources": [
+        {
+          "title": "Small caps",
+          "url": "/india/screens/smallest.html"
+        }
+      ]
+    },
+    {
+      "id": "market-mood",
+      "q": "What is the market mood today?",
+      "cat": "market",
+      "added": "2026-06-30",
+      "dynamic": true,
+      "mode": "news",
+      "source": [
+        "macro",
+        "news"
+      ],
+      "followups": [
+        "sectors-leading",
+        "buy-today",
+        "reversal"
+      ],
+      "answer": "",
+      "sources": []
+    }
+  ]
+}
