@@ -7,6 +7,8 @@
  *   - Grounding: reads already-deployed static assets (stock HTMLs, /_fred_cache.json)
  *   - Web fallback: DuckDuckGo (no key) — used only when internal data is thin
  *   - Optional answer cache: env.HERAI_KV (falls back to no-cache if unbound)
+ *   - Region-aware asset routing: env.STOCK_MANIFEST (KV namespace) for
+ *     sub-millisecond ticker resolution across USA/India markets.
  *
  * Public entry: handleHeraiRequest(request, env, ctx)
  *   Routes:
@@ -15,6 +17,8 @@
  *
  * Design: docs/HERAI_MULTI_AGENT_DESIGN.md
  */
+
+import { extractStockContext, stockContextToText, parseScreenerTable } from "./herai_extract.js";
 
 // ── LLM provider chain (mirrors HerAI/engine/query_engine.py) ───────────────
 const PROVIDERS = [
@@ -39,6 +43,86 @@ const CF_MODEL_FALLBACKS = [
   "@cf/meta/llama-3.2-3b-instruct",
   "@cf/meta/llama-3.1-8b-instruct",
 ];
+
+// ── Region-aware ticker routing engine ───────────────────────────────────────
+// Resolves ticker collisions across USA/India markets using the stock manifest.
+// The manifest (stock_master_final.json) is loaded into KV at deploy time.
+const MANIFEST_KV_KEY = "stock_master_final";
+
+async function loadManifest(env) {
+  if (!env.STOCK_MANIFEST) return null;
+  try {
+    const raw = await env.STOCK_MANIFEST.get(MANIFEST_KV_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Resolve the correct asset path for a ticker in a given region.
+ * Handles ticker collisions (e.g., "INFY" exists in both USA (ADR) and India).
+ * Returns { path, region, ticker } or null if not found.
+ */
+async function resolveStockPath(env, ticker, preferredRegion) {
+  const manifest = await loadManifest(env);
+  const t = ticker.toUpperCase().replace(/\.(NS|BO)$/i, "");
+
+  // 1) If we have a manifest, use it for sub-millisecond resolution
+  if (manifest && manifest.records) {
+    const record = manifest.records[t];
+    if (record) {
+      // If the ticker exists in the preferred region, use that
+      if (record[preferredRegion]) {
+        return {
+          path: record[preferredRegion].path,
+          region: preferredRegion,
+          ticker: t,
+          name: record[preferredRegion].name,
+        };
+      }
+      // Fall back to any available region
+      for (const region of ["usa", "india"]) {
+        if (record[region]) {
+          return {
+            path: record[region].path,
+            region,
+            ticker: t,
+            name: record[region].name,
+          };
+        }
+      }
+    }
+  }
+
+  // 2) Fallback: try the preferred region first, then the other
+  const candidates = preferredRegion === "india"
+    ? [`/${preferredRegion}/stocks/${t}.NS.html`, `/${preferredRegion}/stocks/${t}.html`]
+    : [`/${preferredRegion}/stocks/${t}.html`];
+  const otherRegion = preferredRegion === "india" ? "usa" : "india";
+  const otherCandidates = otherRegion === "india"
+    ? [`/${otherRegion}/stocks/${t}.NS.html`, `/${otherRegion}/stocks/${t}.html`]
+    : [`/${otherRegion}/stocks/${t}.html`];
+
+  const allCandidates = [
+    ...candidates.map((p) => ({ path: p, region: preferredRegion })),
+    ...otherCandidates.map((p) => ({ path: p, region: otherRegion })),
+  ];
+
+  for (const c of allCandidates) {
+    try {
+      const req = new Request(`https://heraiscreener.com${c.path}`);
+      const res = await env.ASSETS.fetch(req);
+      if (res.ok) {
+        return { ...c, ticker: t };
+      }
+    } catch {
+      // try next
+    }
+  }
+
+  return null;
+}
 
 // ── Small helpers ───────────────────────────────────────────────────────────
 function cors() {
@@ -84,8 +168,7 @@ function stripHtml(html) {
     .replace(/<script[\s\S]*?<\/script>/gi, " ")
     .replace(/<style[\s\S]*?<\/style>/gi, " ")
     .replace(/<[^>]+>/g, " ")
-    .replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
-    .replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&nbsp;/g, " ")
+    .replace(/&[#]?[a-zA-Z0-9]+;/g, " ")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -337,23 +420,38 @@ async function assetGet(env, origin, path) {
 }
 
 async function fetchStockContext(env, origin, region, ticker) {
-  // Try both plain and .NS for India
-  const candidates = region === "india"
-    ? [`/${region}/stocks/${ticker}.NS.html`, `/${region}/stocks/${ticker}.html`]
-    : [`/${region}/stocks/${ticker}.html`];
-  for (const path of candidates) {
-    const res = await assetGet(env, origin, path);
-    if (res) {
-      const html = await res.text();
-      const meta = (html.match(/<meta name="description" content="([^"]+)"/i) || [])[1] || "";
-      const body = stripHtml(html);
-      return {
-        ticker,
-        url: `https://heraiscreener.com${path}`,
-        summary: clip(meta, 400),
-        text: clip(body, 4500),
-      };
-    }
+  // Use the resolveStockPath engine for region-aware routing
+  const resolved = await resolveStockPath(env, ticker, region);
+  const candidates = [];
+  if (resolved) {
+    candidates.push({ path: resolved.path, region: resolved.region, ticker: resolved.ticker, name: resolved.name });
+  }
+  if (region === "india") {
+    candidates.push({ path: `/${region}/stocks/${ticker}.NS.html`, region, ticker, name: "" });
+    candidates.push({ path: `/${region}/stocks/${ticker}.html`, region, ticker, name: "" });
+  } else {
+    candidates.push({ path: `/${region}/stocks/${ticker}.html`, region, ticker, name: "" });
+  }
+
+  const seen = new Set();
+  for (const c of candidates) {
+    if (seen.has(c.path)) continue;
+    seen.add(c.path);
+    const res = await assetGet(env, origin, c.path);
+    if (!res) continue;
+    const html = await res.text();
+    const meta = (html.match(/<meta name="description" content="([^"]+)"/i) || [])[1] || "";
+    const snap = extractStockContext(html, `https://heraiscreener.com${c.path}`);
+    const structuredText = stockContextToText(snap, c.ticker, 4500);
+    return {
+      ticker: c.ticker,
+      name: c.name || ticker,
+      url: `https://heraiscreener.com${c.path}`,
+      summary: clip(meta, 400),
+      text: structuredText || clip(stripHtml(html), 4500),
+      rawSnapshot: snap,
+      region: c.region,
+    };
   }
   return null;
 }
@@ -405,15 +503,30 @@ async function webSearch(query) {
 }
 
 // ── Specialist agents (focused LLM prompts over grounded context) ───────────
+// Institutional-grade prompts with mandatory inline evidence
 const SPECIALIST_SYSTEMS = {
   technical:
-    "You are a technical analyst. Using ONLY the provided data (price, SMAs, RSI, 52w, returns), give a concise read of trend, momentum and key levels. Never invent numbers. 3-5 sentences.",
+    "You are a Senior Technical Analyst (CMT charterholder equivalent) writing an internal research note. " +
+    "Using ONLY the provided data, write one short paragraph that states the trend/momentum regime and cites exact readings inline " +
+    "(e.g., 'price is 4% above the 50-DMA, RSI(14) reads 62, and the stock sits at 78% of its 52-week range'). " +
+    "Use institutional phrasing: momentum regime, support/resistance, moving-average structure, breadth. " +
+    "Never invent numbers. Always attribute each data point to its source.",
   fundamental:
-    "You are a fundamental analyst. Using ONLY the provided data (valuation, quality, growth), summarize the company's fundamental picture and fair-value context. Never invent numbers. 3-5 sentences.",
+    "You are a Senior Fundamental Analyst (CFA charterholder equivalent) writing an internal research note. " +
+    "Using ONLY the provided data, write one short paragraph summarizing valuation, capital efficiency, and growth trajectory. " +
+    "Cite exact ratios inline (e.g., 'trailing P/E of 14.2x versus sector 22x, ROE of 18%, and revenue growth of 12%'). " +
+    "Frame in institutional terminology: capital efficiency, margin structure, earnings trajectory, fair-value context. " +
+    "Never invent numbers. Always attribute each data point to its source.",
   news:
-    "You are a news analyst. Using ONLY the provided items, summarize the most relevant recent catalysts and their likely tone. Cite dates when present. 3-5 sentences.",
+    "You are a Senior News Analyst (equity research desk equivalent). " +
+    "Using ONLY the provided items, summarize the most relevant recent catalysts and their likely tone. " +
+    "Cite dates/sources when present. Distinguish between material news and promotional content. " +
+    "3-5 sentences. Always attribute each data point to its source.",
   macro:
-    "You are a macro/market-regime analyst. Using ONLY the provided macro data, describe the current market backdrop briefly. 2-4 sentences.",
+    "You are a Senior Macro Strategist. " +
+    "Using ONLY the provided macro data, describe the current market backdrop in one short paragraph. " +
+    "Frame in terms of regime (risk-on/risk-off, inflation trajectory, rate expectations, sector rotation). " +
+    "Cite exact data points inline. Always attribute each data point to its source.",
 };
 
 async function runSpecialist(env, kind, question, contextText) {
@@ -428,13 +541,24 @@ async function runSpecialist(env, kind, question, contextText) {
 }
 
 // ── Synthesizer ─────────────────────────────────────────────────────────────
-const SYNTH_SYSTEM = `You are HerAI, the manager that assembles a final answer for the user.
-You are given specialist notes and source snippets. Produce a clear, well-structured answer.
+const SYNTH_SYSTEM = `You are HerAI, a senior equity research analyst at an institutional desk. You write concise, evidence-based research notes for professional investors.
+
+You are given specialist notes and source snippets. Produce a final answer in short paragraphs with the following labelled sections, but ONLY include sections for which data is actually present:
+
+**Thesis** — one-sentence bottom-line take on the question.
+**Technical Read** — trend/momentum regime with exact readings cited inline.
+**Fundamental Read** — valuation, capital efficiency, and growth trajectory with exact ratios cited inline.
+**News / Catalysts** — only if news data is provided; cite dates/sources.
+**Macro / Regime** — only if macro data is provided; cite exact data points.
+**Key Risks** — balanced risks visible in the data (e.g., stretched valuation, weakening momentum, leverage).
+**Conclusion** — data-driven framing, never a direct buy/sell recommendation.
+
 Rules:
-- Use ONLY facts present in the specialist notes / sources. Do not invent numbers.
-- Be balanced; never say "buy" or "sell" as advice. Frame as data-driven analysis.
-- Use short paragraphs or bullets. Keep it focused on the question.
-- Do NOT append a disclaimer (the app adds one).`;
+- Use ONLY facts present in the specialist notes / sources. Do not invent numbers, prices, or dates.
+- Cite exact figures inline so the reader sees the evidence (e.g., "RSI(14) at 62", "P/E of 14.2x", "52-week range position of 78%").
+- Use institutional terminology: momentum regime, capital efficiency, margin structure, earnings trajectory, fair-value context, support/resistance.
+- Be balanced; never say "buy" or "sell" as advice. Reframe "should I buy?" into "the data suggests...".
+- Keep each section to 1-3 short paragraphs. Do NOT append a disclaimer (the app adds one).`;
 
 async function synthesize(env, question, notes, sources) {
   const notesText = notes.map((n) => `[${n.kind}] ${n.text}`).join("\n\n");
@@ -497,7 +621,7 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
   const wantNews = route.needs.includes("news");
   const wantMacro = route.needs.includes("macro");
 
-  // Stock context (shared by technical + fundamental)
+  // Stock context (shared by technical + fundamental) — uses resolveStockPath
   let stockContexts = [];
   if ((wantTech || wantFund) && route.tickers.length) {
     groundingTasks.push(
