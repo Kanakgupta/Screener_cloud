@@ -28,11 +28,16 @@
       "binding": "ELITE_KV",
       "id": "1f45ba0294924143be0485776bb114c0"
     }
-    // ── HerAI answer cache (OPTIONAL) ──────────────────────────────────────
-    // HerAI works without this; it just skips caching if unbound.
+    // ── HerAI answer cache + QUESTION BANK (recommended) ───────────────────
+    // The SAME HERAI_KV namespace powers two things:
+    //   1. the optional answer cache, and
+    //   2. the customer Question Bank (every chat question is logged here so
+    //      you can see what users ask + which answers failed, via the hidden
+    //      /herai-admin.html page and GET /api/herai/questions).
+    // HerAI still works without it (caching + logging just no-op).
     // To enable:
     //   npx wrangler kv namespace create HERAI_KV
-    // then add:
+    // then add (uncomment, paste the returned id):
     // ,{ "binding": "HERAI_KV", "id": "<paste-id-here>" }
   ]
 
@@ -45,6 +50,11 @@
   //   npx wrangler secret put CEREBRAS_API_KEY
   //   npx wrangler secret put OPENROUTER_API_KEY
   // The free chain tries them in order: Gemini -> Groq -> Cerebras -> OpenRouter.
+
+  // ── HerAI Question Bank admin password (REQUIRED to view the bank) ────────
+  // Gates GET /api/herai/questions and the hidden /herai-admin.html page.
+  //   npx wrangler secret put HERAI_ADMIN_KEY
+  // Then open https://<your-domain>/herai-admin.html and enter that key.
 
   // Optional override for Workers AI model used by HerAI:
   //   npx wrangler secret put HERAI_AI_MODEL

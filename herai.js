@@ -1550,6 +1550,110 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
   };
 }
 
+// ── Question bank (analytics) — capture every customer question ─────────────
+// Every /api/herai/chat request is logged to KV so we can see what customers
+// actually ask, which ones failed, and the data path each answer took. Viewable
+// via the key-gated GET /api/herai/questions endpoint and the hidden
+// /herai-admin.html page. Best-effort: silently no-ops if HERAI_KV is unbound.
+const QLOG_PREFIX = "q:";        // one KV key per logged question
+const QLOG_MAX_READ = 5000;      // admin read cap
+
+function isFallbackAnswer(result) {
+  if (!result) return true;
+  if (result.error) return true;
+  if (result.intent === "CLARIFY") return true;
+  const a = String(result.answer || "");
+  if (!a.trim()) return true;
+  return /could not locate the specific data|not configured yet|hit an error|AI narrative unavailable|couldn't tell which stock|no recent headlines/i.test(a);
+}
+
+function logQuestion(env, ctx, meta, result) {
+  try {
+    const kv = env && env.HERAI_KV;
+    if (!kv) return;
+    const entry = {
+      ts: new Date().toISOString(),
+      region: meta.region,
+      mode: meta.mode,
+      q: String(meta.message || "").slice(0, 500),
+      intent: result ? (result.intent || null) : null,
+      fellBack: isFallbackAnswer(result),
+      cached: !!(result && result.cached),
+      usedWeb: !!(result && result.usedWeb),
+      agents: (result && result.agents) || [],
+      sourceKeys: (result && result.sourceKeys) || [],
+      tickers: (result && result.tickers) || [],
+      // "flow": which HTMLs / data / web the answer was grounded in.
+      sources: ((result && result.citations) || []).map((c) => ({ t: c.title, u: c.url })),
+      answerPreview: String((result && result.answer) || (result && result.error) || "").slice(0, 400),
+    };
+    const key = QLOG_PREFIX + Date.now() + ":" + Math.random().toString(36).slice(2, 8);
+    const p = kv.put(key, JSON.stringify(entry));
+    if (ctx && ctx.waitUntil) ctx.waitUntil(p); else p.catch(() => {});
+  } catch {
+    /* logging must never break the chat */
+  }
+}
+
+function csvCell(v) {
+  let s;
+  if (Array.isArray(v)) {
+    s = v.map((x) => (x && typeof x === "object" ? `${x.t || ""} (${x.u || ""})` : String(x))).join(" | ");
+  } else if (v === null || v === undefined) {
+    s = "";
+  } else {
+    s = String(v);
+  }
+  if (/[",\n]/.test(s)) s = '"' + s.replace(/"/g, '""') + '"';
+  return s;
+}
+
+async function handleQuestionsAdmin(request, env) {
+  const url = new URL(request.url);
+  const key = url.searchParams.get("key") || request.headers.get("x-admin-key") || "";
+  const adminKey = env && env.HERAI_ADMIN_KEY;
+  if (!adminKey || key !== adminKey) {
+    return json({ error: "unauthorized" }, 401);
+  }
+  const kv = env && env.HERAI_KV;
+  if (!kv) return json({ error: "HERAI_KV not bound — question logging is disabled.", entries: [] }, 200);
+
+  const limit = Math.min(parseInt(url.searchParams.get("limit") || "2000", 10) || 2000, QLOG_MAX_READ);
+  const entries = [];
+  let cursor;
+  while (entries.length < QLOG_MAX_READ) {
+    const res = await kv.list({ prefix: QLOG_PREFIX, cursor, limit: 1000 });
+    const gets = await Promise.all(res.keys.map((k) => kv.get(k.name)));
+    for (const g of gets) { if (g) { try { entries.push(JSON.parse(g)); } catch { /* skip */ } } }
+    if (res.list_complete || !res.cursor) break;
+    cursor = res.cursor;
+  }
+  entries.sort((a, b) => (a.ts < b.ts ? 1 : -1)); // newest first
+  const trimmed = entries.slice(0, limit);
+
+  if (url.searchParams.get("format") === "csv") {
+    const cols = ["ts", "region", "mode", "q", "intent", "fellBack", "cached", "usedWeb", "agents", "sourceKeys", "tickers", "sources", "answerPreview"];
+    const rows = [cols.join(",")];
+    for (const e of trimmed) rows.push(cols.map((c) => csvCell(e[c])).join(","));
+    return new Response(rows.join("\n"), {
+      status: 200,
+      headers: { ...cors(), "Content-Type": "text/csv; charset=utf-8", "Content-Disposition": 'attachment; filename="herai_questions.csv"' },
+    });
+  }
+
+  const byIntent = {}; const byRegion = {}; const byQuestion = {}; let fallbacks = 0;
+  for (const e of trimmed) {
+    byIntent[e.intent || "?"] = (byIntent[e.intent || "?"] || 0) + 1;
+    byRegion[e.region || "?"] = (byRegion[e.region || "?"] || 0) + 1;
+    if (e.fellBack) fallbacks++;
+    const qn = String(e.q || "").toLowerCase().replace(/\s+/g, " ").trim().slice(0, 140);
+    if (!byQuestion[qn]) byQuestion[qn] = { q: e.q, count: 0, fell: 0 };
+    byQuestion[qn].count++; if (e.fellBack) byQuestion[qn].fell++;
+  }
+  const top = Object.values(byQuestion).sort((a, b) => b.count - a.count).slice(0, 100);
+  return json({ total: trimmed.length, fallbacks, byIntent, byRegion, top, entries: trimmed });
+}
+
 // ── HTTP entry ──────────────────────────────────────────────────────────────
 export async function handleHeraiRequest(request, env, ctx) {
   const url = new URL(request.url);
@@ -1570,6 +1674,10 @@ export async function handleHeraiRequest(request, env, ctx) {
     });
   }
 
+  if (url.pathname === "/api/herai/questions" && request.method === "GET") {
+    return handleQuestionsAdmin(request, env);
+  }
+
   if (url.pathname === "/api/herai/chat" && request.method === "POST") {
     let body = {};
     try { body = await request.json(); } catch { /* empty */ }
@@ -1586,14 +1694,19 @@ export async function handleHeraiRequest(request, env, ctx) {
 
     const key = await cacheKey(region, `${mode}::${message}`);
     const cached = history.length ? null : await cacheGet(env, key);
-    if (cached) return json({ ...cached, cached: true });
+    if (cached) {
+      logQuestion(env, ctx, { message, region, mode }, cached);
+      return json({ ...cached, cached: true });
+    }
 
     try {
       const result = await orchestrate(env, url.origin, message, region, history, mode);
+      logQuestion(env, ctx, { message, region, mode }, result);
       if (!history.length) ctx.waitUntil(cachePut(env, key, result));
       return json(result);
     } catch (e) {
       const msg = String(e && e.message);
+      logQuestion(env, ctx, { message, region, mode }, { error: msg, intent: "ERROR" });
       if (msg.includes("NO_LLM_KEYS")) {
         return json({ error: "HerAI is not configured yet (no Workers AI binding or provider key set)." }, 503);
       }

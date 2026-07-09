@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>HerAI · Question Bank (Admin)</title>
+<style>
+  :root { --bg:#0f1216; --card:#171b21; --line:#242b34; --txt:#e7ecf2; --mut:#93a1b0;
+          --accent:#4f8cff; --bad:#ff5c6c; --good:#38c172; --warn:#f0a92b; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--txt);
+         font:14px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
+  header { padding:16px 22px; border-bottom:1px solid var(--line);
+           display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  header h1 { font-size:17px; margin:0; font-weight:700; }
+  header .sp { flex:1; }
+  button, input, select { font:inherit; color:var(--txt); }
+  .btn { background:var(--accent); border:0; color:#fff; padding:8px 14px;
+         border-radius:8px; cursor:pointer; font-weight:600; }
+  .btn.ghost { background:transparent; border:1px solid var(--line); color:var(--txt); }
+  .btn:disabled { opacity:.5; cursor:not-allowed; }
+  .wrap { padding:22px; max-width:1400px; margin:0 auto; }
+  .gate { max-width:420px; margin:12vh auto; background:var(--card);
+          border:1px solid var(--line); border-radius:14px; padding:26px; }
+  .gate h2 { margin:0 0 6px; }
+  .gate p { color:var(--mut); margin:0 0 16px; }
+  .gate input { width:100%; padding:11px 12px; border-radius:9px; margin-bottom:12px;
+                background:#0d1116; border:1px solid var(--line); }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+           gap:12px; margin-bottom:20px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
+  .card .n { font-size:26px; font-weight:800; }
+  .card .l { color:var(--mut); font-size:12px; text-transform:uppercase; letter-spacing:.04em; }
+  .panels { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px; }
+  @media (max-width:900px){ .panels{ grid-template-columns:1fr; } }
+  .panel { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; }
+  .panel h3 { margin:0 0 12px; font-size:13px; color:var(--mut); text-transform:uppercase; letter-spacing:.05em; }
+  .bar { display:flex; align-items:center; gap:10px; margin:6px 0; }
+  .bar .k { width:150px; flex:none; color:var(--txt); font-size:13px; overflow:hidden;
+            text-overflow:ellipsis; white-space:nowrap; }
+  .bar .t { flex:1; background:#0d1116; border-radius:6px; overflow:hidden; height:16px; }
+  .bar .t i { display:block; height:100%; background:var(--accent); }
+  .bar .t i.bad { background:var(--bad); }
+  .bar .v { width:74px; flex:none; text-align:right; color:var(--mut); font-variant-numeric:tabular-nums; }
+  .toolbar { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:12px; }
+  .toolbar input[type=text]{ padding:8px 11px; border-radius:8px; background:var(--card);
+        border:1px solid var(--line); min-width:220px; }
+  .toolbar label { color:var(--mut); display:flex; align-items:center; gap:6px; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--mut); font-weight:600; position:sticky; top:0; background:var(--bg); cursor:pointer; }
+  tr.fail td { background:rgba(255,92,108,.07); }
+  .pill { display:inline-block; padding:1px 8px; border-radius:999px; font-size:11px; font-weight:700; }
+  .pill.ok { background:rgba(56,193,114,.15); color:var(--good); }
+  .pill.bad { background:rgba(255,92,108,.15); color:var(--bad); }
+  .mono { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:12px; color:var(--mut); }
+  .src { color:var(--mut); font-size:12px; }
+  .q { max-width:340px; }
+  .prev { max-width:360px; color:var(--mut); }
+  .err { color:var(--bad); margin-top:10px; }
+  .muted { color:var(--mut); }
+</style>
+</head>
+<body>
+
+<div id="gate" class="gate">
+  <h2>HerAI Question Bank</h2>
+  <p>Enter the admin password to view what customers are asking.</p>
+  <input id="key" type="password" placeholder="Admin password" autocomplete="off" />
+  <button class="btn" style="width:100%" onclick="unlock()">Unlock</button>
+  <div id="gateErr" class="err" hidden></div>
+</div>
+
+<div id="app" hidden>
+  <header>
+    <h1>&#129504; HerAI · Question Bank</h1>
+    <span id="regionInfo" class="muted"></span>
+    <span class="sp"></span>
+    <select id="regionFilter" class="btn ghost" onchange="render()"></select>
+    <button class="btn ghost" onclick="load()">&#8635; Refresh</button>
+    <button class="btn" onclick="downloadCsv()">&#8681; Download CSV</button>
+    <button class="btn ghost" onclick="lock()">Lock</button>
+  </header>
+
+  <div class="wrap">
+    <div class="cards" id="cards"></div>
+
+    <div class="panels">
+      <div class="panel">
+        <h3>Top questions (by frequency · red = failed)</h3>
+        <div id="topQ"></div>
+      </div>
+      <div class="panel">
+        <h3>By intent</h3>
+        <div id="byIntent"></div>
+        <h3 style="margin-top:16px">By region</h3>
+        <div id="byRegion"></div>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <input id="search" type="text" placeholder="Search question / ticker / source&hellip;" oninput="render()" />
+      <label><input type="checkbox" id="onlyFailed" onchange="render()" /> Only failed answers</label>
+      <span class="sp"></span>
+      <span id="tableCount" class="muted"></span>
+    </div>
+
+    <div style="overflow:auto; max-height:65vh; border:1px solid var(--line); border-radius:12px;">
+      <table id="tbl">
+        <thead><tr>
+          <th onclick="sortBy('ts')">Time</th>
+          <th onclick="sortBy('region')">Region</th>
+          <th onclick="sortBy('mode')">Mode</th>
+          <th class="q" onclick="sortBy('q')">Question</th>
+          <th onclick="sortBy('intent')">Intent</th>
+          <th onclick="sortBy('fellBack')">Status</th>
+          <th>Flow (data used)</th>
+          <th class="prev">Answer preview</th>
+        </tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  var KEY = "", DATA = null, SORT = { c: "ts", dir: -1 };
+
+  function unlock() {
+    KEY = document.getElementById("key").value.trim();
+    if (!KEY) return;
+    sessionStorage.setItem("herai_admin_key", KEY);
+    load();
+  }
+  function lock() {
+    sessionStorage.removeItem("herai_admin_key"); KEY = ""; DATA = null;
+    document.getElementById("app").hidden = true;
+    document.getElementById("gate").hidden = false;
+  }
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+
+  async function load() {
+    var gateErr = document.getElementById("gateErr");
+    gateErr.hidden = true;
+    try {
+      var r = await fetch("/api/herai/questions?key=" + encodeURIComponent(KEY) + "&limit=5000",
+                          { headers: { "x-admin-key": KEY } });
+      if (r.status === 401) { gateErr.textContent = "Wrong password."; gateErr.hidden = false; return; }
+      DATA = await r.json();
+      document.getElementById("gate").hidden = true;
+      document.getElementById("app").hidden = false;
+      buildRegionFilter();
+      render();
+    } catch (e) {
+      gateErr.textContent = "Could not load: " + e; gateErr.hidden = false;
+    }
+  }
+
+  function buildRegionFilter() {
+    var sel = document.getElementById("regionFilter");
+    var regions = Object.keys((DATA && DATA.byRegion) || {});
+    sel.innerHTML = '<option value="">All regions</option>' +
+      regions.map(function(x){ return '<option value="'+esc(x)+'">'+esc(x)+'</option>'; }).join("");
+  }
+
+  function bars(obj, opts) {
+    opts = opts || {};
+    var items = Array.isArray(obj) ? obj : Object.keys(obj).map(function(k){ return {k:k, v:obj[k]}; });
+    if (!Array.isArray(obj)) items.sort(function(a,b){ return b.v-a.v; });
+    var max = items.reduce(function(m,i){ return Math.max(m, opts.val?opts.val(i):i.v); }, 0) || 1;
+    return items.slice(0, opts.limit||12).map(function(i){
+      var label = opts.label ? opts.label(i) : i.k;
+      var val = opts.val ? opts.val(i) : i.v;
+      var sub = opts.sub ? opts.sub(i) : val;
+      var badPct = opts.badFrac ? opts.badFrac(i) : 0;
+      var w = Math.round(val/max*100);
+      var bw = Math.round(badPct*100);
+      return '<div class="bar"><div class="k" title="'+esc(label)+'">'+esc(label)+'</div>'+
+             '<div class="t"><i class="bad" style="width:'+ (w*badPct||0) +'%;position:absolute"></i>'+
+             '<i style="width:'+w+'%"></i></div>'+
+             '<div class="v">'+esc(sub)+'</div></div>';
+    }).join("") || '<div class="muted">No data yet.</div>';
+  }
+
+  function render() {
+    if (!DATA) return;
+    var entries = DATA.entries || [];
+    var total = DATA.total || entries.length;
+    var fb = DATA.fallbacks || 0;
+    var uniq = (DATA.top || []).length;
+    document.getElementById("regionInfo").textContent =
+      total + " logged · " + fb + " failed (" + (total? Math.round(fb/total*100):0) + "%)";
+    document.getElementById("cards").innerHTML =
+      card(total, "Questions logged") +
+      card(fb + " · " + (total?Math.round(fb/total*100):0) + "%", "Failed / fell back") +
+      card(uniq, "Distinct questions") +
+      card(Object.keys(DATA.byRegion||{}).length, "Regions");
+
+    document.getElementById("topQ").innerHTML = bars(DATA.top || [], {
+      limit: 12,
+      label: function(i){ return i.q; },
+      val: function(i){ return i.count; },
+      sub: function(i){ return i.count + (i.fell? " · "+i.fell+"✗":""); },
+      badFrac: function(i){ return i.count? i.fell/i.count : 0; },
+    });
+    document.getElementById("byIntent").innerHTML = bars(DATA.byIntent || {});
+    document.getElementById("byRegion").innerHTML = bars(DATA.byRegion || {});
+
+    // table
+    var q = document.getElementById("search").value.toLowerCase().trim();
+    var onlyFailed = document.getElementById("onlyFailed").checked;
+    var rf = document.getElementById("regionFilter").value;
+    var rows = entries.filter(function(e){
+      if (onlyFailed && !e.fellBack) return false;
+      if (rf && e.region !== rf) return false;
+      if (q) {
+        var hay = (e.q+" "+(e.tickers||[]).join(" ")+" "+(e.intent||"")+" "+
+                  ((e.sources||[]).map(function(s){return s.t+" "+s.u;}).join(" "))).toLowerCase();
+        if (hay.indexOf(q) < 0) return false;
+      }
+      return true;
+    });
+    rows.sort(function(a,b){
+      var c = SORT.c, av=a[c], bv=b[c];
+      if (av==null) av=""; if (bv==null) bv="";
+      return (av<bv?-1:av>bv?1:0) * SORT.dir;
+    });
+    document.getElementById("tableCount").textContent = rows.length + " rows shown";
+    document.getElementById("rows").innerHTML = rows.map(function(e){
+      var flow = [];
+      if (e.agents && e.agents.length) flow.push("agents: "+e.agents.join(", "));
+      if (e.sourceKeys && e.sourceKeys.length) flow.push("keys: "+e.sourceKeys.join(", "));
+      if (e.usedWeb) flow.push("web");
+      var srcs = (e.sources||[]).map(function(s){
+        return s.u ? '<a href="'+esc(s.u)+'" target="_blank" rel="noopener">'+esc(s.t||s.u)+'</a>' : esc(s.t);
+      }).join(", ");
+      return '<tr class="'+(e.fellBack?"fail":"")+'">'+
+        '<td class="mono">'+esc((e.ts||"").replace("T"," ").slice(0,19))+'</td>'+
+        '<td>'+esc(e.region||"")+'</td>'+
+        '<td>'+esc(e.mode||"")+'</td>'+
+        '<td class="q">'+esc(e.q||"")+'</td>'+
+        '<td>'+esc(e.intent||"")+'</td>'+
+        '<td>'+(e.fellBack?'<span class="pill bad">FAILED</span>':'<span class="pill ok">ok</span>')+'</td>'+
+        '<td class="src">'+esc(flow.join(" · "))+(srcs?'<br>'+srcs:"")+'</td>'+
+        '<td class="prev">'+esc(e.answerPreview||"")+'</td>'+
+      '</tr>';
+    }).join("") || '<tr><td colspan="8" class="muted">No matching questions.</td></tr>';
+  }
+  function card(n,l){ return '<div class="card"><div class="n">'+esc(n)+'</div><div class="l">'+esc(l)+'</div></div>'; }
+  function sortBy(c){ SORT.dir = (SORT.c===c ? -SORT.dir : -1); SORT.c=c; render(); }
+  function downloadCsv(){ window.location = "/api/herai/questions?key="+encodeURIComponent(KEY)+"&format=csv&limit=5000"; }
+
+  (function init(){
+    var k = sessionStorage.getItem("herai_admin_key");
+    if (k) { KEY = k; document.getElementById("key").value = k; load(); }
+  })();
+</script>
+</body>
+</html>
