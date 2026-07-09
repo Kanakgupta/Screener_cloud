@@ -18,7 +18,15 @@
  * Design: docs/HERAI_MULTI_AGENT_DESIGN.md
  */
 
-import { extractStockContext, stockContextToText, parseScreenerTable } from "./herai_extract.js";
+import {
+  extractStockContext,
+  stockContextToText,
+  parseScreenerTable,
+  extractPriceHistory,
+  computeTechnicals,
+  technicalsToText,
+  buildScreenPool,
+} from "./herai_extract.js";
 
 // ── LLM provider chain (mirrors HerAI/engine/query_engine.py) ───────────────
 const PROVIDERS = [
@@ -261,6 +269,9 @@ async function callOne(p, key, system, user, wantJson, maxTokens) {
       generationConfig: {
         temperature: 0.3,
         maxOutputTokens: maxTokens,
+        // gemini-2.5-flash spends "thinking" tokens from the output budget,
+        // which can starve the visible answer. Disable it for full responses.
+        thinkingConfig: { thinkingBudget: 0 },
         ...(wantJson ? { responseMimeType: "application/json" } : {}),
       },
     };
@@ -314,19 +325,25 @@ function parseJsonLoose(text) {
 }
 
 // ── Router: intent + entities + which specialists are needed ────────────────
-const ROUTER_SYSTEM = `You are the routing brain of a stock-market assistant.
+const ROUTER_SYSTEM = `You are the routing brain of a senior stock-market analyst assistant.
 Classify the user's question and extract entities. Return ONLY JSON:
 {
-  "intent": "STOCK_DEEP_DIVE|BUY_RECOMMENDATION|SECTOR_ANALYSIS|SCREEN_QUERY|MARKET_REGIME|COMPARE_STOCKS|NEWS_QUERY|GENERAL_QUERY",
+  "intent": "PRICE_TARGET|SCREEN_PICK|STOCK_DEEP_DIVE|SECTOR_ANALYSIS|MARKET_REGIME|COMPARE_STOCKS|NEWS_QUERY|GENERAL_QUERY",
   "tickers": ["AAPL"],
   "sectors": [],
+  "universe": "SPX|NDX|R2K|ALL",
+  "count": 10,
   "timeframe": "short|medium|long|unspecified",
   "needs": ["technical","fundamental","news","macro"],
   "confidence": 0.0
 }
-Rules: "needs" lists ONLY the specialists required to answer well (keep it minimal).
-For a single-stock analysis include technical+fundamental+news. For market mood use macro.
-Tickers must be plain symbols (uppercase, no exchange suffix). If none, return [].`;
+Intent guide:
+- PRICE_TARGET: user asks the right/fair/good entry or buy price, buy zone, support level, or "when/at what price to buy X" for a specific company. Put that company in "tickers".
+- SCREEN_PICK: user wants a LIST of stocks to buy/invest/watch (e.g. "give me 10 stocks to invest", "best S&P 500 stocks", "top picks tomorrow"). Set "count" (default 10) and "universe" (SPX for S&P 500, NDX for Nasdaq-100, R2K for Russell 2000, ALL otherwise).
+- STOCK_DEEP_DIVE: analyse one or more named companies (no explicit price ask).
+- MARKET_REGIME: overall market mood / is it a bull or bear market.
+Rules: "needs" lists ONLY the specialists required. For a single-stock analysis include technical+fundamental+news.
+Tickers must be plain symbols (uppercase, no exchange suffix). Map company names to tickers (e.g. Reliance->RELIANCE, Apple->AAPL). If none, return [].`;
 
 async function routeQuery(env, message, history, region) {
   const historyText = (history || [])
@@ -345,12 +362,66 @@ async function routeQuery(env, message, history, region) {
   return enrichRouteWithTicker(ruleRoute(message), message);
 }
 
+// ── Universe / count parsing shared by router + handlers ────────────────────
+const UNIVERSE_LABELS = { SPX: "S&P 500", NDX: "Nasdaq-100", R2K: "Russell 2000", ALL: "the full market" };
+
+function parseUniverse(message) {
+  const m = String(message || "");
+  if (/\b(s\s*&\s*p\s*500|sp\s?500|spx|s and p 500)\b/i.test(m)) return "SPX";
+  if (/\b(nasdaq[-\s]?100|ndx|nasdaq 100)\b/i.test(m)) return "NDX";
+  if (/\b(russell\s?2000|r2k|russell 2k)\b/i.test(m)) return "R2K";
+  return "ALL";
+}
+
+function parseCount(message, fallback = 10) {
+  const m = String(message || "").match(/\b(\d{1,3})\b/);
+  let n = m ? parseInt(m[1], 10) : fallback;
+  if (!Number.isFinite(n) || n <= 0) n = fallback;
+  return Math.min(Math.max(n, 1), 25);
+}
+
+const RE_PRICE_TARGET =
+  /(right|fair|good|best|ideal|entry|target|correct)\s+(price|entry|level|point)|price\s+to\s+buy|when\s+to\s+buy|at\s+what\s+price|buy\s+(price|zone|level|point|target)|support\s+(level|price|zone)|good\s+entry|entry\s+point/i;
+const RE_SCREEN_PICK =
+  /(give|show|find|list|suggest|recommend|top|best)\b[\s\S]*\b(stocks?|picks?|ideas?|names?|companies)|stocks?\s+to\s+(buy|invest|watch|trade)|what\s+(should\s+i|to)\s+buy|invest\s+(in\b|tomorrow|today|now)|\b\d{1,3}\s+(stocks?|picks?)\b/i;
+const RE_BREAKOUT = /\b(break(?:ing)?\s*out|breakout|golden\s+cross)\b/i;
+
+// A message is "stock-specific" when it asks about ONE named company rather
+// than a list/screen of ideas (parity with agent_orchestrator._is_stock_specific).
+function isStockSpecific(message) {
+  if (RE_SCREEN_PICK.test(message)) return false;
+  if (/\b(stocks|shares|ideas|names|companies|picks|list|screener|screen)\b/i.test(message)) return false;
+  return true;
+}
+
+
 function enrichRouteWithTicker(route, message) {
   const out = { ...route };
-  const tokens = Array.from(new Set((message.match(/\b[A-Z]{1,5}\b/g) || []).slice(0, 4)));
-  if (!out.tickers || !out.tickers.length) {
+  out.universe = ["SPX", "NDX", "R2K", "ALL"].includes(out.universe) ? out.universe : parseUniverse(message);
+  out.count = parseCount(message, typeof out.count === "number" ? out.count : 10);
+
+  // Screening (list of ideas) takes priority — never treat stray capitals as tickers here.
+  if (RE_SCREEN_PICK.test(message) && !RE_PRICE_TARGET.test(message)) {
+    out.intent = "SCREEN_PICK";
+    out.tickers = [];
+    out.needs = ["technical", "fundamental", "news"];
+    return out;
+  }
+
+  // Auto-extract uppercase tokens as tickers for stock-specific intents only.
+  const tokens = Array.from(new Set((message.match(/\b[A-Z]{2,5}\b/g) || []).slice(0, 4)))
+    .filter((t) => !["AND", "THE", "FOR", "USA", "SP", "ETF", "IPO", "CEO", "USD", "INR"].includes(t));
+  if ((!out.tickers || !out.tickers.length) && out.intent !== "SCREEN_PICK") {
     out.tickers = tokens;
   }
+
+  // Price-target intent when a buy-price ask is present and we have a name/ticker.
+  if (RE_PRICE_TARGET.test(message) && (out.tickers && out.tickers.length || out.intent === "PRICE_TARGET")) {
+    out.intent = "PRICE_TARGET";
+    out.needs = ["technical", "fundamental", "news"];
+    return out;
+  }
+
   if (out.tickers && out.tickers.length && (!out.needs || !out.needs.length)) {
     out.needs = ["technical", "fundamental", "news"];
   }
@@ -366,11 +437,18 @@ function enrichRouteWithTicker(route, message) {
 
 function normalizeRoute(r) {
   const validNeeds = new Set(["technical", "fundamental", "news", "macro"]);
+  const validIntents = new Set([
+    "PRICE_TARGET", "SCREEN_PICK", "STOCK_DEEP_DIVE", "SECTOR_ANALYSIS",
+    "MARKET_REGIME", "COMPARE_STOCKS", "NEWS_QUERY", "GENERAL_QUERY",
+  ]);
   const needs = (r.needs || []).filter((n) => validNeeds.has(n));
+  const intent = validIntents.has(r.intent) ? r.intent : "GENERAL_QUERY";
   return {
-    intent: r.intent || "GENERAL_QUERY",
+    intent,
     tickers: (r.tickers || []).map((t) => String(t).toUpperCase().replace(/\.(NS|BO)$/i, "")).slice(0, 4),
     sectors: (r.sectors || []).slice(0, 3),
+    universe: ["SPX", "NDX", "R2K", "ALL"].includes(r.universe) ? r.universe : "ALL",
+    count: typeof r.count === "number" ? r.count : 10,
     timeframe: r.timeframe || "unspecified",
     needs: needs.length ? needs : ["fundamental"],
     confidence: typeof r.confidence === "number" ? r.confidence : 0.5,
@@ -409,10 +487,20 @@ function ruleRoute(message) {
 
 // ── Grounding fetchers (read deployed static assets) ────────────────────────
 async function assetGet(env, origin, path) {
+  if (!env || !env.ASSETS || typeof env.ASSETS.fetch !== "function") return null;
   try {
-    const req = new Request(origin + path);
-    const res = await env.ASSETS.fetch(req);
-    if (!res.ok) return null;
+    let res = await env.ASSETS.fetch(new Request(origin + path));
+    // Static-asset "pretty URLs" redirect `/foo.html` -> `/foo`. The Worker
+    // must follow that redirect to actually read the file contents.
+    let hops = 0;
+    while (res && res.status >= 300 && res.status < 400 && hops < 3) {
+      const loc = res.headers.get("location");
+      if (!loc) break;
+      const next = /^https?:\/\//i.test(loc) ? loc : origin + (loc.startsWith("/") ? loc : "/" + loc);
+      res = await env.ASSETS.fetch(new Request(next));
+      hops += 1;
+    }
+    if (!res || !res.ok) return null;
     return res;
   } catch {
     return null;
@@ -450,16 +538,120 @@ async function fetchStockContext(env, origin, region, ticker) {
       summary: clip(meta, 400),
       text: structuredText || clip(stripHtml(html), 4500),
       rawSnapshot: snap,
+      rawHtml: html,
       region: c.region,
     };
   }
   return null;
 }
 
+// ── Deterministic company-name / fuzzy-ticker resolution ────────────────────
+// Mirrors HerAI/engine/news_agent.resolve_query so short spoken names
+// ("Infosys" -> INFY), lowercase ticker tokens ("infy") and mild misspellings
+// ("nyka" -> NYKAA) resolve even when the LLM router / uppercase-token
+// heuristic misses them. Reads STOCK_INDEX + TICKER_ALIAS embedded in the
+// already-deployed /{region}/heraiai.html asset.
+const _NAME_INDEX_CACHE = new Map(); // region -> { ts, index:[{t,n}], alias:{} }
+const NAME_INDEX_TTL = 3600 * 1000;
+
+const RESOLVE_STOP = new Set([
+  "what", "is", "the", "a", "an", "latest", "about", "news", "on", "for", "of",
+  "tell", "me", "any", "today", "recent", "recently", "update", "updates",
+  "happening", "with", "give", "show", "whats", "how", "to", "at",
+]);
+const RESOLVE_GENERIC_SKIP = new Set([
+  "stock", "stocks", "share", "shares", "price", "prices", "buy", "sell", "hold",
+  "breakout", "breaking", "today", "now", "fundamental", "fundamentals", "technical",
+  "which", "what", "best", "top", "good", "right", "fair", "analysis", "analyse",
+  "analyze", "list", "ideas", "idea", "screen", "screener", "market", "markets",
+  "sector", "sectors", "value", "growth", "dividend", "momentum", "target", "entry",
+  "level", "levels", "zone", "should", "give", "show", "tell", "about", "latest",
+  "news", "how",
+]);
+
+function cleanBase(t) {
+  return String(t || "").toUpperCase().replace(/\.(NS|BO)$/i, "");
+}
+
+async function loadNameIndex(env, origin, region) {
+  const now = Date.now();
+  const cached = _NAME_INDEX_CACHE.get(region);
+  if (cached && now - cached.ts < NAME_INDEX_TTL) return cached;
+  let index = [];
+  let alias = {};
+  const res = await assetGet(env, origin, `/${region}/heraiai.html`);
+  if (res) {
+    try {
+      const html = await res.text();
+      const im = html.match(/const STOCK_INDEX = (\[[\s\S]*?\]);/);
+      const am = html.match(/const TICKER_ALIAS = (\{[\s\S]*?\});/);
+      if (im) index = JSON.parse(im[1]);
+      if (am) alias = JSON.parse(am[1]);
+    } catch {
+      index = [];
+      alias = {};
+    }
+  }
+  const entry = { ts: now, index, alias };
+  _NAME_INDEX_CACHE.set(region, entry);
+  return entry;
+}
+
+async function resolveNameToTicker(env, origin, region, message) {
+  const { index, alias } = await loadNameIndex(env, origin, region);
+  if (!index.length && !Object.keys(alias).length) return null;
+  const t = String(message || "").trim();
+  const tl = t.toLowerCase();
+
+  // 1) alias match on individual tokens ("nykaa" -> NYKAA)
+  const toks = tl.match(/[a-z0-9&]+/g) || [];
+  for (const tok of toks) {
+    if (alias[tok]) {
+      const tk = cleanBase(alias[tok]);
+      const hit = index.find((s) => cleanBase(s.t) === tk);
+      return { ticker: tk, name: (hit && hit.n) || tk };
+    }
+  }
+
+  // 2) explicit uppercase ticker token in the original text
+  for (const tok of t.match(/\b[A-Z]{1,5}\b/g) || []) {
+    const hit = index.find((s) => cleanBase(s.t) === tok);
+    if (hit) return { ticker: tok, name: hit.n || tok };
+  }
+
+  // 3) name / fuzzy-ticker match, precision-first
+  const tokens = toks.filter(
+    (x) => x.length >= 3 && !RESOLVE_STOP.has(x) && !RESOLVE_GENERIC_SKIP.has(x)
+  );
+  if (!tokens.length) return null;
+  let best = null; // [score, ticker, name]
+  for (const s of index) {
+    const base = cleanBase(s.t);
+    if (!base) continue;
+    const blow = base.toLowerCase();
+    const nameWords = String(s.n || "").toLowerCase().match(/[a-z0-9&]+/g) || [];
+    const first = nameWords[0] || "";
+    for (const tok of tokens) {
+      let score = 0;
+      if (tok === blow) score = 100;
+      else if (first && tok === first) score = 90;
+      else if (tok.length >= 4 && first.startsWith(tok)) score = 70;
+      else if (tok.length >= 4 && nameWords.includes(tok)) score = 60;
+      else if (
+        tok.length >= 4 && blow.length >= 4 &&
+        (tok.startsWith(blow) || blow.startsWith(tok)) &&
+        Math.abs(tok.length - blow.length) <= 2
+      ) score = 50;
+      if (score && (!best || score > best[0])) best = [score, base, s.n || base];
+    }
+  }
+  if (best && best[0] >= 50) return { ticker: best[1], name: best[2] };
+  return null;
+}
+
 async function fetchMacro(env, origin) {
   const res = await assetGet(env, origin, "/_fred_cache.json");
-  if (!res) return null;
-  try {
+  if (!res) return null;  try {
     const data = await res.json();
     return { url: "https://heraiscreener.com/_fred_cache.json", text: clip(JSON.stringify(data), 3000) };
   } catch {
@@ -560,6 +752,47 @@ Rules:
 - Be balanced; never say "buy" or "sell" as advice. Reframe "should I buy?" into "the data suggests...".
 - Keep each section to 1-3 short paragraphs. Do NOT append a disclaimer (the app adds one).`;
 
+// ── Screening / picks synthesizer ───────────────────────────────────────────
+const SCREEN_SYNTH_SYSTEM = `You are HerAI, a senior portfolio strategist presenting a ranked shortlist of stock ideas to an investment committee.
+You are given a PRE-RANKED, PRE-SCORED candidate pool built from HeRAI's own screeners and price history, plus the prevailing market regime and the weights it implies.
+
+Write a professional shortlist, best-to-good, using ONLY the supplied data. Structure:
+
+Open with one sentence stating the universe, the market regime, and how it shaped your weighting (e.g., "In the current bull regime I have tilted toward technical momentum...").
+
+Then, for EACH stock in the given order, a compact block:
+**N. TICKER — Company**
+- **Technical:** trend vs 50/200-DMA, RSI, 52-week range position, breakout/support levels — cite the exact computed numbers provided.
+- **Fundamental:** valuation (P/E, PEG), returns (ROE/ROCE), growth (revenue/profit CAGR), yield — cite exact figures provided.
+- **Sentiment/Momentum:** which momentum/near-high screens and setups it triggered, recent price performance.
+- **Why it ranks here:** one line tying the composite score to the regime.
+
+Close with a short "How to read this list" note on the regime tilt and diversification.
+
+Rules:
+- Use ONLY facts present in the supplied pool. NEVER invent numbers, prices, targets or dates.
+- Preserve the given ranking order.
+- Institutional tone; concise. No direct "buy/sell" imperatives — frame as "the data ranks..." / "screens favour...".
+- Do NOT append a disclaimer (the app adds one).`;
+
+// ── Price-target / buy-zone synthesizer ─────────────────────────────────────
+const PRICE_TARGET_SYNTH_SYSTEM = `You are HerAI, a senior equity analyst answering "what is the right price to buy X" for a professional client.
+HeRAI has ALREADY computed a buy zone deterministically from its own data (technical support/moving-averages, valuation vs sector, analyst targets) and weighted it by the market regime. Your job is to present that answer with a transparent, senior-analyst walkthrough.
+
+Structure:
+**Bottom line** — state the computed buy zone and the single blended fair-entry figure up front, clearly labelled as data-derived, not personal advice.
+**Technical case** — support, swing low, 50/200-DMA, RSI, 52-week range position, breakout trigger — cite the exact numbers supplied.
+**Fundamental case** — P/E vs sector median (and forward P/E if given), the implied re-rated fair value — cite exact numbers.
+**Analyst context** — mean/high/low targets and consensus IF supplied; otherwise say analyst data was unavailable.
+**How the regime tips the scale** — explain that in a bull regime technicals carry more weight, otherwise fundamentals do, and how that shaped the blend.
+**Key risks** — 1-2 risks visible in the data (stretched valuation, below-200-DMA, extended RSI, etc.).
+
+Rules:
+- Use ONLY the computed numbers supplied. NEVER invent figures. Reproduce the supplied buy zone exactly.
+- You MAY state the concrete computed price/zone — it is a data-derived estimate, framed as informational, not a personal recommendation.
+- Show the reasoning; be transparent about how each anchor contributed.
+- Do NOT append a disclaimer (the app adds one).`;
+
 async function synthesize(env, question, notes, sources) {
   const notesText = notes.map((n) => `[${n.kind}] ${n.text}`).join("\n\n");
   const srcText = sources.map((s, i) => `(${i + 1}) ${s.url}`).join("\n");
@@ -601,14 +834,614 @@ async function cacheKey(region, message) {
   return "herai:" + Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("").slice(0, 32);
 }
 
+// ── Numeric helpers ─────────────────────────────────────────────────────────
+function parseNum(s) {
+  if (s === null || s === undefined) return null;
+  const m = String(s).replace(/,/g, "").match(/-?\d+(?:\.\d+)?/);
+  return m ? parseFloat(m[0]) : null;
+}
+
+// ── Market-regime detection (breadth-based, grounded in built screeners) ─────
+// Bull markets reward technicals; corrective/bear markets reward fundamentals.
+async function detectMarketRegime(env, origin, region) {
+  const countRows = async (name) => {
+    const res = await assetGet(env, origin, `/${region}/screens/${name}.html`);
+    if (!res) return null;
+    try { return parseScreenerTable(await res.text(), 500).length; } catch { return null; }
+  };
+  const [hi, lo, gc, dc] = await Promise.all([
+    countRows("near-52w-high"),
+    countRows("near-52w-low"),
+    countRows("golden-cross"),
+    countRows("death-cross"),
+  ]);
+
+  const have = [hi, lo, gc, dc].some((x) => x !== null);
+  const H = hi || 0, L = lo || 0, G = gc || 0, D = dc || 0;
+  let regime = "neutral";
+  if (have) {
+    const breadthBull = H > L * 1.4 && G >= D;
+    const breadthBear = L > H * 1.4 && D >= G;
+    if (breadthBull) regime = "bull";
+    else if (breadthBear) regime = "bear";
+  }
+
+  const weights = {
+    bull: { tech: 0.6, fund: 0.3, sent: 0.1 },
+    neutral: { tech: 0.4, fund: 0.45, sent: 0.15 },
+    bear: { tech: 0.25, fund: 0.6, sent: 0.15 },
+  }[regime];
+
+  return {
+    regime,
+    weights,
+    breadth: { near_52w_high: H, near_52w_low: L, golden_cross: G, death_cross: D, measured: have },
+    note:
+      regime === "bull"
+        ? "Broad breadth is expansionary (more 52-week highs than lows) — a technical/momentum tilt is favoured."
+        : regime === "bear"
+        ? "Breadth is deteriorating (more 52-week lows than highs) — a defensive, fundamentals-first tilt is favoured."
+        : "Breadth is mixed — balancing technical and fundamental signals.",
+  };
+}
+
+// ── Best-effort analyst targets (not in static HTML; via public API) ─────────
+async function fetchAnalystTargets(origin, region, ticker) {
+  try {
+    const url = `${origin}/api/analyst?ticker=${encodeURIComponent(ticker)}&region=${encodeURIComponent(region)}`;
+    const r = await fetch(url, { headers: { "User-Agent": "HeRAI/1.0" } });
+    if (!r.ok) return null;
+    const d = await r.json();
+    const t = d && d.targets ? d.targets : d;
+    if (!t) return null;
+    const out = {
+      mean: parseNum(t.target_mean),
+      median: parseNum(t.target_median),
+      high: parseNum(t.target_high),
+      low: parseNum(t.target_low),
+      recommendation: t.recommendation || d.recommendation || null,
+    };
+    return out.mean || out.median ? out : null;
+  } catch {
+    return null;
+  }
+}
+
+// ── Build-time precomputed screening pool (scalability) ─────────────────────
+// The daily build writes /{region}/herai_picks.json = { generated, pool:[...] }
+// where each pool item matches buildScreenPool output. Optional: if absent the
+// worker builds the pool live from the screener HTMLs.
+async function loadScreenPoolCache(env, origin, region) {
+  const res = await assetGet(env, origin, `/${region}/herai_picks.json`);
+  if (!res) return null;
+  try {
+    const data = await res.json();
+    const pool = Array.isArray(data) ? data : (data && data.pool) || null;
+    return Array.isArray(pool) && pool.length ? pool : null;
+  } catch {
+    return null;
+  }
+}
+
+// ── Screening pool: which screens feed technical vs fundamental strength ─────
+const TECH_SCREENS = [
+  "high-momentum", "momentum-3m", "near-52w-high", "golden-cross",
+  "ema-multi-up-5d", "top-ytd", "high-rev-growth",
+];
+const FUND_SCREENS = [
+  "high-roe", "high-fcf", "high-earnings-growth", "high-margin",
+  "low-debt", "low-pe", "low-ev-ebitda", "high-dividend", "high-rev-growth",
+];
+const TECH_SET = new Set(TECH_SCREENS);
+const FUND_SET = new Set(FUND_SCREENS);
+
+function scoreCandidate(c, weights) {
+  const m = c.metrics || {};
+  const inScreens = new Set(c.screens || []);
+  const setups = (c.setups || []).join(" ").toLowerCase();
+
+  // Technical strength
+  let tech = 0;
+  for (const s of inScreens) if (TECH_SET.has(s)) tech += 1;
+  if (/breakout|52w high|52-week high|golden/.test(setups)) tech += 1.5;
+  const oneY = parseNum(m["1Y %"] || m["1Y%"] || m["YTD %"]);
+  if (oneY !== null) tech += Math.max(-1, Math.min(2, oneY / 50));
+
+  // Fundamental strength
+  let fund = 0;
+  for (const s of inScreens) if (FUND_SET.has(s)) fund += 1;
+  const roe = parseNum(m["ROE %"]);
+  const roce = parseNum(m["ROCE %"]);
+  if (roe !== null && roe >= 15) fund += 1;
+  if (roce !== null && roce >= 15) fund += 0.5;
+  const revC = parseNum(m["Rev CAGR 5Y %"]);
+  const proC = parseNum(m["Profit CAGR 5Y %"]);
+  if (revC !== null && revC >= 12) fund += 1;
+  if (proC !== null && proC >= 15) fund += 1;
+  const peg = parseNum(m["PEG"]);
+  if (peg !== null && peg > 0 && peg <= 1.5) fund += 1;
+
+  // Sentiment/momentum proxy (grounded in momentum screens + trend setups)
+  let sent = 0;
+  if (inScreens.has("momentum-3m") || inScreens.has("high-momentum")) sent += 1;
+  if (inScreens.has("near-52w-high")) sent += 1;
+  if (/breakout/.test(setups)) sent += 0.5;
+
+  // Normalise each axis to ~0..1 then blend by regime weights.
+  const techN = Math.min(1, tech / 5);
+  const fundN = Math.min(1, fund / 5);
+  const sentN = Math.min(1, sent / 2.5);
+  const composite = weights.tech * techN + weights.fund * fundN + weights.sent * sentN;
+  return { composite, tech: techN, fund: fundN, sent: sentN, screens: c.screens, setups: c.setups, metrics: m };
+}
+
+async function runScreenPick(env, origin, region, route, regime) {
+  const wantAll = route.universe === "ALL";
+  const screenNames = Array.from(new Set([...TECH_SCREENS, ...FUND_SCREENS]));
+
+  // Scalability: prefer the daily build-time precomputed pool if present,
+  // so a screening query needs one small asset read instead of ~16.
+  let pool = await loadScreenPoolCache(env, origin, region);
+  if (!pool || !pool.length) {
+    const fetched = await Promise.all(
+      screenNames.map(async (name) => {
+        const res = await assetGet(env, origin, `/${region}/screens/${name}.html`);
+        if (!res) return null;
+        try { return { name, html: await res.text() }; } catch { return null; }
+      })
+    );
+    const screens = fetched.filter(Boolean);
+    if (!screens.length) return null;
+    pool = buildScreenPool(screens, 80);
+  }
+  if (!pool.length) return null;
+
+  if (!wantAll) pool = pool.filter((c) => (c.universes || []).includes(route.universe));
+  if (!pool.length) return null;
+
+  const scored = pool
+    .map((c) => ({ ...c, ...scoreCandidate(c, regime.weights) }))
+    .sort((a, b) => b.composite - a.composite);
+
+  const topN = scored.slice(0, route.count);
+
+  // Deep-enrich the finalists with computed technicals from their own pages.
+  const enriched = await Promise.all(
+    topN.map(async (c) => {
+      const ctx = await fetchStockContext(env, origin, region, c.ticker);
+      let technicals = null;
+      if (ctx && ctx.rawHtml) technicals = computeTechnicals(extractPriceHistory(ctx.rawHtml));
+      return { ...c, name: c.name || (ctx && ctx.name) || c.ticker, technicals, summary: ctx ? ctx.summary : "" };
+    })
+  );
+
+  const sources = enriched.map((c) => ({
+    title: c.ticker,
+    url: `https://heraiscreener.com/${region}/stocks/${c.ticker}${region === "india" ? ".NS" : ""}.html`,
+  }));
+
+  const evidence = enriched
+    .map((c, i) => {
+      const m = c.metrics || {};
+      const keep = ["Price", "P/E", "PEG", "ROE %", "ROCE %", "Rev CAGR 5Y %", "Profit CAGR 5Y %", "Div %", "1Y %", "Sector"];
+      const metricLine = keep
+        .filter((k) => m[k])
+        .map((k) => `${k} ${m[k]}`)
+        .join(", ");
+      const techLine = c.technicals
+        ? technicalsToText(c.technicals)
+        : "";
+      return [
+        `${i + 1}. ${c.ticker} — ${c.name}`,
+        `   universes: ${(c.universes || []).join(", ") || "n/a"}`,
+        `   screens hit: ${(c.screens || []).join(", ")}`,
+        c.setups && c.setups.length ? `   setups: ${c.setups.join(", ")}` : "",
+        metricLine ? `   fundamentals: ${metricLine}` : "",
+        techLine ? `   ${techLine}` : "",
+        `   scores → technical ${c.tech.toFixed(2)}, fundamental ${c.fund.toFixed(2)}, sentiment ${c.sent.toFixed(2)}, composite ${c.composite.toFixed(2)}`,
+      ]
+        .filter(Boolean)
+        .join("\n");
+    })
+    .join("\n\n");
+
+  const user =
+    `User question: ${route.rawMessage || "top stock ideas"}\n` +
+    `Universe: ${UNIVERSE_LABELS[route.universe]}\n` +
+    `Market regime: ${regime.regime.toUpperCase()} — ${regime.note} (weights: technical ${regime.weights.tech}, fundamental ${regime.weights.fund}, sentiment ${regime.weights.sent}).\n\n` +
+    `Ranked candidate pool (already scored from HeRAI's own screeners and price history):\n${evidence}`;
+
+  const { text } = await callLLM(env, SCREEN_SYNTH_SYSTEM, user, { maxTokens: 1400 });
+  return { answer: text, sources, picks: enriched, regime };
+}
+
+// ── Breakout composer: conviction-filtered, pattern-grouped ─────────────────
+// Mirrors HerAI/engine/signal_engine.breakout_ideas. "Breaking out" spans
+// several distinct technical patterns; rather than dump every row, group by
+// pattern and keep only rows clearing a conviction bar (momentum + earnings
+// quality + sane valuation) so genuine, high-conviction breakouts show first.
+const BREAKOUT_PATTERNS = [
+  ["new_high", "near-52w-high", "New 52-week-high breakout",
+    "price breaking to fresh 52-week highs — the most literal, 'absolute' breakout"],
+  ["golden", "golden-cross", "Golden-cross breakout",
+    "50-DMA crossing above the 200-DMA — a fresh long-term trend breakout"],
+  ["multi_ema", "ema-multi-up-5d", "Multi-EMA stacked breakout",
+    "short-, medium- and long-term EMAs newly stacked bullishly"],
+];
+const MIN_CONVICTION = 2;
+
+function rowMetric(row, ...names) {
+  const d = {};
+  for (const [h, v] of row.metrics || []) d[String(h).toLowerCase()] = v;
+  for (const n of names) {
+    const v = d[n.toLowerCase()];
+    if (v !== undefined) return v;
+  }
+  return null;
+}
+
+function breakoutConviction(row) {
+  let score = 0;
+  const tags = [];
+  const oneY = parseNum(rowMetric(row, "1Y %"));
+  if (oneY !== null) {
+    if (oneY >= 30) { score += 2; tags.push(`1Y +${Math.round(oneY)}%`); }
+    else if (oneY >= 10) { score += 1; tags.push(`1Y +${Math.round(oneY)}%`); }
+    else if (oneY < 0) score -= 1;
+  }
+  const pc = parseNum(rowMetric(row, "Profit CAGR 5Y %"));
+  if (pc !== null) {
+    if (pc >= 10) { score += 1; tags.push("earnings growing"); }
+    else if (pc < 0) { score -= 1; tags.push("earnings shrinking"); }
+  }
+  const roce = parseNum(rowMetric(row, "ROCE %"));
+  if (roce !== null) {
+    if (roce >= 15) { score += 1; tags.push(`ROCE ${Math.round(roce)}%`); }
+    else if (roce < 8) score -= 1;
+  }
+  const pe = parseNum(rowMetric(row, "P/E"));
+  if (pe !== null && (pe < 0 || pe > 150)) { score -= 2; tags.push("valuation/earnings stretched"); }
+  return { score, tags };
+}
+
+async function breakoutIdeas(env, origin, region, limit = 6) {
+  const sections = [];
+  const citations = {};
+  let anyHits = false;
+
+  for (const [key, name, title, blurb] of BREAKOUT_PATTERNS) {
+    const res = await assetGet(env, origin, `/${region}/screens/${name}.html`);
+    if (!res) continue;
+    let rows;
+    try { rows = parseScreenerTable(await res.text(), 400); } catch { continue; }
+    if (!rows || !rows.length) continue;
+
+    // Golden cross is a discrete daily event — keep only the freshest signals.
+    if (key === "golden") {
+      const dates = rows.map((r) => rowMetric(r, "Signal Date")).filter(Boolean);
+      if (dates.length) {
+        const latest = dates.slice().sort().slice(-1)[0];
+        rows = rows.filter((r) => rowMetric(r, "Signal Date") === latest);
+      }
+    }
+
+    const scored = [];
+    for (const r of rows) {
+      const { score, tags } = breakoutConviction(r);
+      if (score >= MIN_CONVICTION) scored.push({ score, oneY: parseNum(rowMetric(r, "1Y %")) || 0, row: r, tags });
+    }
+    scored.sort((a, b) => (b.score - a.score) || (b.oneY - a.oneY));
+    const top = scored.slice(0, limit);
+    if (!top.length) continue;
+
+    anyHits = true;
+    citations[title] = `https://heraiscreener.com/${region}/screens/${name}.html`;
+    const block = [`**${title}** — ${blurb}:`];
+    for (const { score, row, tags } of top) {
+      const conv = score >= 4 ? "High conviction" : "Medium conviction";
+      const price = rowMetric(row, "Price") || "";
+      const nm = row.name || "";
+      const head = `- **${row.ticker}**${nm ? ` — ${nm}` : ""}`;
+      const extra = [];
+      if (price) extra.push(region === "india" ? `₹${price}` : `$${price}`);
+      extra.push(conv);
+      if (tags.length) extra.push(tags.join(", "));
+      block.push(`${head}  \n  ${extra.join(" · ")}`);
+    }
+    sections.push(block.join("\n"));
+  }
+
+  if (!anyHits) return null;
+  const intro =
+    "Here are today's genuine breakouts from HeRAI's screeners, grouped by pattern " +
+    "and filtered to only medium/high-conviction names (strong momentum, growing " +
+    "earnings, sane valuation — weak or loss-making breakouts are dropped):";
+  const note =
+    "\n\n'Absolute' breakouts (new 52-week highs) are listed first. This is a research " +
+    "shortlist, not a buy/sell call — confirm volume and your own risk levels on the chart before acting.";
+  const answer = intro + "\n\n" + sections.join("\n\n") + note;
+  const cites = Object.entries(citations).map(([title, url]) => ({ title, url }));
+  return { answer, citations: cites };
+}
+
+// ── Price-target / buy-zone computation (deterministic, then narrated) ───────
+function computeBuyZone({ price, tech, pe, sectorPe, fwdPe, analyst, regime }) {
+  const anchors = [];
+  const rationale = [];
+  const w = regime.weights;
+
+  // Technical entry anchor
+  let techEntry = null;
+  if (tech && price) {
+    if (tech.above_sma50) {
+      const pullbackFloor = Math.max(
+        tech.nearest_support || 0,
+        tech.sma50 || 0
+      ) || tech.sma50 || tech.nearest_support;
+      if (pullbackFloor) {
+        techEntry = (pullbackFloor + price * 0.98) / 2;
+        rationale.push(
+          `Uptrend (price ${price} above SMA50 ${tech.sma50}); a healthy pullback toward support/50-DMA near ${tech.nearest_support ?? tech.sma50} offers a lower-risk entry.`
+        );
+      }
+    } else if (tech.nearest_support) {
+      techEntry = tech.nearest_support;
+      rationale.push(
+        `Price ${price} is below SMA50 ${tech.sma50 ?? "n/a"} — waiting for a reclaim/hold of nearest support ${tech.nearest_support} (20-bar swing low ${tech.swing_low}) is prudent.`
+      );
+    }
+    if (tech.breakout_20d) {
+      rationale.push(`Momentum breakout trigger sits above ${tech.breakout_20d} (prior 20-day high).`);
+    }
+  }
+  if (techEntry) anchors.push({ kind: "technical", value: techEntry, weight: w.tech });
+
+  // Fundamental fair-value anchor (re-rate to sector median P/E)
+  let fundEntry = null;
+  if (price && pe && sectorPe && pe > 0 && pe <= 150 && sectorPe > 0 && sectorPe <= 150) {
+    let fairPe = price * (sectorPe / pe);
+    // Guard against distorted trailing earnings (one-off charges, data glitches)
+    // producing an absurd sub-half fair value: never anchor the fundamental
+    // entry more than 35% below spot.
+    fairPe = Math.max(fairPe, price * 0.65);
+    fundEntry = Math.min(fairPe, price); // only a "buy" if at/below fair value
+    rationale.push(
+      `On valuation, P/E ${pe} vs sector median ${sectorPe} implies a re-rated fair value near ${_r(fairPe)}${
+        fairPe < price ? " (currently above fair value)" : " (currently at/below fair value)"
+      }.`
+    );
+  }
+  if (fundEntry) anchors.push({ kind: "fundamental", value: fundEntry, weight: w.fund });
+
+  // Analyst-target anchor with margin of safety
+  let analystEntry = null;
+  if (analyst && (analyst.mean || analyst.median) && price) {
+    const target = analyst.mean || analyst.median;
+    const mos = regime.regime === "bear" ? 0.1 : regime.regime === "bull" ? 0.05 : 0.08;
+    analystEntry = target * (1 - mos);
+    const upside = ((target / price - 1) * 100).toFixed(1);
+    rationale.push(
+      `Analyst mean target ${_r(target)} (≈ ${upside}% vs spot ${price}); applying a ${(mos * 100).toFixed(0)}% margin of safety gives ${_r(analystEntry)}.`
+    );
+  }
+  if (analystEntry) anchors.push({ kind: "analyst", value: analystEntry, weight: w.sent + 0.05 });
+
+  if (!anchors.length) return null;
+
+  // Weighted blend of available anchors (weights renormalised).
+  const totW = anchors.reduce((s, a) => s + a.weight, 0) || 1;
+  const buy = anchors.reduce((s, a) => s + a.value * a.weight, 0) / totW;
+  const zoneLow = _r(buy * 0.985);
+  const zoneHigh = _r(buy * 1.01);
+
+  return {
+    buy: _r(buy),
+    zone: [zoneLow, zoneHigh],
+    anchors: anchors.map((a) => ({ kind: a.kind, value: _r(a.value), weight: _r(a.weight) })),
+    rationale,
+    price,
+    fwdPe: fwdPe || null,
+  };
+}
+function _r(x) {
+  if (x === null || x === undefined || !Number.isFinite(x)) return null;
+  return Math.round(x * 100) / 100;
+}
+
+async function runPriceTarget(env, origin, region, ticker, route, regime) {
+  const ctx = await fetchStockContext(env, origin, region, ticker);
+  if (!ctx || !ctx.rawHtml) return null;
+
+  const snap = ctx.rawSnapshot || {};
+  const tech = computeTechnicals(extractPriceHistory(ctx.rawHtml));
+
+  // Current price
+  const price =
+    parseNum((snap.header && (snap.header.Price || snap.header.price)) || "") ||
+    (tech ? tech.last : null);
+
+  // Valuation from ratio tiles + snapshot "valuation vs sector"
+  const ratios = snap.ratios || {};
+  const valTile = ratios["Valuation"] || {};
+  // Stock pages label these "Stock P/E" and "Industry PE" (not "P/E").
+  const pe = parseNum(valTile["Stock P/E"] || valTile["P/E"] || valTile["PE"] || valTile["P/E (TTM)"]);
+  const fwdPe = parseNum(valTile["Forward P/E"] || valTile["Fwd P/E"] || valTile["Forward PE"]);
+  let sectorPe = parseNum(valTile["Industry PE"] || valTile["Industry P/E"] || valTile["Sector P/E"] || valTile["Sector median P/E"]);
+  const valVsSector = (snap.technical_snapshot && snap.technical_snapshot.valuation_vs_sector) || "";
+  if (sectorPe === null) {
+    const smv = String(valVsSector).match(/sector median of\s*([\d.]+)/i);
+    if (smv) sectorPe = parseNum(smv[1]);
+  }
+  const pemv = String(valVsSector).match(/P\/E of\s*([\d.]+)/i);
+  const peFromSnap = pemv ? parseNum(pemv[1]) : null;
+
+  const analyst = await fetchAnalystTargets(origin, region, ticker);
+
+  const zone = computeBuyZone({
+    price,
+    tech,
+    pe: pe || peFromSnap,
+    sectorPe,
+    fwdPe,
+    analyst,
+    regime,
+  });
+  if (!zone) return null;
+
+  // Suppress an implausible trailing P/E (distorted by one-off earnings / data
+  // glitches) from the narrative and prefer forward P/E instead.
+  const peShow = pe || peFromSnap;
+  const peSane = peShow && peShow > 0 && peShow <= 150;
+  let valLine = "";
+  if (peSane) {
+    valLine = `Valuation: P/E ${peShow}${sectorPe ? `, sector median P/E ${sectorPe}` : ""}${fwdPe ? `, forward P/E ${fwdPe}` : ""}.`;
+  } else if (fwdPe) {
+    valLine = `Valuation: forward P/E ${fwdPe}${sectorPe ? ` vs sector median P/E ${sectorPe}` : ""} (trailing P/E distorted by one-off earnings — using forward P/E).`;
+  }
+
+  const factLines = [
+    `Ticker: ${ticker}${ctx.name ? " (" + ctx.name + ")" : ""}`,
+    `Spot price: ${zone.price}`,
+    tech ? technicalsToText(tech) : "",
+    valLine,
+    analyst ? `Analyst targets: ${analyst.mean ? "mean " + _r(analyst.mean) : ""}${analyst.high ? ", high " + _r(analyst.high) : ""}${analyst.low ? ", low " + _r(analyst.low) : ""}${analyst.recommendation ? ", consensus " + analyst.recommendation : ""}.` : "Analyst targets: not available in dataset.",
+    "",
+    `Computed buy zone: ${zone.zone[0]}–${zone.zone[1]} (blended fair entry ≈ ${zone.buy}).`,
+    `Anchors used (regime-weighted, ${regime.regime}): ${zone.anchors.map((a) => `${a.kind} ${a.value}`).join(", ")}.`,
+    "Reasoning points:",
+    ...zone.rationale.map((r) => `- ${r}`),
+  ].filter(Boolean).join("\n");
+
+  const user =
+    `User question: ${route.rawMessage || `right price to buy ${ticker}`}\n` +
+    `Market regime: ${regime.regime.toUpperCase()} — ${regime.note}\n\n` +
+    `HeRAI computed the following from its own data:\n${factLines}`;
+
+  const sources = [{ title: ticker, url: ctx.url }];
+  const { text } = await callLLM(env, PRICE_TARGET_SYNTH_SYSTEM, user, { maxTokens: 1000 });
+  return { answer: text, sources, zone, regime, ticker };
+}
+
 // ── Main orchestration ──────────────────────────────────────────────────────
 async function orchestrate(env, origin, message, region, history, mode = "analysis") {
+  // 0) Deterministic front-door (parity with the local Python engine): a
+  //    breakout question is answered by the conviction-filtered, pattern-grouped
+  //    composer straight from HeRAI's screeners — no LLM router needed.
+  if (mode !== "news" && RE_BREAKOUT.test(message) && !RE_SCREEN_PICK.test(message)) {
+    try {
+      const bo = await breakoutIdeas(env, origin, region);
+      if (bo && bo.answer) {
+        return {
+          answer: verify(bo.answer),
+          disclaimer: DISCLAIMER,
+          intent: "SCREEN_QUERY",
+          agents: ["technical", "screener"],
+          tickers: [],
+          citations: bo.citations || [],
+          usedWeb: false,
+        };
+      }
+    } catch (e) {
+      // fall through to the LLM-routed pipeline
+    }
+  }
+
   // 1) Route
   const route = await routeQuery(env, message, history, region);
+  route.rawMessage = message;
 
   // Mode override: news mode should route strictly to news specialist flow.
   if (mode === "news") {
     route.needs = ["news"];
+  }
+
+  // 1a) Deterministic name->ticker resolution + clarification (parity w/ Python).
+  //     Handles short company names ("Infosys"), misspellings ("Nyka") and
+  //     lowercase tickers the LLM router may not have extracted.
+  if (mode !== "news") {
+    const isPrice = RE_PRICE_TARGET.test(message) && !RE_SCREEN_PICK.test(message);
+    if (isPrice) {
+      if (!route.tickers || !route.tickers.length) {
+        const nm = await resolveNameToTicker(env, origin, region, message);
+        if (nm) route.tickers = [nm.ticker];
+      }
+      if (route.tickers && route.tickers.length) {
+        route.intent = "PRICE_TARGET";
+        route.needs = ["technical", "fundamental", "news"];
+      } else {
+        // A clear "right price to buy" ask, but no identifiable stock — ask
+        // instead of guessing / dumping a generic shortlist.
+        const label = region === "india" ? "India" : "USA";
+        return {
+          answer:
+            `I couldn't tell which stock you're asking about. Which ${label} stock would you like a ` +
+            `fair-entry / buy-zone read on? Type the company name or its ticker ` +
+            `(for example \u201cRELIANCE\u201d or \u201cInfosys\u201d).`,
+          disclaimer: DISCLAIMER,
+          intent: "CLARIFY",
+          agents: [],
+          tickers: [],
+          citations: [],
+          usedWeb: false,
+        };
+      }
+    } else if (
+      route.intent !== "SCREEN_PICK" &&
+      isStockSpecific(message) &&
+      (!route.tickers || !route.tickers.length)
+    ) {
+      // A single named-company question ("how is the fundamental of Nykaa")
+      // that the router left ticker-less — resolve and deep-dive on it.
+      const nm = await resolveNameToTicker(env, origin, region, message);
+      if (nm) {
+        route.tickers = [nm.ticker];
+        route.intent = "STOCK_DEEP_DIVE";
+        route.needs = ["technical", "fundamental", "news"];
+      }
+    }
+  }
+
+  // 1b) Specialised analyst flows (grounded only) before the generic pipeline.
+  if (mode !== "news" && (route.intent === "SCREEN_PICK" || route.intent === "PRICE_TARGET")) {
+    try {
+      const regime = await detectMarketRegime(env, origin, region);
+
+      if (route.intent === "SCREEN_PICK") {
+        const res = await runScreenPick(env, origin, region, route, regime);
+        if (res && res.answer) {
+          return {
+            answer: verify(res.answer),
+            disclaimer: DISCLAIMER,
+            intent: route.intent,
+            agents: ["screener", "technical", "fundamental"],
+            tickers: (res.picks || []).map((p) => p.ticker),
+            universe: route.universe,
+            regime: regime.regime,
+            citations: res.sources || [],
+            usedWeb: false,
+          };
+        }
+      }
+
+      if (route.intent === "PRICE_TARGET" && route.tickers.length) {
+        const res = await runPriceTarget(env, origin, region, route.tickers[0], route, regime);
+        if (res && res.answer) {
+          return {
+            answer: verify(res.answer),
+            disclaimer: DISCLAIMER,
+            intent: route.intent,
+            agents: ["technical", "fundamental", "valuation"],
+            tickers: [res.ticker],
+            regime: regime.regime,
+            buyZone: res.zone ? { buy: res.zone.buy, zone: res.zone.zone } : null,
+            citations: res.sources || [],
+            usedWeb: false,
+          };
+        }
+      }
+    } catch (e) {
+      // Fall through to the generic grounded pipeline on any failure.
+    }
   }
 
   // 2) Gather grounding in parallel
@@ -679,14 +1512,29 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
   if (notes.length) {
     answer = await synthesize(env, message, notes, sources);
   } else {
-    // No grounding available — general answer, clearly framed.
-    const { text } = await callLLM(
-      env,
-      "You are HerAI, a careful stock-market educator. Answer once in 1-3 short paragraphs or bullets. Never role-play both sides, never ask follow-up questions, never continue into a dialogue. Never give direct buy/sell advice. Do not invent specific prices or figures.",
-      message,
-      { maxTokens: 700 }
-    );
-    answer = text;
+    // No grounding available. HerAI is a data-grounded analyst, not a generic
+    // chatbot: it must NOT fabricate stock-specific data. If the question needs
+    // specific stock/screen data we could not locate, say so and guide the user.
+    const needsSpecificData =
+      route.tickers.length ||
+      ["STOCK_DEEP_DIVE", "PRICE_TARGET", "SCREEN_PICK", "COMPARE_STOCKS", "SECTOR_ANALYSIS"].includes(route.intent);
+    if (needsSpecificData) {
+      const askedFor = route.tickers.length ? route.tickers.join(", ") : "that";
+      answer =
+        `I ground every answer in HeRAI's own built data (per-stock pages, screeners, macro), and I could not locate the specific data needed for ${askedFor} in the ${region.toUpperCase()} dataset right now. ` +
+        `Please give me an exact ticker we cover (e.g., AAPL, RELIANCE), ask for a screen-based shortlist (e.g., "10 S&P 500 stocks to consider"), or ask for a buy zone on a named stock, and I'll analyse it from the data.`;
+    } else {
+      // General market-education concept — allowed, but strictly no fabricated specifics.
+      const { text } = await callLLM(
+        env,
+        "You are HerAI, a senior stock-market analyst acting as an educator. Explain the CONCEPT the user asked about (e.g., what RSI/P-E/support means) in 1-3 short paragraphs, using institutional terminology. " +
+          "Do NOT invent specific prices, tickers, targets, or figures. Do NOT give buy/sell advice. Do not role-play a dialogue or ask follow-up questions. " +
+          "If the question actually requires specific stock data, say it should be asked about a named ticker or via a screen.",
+        message,
+        { maxTokens: 600 }
+      );
+      answer = text;
+    }
   }
 
   answer = verify(answer);

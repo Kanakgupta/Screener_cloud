@@ -4,3 +4,7 @@ cloud/india/_build/
 
 # Windows reserved filenames
 cloud/usa/stocks/CON.html
+.dev.vars
+wrangler.dev.jsonc
+node_modules/
+.wrangler/

@@ -7,7 +7,11 @@
     "enabled": true
   },
   "assets": {
-    "directory": "./cloud"
+    "directory": "./cloud",
+    // Named binding so the HerAI Worker can READ deployed pages/screeners for
+    // grounding (env.ASSETS.fetch). Without this, all grounding silently fails
+    // and answers degrade to generic LLM output.
+    "binding": "ASSETS"
   },
   // Cloudflare Workers AI binding for HerAI runtime analysis.
   "ai": {
