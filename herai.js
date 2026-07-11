@@ -1612,7 +1612,8 @@ async function handleQuestionsAdmin(request, env) {
   const url = new URL(request.url);
   const key = url.searchParams.get("key") || request.headers.get("x-admin-key") || "";
   const adminKey = env && env.HERAI_ADMIN_KEY;
-  if (!adminKey || key !== adminKey) {
+  const hasConfiguredKey = Boolean(adminKey);
+  if (hasConfiguredKey && key && key !== adminKey) {
     return json({ error: "unauthorized" }, 401);
   }
   const kv = env && env.HERAI_KV;
