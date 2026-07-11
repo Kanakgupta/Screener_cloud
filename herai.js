@@ -45,11 +45,21 @@ const DISCLAIMER =
   "This is informational analysis generated from HeRAI's own data, not investment advice. " +
   "Data may be delayed or incomplete. Always do your own research.";
 
-const DEFAULT_CF_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
+// ── Two-stage model pipeline ─────────────────────────────────────────
+// Stage 1 — Analysis: high-context model for reading HTML data & running specialists.
+//   Uses Kimi K2.7 Code (Moonshot AI) for its large context window.
+// Stage 2 — Synthesis: latest generation model for polished final output.
+//   Uses Gemma 4 (Google) for its superior instruction-following & presentation.
+// Both can be overridden via env vars:
+//   HERAI_AI_MODEL       (default: @cf/moonshotai/kimi-k2.7-code)
+//   HERAI_SYNTHESIS_MODEL (default: @cf/google/gemma-4-26b-a4b-it)
+const DEFAULT_CF_MODEL = "@cf/moonshotai/kimi-k2.7-code";
+const DEFAULT_SYNTHESIS_MODEL = "@cf/google/gemma-4-26b-a4b-it";
 const CF_MODEL_FALLBACKS = [
+  "@cf/moonshotai/kimi-k2.7-code",
+  "@cf/moonshotai/kimi-k2.6",
   "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
   "@cf/meta/llama-3.2-3b-instruct",
-  "@cf/meta/llama-3.1-8b-instruct",
 ];
 
 // ── Region-aware ticker routing engine ───────────────────────────────────────
@@ -165,7 +175,12 @@ function workersAiModel(env) {
 function workersAiModelCandidates(env) {
   const cfg = String(env?.HERAI_AI_MODEL || "").trim();
   const ordered = [cfg, ...CF_MODEL_FALLBACKS].filter(Boolean);
-  return Array.from(new Set(ordered));
+  return [...new Set(ordered)];
+}
+
+function synthesisWorkersAiModel(env) {
+  const m = String(env?.HERAI_SYNTHESIS_MODEL || "").trim();
+  return m || DEFAULT_SYNTHESIS_MODEL;
 }
 function clip(s, n) {
   s = String(s || "");
@@ -182,14 +197,14 @@ function stripHtml(html) {
 }
 
 // ── Unified LLM call across the free chain ──────────────────────────────────
-async function callLLM(env, system, user, { wantJson = false, maxTokens = 900 } = {}) {
+async function callLLM(env, system, user, { wantJson = false, maxTokens = 900, model } = {}) {
   const providers = availableProviders(env);
   let workersAiErr = null;
 
   // Primary path: Workers AI binding
   if (hasWorkersAI(env)) {
     try {
-      const text = await callWorkersAI(env, system, user, wantJson, maxTokens);
+      const text = await callWorkersAI(env, system, user, wantJson, maxTokens, model);
       if (text && text.trim()) return { text: text.trim(), provider: "workers-ai" };
     } catch (e) {
       workersAiErr = e;
@@ -216,8 +231,10 @@ async function callLLM(env, system, user, { wantJson = false, maxTokens = 900 } 
   throw lastErr || new Error("LLM_ALL_FAILED");
 }
 
-async function callWorkersAI(env, system, user, wantJson, maxTokens) {
-  const models = workersAiModelCandidates(env);
+async function callWorkersAI(env, system, user, wantJson, maxTokens, overrideModel) {
+  const models = overrideModel
+    ? [overrideModel]
+    : workersAiModelCandidates(env);
   const jsonTail = wantJson
     ? "\n\nReturn ONLY a valid JSON object. Do not add markdown fences or extra text."
     : "";
@@ -797,7 +814,9 @@ async function synthesize(env, question, notes, sources) {
   const notesText = notes.map((n) => `[${n.kind}] ${n.text}`).join("\n\n");
   const srcText = sources.map((s, i) => `(${i + 1}) ${s.url}`).join("\n");
   const user = `User question: ${question}\n\nSpecialist notes:\n${notesText || "(none)"}\n\nSources:\n${srcText || "(none)"}`;
-  const { text } = await callLLM(env, SYNTH_SYSTEM, user, { maxTokens: 900 });
+  // Stage 2: Use Gemma 4 for polished final output presentation
+  const synthesisModel = synthesisWorkersAiModel(env);
+  const { text } = await callLLM(env, SYNTH_SYSTEM, user, { maxTokens: 900, model: synthesisModel });
   return text;
 }
 
@@ -1051,7 +1070,9 @@ async function runScreenPick(env, origin, region, route, regime) {
     `Market regime: ${regime.regime.toUpperCase()} — ${regime.note} (weights: technical ${regime.weights.tech}, fundamental ${regime.weights.fund}, sentiment ${regime.weights.sent}).\n\n` +
     `Ranked candidate pool (already scored from HeRAI's own screeners and price history):\n${evidence}`;
 
-  const { text } = await callLLM(env, SCREEN_SYNTH_SYSTEM, user, { maxTokens: 1400 });
+  // Stage 2: Use Gemma 4 for polished final output presentation
+  const synthesisModel = synthesisWorkersAiModel(env);
+  const { text } = await callLLM(env, SCREEN_SYNTH_SYSTEM, user, { maxTokens: 1400, model: synthesisModel });
   return { answer: text, sources, picks: enriched, regime };
 }
 
@@ -1318,7 +1339,9 @@ async function runPriceTarget(env, origin, region, ticker, route, regime) {
     `HeRAI computed the following from its own data:\n${factLines}`;
 
   const sources = [{ title: ticker, url: ctx.url }];
-  const { text } = await callLLM(env, PRICE_TARGET_SYNTH_SYSTEM, user, { maxTokens: 1000 });
+  // Stage 2: Use Gemma 4 for polished final output presentation
+  const synthesisModel = synthesisWorkersAiModel(env);
+  const { text } = await callLLM(env, PRICE_TARGET_SYNTH_SYSTEM, user, { maxTokens: 1000, model: synthesisModel });
   return { answer: text, sources, zone, regime, ticker };
 }
 
@@ -1525,13 +1548,15 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
         `Please give me an exact ticker we cover (e.g., AAPL, RELIANCE), ask for a screen-based shortlist (e.g., "10 S&P 500 stocks to consider"), or ask for a buy zone on a named stock, and I'll analyse it from the data.`;
     } else {
       // General market-education concept — allowed, but strictly no fabricated specifics.
+      // Stage 2: Use Gemma 4 for polished final output presentation
+      const synthesisModel = synthesisWorkersAiModel(env);
       const { text } = await callLLM(
         env,
         "You are HerAI, a senior stock-market analyst acting as an educator. Explain the CONCEPT the user asked about (e.g., what RSI/P-E/support means) in 1-3 short paragraphs, using institutional terminology. " +
           "Do NOT invent specific prices, tickers, targets, or figures. Do NOT give buy/sell advice. Do not role-play a dialogue or ask follow-up questions. " +
           "If the question actually requires specific stock data, say it should be asked about a named ticker or via a screen.",
         message,
-        { maxTokens: 600 }
+        { maxTokens: 600, model: synthesisModel }
       );
       answer = text;
     }
@@ -1672,6 +1697,7 @@ export async function handleHeraiRequest(request, env, ctx) {
       providers,
       model: hasWorkersAI(env) ? workersAiModel(env) : null,
       modelCandidates: hasWorkersAI(env) ? workersAiModelCandidates(env) : [],
+      synthesisModel: hasWorkersAI(env) ? synthesisWorkersAiModel(env) : null,
     });
   }
 

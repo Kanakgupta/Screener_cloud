@@ -56,7 +56,11 @@
   //   npx wrangler secret put HERAI_ADMIN_KEY
   // Then open https://<your-domain>/herai-admin.html and enter that key.
 
-  // Optional override for Workers AI model used by HerAI:
-  //   npx wrangler secret put HERAI_AI_MODEL
-  // Example value: @cf/meta/llama-3.1-8b-instruct
+  // ── HerAI two-stage model pipeline (recommended) ──────────────────────────
+  // Stage 1 — Analysis: high-context model for reading HTML stock data.
+  //   Set with:   npx wrangler secret put HERAI_AI_MODEL
+  //   Default:    @cf/moonshotai/kimi-k2.7-code
+  // Stage 2 — Synthesis: latest model for polished final output presentation.
+  //   Set with:   npx wrangler secret put HERAI_SYNTHESIS_MODEL
+  //   Default:    @cf/google/gemma-4-26b-a4b-it
 }
