@@ -1,66 +1,57 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "screener",
-  "main": "worker.js",
-  "compatibility_date": "2026-05-27",
-  "observability": {
-    "enabled": true
-  },
-  "assets": {
-    "directory": "./cloud",
-    // Named binding so the HerAI Worker can READ deployed pages/screeners for
-    // grounding (env.ASSETS.fetch). Without this, all grounding silently fails
-    // and answers degrade to generic LLM output.
-    "binding": "ASSETS"
-  },
-  // Cloudflare Workers AI binding for HerAI runtime analysis.
-  "ai": {
-    "binding": "AI"
-  },
-  "compatibility_flags": [
-    "nodejs_compat"
-  ],
-  // Create this KV namespace first:
-  //   npx wrangler kv namespace create ELITE_KV
-  // Then paste the returned id below.
-  "kv_namespaces": [
-    {
-      "binding": "ELITE_KV",
-      "id": "1f45ba0294924143be0485776bb114c0"
-    }
-    // ── HerAI answer cache + QUESTION BANK (recommended) ───────────────────
-    // The SAME HERAI_KV namespace powers two things:
-    //   1. the optional answer cache, and
-    //   2. the customer Question Bank (every chat question is logged here so
-    //      you can see what users ask + which answers failed, via the hidden
-    //      /herai-admin.html page and GET /api/herai/questions).
-    // HerAI still works without it (caching + logging just no-op).
-    // To enable:
-    //   npx wrangler kv namespace create HERAI_KV
-    // then add (uncomment, paste the returned id):
-    // ,{ "binding": "HERAI_KV", "id": "<paste-id-here>" }
-  ]
-
-  // ── HerAI LLM provider secrets (set at least ONE) ────────────────────────
-  // Workers AI is primary now (via the AI binding above), so these are optional
-  // fallbacks only.
-  // These are Worker SECRETS, not committed here. Set with:
-  //   npx wrangler secret put GEMINI_API_KEY
-  //   npx wrangler secret put GROQ_API_KEY
-  //   npx wrangler secret put CEREBRAS_API_KEY
-  //   npx wrangler secret put OPENROUTER_API_KEY
-  // The free chain tries them in order: Gemini -> Groq -> Cerebras -> OpenRouter.
-
-  // ── HerAI Question Bank admin password (REQUIRED to view the bank) ────────
-  // Gates GET /api/herai/questions and the hidden /herai-admin.html page.
-  //   npx wrangler secret put HERAI_ADMIN_KEY
-  // Then open https://<your-domain>/herai-admin.html and enter that key.
-
-  // ── HerAI two-stage model pipeline (recommended) ──────────────────────────
-  // Stage 1 — Analysis: high-context model for reading HTML stock data.
-  //   Set with:   npx wrangler secret put HERAI_AI_MODEL
-  //   Default:    @cf/moonshotai/kimi-k2.7-code
-  // Stage 2 — Synthesis: latest model for polished final output presentation.
-  //   Set with:   npx wrangler secret put HERAI_SYNTHESIS_MODEL
-  //   Default:    @cf/google/gemma-4-26b-a4b-it
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "screener",
+	"main": "worker.js",
+	"compatibility_date": "2026-05-27",
+	"observability": {
+		"enabled": true
+	},
+	"assets": {
+		"directory": "./cloud",
+		// Named binding so the HerAI Worker can READ deployed pages/screeners for
+		// grounding (env.ASSETS.fetch). Without this, all grounding silently fails
+		// and answers degrade to generic LLM output.
+		"binding": "ASSETS"
+	},
+	// Cloudflare Workers AI binding for HerAI runtime analysis.
+	"ai": {
+		"binding": "AI"
+	},
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	// Create this KV namespace first:
+	//   npx wrangler kv namespace create ELITE_KV
+	// Then paste the returned id below.
+	"kv_namespaces": [
+		{
+			"binding": "ELITE_KV",
+			"id": "1f45ba0294924143be0485776bb114c0"
+		},
+		{
+			"binding": "HERAI_KV",
+			"id": "25457a1b05d84ac5ab2aae0cd3d617da",
+			"remote": true
+		}
+	]
+	// ── HerAI LLM provider secrets (set at least ONE) ────────────────────────
+	// Workers AI is primary now (via the AI binding above), so these are optional
+	// fallbacks only.
+	// These are Worker SECRETS, not committed here. Set with:
+	//   npx wrangler secret put GEMINI_API_KEY
+	//   npx wrangler secret put GROQ_API_KEY
+	//   npx wrangler secret put CEREBRAS_API_KEY
+	//   npx wrangler secret put OPENROUTER_API_KEY
+	// The free chain tries them in order: Gemini -> Groq -> Cerebras -> OpenRouter.
+	// ── HerAI Question Bank admin password (REQUIRED to view the bank) ────────
+	// Gates GET /api/herai/questions and the hidden /herai-admin.html page.
+	//   npx wrangler secret put HERAI_ADMIN_KEY
+	// Then open https://<your-domain>/herai-admin.html and enter that key.
+	// ── HerAI two-stage model pipeline (recommended) ──────────────────────────
+	// Stage 1 — Analysis: high-context model for reading HTML stock data.
+	//   Set with:   npx wrangler secret put HERAI_AI_MODEL
+	//   Default:    @cf/moonshotai/kimi-k2.7-code
+	// Stage 2 — Synthesis: latest model for polished final output presentation.
+	//   Set with:   npx wrangler secret put HERAI_SYNTHESIS_MODEL
+	//   Default:    @cf/google/gemma-4-26b-a4b-it
 }

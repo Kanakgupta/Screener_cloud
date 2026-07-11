@@ -515,7 +515,7 @@ async function assetGet(env, origin, path) {
 }
 
 async function fetchStockContext(env, origin, region, ticker) {
-  const resolved = await resolveStockPath(env, ticker, region);
+  const resolved = await resolveStockPath(env, origin, ticker, region);
   const candidates = [];
   if (resolved) {
     candidates.push({ path: resolved.path, region: resolved.region, ticker: resolved.ticker, name: resolved.name });
@@ -564,7 +564,7 @@ async function loadManifest(env) {
   }
 }
 
-async function resolveStockPath(env, ticker, preferredRegion) {
+async function resolveStockPath(env, origin, ticker, preferredRegion) {
   const manifest = await loadManifest(env);
   const t = ticker.toUpperCase().replace(/\.(NS|BO)$/i, "");
 
@@ -607,7 +607,7 @@ async function resolveStockPath(env, ticker, preferredRegion) {
 
   for (const c of allCandidates) {
     try {
-      const req = new Request(`https://heraiscreener.com${c.path}`);
+      const req = new Request(`${origin}${c.path}`);
       const res = await env.ASSETS.fetch(req);
       if (res.ok) {
         return { ...c, ticker: t };
