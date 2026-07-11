@@ -56,10 +56,60 @@ const DISCLAIMER =
 const DEFAULT_CF_MODEL = "@cf/moonshotai/kimi-k2.7-code";
 const DEFAULT_SYNTHESIS_MODEL = "@cf/google/gemma-4-26b-a4b-it";
 const CF_MODEL_FALLBACKS = [
+  // Tier 1 — Large high-quality models (primary)
   "@cf/moonshotai/kimi-k2.7-code",
   "@cf/moonshotai/kimi-k2.6",
   "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+  "@cf/meta/llama-3.1-70b-instruct",
+  "@cf/meta/llama-3.1-8b-instruct",
+  "@cf/meta/llama-3.2-11b-instruct",
   "@cf/meta/llama-3.2-3b-instruct",
+  "@cf/meta/llama-3.2-1b-instruct",
+  // Tier 2 — Mistral family
+  "@cf/mistral/mistral-7b-instruct-v0.3",
+  "@cf/mistral/mistral-7b-instruct-v0.2",
+  "@cf/mistral/mistral-7b-instruct-v0.1",
+  "@cf/mistral/mistral-large-latest",
+  "@cf/mistral/mistral-small-latest",
+  // Tier 3 — Google Gemma family
+  "@cf/google/gemma-4-26b-a4b-it",
+  "@cf/google/gemma-4-9b-it",
+  "@cf/google/gemma-2-27b-it",
+  "@cf/google/gemma-2-9b-it",
+  "@cf/google/gemma-2-2b-it",
+  "@cf/google/gemma-7b-it",
+  "@cf/google/gemma-2b-it",
+  // Tier 4 — Microsoft Phi family (fast, small, reliable)
+  "@cf/microsoft/phi-3.5-mini-instruct",
+  "@cf/microsoft/phi-3-mini-4k-instruct",
+  "@cf/microsoft/phi-3-mini-128k-instruct",
+  "@cf/microsoft/phi-2",
+  // Tier 5 — Other reliable models
+  "@hf/thebloke/deepseek-coder-6.7b-instruct-awq",
+  "@hf/thebloke/mistral-7b-instruct-v0.2-awq",
+  "@hf/thebloke/llama-2-13b-chat-awq",
+  "@hf/thebloke/llama-2-7b-chat-awq",
+  "@hf/thebloke/zephyr-7b-beta-awq",
+  "@hf/thebloke/neural-chat-7b-v3-1-awq",
+  "@hf/thebloke/starling-lm-7b-beta-awq",
+  "@hf/thebloke/tulu-2-dpo-7b-awq",
+  "@hf/thebloke/openchat-3.5-0106-awq",
+  "@hf/thebloke/solar-10.7b-instruct-v1.0-awq",
+  "@hf/thebloke/airoboros-7b-awq",
+  "@hf/thebloke/yi-34b-chat-awq",
+  "@hf/thebloke/codellama-7b-instruct-awq",
+  "@hf/thebloke/codellama-13b-instruct-awq",
+  "@hf/thebloke/codellama-34b-instruct-awq",
+  "@hf/thebloke/dolphin-2.2.1-mistral-7b-awq",
+  "@hf/thebloke/dolphin-2.6-mistral-7b-awq",
+  "@hf/thebloke/synthia-7b-awq",
+  "@hf/thebloke/nous-hermes-2-mixtral-8x7b-dpo-awq",
+  "@hf/thebloke/nous-hermes-2-solar-10.7b-awq",
+  "@hf/thebloke/nous-hermes-2-yi-34b-awq",
+  "@hf/thebloke/guanaco-7b-awq",
+  "@hf/thebloke/guanaco-13b-awq",
+  "@hf/thebloke/vicuna-7b-1.5-awq",
+  "@hf/thebloke/vicuna-13b-1.5-awq",
 ];
 
 // ── Region-aware ticker routing engine ───────────────────────────────────────
@@ -239,18 +289,22 @@ async function callWorkersAI(env, system, user, wantJson, maxTokens, overrideMod
     ? "\n\nReturn ONLY a valid JSON object. Do not add markdown fences or extra text."
     : "";
   const promptUser = `${user}${jsonTail}`;
-  const prompt = `System:\n${system}\n\nUser:\n${promptUser}`;
 
   let lastErr = null;
   for (const model of models) {
     try {
-      // Workers AI text models are most consistently supported with `prompt`.
+      // Workers AI text models use the OpenAI-compatible messages format.
       const out = await env.AI.run(model, {
-        prompt,
+        messages: [
+          { role: "system", content: system },
+          { role: "user", content: promptUser },
+        ],
         max_tokens: maxTokens,
         temperature: 0.3,
       });
 
+      // Standard Workers AI text generation response: { response: "..." }
+      // Some models return { result: { response: "..." } } or other shapes.
       const text =
         out?.response ||
         out?.result?.response ||
@@ -261,17 +315,10 @@ async function callWorkersAI(env, system, user, wantJson, maxTokens, overrideMod
       if (String(text || "").trim()) return String(text || "");
     } catch (e) {
       lastErr = e;
-      const msg = String(e?.message || e || "").toLowerCase();
-      // Auto-try the next model when current one is deprecated/unavailable.
-      if (
-        msg.includes("deprecated") ||
-        msg.includes("unknown model") ||
-        msg.includes("not found") ||
-        msg.includes("invalid model")
-      ) {
-        continue;
-      }
-      throw e;
+      // Try the next fallback model for ANY error — inference failures, rate
+      // limits, timeouts, model unavailability, etc. Only give up after all
+      // candidates have been exhausted.
+      continue;
     }
   }
   throw lastErr || new Error("workers ai returned empty output");
