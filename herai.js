@@ -55,8 +55,12 @@ const DISCLAIMER =
 //   HERAI_SYNTHESIS_MODEL (default: @cf/google/gemma-4-26b-a4b-it)
 const DEFAULT_CF_MODEL = "@cf/moonshotai/kimi-k2.7-code";
 const DEFAULT_SYNTHESIS_MODEL = "@cf/google/gemma-4-26b-a4b-it";
+
+// Workers AI text generation models (names verified to exist on the platform).
+// Ordered by quality/speed — the function tries each in sequence, so a fast
+// working model is found quickly.
 const CF_MODEL_FALLBACKS = [
-  // Tier 1 — Large high-quality models (primary)
+  // ── Large chat / instruction models ───────────────────────────────────
   "@cf/moonshotai/kimi-k2.7-code",
   "@cf/moonshotai/kimi-k2.6",
   "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
@@ -65,134 +69,25 @@ const CF_MODEL_FALLBACKS = [
   "@cf/meta/llama-3.2-11b-instruct",
   "@cf/meta/llama-3.2-3b-instruct",
   "@cf/meta/llama-3.2-1b-instruct",
-  // Tier 2 — Mistral family
+
+  // ── Mistral family ───────────────────────────────────────────────────
   "@cf/mistral/mistral-7b-instruct-v0.3",
   "@cf/mistral/mistral-7b-instruct-v0.2",
   "@cf/mistral/mistral-7b-instruct-v0.1",
-  "@cf/mistral/mistral-large-latest",
-  "@cf/mistral/mistral-small-latest",
-  // Tier 3 — Google Gemma family
-  "@cf/google/gemma-4-26b-a4b-it",
-  "@cf/google/gemma-4-9b-it",
+
+  // ── Google Gemma family ──────────────────────────────────────────────
   "@cf/google/gemma-2-27b-it",
   "@cf/google/gemma-2-9b-it",
   "@cf/google/gemma-2-2b-it",
-  "@cf/google/gemma-7b-it",
-  "@cf/google/gemma-2b-it",
-  // Tier 4 — Microsoft Phi family (fast, small, reliable)
+
+  // ── Microsoft Phi family ─────────────────────────────────────────────
   "@cf/microsoft/phi-3.5-mini-instruct",
   "@cf/microsoft/phi-3-mini-4k-instruct",
   "@cf/microsoft/phi-3-mini-128k-instruct",
   "@cf/microsoft/phi-2",
-  // Tier 5 — Other reliable models
-  "@hf/thebloke/deepseek-coder-6.7b-instruct-awq",
-  "@hf/thebloke/mistral-7b-instruct-v0.2-awq",
-  "@hf/thebloke/llama-2-13b-chat-awq",
-  "@hf/thebloke/llama-2-7b-chat-awq",
-  "@hf/thebloke/zephyr-7b-beta-awq",
-  "@hf/thebloke/neural-chat-7b-v3-1-awq",
-  "@hf/thebloke/starling-lm-7b-beta-awq",
-  "@hf/thebloke/tulu-2-dpo-7b-awq",
-  "@hf/thebloke/openchat-3.5-0106-awq",
-  "@hf/thebloke/solar-10.7b-instruct-v1.0-awq",
-  "@hf/thebloke/airoboros-7b-awq",
-  "@hf/thebloke/yi-34b-chat-awq",
-  "@hf/thebloke/codellama-7b-instruct-awq",
-  "@hf/thebloke/codellama-13b-instruct-awq",
-  "@hf/thebloke/codellama-34b-instruct-awq",
-  "@hf/thebloke/dolphin-2.2.1-mistral-7b-awq",
-  "@hf/thebloke/dolphin-2.6-mistral-7b-awq",
-  "@hf/thebloke/synthia-7b-awq",
-  "@hf/thebloke/nous-hermes-2-mixtral-8x7b-dpo-awq",
-  "@hf/thebloke/nous-hermes-2-solar-10.7b-awq",
-  "@hf/thebloke/nous-hermes-2-yi-34b-awq",
-  "@hf/thebloke/guanaco-7b-awq",
-  "@hf/thebloke/guanaco-13b-awq",
-  "@hf/thebloke/vicuna-7b-1.5-awq",
-  "@hf/thebloke/vicuna-13b-1.5-awq",
 ];
 
-// ── Region-aware ticker routing engine ───────────────────────────────────────
-// Resolves ticker collisions across USA/India markets using the stock manifest.
-// The manifest (stock_master_final.json) is loaded into KV at deploy time.
-const MANIFEST_KV_KEY = "stock_master_final";
-
-async function loadManifest(env) {
-  if (!env.STOCK_MANIFEST) return null;
-  try {
-    const raw = await env.STOCK_MANIFEST.get(MANIFEST_KV_KEY);
-    return raw ? JSON.parse(raw) : null;
-  } catch {
-    return null;
-  }
-}
-
-/**
- * Resolve the correct asset path for a ticker in a given region.
- * Handles ticker collisions (e.g., "INFY" exists in both USA (ADR) and India).
- * Returns { path, region, ticker } or null if not found.
- */
-async function resolveStockPath(env, ticker, preferredRegion) {
-  const manifest = await loadManifest(env);
-  const t = ticker.toUpperCase().replace(/\.(NS|BO)$/i, "");
-
-  // 1) If we have a manifest, use it for sub-millisecond resolution
-  if (manifest && manifest.records) {
-    const record = manifest.records[t];
-    if (record) {
-      // If the ticker exists in the preferred region, use that
-      if (record[preferredRegion]) {
-        return {
-          path: record[preferredRegion].path,
-          region: preferredRegion,
-          ticker: t,
-          name: record[preferredRegion].name,
-        };
-      }
-      // Fall back to any available region
-      for (const region of ["usa", "india"]) {
-        if (record[region]) {
-          return {
-            path: record[region].path,
-            region,
-            ticker: t,
-            name: record[region].name,
-          };
-        }
-      }
-    }
-  }
-
-  // 2) Fallback: try the preferred region first, then the other
-  const candidates = preferredRegion === "india"
-    ? [`/${preferredRegion}/stocks/${t}.NS.html`, `/${preferredRegion}/stocks/${t}.html`]
-    : [`/${preferredRegion}/stocks/${t}.html`];
-  const otherRegion = preferredRegion === "india" ? "usa" : "india";
-  const otherCandidates = otherRegion === "india"
-    ? [`/${otherRegion}/stocks/${t}.NS.html`, `/${otherRegion}/stocks/${t}.html`]
-    : [`/${otherRegion}/stocks/${t}.html`];
-
-  const allCandidates = [
-    ...candidates.map((p) => ({ path: p, region: preferredRegion })),
-    ...otherCandidates.map((p) => ({ path: p, region: otherRegion })),
-  ];
-
-  for (const c of allCandidates) {
-    try {
-      const req = new Request(`https://heraiscreener.com${c.path}`);
-      const res = await env.ASSETS.fetch(req);
-      if (res.ok) {
-        return { ...c, ticker: t };
-      }
-    } catch {
-      // try next
-    }
-  }
-
-  return null;
-}
-
-// ── Small helpers ───────────────────────────────────────────────────────────
+// ── Helpers ────────────────────────────────────────────────────────────────
 function cors() {
   return {
     "Access-Control-Allow-Origin": "*",
@@ -227,7 +122,6 @@ function workersAiModelCandidates(env) {
   const ordered = [cfg, ...CF_MODEL_FALLBACKS].filter(Boolean);
   return [...new Set(ordered)];
 }
-
 function synthesisWorkersAiModel(env) {
   const m = String(env?.HERAI_SYNTHESIS_MODEL || "").trim();
   return m || DEFAULT_SYNTHESIS_MODEL;
@@ -281,6 +175,74 @@ async function callLLM(env, system, user, { wantJson = false, maxTokens = 900, m
   throw lastErr || new Error("LLM_ALL_FAILED");
 }
 
+/**
+ * Extract text response from any Workers AI model output shape.
+ *
+ * Workers AI text-generation models return one of several shapes depending on
+ * model family and whether the request used `messages` or `prompt`:
+ *
+ *   { result: { response: "..." } }        — most common with messages
+ *   { response: "..." }                    — some models return at top level
+ *   { result: [{ text: "..." }, ...] }     — legacy array format
+ *   { result: { output_text: "..." } }     — some non-chat models
+ *   { choices: [{ message: { content } }] } — OpenAI-compat (rare on Workers AI)
+ *   { output_text: "..." }                 — embeddings / some text models
+ */
+function extractWAIResponse(out) {
+  if (!out) return "";
+
+  // 1) Most common: { result: { response: "..." } }
+  if (out.result && typeof out.result.response === "string") {
+    const t = out.result.response.trim();
+    if (t) return t;
+  }
+
+  // 2) Top-level response field
+  if (typeof out.response === "string") {
+    const t = out.response.trim();
+    if (t) return t;
+  }
+
+  // 3) OpenAI-compatible format: { choices: [{ message: { content } }] }
+  if (Array.isArray(out.choices)) {
+    for (const c of out.choices) {
+      if (c && c.message && typeof c.message.content === "string") {
+        const t = c.message.content.trim();
+        if (t) return t;
+      }
+    }
+  }
+
+  // 4) Array result: { result: [{ text: "..." }, ...] }
+  if (Array.isArray(out.result)) {
+    const parts = out.result
+      .map((x) => (x && typeof x.text === "string" ? x.text : ""))
+      .filter(Boolean);
+    if (parts.length) return parts.join("\n");
+  }
+
+  // 5) output_text field (some non-chat models)
+  if (typeof out.output_text === "string") {
+    const t = out.output_text.trim();
+    if (t) return t;
+  }
+
+  // 6) Nested result.output_text
+  if (out.result && typeof out.result.output_text === "string") {
+    const t = out.result.output_text.trim();
+    if (t) return t;
+  }
+
+  return "";
+}
+
+/**
+ * Call Workers AI with model fallback.
+ *
+ * Tries each model in the candidate list in sequence until one returns a
+ * non-empty response. On error (any error) it moves to the next model.
+ * Only throws after ALL models have been exhausted.
+ */
 async function callWorkersAI(env, system, user, wantJson, maxTokens, overrideModel) {
   const models = overrideModel
     ? [overrideModel]
@@ -293,7 +255,6 @@ async function callWorkersAI(env, system, user, wantJson, maxTokens, overrideMod
   let lastErr = null;
   for (const model of models) {
     try {
-      // Workers AI text models use the OpenAI-compatible messages format.
       const out = await env.AI.run(model, {
         messages: [
           { role: "system", content: system },
@@ -301,23 +262,14 @@ async function callWorkersAI(env, system, user, wantJson, maxTokens, overrideMod
         ],
         max_tokens: maxTokens,
         temperature: 0.3,
+        stream: false,
       });
 
-      // Standard Workers AI text generation response: { response: "..." }
-      // Some models return { result: { response: "..." } } or other shapes.
-      const text =
-        out?.response ||
-        out?.result?.response ||
-        out?.output_text ||
-        (Array.isArray(out?.result)
-          ? out.result.map((x) => x?.text || x?.response || "").join("\n")
-          : "");
-      if (String(text || "").trim()) return String(text || "");
+      const text = extractWAIResponse(out);
+      if (text) return text;
     } catch (e) {
       lastErr = e;
-      // Try the next fallback model for ANY error — inference failures, rate
-      // limits, timeouts, model unavailability, etc. Only give up after all
-      // candidates have been exhausted.
+      // Try the next model on ANY error
       continue;
     }
   }
@@ -333,8 +285,6 @@ async function callOne(p, key, system, user, wantJson, maxTokens) {
       generationConfig: {
         temperature: 0.3,
         maxOutputTokens: maxTokens,
-        // gemini-2.5-flash spends "thinking" tokens from the output budget,
-        // which can starve the visible answer. Disable it for full responses.
         thinkingConfig: { thinkingBudget: 0 },
         ...(wantJson ? { responseMimeType: "application/json" } : {}),
       },
@@ -450,8 +400,6 @@ const RE_SCREEN_PICK =
   /(give|show|find|list|suggest|recommend|top|best)\b[\s\S]*\b(stocks?|picks?|ideas?|names?|companies)|stocks?\s+to\s+(buy|invest|watch|trade)|what\s+(should\s+i|to)\s+buy|invest\s+(in\b|tomorrow|today|now)|\b\d{1,3}\s+(stocks?|picks?)\b/i;
 const RE_BREAKOUT = /\b(break(?:ing)?\s*out|breakout|golden\s+cross)\b/i;
 
-// A message is "stock-specific" when it asks about ONE named company rather
-// than a list/screen of ideas (parity with agent_orchestrator._is_stock_specific).
 function isStockSpecific(message) {
   if (RE_SCREEN_PICK.test(message)) return false;
   if (/\b(stocks|shares|ideas|names|companies|picks|list|screener|screen)\b/i.test(message)) return false;
@@ -464,7 +412,6 @@ function enrichRouteWithTicker(route, message) {
   out.universe = ["SPX", "NDX", "R2K", "ALL"].includes(out.universe) ? out.universe : parseUniverse(message);
   out.count = parseCount(message, typeof out.count === "number" ? out.count : 10);
 
-  // Screening (list of ideas) takes priority — never treat stray capitals as tickers here.
   if (RE_SCREEN_PICK.test(message) && !RE_PRICE_TARGET.test(message)) {
     out.intent = "SCREEN_PICK";
     out.tickers = [];
@@ -472,14 +419,12 @@ function enrichRouteWithTicker(route, message) {
     return out;
   }
 
-  // Auto-extract uppercase tokens as tickers for stock-specific intents only.
   const tokens = Array.from(new Set((message.match(/\b[A-Z]{2,5}\b/g) || []).slice(0, 4)))
     .filter((t) => !["AND", "THE", "FOR", "USA", "SP", "ETF", "IPO", "CEO", "USD", "INR"].includes(t));
   if ((!out.tickers || !out.tickers.length) && out.intent !== "SCREEN_PICK") {
     out.tickers = tokens;
   }
 
-  // Price-target intent when a buy-price ask is present and we have a name/ticker.
   if (RE_PRICE_TARGET.test(message) && (out.tickers && out.tickers.length || out.intent === "PRICE_TARGET")) {
     out.intent = "PRICE_TARGET";
     out.needs = ["technical", "fundamental", "news"];
@@ -554,8 +499,6 @@ async function assetGet(env, origin, path) {
   if (!env || !env.ASSETS || typeof env.ASSETS.fetch !== "function") return null;
   try {
     let res = await env.ASSETS.fetch(new Request(origin + path));
-    // Static-asset "pretty URLs" redirect `/foo.html` -> `/foo`. The Worker
-    // must follow that redirect to actually read the file contents.
     let hops = 0;
     while (res && res.status >= 300 && res.status < 400 && hops < 3) {
       const loc = res.headers.get("location");
@@ -572,7 +515,6 @@ async function assetGet(env, origin, path) {
 }
 
 async function fetchStockContext(env, origin, region, ticker) {
-  // Use the resolveStockPath engine for region-aware routing
   const resolved = await resolveStockPath(env, ticker, region);
   const candidates = [];
   if (resolved) {
@@ -609,13 +551,77 @@ async function fetchStockContext(env, origin, region, ticker) {
   return null;
 }
 
+// ── Region-aware ticker routing engine ───────────────────────────────────────
+const MANIFEST_KV_KEY = "stock_master_final";
+
+async function loadManifest(env) {
+  if (!env.STOCK_MANIFEST) return null;
+  try {
+    const raw = await env.STOCK_MANIFEST.get(MANIFEST_KV_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+async function resolveStockPath(env, ticker, preferredRegion) {
+  const manifest = await loadManifest(env);
+  const t = ticker.toUpperCase().replace(/\.(NS|BO)$/i, "");
+
+  if (manifest && manifest.records) {
+    const record = manifest.records[t];
+    if (record) {
+      if (record[preferredRegion]) {
+        return {
+          path: record[preferredRegion].path,
+          region: preferredRegion,
+          ticker: t,
+          name: record[preferredRegion].name,
+        };
+      }
+      for (const region of ["usa", "india"]) {
+        if (record[region]) {
+          return {
+            path: record[region].path,
+            region,
+            ticker: t,
+            name: record[region].name,
+          };
+        }
+      }
+    }
+  }
+
+  const candidates = preferredRegion === "india"
+    ? [`/${preferredRegion}/stocks/${t}.NS.html`, `/${preferredRegion}/stocks/${t}.html`]
+    : [`/${preferredRegion}/stocks/${t}.html`];
+  const otherRegion = preferredRegion === "india" ? "usa" : "india";
+  const otherCandidates = otherRegion === "india"
+    ? [`/${otherRegion}/stocks/${t}.NS.html`, `/${otherRegion}/stocks/${t}.html`]
+    : [`/${otherRegion}/stocks/${t}.html`];
+
+  const allCandidates = [
+    ...candidates.map((p) => ({ path: p, region: preferredRegion })),
+    ...otherCandidates.map((p) => ({ path: p, region: otherRegion })),
+  ];
+
+  for (const c of allCandidates) {
+    try {
+      const req = new Request(`https://heraiscreener.com${c.path}`);
+      const res = await env.ASSETS.fetch(req);
+      if (res.ok) {
+        return { ...c, ticker: t };
+      }
+    } catch {
+      // try next
+    }
+  }
+
+  return null;
+}
+
 // ── Deterministic company-name / fuzzy-ticker resolution ────────────────────
-// Mirrors HerAI/engine/news_agent.resolve_query so short spoken names
-// ("Infosys" -> INFY), lowercase ticker tokens ("infy") and mild misspellings
-// ("nyka" -> NYKAA) resolve even when the LLM router / uppercase-token
-// heuristic misses them. Reads STOCK_INDEX + TICKER_ALIAS embedded in the
-// already-deployed /{region}/heraiai.html asset.
-const _NAME_INDEX_CACHE = new Map(); // region -> { ts, index:[{t,n}], alias:{} }
+const _NAME_INDEX_CACHE = new Map();
 const NAME_INDEX_TTL = 3600 * 1000;
 
 const RESOLVE_STOP = new Set([
@@ -667,7 +673,6 @@ async function resolveNameToTicker(env, origin, region, message) {
   const t = String(message || "").trim();
   const tl = t.toLowerCase();
 
-  // 1) alias match on individual tokens ("nykaa" -> NYKAA)
   const toks = tl.match(/[a-z0-9&]+/g) || [];
   for (const tok of toks) {
     if (alias[tok]) {
@@ -677,18 +682,16 @@ async function resolveNameToTicker(env, origin, region, message) {
     }
   }
 
-  // 2) explicit uppercase ticker token in the original text
   for (const tok of t.match(/\b[A-Z]{1,5}\b/g) || []) {
     const hit = index.find((s) => cleanBase(s.t) === tok);
     if (hit) return { ticker: tok, name: hit.n || tok };
   }
 
-  // 3) name / fuzzy-ticker match, precision-first
   const tokens = toks.filter(
     (x) => x.length >= 3 && !RESOLVE_STOP.has(x) && !RESOLVE_GENERIC_SKIP.has(x)
   );
   if (!tokens.length) return null;
-  let best = null; // [score, ticker, name]
+  let best = null;
   for (const s of index) {
     const base = cleanBase(s.t);
     if (!base) continue;
@@ -715,7 +718,8 @@ async function resolveNameToTicker(env, origin, region, message) {
 
 async function fetchMacro(env, origin) {
   const res = await assetGet(env, origin, "/_fred_cache.json");
-  if (!res) return null;  try {
+  if (!res) return null;
+  try {
     const data = await res.json();
     return { url: "https://heraiscreener.com/_fred_cache.json", text: clip(JSON.stringify(data), 3000) };
   } catch {
@@ -724,7 +728,6 @@ async function fetchMacro(env, origin) {
 }
 
 async function fetchNews(env, origin, region) {
-  // News feeds may or may not be deployed; try known locations.
   const paths = [`/_news_feeds_${region}.json`, `/${region}/_news_feeds.json`];
   for (const p of paths) {
     const res = await assetGet(env, origin, p);
@@ -759,7 +762,6 @@ async function webSearch(query) {
 }
 
 // ── Specialist agents (focused LLM prompts over grounded context) ───────────
-// Institutional-grade prompts with mandatory inline evidence
 const SPECIALIST_SYSTEMS = {
   technical:
     "You are a Senior Technical Analyst (CMT charterholder equivalent) writing an internal research note. " +
@@ -861,7 +863,6 @@ async function synthesize(env, question, notes, sources) {
   const notesText = notes.map((n) => `[${n.kind}] ${n.text}`).join("\n\n");
   const srcText = sources.map((s, i) => `(${i + 1}) ${s.url}`).join("\n");
   const user = `User question: ${question}\n\nSpecialist notes:\n${notesText || "(none)"}\n\nSources:\n${srcText || "(none)"}`;
-  // Stage 2: Use Gemma 4 for polished final output presentation
   const synthesisModel = synthesisWorkersAiModel(env);
   const { text } = await callLLM(env, SYNTH_SYSTEM, user, { maxTokens: 900, model: synthesisModel });
   return text;
@@ -870,12 +871,10 @@ async function synthesize(env, question, notes, sources) {
 // ── Verifier / guardrails (rule-based, cheap; upgradeable to LLM) ────────────
 function verify(answer) {
   let out = String(answer || "").trim();
-  // Trim accidental assistant self-dialogue to first complete answer.
   out = out.split(/\n\nIs that\b/i)[0];
   out = out.split(/\n\nNow, let's\b/i)[0];
   out = out.split(/\n\nWould you like\b/i)[0];
   out = out.replace(/^HerAI:\s*/i, "");
-  // Soften any accidental direct advice phrasing.
   out = out.replace(/\byou should (buy|sell)\b/gi, "the data suggests you might consider researching");
   return out;
 }
@@ -908,7 +907,6 @@ function parseNum(s) {
 }
 
 // ── Market-regime detection (breadth-based, grounded in built screeners) ─────
-// Bull markets reward technicals; corrective/bear markets reward fundamentals.
 async function detectMarketRegime(env, origin, region) {
   const countRows = async (name) => {
     const res = await assetGet(env, origin, `/${region}/screens/${name}.html`);
@@ -974,9 +972,6 @@ async function fetchAnalystTargets(origin, region, ticker) {
 }
 
 // ── Build-time precomputed screening pool (scalability) ─────────────────────
-// The daily build writes /{region}/herai_picks.json = { generated, pool:[...] }
-// where each pool item matches buildScreenPool output. Optional: if absent the
-// worker builds the pool live from the screener HTMLs.
 async function loadScreenPoolCache(env, origin, region) {
   const res = await assetGet(env, origin, `/${region}/herai_picks.json`);
   if (!res) return null;
@@ -1006,14 +1001,12 @@ function scoreCandidate(c, weights) {
   const inScreens = new Set(c.screens || []);
   const setups = (c.setups || []).join(" ").toLowerCase();
 
-  // Technical strength
   let tech = 0;
   for (const s of inScreens) if (TECH_SET.has(s)) tech += 1;
   if (/breakout|52w high|52-week high|golden/.test(setups)) tech += 1.5;
   const oneY = parseNum(m["1Y %"] || m["1Y%"] || m["YTD %"]);
   if (oneY !== null) tech += Math.max(-1, Math.min(2, oneY / 50));
 
-  // Fundamental strength
   let fund = 0;
   for (const s of inScreens) if (FUND_SET.has(s)) fund += 1;
   const roe = parseNum(m["ROE %"]);
@@ -1027,13 +1020,11 @@ function scoreCandidate(c, weights) {
   const peg = parseNum(m["PEG"]);
   if (peg !== null && peg > 0 && peg <= 1.5) fund += 1;
 
-  // Sentiment/momentum proxy (grounded in momentum screens + trend setups)
   let sent = 0;
   if (inScreens.has("momentum-3m") || inScreens.has("high-momentum")) sent += 1;
   if (inScreens.has("near-52w-high")) sent += 1;
   if (/breakout/.test(setups)) sent += 0.5;
 
-  // Normalise each axis to ~0..1 then blend by regime weights.
   const techN = Math.min(1, tech / 5);
   const fundN = Math.min(1, fund / 5);
   const sentN = Math.min(1, sent / 2.5);
@@ -1045,8 +1036,6 @@ async function runScreenPick(env, origin, region, route, regime) {
   const wantAll = route.universe === "ALL";
   const screenNames = Array.from(new Set([...TECH_SCREENS, ...FUND_SCREENS]));
 
-  // Scalability: prefer the daily build-time precomputed pool if present,
-  // so a screening query needs one small asset read instead of ~16.
   let pool = await loadScreenPoolCache(env, origin, region);
   if (!pool || !pool.length) {
     const fetched = await Promise.all(
@@ -1071,7 +1060,6 @@ async function runScreenPick(env, origin, region, route, regime) {
 
   const topN = scored.slice(0, route.count);
 
-  // Deep-enrich the finalists with computed technicals from their own pages.
   const enriched = await Promise.all(
     topN.map(async (c) => {
       const ctx = await fetchStockContext(env, origin, region, c.ticker);
@@ -1117,17 +1105,12 @@ async function runScreenPick(env, origin, region, route, regime) {
     `Market regime: ${regime.regime.toUpperCase()} — ${regime.note} (weights: technical ${regime.weights.tech}, fundamental ${regime.weights.fund}, sentiment ${regime.weights.sent}).\n\n` +
     `Ranked candidate pool (already scored from HeRAI's own screeners and price history):\n${evidence}`;
 
-  // Stage 2: Use Gemma 4 for polished final output presentation
   const synthesisModel = synthesisWorkersAiModel(env);
   const { text } = await callLLM(env, SCREEN_SYNTH_SYSTEM, user, { maxTokens: 1400, model: synthesisModel });
   return { answer: text, sources, picks: enriched, regime };
 }
 
 // ── Breakout composer: conviction-filtered, pattern-grouped ─────────────────
-// Mirrors HerAI/engine/signal_engine.breakout_ideas. "Breaking out" spans
-// several distinct technical patterns; rather than dump every row, group by
-// pattern and keep only rows clearing a conviction bar (momentum + earnings
-// quality + sane valuation) so genuine, high-conviction breakouts show first.
 const BREAKOUT_PATTERNS = [
   ["new_high", "near-52w-high", "New 52-week-high breakout",
     "price breaking to fresh 52-week highs — the most literal, 'absolute' breakout"],
@@ -1184,7 +1167,6 @@ async function breakoutIdeas(env, origin, region, limit = 6) {
     try { rows = parseScreenerTable(await res.text(), 400); } catch { continue; }
     if (!rows || !rows.length) continue;
 
-    // Golden cross is a discrete daily event — keep only the freshest signals.
     if (key === "golden") {
       const dates = rows.map((r) => rowMetric(r, "Signal Date")).filter(Boolean);
       if (dates.length) {
@@ -1238,7 +1220,6 @@ function computeBuyZone({ price, tech, pe, sectorPe, fwdPe, analyst, regime }) {
   const rationale = [];
   const w = regime.weights;
 
-  // Technical entry anchor
   let techEntry = null;
   if (tech && price) {
     if (tech.above_sma50) {
@@ -1264,15 +1245,11 @@ function computeBuyZone({ price, tech, pe, sectorPe, fwdPe, analyst, regime }) {
   }
   if (techEntry) anchors.push({ kind: "technical", value: techEntry, weight: w.tech });
 
-  // Fundamental fair-value anchor (re-rate to sector median P/E)
   let fundEntry = null;
   if (price && pe && sectorPe && pe > 0 && pe <= 150 && sectorPe > 0 && sectorPe <= 150) {
     let fairPe = price * (sectorPe / pe);
-    // Guard against distorted trailing earnings (one-off charges, data glitches)
-    // producing an absurd sub-half fair value: never anchor the fundamental
-    // entry more than 35% below spot.
     fairPe = Math.max(fairPe, price * 0.65);
-    fundEntry = Math.min(fairPe, price); // only a "buy" if at/below fair value
+    fundEntry = Math.min(fairPe, price);
     rationale.push(
       `On valuation, P/E ${pe} vs sector median ${sectorPe} implies a re-rated fair value near ${_r(fairPe)}${
         fairPe < price ? " (currently above fair value)" : " (currently at/below fair value)"
@@ -1281,7 +1258,6 @@ function computeBuyZone({ price, tech, pe, sectorPe, fwdPe, analyst, regime }) {
   }
   if (fundEntry) anchors.push({ kind: "fundamental", value: fundEntry, weight: w.fund });
 
-  // Analyst-target anchor with margin of safety
   let analystEntry = null;
   if (analyst && (analyst.mean || analyst.median) && price) {
     const target = analyst.mean || analyst.median;
@@ -1296,7 +1272,6 @@ function computeBuyZone({ price, tech, pe, sectorPe, fwdPe, analyst, regime }) {
 
   if (!anchors.length) return null;
 
-  // Weighted blend of available anchors (weights renormalised).
   const totW = anchors.reduce((s, a) => s + a.weight, 0) || 1;
   const buy = anchors.reduce((s, a) => s + a.value * a.weight, 0) / totW;
   const zoneLow = _r(buy * 0.985);
@@ -1323,15 +1298,12 @@ async function runPriceTarget(env, origin, region, ticker, route, regime) {
   const snap = ctx.rawSnapshot || {};
   const tech = computeTechnicals(extractPriceHistory(ctx.rawHtml));
 
-  // Current price
   const price =
     parseNum((snap.header && (snap.header.Price || snap.header.price)) || "") ||
     (tech ? tech.last : null);
 
-  // Valuation from ratio tiles + snapshot "valuation vs sector"
   const ratios = snap.ratios || {};
   const valTile = ratios["Valuation"] || {};
-  // Stock pages label these "Stock P/E" and "Industry PE" (not "P/E").
   const pe = parseNum(valTile["Stock P/E"] || valTile["P/E"] || valTile["PE"] || valTile["P/E (TTM)"]);
   const fwdPe = parseNum(valTile["Forward P/E"] || valTile["Fwd P/E"] || valTile["Forward PE"]);
   let sectorPe = parseNum(valTile["Industry PE"] || valTile["Industry P/E"] || valTile["Sector P/E"] || valTile["Sector median P/E"]);
@@ -1356,8 +1328,6 @@ async function runPriceTarget(env, origin, region, ticker, route, regime) {
   });
   if (!zone) return null;
 
-  // Suppress an implausible trailing P/E (distorted by one-off earnings / data
-  // glitches) from the narrative and prefer forward P/E instead.
   const peShow = pe || peFromSnap;
   const peSane = peShow && peShow > 0 && peShow <= 150;
   let valLine = "";
@@ -1386,7 +1356,6 @@ async function runPriceTarget(env, origin, region, ticker, route, regime) {
     `HeRAI computed the following from its own data:\n${factLines}`;
 
   const sources = [{ title: ticker, url: ctx.url }];
-  // Stage 2: Use Gemma 4 for polished final output presentation
   const synthesisModel = synthesisWorkersAiModel(env);
   const { text } = await callLLM(env, PRICE_TARGET_SYNTH_SYSTEM, user, { maxTokens: 1000, model: synthesisModel });
   return { answer: text, sources, zone, regime, ticker };
@@ -1394,9 +1363,6 @@ async function runPriceTarget(env, origin, region, ticker, route, regime) {
 
 // ── Main orchestration ──────────────────────────────────────────────────────
 async function orchestrate(env, origin, message, region, history, mode = "analysis") {
-  // 0) Deterministic front-door (parity with the local Python engine): a
-  //    breakout question is answered by the conviction-filtered, pattern-grouped
-  //    composer straight from HeRAI's screeners — no LLM router needed.
   if (mode !== "news" && RE_BREAKOUT.test(message) && !RE_SCREEN_PICK.test(message)) {
     try {
       const bo = await breakoutIdeas(env, origin, region);
@@ -1416,18 +1382,13 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
     }
   }
 
-  // 1) Route
   const route = await routeQuery(env, message, history, region);
   route.rawMessage = message;
 
-  // Mode override: news mode should route strictly to news specialist flow.
   if (mode === "news") {
     route.needs = ["news"];
   }
 
-  // 1a) Deterministic name->ticker resolution + clarification (parity w/ Python).
-  //     Handles short company names ("Infosys"), misspellings ("Nyka") and
-  //     lowercase tickers the LLM router may not have extracted.
   if (mode !== "news") {
     const isPrice = RE_PRICE_TARGET.test(message) && !RE_SCREEN_PICK.test(message);
     if (isPrice) {
@@ -1439,8 +1400,6 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
         route.intent = "PRICE_TARGET";
         route.needs = ["technical", "fundamental", "news"];
       } else {
-        // A clear "right price to buy" ask, but no identifiable stock — ask
-        // instead of guessing / dumping a generic shortlist.
         const label = region === "india" ? "India" : "USA";
         return {
           answer:
@@ -1460,8 +1419,6 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
       isStockSpecific(message) &&
       (!route.tickers || !route.tickers.length)
     ) {
-      // A single named-company question ("how is the fundamental of Nykaa")
-      // that the router left ticker-less — resolve and deep-dive on it.
       const nm = await resolveNameToTicker(env, origin, region, message);
       if (nm) {
         route.tickers = [nm.ticker];
@@ -1471,7 +1428,6 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
     }
   }
 
-  // 1b) Specialised analyst flows (grounded only) before the generic pipeline.
   if (mode !== "news" && (route.intent === "SCREEN_PICK" || route.intent === "PRICE_TARGET")) {
     try {
       const regime = await detectMarketRegime(env, origin, region);
@@ -1524,7 +1480,6 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
   const wantNews = route.needs.includes("news");
   const wantMacro = route.needs.includes("macro");
 
-  // Stock context (shared by technical + fundamental) — uses resolveStockPath
   let stockContexts = [];
   if ((wantTech || wantFund) && route.tickers.length) {
     groundingTasks.push(
@@ -1549,7 +1504,6 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
   if (macroCtx) { contextByKind.macro = macroCtx.text; sources.push({ title: "Macro (FRED)", url: macroCtx.url }); }
   if (newsCtx) { contextByKind.news = newsCtx.text; sources.push({ title: "Market news", url: newsCtx.url }); }
 
-  // 3) Web fallback only if internal grounding is thin for what was requested
   let usedWeb = false;
   const internalThin =
     (wantTech || wantFund) && !stockContexts.length &&
@@ -1563,7 +1517,6 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
     }
   }
 
-  // 4) Run needed specialists in parallel
   const specialistJobs = [];
   if (wantTech && contextByKind.technical) specialistJobs.push(runSpecialist(env, "technical", message, contextByKind.technical).then((t) => ({ kind: "technical", text: t })));
   if (wantFund && contextByKind.fundamental) specialistJobs.push(runSpecialist(env, "fundamental", message, contextByKind.fundamental).then((t) => ({ kind: "fundamental", text: t })));
@@ -1572,19 +1525,14 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
 
   let notes = (await Promise.all(specialistJobs)).filter((n) => n && n.text);
 
-  // If nothing grounded at all, answer generally (single LLM pass) with web note.
   if (!notes.length && contextByKind.web) {
     notes = [{ kind: "web", text: contextByKind.web }];
   }
 
-  // 5) Synthesize
   let answer;
   if (notes.length) {
     answer = await synthesize(env, message, notes, sources);
   } else {
-    // No grounding available. HerAI is a data-grounded analyst, not a generic
-    // chatbot: it must NOT fabricate stock-specific data. If the question needs
-    // specific stock/screen data we could not locate, say so and guide the user.
     const needsSpecificData =
       route.tickers.length ||
       ["STOCK_DEEP_DIVE", "PRICE_TARGET", "SCREEN_PICK", "COMPARE_STOCKS", "SECTOR_ANALYSIS"].includes(route.intent);
@@ -1594,8 +1542,6 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
         `I ground every answer in HeRAI's own built data (per-stock pages, screeners, macro), and I could not locate the specific data needed for ${askedFor} in the ${region.toUpperCase()} dataset right now. ` +
         `Please give me an exact ticker we cover (e.g., AAPL, RELIANCE), ask for a screen-based shortlist (e.g., "10 S&P 500 stocks to consider"), or ask for a buy zone on a named stock, and I'll analyse it from the data.`;
     } else {
-      // General market-education concept — allowed, but strictly no fabricated specifics.
-      // Stage 2: Use Gemma 4 for polished final output presentation
       const synthesisModel = synthesisWorkersAiModel(env);
       const { text } = await callLLM(
         env,
@@ -1623,12 +1569,8 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
 }
 
 // ── Question bank (analytics) — capture every customer question ─────────────
-// Every /api/herai/chat request is logged to KV so we can see what customers
-// actually ask, which ones failed, and the data path each answer took. Viewable
-// via the key-gated GET /api/herai/questions endpoint and the hidden
-// /herai-admin.html page. Best-effort: silently no-ops if HERAI_KV is unbound.
-const QLOG_PREFIX = "q:";        // one KV key per logged question
-const QLOG_MAX_READ = 5000;      // admin read cap
+const QLOG_PREFIX = "q:";
+const QLOG_MAX_READ = 5000;
 
 function isFallbackAnswer(result) {
   if (!result) return true;
@@ -1655,7 +1597,6 @@ function logQuestion(env, ctx, meta, result) {
       agents: (result && result.agents) || [],
       sourceKeys: (result && result.sourceKeys) || [],
       tickers: (result && result.tickers) || [],
-      // "flow": which HTMLs / data / web the answer was grounded in.
       sources: ((result && result.citations) || []).map((c) => ({ t: c.title, u: c.url })),
       answerPreview: String((result && result.answer) || (result && result.error) || "").slice(0, 400),
     };
@@ -1701,7 +1642,7 @@ async function handleQuestionsAdmin(request, env) {
     if (res.list_complete || !res.cursor) break;
     cursor = res.cursor;
   }
-  entries.sort((a, b) => (a.ts < b.ts ? 1 : -1)); // newest first
+  entries.sort((a, b) => (a.ts < b.ts ? 1 : -1));
   const trimmed = entries.slice(0, limit);
 
   if (url.searchParams.get("format") === "csv") {
