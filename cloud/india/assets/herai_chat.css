@@ -256,12 +256,13 @@
 
 .herai-mode-toggle {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   padding: 0 16px 14px;
   background: linear-gradient(90deg, rgba(124,58,237,0.04), rgba(6,182,212,0.04));
 }
 .herai-mode-btn {
-  flex: 1;
+  flex: 1 1 180px;
   border: 1px solid var(--herai-border);
   background: rgba(255, 255, 255, 0.03);
   color: var(--herai-muted);
@@ -292,3 +293,121 @@
   border: 1px dashed var(--herai-border);
 }
 .herai-browse:hover { background: rgba(124, 58, 237, 0.08); }
+
+.herai-keybar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px 14px;
+  background: linear-gradient(90deg, rgba(124,58,237,0.04), rgba(6,182,212,0.04));
+  border-top: 1px dashed var(--herai-border);
+}
+.herai-key-status {
+  font-size: 12px;
+  color: var(--herai-muted);
+  line-height: 1.35;
+}
+.herai-key-btn {
+  border: 1px solid #f59e0b;
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+  color: #fff;
+  border-radius: 10px;
+  padding: 9px 14px;
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  box-shadow: 0 8px 18px rgba(249, 115, 22, 0.35);
+  cursor: pointer;
+}
+.herai-key-btn:hover {
+  border-color: #fb923c;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(249, 115, 22, 0.42);
+}
+
+.herai-key-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 14, 39, 0.56);
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.herai-key-sheet {
+  width: min(900px, 96vw);
+  max-height: 90vh;
+  overflow: auto;
+  border-radius: 16px;
+  border: 1px solid var(--herai-border);
+  background: #fff;
+  color: #1f2937;
+  box-shadow: 0 16px 40px rgba(31, 41, 55, 0.28);
+  padding: 14px;
+}
+.herai-key-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.herai-key-head h3 {
+  margin: 0;
+  color: var(--herai-indigo);
+}
+.herai-key-close {
+  border: 1px solid #d1d5db;
+  background: #fff;
+  border-radius: 10px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.herai-key-note {
+  margin: 10px 0 12px;
+  font-size: 14.5px;
+  color: #b91c1c;
+  font-weight: 800;
+}
+.herai-key-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.herai-key-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+  color: #374151;
+}
+.herai-key-grid input {
+  border: 1px solid #d1d5db;
+  border-radius: 9px;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+.herai-key-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 12px;
+}
+.herai-key-actions button {
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-weight: 700;
+  cursor: pointer;
+  background: #fff;
+}
+.herai-key-actions #herai-save-keys {
+  border-color: transparent;
+  color: #fff;
+  background: var(--herai-grad);
+}
+@media (max-width: 760px) {
+  .herai-key-grid { grid-template-columns: 1fr; }
+  .herai-keybar { flex-direction: column; align-items: flex-start; }
+}

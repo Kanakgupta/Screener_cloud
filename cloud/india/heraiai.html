@@ -123,8 +123,8 @@
 
   <aside class="herai-side">
     <div class="herai-side-head">
-      <h2>Market ideas</h2>
-      <p>Tap an idea for a fresh, data-driven answer</p>
+      <h2>Your questions</h2>
+      <p>This panel learns from what you ask in this browser</p>
     </div>
 
     <div class="herai-search">
@@ -137,18 +137,18 @@
       <div class="herai-faq-list" id="herai-foryou"></div>
     </div>
 
-    <div class="herai-faq-group-label">Recent &amp; trending</div>
+    <div class="herai-faq-group-label">Recent questions</div>
     <div class="herai-faq-list" id="herai-faq-top"></div>
     <div class="herai-faq-list herai-hidden" id="herai-faq-rest"></div>
     <button class="herai-showmore herai-hidden" id="herai-showmore">Show more</button>
-    <a class="herai-browse" href="learn/faq.html">Browse all FAQs &rarr;</a>
+    <a class="herai-browse" href="learn/faq.html">Question bank remains available &rarr;</a>
   </aside>
 
   <section class="herai-chat">
     <div class="herai-messages" id="herai-messages">
       <div class="herai-msg bot">
-        Hi! I'm <strong>HerAI</strong>. Pick a popular question on the left for an instant answer,
-        or ask your own about India stocks &mdash; fundamentals, technicals, news, or the market mood.
+        Hi! I'm <strong>HerAI</strong>. Ask your India market question and I will ground the answer in
+        technicals, fundamentals, and optional internet research based on your selected modes.
       </div>
     </div>
 
@@ -157,11 +157,53 @@
       <button class="herai-send" id="herai-send">Ask</button>
     </div>
     <div class="herai-mode-toggle" role="group" aria-label="Mode">
-      <button type="button" class="herai-mode-btn" id="herai-mode-news" title="Search live news for exactly what you type">&#128240; News</button>
-      <button type="button" class="herai-mode-btn active" id="herai-mode-analysis" title="Grounded, data-driven analysis">&#129504; Analysis</button>
+      <button type="button" class="herai-mode-btn active" id="herai-mode-technical" title="Use HeRAI technical screens and stock technical points">Technical analysis</button>
+      <button type="button" class="herai-mode-btn active" id="herai-mode-fundamental" title="Use HeRAI fundamental screens and stock fundamentals">Fundamental analysis</button>
+      <button type="button" class="herai-mode-btn" id="herai-mode-internet" title="Allow internet fallback and external finance sources">Internet</button>
+    </div>
+    <div class="herai-keybar">
+      <div class="herai-key-status" id="herai-key-status"></div>
+      <button type="button" class="herai-key-btn" id="herai-open-keys">Set API keys</button>
     </div>
   </section>
 
+</div>
+
+<div class="herai-key-modal herai-hidden" id="herai-key-modal" role="dialog" aria-modal="true" aria-label="API key manager">
+  <div class="herai-key-sheet">
+    <div class="herai-key-head">
+      <h3>Session API keys</h3>
+      <button type="button" class="herai-key-close" aria-label="Close">&times;</button>
+    </div>
+    <p class="herai-key-note">We do not store keys on our servers. Keys stay only in this browser session and are cleared when the tab/window closes. If all provided keys fail, HerAI falls back to Cloudflare AI models.</p>
+    <div class="herai-key-grid">
+      <label>Gemini key<input id="herai-key-gemini" type="password" autocomplete="off" /></label>
+      <label>Gemini model (optional)<input id="herai-model-gemini" type="text" placeholder="gemini-2.5-flash" /></label>
+
+      <label>Claude key<input id="herai-key-claude" type="password" autocomplete="off" /></label>
+      <label>Claude model (optional)<input id="herai-model-claude" type="text" placeholder="claude-3-5-sonnet-latest" /></label>
+
+      <label>OpenAI key<input id="herai-key-openai" type="password" autocomplete="off" /></label>
+      <label>OpenAI model (optional)<input id="herai-model-openai" type="text" placeholder="gpt-4o-mini" /></label>
+
+      <label>OpenRouter key<input id="herai-key-openrouter" type="password" autocomplete="off" /></label>
+      <label>OpenRouter model (optional)<input id="herai-model-openrouter" type="text" placeholder="meta-llama/llama-3.3-70b-instruct:free" /></label>
+
+      <label>Ollama key (optional)<input id="herai-key-ollama" type="password" autocomplete="off" /></label>
+      <label>Ollama endpoint (required if used)<input id="herai-endpoint-ollama" type="text" placeholder="https://your-ollama-endpoint" /></label>
+      <label>Ollama model (optional)<input id="herai-model-ollama" type="text" placeholder="llama3.1:8b" /></label>
+
+      <label>Groq key<input id="herai-key-groq" type="password" autocomplete="off" /></label>
+      <label>Groq model (optional)<input id="herai-model-groq" type="text" placeholder="llama-3.3-70b-versatile" /></label>
+
+      <label>Cerebras key<input id="herai-key-cerebras" type="password" autocomplete="off" /></label>
+      <label>Cerebras model (optional)<input id="herai-model-cerebras" type="text" placeholder="llama3.1-70b" /></label>
+    </div>
+    <div class="herai-key-actions">
+      <button type="button" class="herai-key-close">Cancel</button>
+      <button type="button" id="herai-save-keys">Save session keys</button>
+    </div>
+  </div>
 </div>
 
 

@@ -36,6 +36,17 @@ const PROVIDERS = [
   { id: "openrouter", model: "meta-llama/llama-3.3-70b-instruct:free", keys: ["OPENROUTER_API_KEY"] },
 ];
 
+const USER_PROVIDER_DEFAULT_MODELS = {
+  gemini: "gemini-2.5-flash",
+  claude: "claude-3-5-sonnet-latest",
+  openai: "gpt-4o-mini",
+  ollama: "llama3.1:8b",
+  openrouter: "meta-llama/llama-3.3-70b-instruct:free",
+  groq: "llama-3.3-70b-versatile",
+  cerebras: "llama3.1-70b",
+};
+const USER_PROVIDER_IDS = new Set(Object.keys(USER_PROVIDER_DEFAULT_MODELS));
+
 const ALLOWED_REGIONS = new Set(["usa", "india"]);
 const MAX_MESSAGE = 1500;
 const MAX_HISTORY = 6;          // last N turns sent for context
@@ -107,6 +118,50 @@ function firstKey(env, keys) {
   }
   return null;
 }
+
+function normalizeUserProviders(raw) {
+  if (!Array.isArray(raw)) return [];
+  const out = [];
+  for (const item of raw) {
+    if (!item || typeof item !== "object") continue;
+    const id = String(item.id || "").trim().toLowerCase();
+    if (!USER_PROVIDER_IDS.has(id)) continue;
+    const key = String(item.key || "").trim();
+    if (!key) continue;
+    const model = String(item.model || USER_PROVIDER_DEFAULT_MODELS[id] || "").trim();
+    const endpoint = String(item.endpoint || "").trim();
+    out.push({ id, key, model, endpoint });
+    if (out.length >= 8) break;
+  }
+  return out;
+}
+
+function normalizeModes(rawModes) {
+  const allowed = new Set(["technical", "fundamental", "internet"]);
+  const picked = new Set();
+  if (Array.isArray(rawModes)) {
+    for (const m of rawModes) {
+      const v = String(m || "").trim().toLowerCase();
+      if (allowed.has(v)) picked.add(v);
+    }
+  }
+  if (!picked.size) {
+    picked.add("technical");
+    picked.add("fundamental");
+  }
+  return {
+    technical: picked.has("technical"),
+    fundamental: picked.has("fundamental"),
+    internet: picked.has("internet"),
+    list: Array.from(picked),
+    cacheKey: Array.from(picked).sort().join("+"),
+  };
+}
+
+function isInternetOnlyMode(mode) {
+  return !!(mode && mode.internet && !mode.technical && !mode.fundamental);
+}
+
 function availableProviders(env) {
   return PROVIDERS.filter((p) => firstKey(env, p.keys));
 }
@@ -140,10 +195,150 @@ function stripHtml(html) {
     .trim();
 }
 
+const TRUSTED_COMMON_DOMAINS = [
+  "finance.yahoo.com",
+  "google.com",
+  "tradingview.com",
+  "sec.gov",
+  "marketwatch.com",
+  "investing.com",
+  "morningstar.com",
+  "nasdaq.com",
+  "reuters.com",
+  "bloomberg.com",
+  "wsj.com",
+];
+const TRUSTED_INDIA_DOMAINS = [
+  "moneycontrol.com",
+  "nseindia.com",
+  "bseindia.com",
+  "economictimes.indiatimes.com",
+  "livemint.com",
+  "business-standard.com",
+];
+const TRUSTED_USA_DOMAINS = [
+  "sec.gov",
+  "nasdaq.com",
+  "marketwatch.com",
+  "fred.stlouisfed.org",
+  "federalreserve.gov",
+];
+
+function safeHost(u) {
+  try {
+    return new URL(u).hostname.toLowerCase();
+  } catch {
+    return "";
+  }
+}
+
+function hostScore(host, region) {
+  if (!host) return 0;
+  if (host.includes("heraiscreener.com")) return 100;
+  const regional = region === "india" ? TRUSTED_INDIA_DOMAINS : TRUSTED_USA_DOMAINS;
+  if (regional.some((d) => host === d || host.endsWith(`.${d}`))) return 85;
+  if (TRUSTED_COMMON_DOMAINS.some((d) => host === d || host.endsWith(`.${d}`))) return 70;
+  if (host.includes("duckduckgo.com")) return 20;
+  return 35;
+}
+
+function rankAndFilterSources(region, sources, max = 10) {
+  const seen = new Set();
+  const rows = [];
+  for (const s of sources || []) {
+    const url = String((s && s.url) || "").trim();
+    if (!url || seen.has(url)) continue;
+    seen.add(url);
+    const host = safeHost(url);
+    rows.push({
+      title: String((s && s.title) || url),
+      url,
+      host,
+      score: hostScore(host, region),
+    });
+  }
+  rows.sort((a, b) => b.score - a.score);
+  return rows.slice(0, max).map((r) => ({ title: r.title, url: r.url }));
+}
+
+function rankAndFilterSourcesForMode(region, sources, mode, max = 10) {
+  const ranked = rankAndFilterSources(region, sources, max);
+  if (!isInternetOnlyMode(mode)) return ranked;
+  return ranked.filter((s) => !safeHost(s.url).includes("heraiscreener.com"));
+}
+
+function shouldAskClarifying(route, message, allowStructured) {
+  if (!allowStructured) return false;
+  const m = String(message || "");
+  const asksScreenList = RE_SCREEN_PICK.test(m) || /\bwhich\s+stocks?\b/i.test(m);
+  if (asksScreenList) return false;
+  const asksStockSpecific =
+    /\b(stock|ticker|share|company|buy\s+price|entry|support|target|should\s+i\s+buy|analyse|analyze)\b/i.test(m);
+  if (!asksStockSpecific) return false;
+  const hasTicker = Array.isArray(route.tickers) && route.tickers.length > 0;
+  if (hasTicker) return false;
+  const conf = Number(route.confidence || 0);
+  return conf < 0.55;
+}
+
+function buildEvidencePack(route, region, contexts, contextByKind, regime, mode, sources) {
+  return {
+    region,
+    mode: mode && mode.list ? mode.list : [],
+    intent: route.intent,
+    tickers: route.tickers || [],
+    confidence: Number(route.confidence || 0),
+    regime: regime ? { regime: regime.regime, note: regime.note, breadth: regime.breadth } : null,
+    technical: contextByKind.technical ? clip(contextByKind.technical, 2200) : null,
+    fundamental: contextByKind.fundamental ? clip(contextByKind.fundamental, 2200) : null,
+    news: contextByKind.news ? clip(contextByKind.news, 1800) : null,
+    macro: contextByKind.macro ? clip(contextByKind.macro, 1800) : null,
+    stockSummaries: (contexts || []).map((s) => ({ ticker: s.ticker, summary: clip(s.summary, 260), url: s.url })),
+    sources: sources || [],
+  };
+}
+
+const VERIFY_SYSTEM = `You are an answer verifier for an equity research assistant.
+You receive a drafted answer and an evidence JSON.
+Task: correct any statement in the answer that is unsupported by the evidence.
+Rules:
+- Keep original structure and tone as much as possible.
+- Remove or soften unsupported exact numbers/tickers/claims.
+- Do not invent new facts.
+- Return ONLY the corrected final answer text.`;
+
+async function verifyAgainstEvidence(env, draft, evidence, userProviders = []) {
+  if (!draft || !evidence) return draft;
+  const evidenceText = clip(JSON.stringify(evidence), 5000);
+  const prompt = `Draft answer:\n${clip(draft, 5000)}\n\nEvidence JSON:\n${evidenceText}`;
+  try {
+    const synthesisModel = synthesisWorkersAiModel(env);
+    const { text } = await callLLM(env, VERIFY_SYSTEM, prompt, {
+      maxTokens: 900,
+      model: synthesisModel,
+      userProviders,
+    });
+    return String(text || draft).trim() || draft;
+  } catch {
+    return draft;
+  }
+}
+
 // ── Unified LLM call across the free chain ──────────────────────────────────
-async function callLLM(env, system, user, { wantJson = false, maxTokens = 900, model } = {}) {
+async function callLLM(env, system, user, { wantJson = false, maxTokens = 900, model, userProviders = [] } = {}) {
   const providers = availableProviders(env);
+  const runtimeProviders = normalizeUserProviders(userProviders);
   let workersAiErr = null;
+  let runtimeErr = null;
+
+  for (const p of runtimeProviders) {
+    try {
+      const text = await callUserProvider(p, system, user, wantJson, maxTokens);
+      if (text && text.trim()) return { text: text.trim(), provider: `${p.id} (user key)` };
+    } catch (e) {
+      runtimeErr = e;
+    }
+  }
 
   // Primary path: Workers AI binding
   if (hasWorkersAI(env)) {
@@ -157,6 +352,7 @@ async function callLLM(env, system, user, { wantJson = false, maxTokens = 900, m
   }
 
   if (!providers.length) {
+    if (runtimeErr) throw new Error(`USER_PROVIDER_FAILED: ${runtimeErr.message || runtimeErr}`);
     if (workersAiErr) throw new Error(`WORKERS_AI_FAILED: ${workersAiErr.message || workersAiErr}`);
     throw new Error("NO_LLM_KEYS");
   }
@@ -276,6 +472,128 @@ async function callWorkersAI(env, system, user, wantJson, maxTokens, overrideMod
   throw lastErr || new Error("workers ai returned empty output");
 }
 
+async function callOpenAICompatible(baseUrl, key, model, system, user, wantJson, maxTokens, extraHeaders = {}) {
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${key}`,
+    ...extraHeaders,
+  };
+  const body = {
+    model,
+    messages: [
+      { role: "system", content: system },
+      { role: "user", content: user },
+    ],
+    temperature: 0.3,
+    max_tokens: maxTokens,
+    ...(wantJson ? { response_format: { type: "json_object" } } : {}),
+  };
+  const r = await fetch(`${baseUrl}/chat/completions`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+  });
+  if (!r.ok) throw new Error(`provider ${r.status}`);
+  const data = await r.json();
+  return data?.choices?.[0]?.message?.content || "";
+}
+
+async function callUserProvider(p, system, user, wantJson, maxTokens) {
+  if (p.id === "gemini") {
+    const model = p.model || USER_PROVIDER_DEFAULT_MODELS.gemini;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(p.key)}`;
+    const body = {
+      systemInstruction: { parts: [{ text: system }] },
+      contents: [{ role: "user", parts: [{ text: user }] }],
+      generationConfig: {
+        temperature: 0.3,
+        maxOutputTokens: maxTokens,
+        thinkingConfig: { thinkingBudget: 0 },
+        ...(wantJson ? { responseMimeType: "application/json" } : {}),
+      },
+    };
+    const r = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    if (!r.ok) throw new Error(`gemini ${r.status}`);
+    const data = await r.json();
+    return data?.candidates?.[0]?.content?.parts?.map((x) => x.text).join("") || "";
+  }
+
+  if (p.id === "claude") {
+    const model = p.model || USER_PROVIDER_DEFAULT_MODELS.claude;
+    const r = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": p.key,
+        "anthropic-version": "2023-06-01",
+      },
+      body: JSON.stringify({
+        model,
+        max_tokens: maxTokens,
+        temperature: 0.3,
+        system,
+        messages: [{ role: "user", content: user }],
+      }),
+    });
+    if (!r.ok) throw new Error(`claude ${r.status}`);
+    const data = await r.json();
+    const blocks = Array.isArray(data?.content) ? data.content : [];
+    return blocks.map((b) => (b && b.type === "text" ? b.text : "")).filter(Boolean).join("\n");
+  }
+
+  if (p.id === "ollama") {
+    const endpoint = (p.endpoint || "").replace(/\/+$/, "");
+    if (!endpoint) throw new Error("ollama endpoint missing");
+    const model = p.model || USER_PROVIDER_DEFAULT_MODELS.ollama;
+    const r = await fetch(`${endpoint}/api/chat`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model,
+        messages: [
+          { role: "system", content: system },
+          { role: "user", content: user },
+        ],
+        stream: false,
+      }),
+    });
+    if (!r.ok) throw new Error(`ollama ${r.status}`);
+    const data = await r.json();
+    return data?.message?.content || data?.response || "";
+  }
+
+  if (p.id === "openai") {
+    const model = p.model || USER_PROVIDER_DEFAULT_MODELS.openai;
+    return callOpenAICompatible("https://api.openai.com/v1", p.key, model, system, user, wantJson, maxTokens);
+  }
+  if (p.id === "openrouter") {
+    const model = p.model || USER_PROVIDER_DEFAULT_MODELS.openrouter;
+    return callOpenAICompatible(
+      "https://openrouter.ai/api/v1",
+      p.key,
+      model,
+      system,
+      user,
+      wantJson,
+      maxTokens,
+      { "HTTP-Referer": "https://heraiscreener.com", "X-Title": "HeRAI Screener" }
+    );
+  }
+  if (p.id === "groq") {
+    const model = p.model || USER_PROVIDER_DEFAULT_MODELS.groq;
+    return callOpenAICompatible("https://api.groq.com/openai/v1", p.key, model, system, user, wantJson, maxTokens);
+  }
+  if (p.id === "cerebras") {
+    const model = p.model || USER_PROVIDER_DEFAULT_MODELS.cerebras;
+    return callOpenAICompatible("https://api.cerebras.ai/v1", p.key, model, system, user, wantJson, maxTokens);
+  }
+  throw new Error(`unsupported provider: ${p.id}`);
+}
+
 async function callOne(p, key, system, user, wantJson, maxTokens) {
   if (p.id === "gemini") {
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${p.model}:generateContent?key=${encodeURIComponent(key)}`;
@@ -339,7 +657,7 @@ function parseJsonLoose(text) {
 }
 
 // ── Router: intent + entities + which specialists are needed ────────────────
-const ROUTER_SYSTEM = `You are the routing brain of a senior stock-market analyst assistant.
+const ROUTER_SYSTEM = `You are a Senior Stock Market Analyst acting as the routing brain of this assistant.
 Classify the user's question and extract entities. Return ONLY JSON:
 {
   "intent": "PRICE_TARGET|SCREEN_PICK|STOCK_DEEP_DIVE|SECTOR_ANALYSIS|MARKET_REGIME|COMPARE_STOCKS|NEWS_QUERY|GENERAL_QUERY",
@@ -359,7 +677,7 @@ Intent guide:
 Rules: "needs" lists ONLY the specialists required. For a single-stock analysis include technical+fundamental+news.
 Tickers must be plain symbols (uppercase, no exchange suffix). Map company names to tickers (e.g. Reliance->RELIANCE, Apple->AAPL). If none, return [].`;
 
-async function routeQuery(env, message, history, region) {
+async function routeQuery(env, message, history, region, userProviders = []) {
   const historyText = (history || [])
     .slice(-MAX_HISTORY)
     .map((h) => `${h.role === "user" ? "User" : "HerAI"}: ${clip(h.content, 300)}`)
@@ -367,7 +685,7 @@ async function routeQuery(env, message, history, region) {
   const user = `Region: ${region}\n${historyText ? "Conversation so far:\n" + historyText + "\n" : ""}New question: ${message}`;
 
   try {
-    const { text } = await callLLM(env, ROUTER_SYSTEM, user, { wantJson: true, maxTokens: 300 });
+    const { text } = await callLLM(env, ROUTER_SYSTEM, user, { wantJson: true, maxTokens: 300, userProviders });
     const parsed = parseJsonLoose(text);
     if (parsed) return enrichRouteWithTicker(normalizeRoute(parsed), message);
   } catch (e) {
@@ -397,13 +715,19 @@ function parseCount(message, fallback = 10) {
 const RE_PRICE_TARGET =
   /(right|fair|good|best|ideal|entry|target|correct)\s+(price|entry|level|point)|price\s+to\s+buy|when\s+to\s+buy|at\s+what\s+price|buy\s+(price|zone|level|point|target)|support\s+(level|price|zone)|good\s+entry|entry\s+point/i;
 const RE_SCREEN_PICK =
-  /(give|show|find|list|suggest|recommend|top|best)\b[\s\S]*\b(stocks?|picks?|ideas?|names?|companies)|stocks?\s+to\s+(buy|invest|watch|trade)|what\s+(should\s+i|to)\s+buy|invest\s+(in\b|tomorrow|today|now)|\b\d{1,3}\s+(stocks?|picks?)\b/i;
+  /(give|show|find|list|suggest|recommend|top|best|which)\b[\s\S]*\b(stocks?|shares?|picks?|ideas?|names?|companies)|stocks?\s+to\s+(buy|invest|watch|trade)|what\s+(should\s+i|to)\s+buy|which\s+stocks?\b|invest\s+(in\b|tomorrow|today|now)|\b\d{1,3}\s+(stocks?|picks?)\b/i;
 const RE_BREAKOUT = /\b(break(?:ing)?\s*out|breakout|golden\s+cross)\b/i;
 
 function isStockSpecific(message) {
   if (RE_SCREEN_PICK.test(message)) return false;
   if (/\b(stocks|shares|ideas|names|companies|picks|list|screener|screen)\b/i.test(message)) return false;
   return true;
+}
+
+function isMultiStockPriceQuery(message) {
+  const m = String(message || "");
+  const plural = /\b(stocks|shares|companies|names|picks)\b/i.test(m);
+  return plural && RE_PRICE_TARGET.test(m);
 }
 
 
@@ -413,6 +737,13 @@ function enrichRouteWithTicker(route, message) {
   out.count = parseCount(message, typeof out.count === "number" ? out.count : 10);
 
   if (RE_SCREEN_PICK.test(message) && !RE_PRICE_TARGET.test(message)) {
+    out.intent = "SCREEN_PICK";
+    out.tickers = [];
+    out.needs = ["technical", "fundamental", "news"];
+    return out;
+  }
+
+  if (isMultiStockPriceQuery(message)) {
     out.intent = "SCREEN_PICK";
     out.tickers = [];
     out.needs = ["technical", "fundamental", "news"];
@@ -491,6 +822,431 @@ function ruleRoute(message) {
     timeframe: "unspecified",
     needs: needs.length ? needs : ["fundamental", "news"],
     confidence: 0.3,
+  };
+}
+
+// ── Multi-intent extraction + corpus search + result coverage ──────────────
+const SEARCH_STOPWORDS = new Set([
+  "the", "a", "an", "and", "or", "to", "of", "for", "in", "on", "at", "with", "from",
+  "is", "are", "was", "were", "be", "been", "being", "this", "that", "these", "those",
+  "which", "what", "when", "how", "why", "today", "now", "near", "good", "best",
+  "stock", "stocks", "share", "shares", "price", "entry", "analysis", "analyse", "analyze",
+]);
+
+function extractSearchTerms(query) {
+  const terms = String(query || "")
+    .toLowerCase()
+    .match(/[a-z0-9]{2,}/g) || [];
+  const out = [];
+  const seen = new Set();
+  for (const t of terms) {
+    if (SEARCH_STOPWORDS.has(t)) continue;
+    if (seen.has(t)) continue;
+    seen.add(t);
+    out.push(t);
+    if (out.length >= 12) break;
+  }
+  return out;
+}
+
+function parseSitemapLocs(xml) {
+  const out = [];
+  const re = /<loc>([^<]+)<\/loc>/gi;
+  let m;
+  while ((m = re.exec(String(xml || "")))) {
+    const v = String(m[1] || "").trim();
+    if (v) out.push(v);
+  }
+  return out;
+}
+
+async function listRegionHtmlPaths(env, origin, region) {
+  const out = new Set([
+    `/${region}/index.html`,
+    `/${region}/screens.html`,
+    `/${region}/technical.html`,
+    `/${region}/funds.html`,
+    `/${region}/stocks.html`,
+    `/${region}/news.html`,
+    `/${region}/learn.html`,
+    `/${region}/heraiai.html`,
+  ]);
+
+  for (const sp of [`/${region}/sitemap.xml`, "/sitemap.xml"]) {
+    const res = await assetGet(env, origin, sp);
+    if (!res) continue;
+    const xml = await res.text();
+    for (const loc of parseSitemapLocs(xml)) {
+      try {
+        const p = new URL(loc).pathname;
+        if (!p.includes(`/${region}/`)) continue;
+        if (!/\.html$/i.test(p)) continue;
+        out.add(p);
+      } catch {
+        // ignore invalid URL
+      }
+    }
+  }
+  return Array.from(out);
+}
+
+function pageTitleFromHtml(html, fallback) {
+  const m = String(html || "").match(/<title>([\s\S]*?)<\/title>/i);
+  if (!m) return fallback;
+  return clip(m[1].replace(/\s+/g, " ").trim(), 120) || fallback;
+}
+
+function scoreTextAgainstTerms(text, terms) {
+  const lower = String(text || "").toLowerCase();
+  let score = 0;
+  let firstHit = -1;
+  for (const t of terms) {
+    if (!t) continue;
+    const idx = lower.indexOf(t);
+    if (idx < 0) continue;
+    if (firstHit < 0 || idx < firstHit) firstHit = idx;
+    score += 1;
+    if (new RegExp(`\\b${t}\\b`, "i").test(lower)) score += 1;
+  }
+  return { score, firstHit };
+}
+
+function snippetAround(text, idx, width = 240) {
+  const s = String(text || "").replace(/\s+/g, " ").trim();
+  if (!s) return "";
+  if (idx < 0) return clip(s, width);
+  const start = Math.max(0, idx - Math.floor(width / 3));
+  return clip(s.slice(start), width);
+}
+
+async function searchHtmlCorpus(env, origin, region, query, options = {}) {
+  const maxPages = Number(options.maxPages || env?.HERAI_HTML_SCAN_MAX || 5000);
+  const maxResults = Number(options.maxResults || 12);
+  const terms = extractSearchTerms(query);
+  if (!terms.length) return { scanned: 0, results: [], sources: [] };
+
+  const paths = await listRegionHtmlPaths(env, origin, region);
+  const picked = paths.slice(0, Math.max(25, Math.min(maxPages, paths.length)));
+  const results = [];
+  let scanned = 0;
+
+  for (const p of picked) {
+    const res = await assetGet(env, origin, p);
+    if (!res) continue;
+    const html = await res.text();
+    const plain = stripHtml(html);
+    const { score, firstHit } = scoreTextAgainstTerms(plain, terms);
+    scanned += 1;
+    if (score <= 0) continue;
+    let boost = 0;
+    if (p.includes("/screens/")) boost += 2;
+    else if (p.includes("/stocks/")) boost += 1;
+    const total = score + boost;
+    results.push({
+      path: p,
+      score: total,
+      snippet: snippetAround(plain, firstHit),
+      title: pageTitleFromHtml(html, p.split("/").pop() || p),
+      url: `https://heraiscreener.com${p}`,
+    });
+  }
+
+  results.sort((a, b) => b.score - a.score);
+  const top = results.slice(0, maxResults);
+  return {
+    scanned,
+    totalPaths: paths.length,
+    results: top,
+    sources: top.map((r) => ({ title: r.title, url: r.url })),
+  };
+}
+
+function detectIntents(message, route, mode) {
+  const m = String(message || "");
+  if (isInternetOnlyMode(mode)) return ["INTERNET_RESEARCH"];
+  const out = [];
+
+  if (RE_SCREEN_PICK.test(m) || isMultiStockPriceQuery(m) || route.intent === "SCREEN_PICK") out.push("SCREEN_PICK");
+  if (RE_PRICE_TARGET.test(m) && !isMultiStockPriceQuery(m)) out.push("PRICE_TARGET");
+  if ((route.tickers && route.tickers.length) || /\b(analyze|analyse|overview|deep\s*dive|compare)\b/i.test(m)) out.push("STOCK_DEEP_DIVE");
+  if (/\b(news|headline|headlines|catalyst|catalysts|results?|earnings)\b/i.test(m) || route.intent === "NEWS_QUERY") out.push("NEWS_QUERY");
+  if (/\b(macro|fed|inflation|rates?|market\s+regime|risk[-\s]?on|risk[-\s]?off)\b/i.test(m) || route.intent === "MARKET_REGIME") out.push("MARKET_REGIME");
+  if (isInternetOnlyMode(mode) || /\b(internet|web|google|online|latest)\b/i.test(m)) out.push("INTERNET_RESEARCH");
+
+  if (!out.length && route.intent) out.push(route.intent);
+  return Array.from(new Set(out));
+}
+
+function intentLabel(kind) {
+  const map = {
+    SCREEN_PICK: "Screen-based Picks",
+    PRICE_TARGET: "Buy Zone / Entry Price",
+    STOCK_DEEP_DIVE: "Stock Deep Dive",
+    NEWS_QUERY: "News / Catalysts",
+    MARKET_REGIME: "Market Regime",
+    INTERNET_RESEARCH: "Internet Research",
+    GENERAL_QUERY: "General",
+  };
+  return map[kind] || kind;
+}
+
+function summarizeCoverage(intents, sections) {
+  return intents.map((kind) => {
+    const sec = sections.find((s) => s.kind === kind);
+    return {
+      kind,
+      label: intentLabel(kind),
+      met: !!(sec && sec.met),
+      note: sec && sec.note ? sec.note : (sec && sec.met ? "Covered" : "No grounded evidence found"),
+    };
+  });
+}
+
+function composeMultiIntentAnswer(message, sections, coverage) {
+  const lines = [];
+  lines.push(`Question: ${message}`);
+  lines.push("");
+  for (const sec of sections) {
+    lines.push(`### ${intentLabel(sec.kind)}`);
+    lines.push(sec.answer || "No grounded evidence found for this intent.");
+    lines.push("");
+  }
+  lines.push("### Intent Coverage");
+  for (const c of coverage) {
+    lines.push(`- ${c.label}: ${c.met ? "met" : "not met"}${c.note ? ` (${c.note})` : ""}`);
+  }
+  return lines.join("\n").trim();
+}
+
+async function runMultiIntentPlan(env, origin, message, region, route, mode, diagnostics, userProviders = []) {
+  const intents = detectIntents(message, route, mode);
+  const internetOnly = isInternetOnlyMode(mode);
+  const regime = await detectMarketRegime(env, origin, region);
+  const sections = [];
+  const sources = [];
+  const searchStats = [];
+  const allTickers = new Set();
+  let usedWeb = false;
+  let providerUsed = null;
+
+  for (const kind of intents) {
+    let localHitCount = 0;
+    let pagesScanned = 0;
+    let totalPaths = 0;
+
+    if (internetOnly) {
+      const queryByIntent = {
+        SCREEN_PICK: `${message} best stocks to buy now valuation momentum`,
+        PRICE_TARGET: `${message} buy zone support resistance analyst target`,
+        STOCK_DEEP_DIVE: `${message} stock analysis valuation technical`,
+        NEWS_QUERY: `${message} latest stock news catalysts`,
+        MARKET_REGIME: `${message} market regime breadth rates inflation`,
+        INTERNET_RESEARCH: message,
+      };
+      const web = await webSearch(queryByIntent[kind] || message, region);
+      if (web && web.text) {
+        usedWeb = true;
+        sections.push({
+          kind,
+          met: true,
+          answer: `Internet scan results:\n${clip(web.text, 1400)}`,
+          note: `Internet source: ${web.engine || "external"}`,
+        });
+        if (Array.isArray(web.sources)) for (const s of web.sources) sources.push(s);
+        else if (web.url) sources.push({ title: `Web (${web.engine || "external"})`, url: web.url });
+        searchStats.push({ kind, pagesScanned: 0, totalPaths: 0, localHitCount: 0, usedWeb: true, met: true });
+      } else {
+        sections.push({
+          kind,
+          met: false,
+          answer: "I could not retrieve internet results for this request right now.",
+          note: "Internet retrieval unavailable",
+        });
+        searchStats.push({ kind, pagesScanned: 0, totalPaths: 0, localHitCount: 0, usedWeb: true, met: false });
+      }
+      continue;
+    }
+
+    if (kind === "SCREEN_PICK" && (mode.technical || mode.fundamental)) {
+      try {
+        const seed = await searchHtmlCorpus(env, origin, region, `${message} screener technical fundamental stocks`, { maxResults: 8 });
+        localHitCount = seed.results.length;
+        pagesScanned = seed.scanned;
+        totalPaths = seed.totalPaths || 0;
+        for (const s of seed.sources || []) sources.push(s);
+
+        const r = { ...route, intent: "SCREEN_PICK", count: route.count || 10, universe: route.universe || "ALL", rawMessage: message };
+        const res = await runScreenPick(env, origin, region, r, regime, mode, userProviders);
+        if (res && res.answer) {
+          sections.push({ kind, met: true, answer: verify(res.answer), note: `Top ranked candidates produced; HTML hits ${localHitCount}` });
+          for (const s of res.sources || []) sources.push(s);
+          for (const p of res.picks || []) if (p.ticker) allTickers.add(p.ticker);
+          if (!providerUsed && res.providerUsed) providerUsed = res.providerUsed;
+          searchStats.push({ kind, pagesScanned, totalPaths, localHitCount, usedWeb: false, met: true });
+          continue;
+        }
+      } catch (e) {
+        diagFail(diagnostics, "multi-screen-pick", e);
+      }
+      sections.push({ kind, met: false, answer: "I could not build a reliable screen-ranked list from current local data.", note: "Screen ranking unavailable" });
+      searchStats.push({ kind, pagesScanned, totalPaths, localHitCount, usedWeb: false, met: false });
+      continue;
+    }
+
+    if (kind === "PRICE_TARGET" && (mode.technical || mode.fundamental)) {
+      try {
+        const seed = await searchHtmlCorpus(env, origin, region, `${message} buy zone support valuation`, { maxResults: 8 });
+        localHitCount = seed.results.length;
+        pagesScanned = seed.scanned;
+        totalPaths = seed.totalPaths || 0;
+        for (const s of seed.sources || []) sources.push(s);
+
+        let tk = (route.tickers && route.tickers[0]) || null;
+        if (!tk) {
+          const nm = await resolveNameToTicker(env, origin, region, message);
+          if (nm) tk = nm.ticker;
+        }
+        if (tk) {
+          const res = await runPriceTarget(env, origin, region, tk, { ...route, rawMessage: message }, regime, userProviders);
+          if (res && res.answer) {
+            sections.push({ kind, met: true, answer: verify(res.answer), note: `Entry zone computed for ${tk}` });
+            for (const s of res.sources || []) sources.push(s);
+            allTickers.add(tk);
+            if (!providerUsed && res.providerUsed) providerUsed = res.providerUsed;
+            searchStats.push({ kind, pagesScanned, totalPaths, localHitCount, usedWeb: false, met: true });
+            continue;
+          }
+        }
+      } catch (e) {
+        diagFail(diagnostics, "multi-price-target", e);
+      }
+      sections.push({ kind, met: false, answer: "A price-target intent was detected but no specific ticker could be grounded.", note: "Ticker missing" });
+      searchStats.push({ kind, pagesScanned, totalPaths, localHitCount, usedWeb: false, met: false });
+      continue;
+    }
+
+    if (kind === "STOCK_DEEP_DIVE" && route.tickers && route.tickers.length) {
+      const seed = await searchHtmlCorpus(env, origin, region, `${message} stock analysis valuation technical`, { maxResults: 10 });
+      localHitCount = seed.results.length;
+      pagesScanned = seed.scanned;
+      totalPaths = seed.totalPaths || 0;
+      for (const s of seed.sources || []) sources.push(s);
+
+      const lines = [];
+      const ts = route.tickers.slice(0, 4);
+      for (const tk of ts) {
+        const ctx = await fetchStockContext(env, origin, region, tk);
+        if (!ctx) continue;
+        const snap = ctx.rawSnapshot || {};
+        const valTile = (snap.ratios && snap.ratios["Valuation"]) || {};
+        const pe = valTile["Stock P/E"] || valTile["P/E"] || valTile["PE"] || "n/a";
+        const roe = (snap.ratios && snap.ratios["Returns"] && (snap.ratios["Returns"]["ROE %"] || snap.ratios["Returns"]["ROE"])) || "n/a";
+        const tech = computeTechnicals(extractPriceHistory(ctx.rawHtml || ""));
+        lines.push(`- ${tk}: ${ctx.summary || "grounded stock page found"}. ${tech ? technicalsToText(tech) : "Technical series unavailable"}. Valuation P/E ${pe}, ROE ${roe}.`);
+        sources.push({ title: tk, url: ctx.url });
+        allTickers.add(tk);
+      }
+      sections.push({
+        kind,
+        met: lines.length > 0,
+        answer: lines.length ? lines.join("\n") : "No stock pages were found for the requested tickers.",
+        note: lines.length ? "Stock pages analyzed" : "No stock pages matched",
+      });
+      searchStats.push({ kind, pagesScanned, totalPaths, localHitCount, usedWeb: false, met: lines.length > 0 });
+      continue;
+    }
+
+    if (kind === "NEWS_QUERY") {
+      const n = await fetchNews(env, origin, region);
+      if (n && n.text) {
+        sections.push({ kind, met: true, answer: `I used local curated news feeds. Key payload snapshot:\n${clip(n.text, 1200)}`, note: "Local news feeds used" });
+        sources.push({ title: "Market news", url: n.url });
+        searchStats.push({ kind, pagesScanned: 0, totalPaths: 0, localHitCount: 1, usedWeb: false, met: true });
+      } else {
+        const htmlNews = await searchHtmlCorpus(env, origin, region, `${message} news catalysts`, { maxPages: 350, maxResults: 8 });
+        localHitCount = htmlNews.results.length;
+        pagesScanned = htmlNews.scanned;
+        totalPaths = htmlNews.totalPaths || 0;
+        if (htmlNews.results.length) {
+          const lines = htmlNews.results.map((r, i) => `(${i + 1}) ${r.title}: ${r.snippet}`);
+          sections.push({ kind, met: true, answer: `Local news feed was unavailable, so I searched regional HTML pages for catalysts:\n${lines.join("\n")}`, note: `HTML news hits: ${htmlNews.results.length}` });
+          for (const s of htmlNews.sources) sources.push(s);
+          searchStats.push({ kind, pagesScanned, totalPaths, localHitCount, usedWeb: false, met: true });
+        } else {
+          const webNews = await webSearch(`${message} latest stock news catalysts`, region);
+          if (webNews && webNews.text) {
+            usedWeb = true;
+            sections.push({ kind, met: true, answer: `Local feeds were unavailable, so I used internet news fallback:\n${clip(webNews.text, 1200)}`, note: "Internet news fallback used" });
+            if (Array.isArray(webNews.sources)) for (const s of webNews.sources) sources.push(s);
+            else if (webNews.url) sources.push({ title: `Web (${webNews.engine || "external"})`, url: webNews.url });
+            searchStats.push({ kind, pagesScanned, totalPaths, localHitCount, usedWeb: true, met: true });
+          } else {
+            sections.push({ kind, met: false, answer: "I could not locate recent catalyst evidence in local feeds, regional HTML pages, or internet fallback.", note: "No catalyst evidence found" });
+            searchStats.push({ kind, pagesScanned, totalPaths, localHitCount, usedWeb: false, met: false });
+          }
+        }
+      }
+      continue;
+    }
+
+    if (kind === "MARKET_REGIME") {
+      sections.push({
+        kind,
+        met: true,
+        answer: `Regime is ${regime.regime.toUpperCase()}. ${regime.note} Breadth: highs ${regime.breadth.near_52w_high}, lows ${regime.breadth.near_52w_low}, golden-cross ${regime.breadth.golden_cross}, death-cross ${regime.breadth.death_cross}.`,
+        note: "Regime computed from screener breadth",
+      });
+      searchStats.push({ kind, pagesScanned: 0, totalPaths: 0, localHitCount: 1, usedWeb: false, met: true });
+      continue;
+    }
+
+    // INTERNET_RESEARCH and general unresolved intents use full HTML corpus scan first.
+    const html = await searchHtmlCorpus(env, origin, region, message, { maxPages: 350, maxResults: 10 });
+    localHitCount = html.results.length;
+    pagesScanned = html.scanned;
+    totalPaths = html.totalPaths || 0;
+    if (html.results.length) {
+      const lines = html.results.map((r, i) => `(${i + 1}) ${r.title}: ${r.snippet}`);
+      sections.push({ kind, met: true, answer: `Scanned ${html.scanned} HTML pages and matched these grounded passages:\n${lines.join("\n")}`, note: `HTML corpus hits: ${html.results.length}` });
+      for (const s of html.sources) sources.push(s);
+      searchStats.push({ kind, pagesScanned, totalPaths, localHitCount, usedWeb: false, met: true });
+      continue;
+    }
+
+    const web = await webSearch(message, region);
+    if (web && web.text) {
+      usedWeb = true;
+      sections.push({ kind, met: true, answer: `Local HTML corpus had no direct hit, so I used internet fallback:\n${clip(web.text, 1200)}`, note: "Internet fallback used" });
+      if (Array.isArray(web.sources)) for (const s of web.sources) sources.push(s);
+      else if (web.url) sources.push({ title: `Web (${web.engine || "external"})`, url: web.url });
+      searchStats.push({ kind, pagesScanned, totalPaths, localHitCount, usedWeb: true, met: true });
+    } else {
+      sections.push({ kind, met: false, answer: "I could not find grounded matches in local HTML corpus or internet fallback.", note: "No evidence found" });
+      searchStats.push({ kind, pagesScanned, totalPaths, localHitCount, usedWeb: false, met: false });
+    }
+  }
+
+  const coverage = summarizeCoverage(intents, sections);
+  const answer = verify(composeMultiIntentAnswer(message, sections, coverage));
+  return {
+    answer,
+    intent: intents.length > 1 ? "MULTI_INTENT" : (intents[0] || route.intent || "GENERAL_QUERY"),
+    intentCoverage: coverage,
+    agents: Array.from(new Set(intents.map((k) => k.toLowerCase()))),
+    tickers: Array.from(allTickers),
+    citations: rankAndFilterSourcesForMode(region, sources, mode, 14),
+    usedWeb,
+    providerUsed: providerUsed || "rule engine",
+    evidence: {
+      region,
+      mode: mode.list,
+      intent: intents.length > 1 ? "MULTI_INTENT" : (intents[0] || route.intent || "GENERAL_QUERY"),
+      intents,
+      intentCoverage: coverage,
+      searchStats,
+      sources: rankAndFilterSourcesForMode(region, sources, mode, 14),
+    },
+    searchStats,
   };
 }
 
@@ -742,9 +1498,71 @@ async function fetchNews(env, origin, region) {
 }
 
 // ── Web fallback (DuckDuckGo, no key) ───────────────────────────────────────
-async function webSearch(query) {
+function buildWebQuery(query, region) {
+  const common = "Yahoo Finance Google Finance TradingView";
+  const regional = region === "india"
+    ? "Moneycontrol NSE India Economic Times"
+    : "SEC MarketWatch Nasdaq";
+  return `${query} ${regional} ${common}`;
+}
+
+function decodeXmlEntities(s) {
+  return String(s || "")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/<!\[CDATA\[|\]\]>/g, "");
+}
+
+function parseGoogleRssItems(xml, maxItems = 6) {
+  const out = [];
+  const itemRe = /<item>([\s\S]*?)<\/item>/gi;
+  let m;
+  while ((m = itemRe.exec(xml)) && out.length < maxItems) {
+    const chunk = m[1] || "";
+    const t = (chunk.match(/<title>([\s\S]*?)<\/title>/i) || [])[1] || "";
+    const l = (chunk.match(/<link>([\s\S]*?)<\/link>/i) || [])[1] || "";
+    const d = (chunk.match(/<description>([\s\S]*?)<\/description>/i) || [])[1] || "";
+    const title = decodeXmlEntities(t).replace(/\s+/g, " ").trim();
+    const link = decodeXmlEntities(l).trim();
+    const desc = decodeXmlEntities(d).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+    if (!title || !link) continue;
+    out.push({ title, url: link, snippet: desc });
+  }
+  return out;
+}
+
+async function googleSearchRss(query, region) {
   try {
-    const url = `https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json&no_html=1&t=herai`;
+    const q = buildWebQuery(query, region);
+    const rss = `https://news.google.com/rss/search?q=${encodeURIComponent(q)}&hl=en-US&gl=US&ceid=US:en`;
+    const r = await fetch(rss, { headers: { "User-Agent": "HeRAI/1.0" } });
+    if (!r.ok) return null;
+    const xml = await r.text();
+    const items = parseGoogleRssItems(xml, 7);
+    if (!items.length) return null;
+    const text = items
+      .map((it, i) => `(${i + 1}) ${it.title}${it.snippet ? ` — ${it.snippet}` : ""}`)
+      .join("\n");
+    return {
+      engine: "google-rss",
+      url: rss,
+      text: clip(text, 3000),
+      sources: items.map((it) => ({ title: it.title, url: it.url })),
+    };
+  } catch {
+    return null;
+  }
+}
+
+async function webSearch(query, region) {
+  const g = await googleSearchRss(query, region);
+  if (g) return g;
+  try {
+    const q = buildWebQuery(query, region);
+    const url = `https://api.duckduckgo.com/?q=${encodeURIComponent(q)}&format=json&no_html=1&t=herai`;
     const r = await fetch(url, { headers: { "User-Agent": "HeRAI/1.0" } });
     if (!r.ok) return null;
     const d = await r.json();
@@ -755,7 +1573,14 @@ async function webSearch(query) {
       if (bits.length >= 6) break;
     }
     const text = bits.join("\n");
-    return text ? { url: d.AbstractURL || "https://duckduckgo.com", text: clip(text, 2500) } : null;
+    if (!text) return null;
+    const srcUrl = d.AbstractURL || "https://duckduckgo.com";
+    return {
+      engine: "duckduckgo",
+      url: srcUrl,
+      text: clip(text, 2500),
+      sources: [{ title: "DuckDuckGo result", url: srcUrl }],
+    };
   } catch {
     return null;
   }
@@ -787,11 +1612,11 @@ const SPECIALIST_SYSTEMS = {
     "Cite exact data points inline. Always attribute each data point to its source.",
 };
 
-async function runSpecialist(env, kind, question, contextText) {
+async function runSpecialist(env, kind, question, contextText, userProviders = []) {
   if (!contextText) return null;
   const user = `Question: ${question}\n\nData:\n${contextText}`;
   try {
-    const { text } = await callLLM(env, SPECIALIST_SYSTEMS[kind], user, { maxTokens: 350 });
+    const { text } = await callLLM(env, SPECIALIST_SYSTEMS[kind], user, { maxTokens: 350, userProviders });
     return text;
   } catch {
     return null;
@@ -799,7 +1624,7 @@ async function runSpecialist(env, kind, question, contextText) {
 }
 
 // ── Synthesizer ─────────────────────────────────────────────────────────────
-const SYNTH_SYSTEM = `You are HerAI, a senior equity research analyst at an institutional desk. You write concise, evidence-based research notes for professional investors.
+const SYNTH_SYSTEM = `You are HerAI, a Senior Stock Market Analyst at an institutional desk. You write concise, evidence-based research notes for professional investors.
 
 You are given specialist notes and source snippets. Produce a final answer in short paragraphs with the following labelled sections, but ONLY include sections for which data is actually present:
 
@@ -819,7 +1644,7 @@ Rules:
 - Keep each section to 1-3 short paragraphs. Do NOT append a disclaimer (the app adds one).`;
 
 // ── Screening / picks synthesizer ───────────────────────────────────────────
-const SCREEN_SYNTH_SYSTEM = `You are HerAI, a senior portfolio strategist presenting a ranked shortlist of stock ideas to an investment committee.
+const SCREEN_SYNTH_SYSTEM = `You are HerAI, a Senior Stock Market Analyst and portfolio strategist presenting a ranked shortlist of stock ideas to an investment committee.
 You are given a PRE-RANKED, PRE-SCORED candidate pool built from HeRAI's own screeners and price history, plus the prevailing market regime and the weights it implies.
 
 Write a professional shortlist, best-to-good, using ONLY the supplied data. Structure:
@@ -842,7 +1667,7 @@ Rules:
 - Do NOT append a disclaimer (the app adds one).`;
 
 // ── Price-target / buy-zone synthesizer ─────────────────────────────────────
-const PRICE_TARGET_SYNTH_SYSTEM = `You are HerAI, a senior equity analyst answering "what is the right price to buy X" for a professional client.
+const PRICE_TARGET_SYNTH_SYSTEM = `You are HerAI, a Senior Stock Market Analyst answering "what is the right price to buy X" for a professional client.
 HeRAI has ALREADY computed a buy zone deterministically from its own data (technical support/moving-averages, valuation vs sector, analyst targets) and weighted it by the market regime. Your job is to present that answer with a transparent, senior-analyst walkthrough.
 
 Structure:
@@ -859,13 +1684,14 @@ Rules:
 - Show the reasoning; be transparent about how each anchor contributed.
 - Do NOT append a disclaimer (the app adds one).`;
 
-async function synthesize(env, question, notes, sources) {
+async function synthesize(env, question, notes, sources, evidence, userProviders = []) {
   const notesText = notes.map((n) => `[${n.kind}] ${n.text}`).join("\n\n");
   const srcText = sources.map((s, i) => `(${i + 1}) ${s.url}`).join("\n");
-  const user = `User question: ${question}\n\nSpecialist notes:\n${notesText || "(none)"}\n\nSources:\n${srcText || "(none)"}`;
+  const evidenceText = evidence ? clip(JSON.stringify(evidence), 5000) : "(none)";
+  const user = `User question: ${question}\n\nSpecialist notes:\n${notesText || "(none)"}\n\nEvidence JSON:\n${evidenceText}\n\nSources:\n${srcText || "(none)"}`;
   const synthesisModel = synthesisWorkersAiModel(env);
-  const { text } = await callLLM(env, SYNTH_SYSTEM, user, { maxTokens: 900, model: synthesisModel });
-  return text;
+  const { text, provider } = await callLLM(env, SYNTH_SYSTEM, user, { maxTokens: 900, model: synthesisModel, userProviders });
+  return { text, provider };
 }
 
 // ── Verifier / guardrails (rule-based, cheap; upgradeable to LLM) ────────────
@@ -1007,6 +1833,14 @@ function scoreCandidate(c, weights) {
   const oneY = parseNum(m["1Y %"] || m["1Y%"] || m["YTD %"]);
   if (oneY !== null) tech += Math.max(-1, Math.min(2, oneY / 50));
 
+  const signalDateRaw = m["Signal Date"] || m["Date"] || m["As of"] || "";
+  const signalDate = parseDateLoose(signalDateRaw);
+  if (signalDate) {
+    const days = Math.floor((Date.now() - signalDate.getTime()) / 86400000);
+    if (days <= 1) tech += 1;
+    else if (days >= 10) tech -= 0.4;
+  }
+
   let fund = 0;
   for (const s of inScreens) if (FUND_SET.has(s)) fund += 1;
   const roe = parseNum(m["ROE %"]);
@@ -1032,9 +1866,101 @@ function scoreCandidate(c, weights) {
   return { composite, tech: techN, fund: fundN, sent: sentN, screens: c.screens, setups: c.setups, metrics: m };
 }
 
-async function runScreenPick(env, origin, region, route, regime) {
+function parseDateLoose(v) {
+  const s = String(v || "").trim();
+  if (!s) return null;
+  const d1 = new Date(s);
+  if (!Number.isNaN(d1.getTime())) return d1;
+  const m = s.match(/(\d{1,2})[-\/.](\d{1,2})[-\/.](\d{2,4})/);
+  if (!m) return null;
+  const dd = parseInt(m[1], 10);
+  const mm = parseInt(m[2], 10);
+  let yy = parseInt(m[3], 10);
+  if (yy < 100) yy += 2000;
+  const d2 = new Date(Date.UTC(yy, mm - 1, dd));
+  return Number.isNaN(d2.getTime()) ? null : d2;
+}
+
+function pickModeWeights(mode, regime) {
+  const onlyTech = mode && mode.technical && !mode.fundamental;
+  const onlyFund = mode && !mode.technical && mode.fundamental;
+  if (onlyTech) return { tech: 0.75, fund: 0.15, sent: 0.10 };
+  if (onlyFund) return { tech: 0.15, fund: 0.75, sent: 0.10 };
+  return regime.weights;
+}
+
+function screenModeLabel(mode) {
+  const onlyTech = mode && mode.technical && !mode.fundamental;
+  const onlyFund = mode && !mode.technical && mode.fundamental;
+  if (onlyTech) return "technical";
+  if (onlyFund) return "fundamental";
+  return "blended technical+fundamental";
+}
+
+function metricValue(c, ...keys) {
+  const m = c.metrics || {};
+  for (const k of keys) {
+    if (m[k] !== undefined && m[k] !== null && String(m[k]).trim()) return String(m[k]).trim();
+  }
+  return null;
+}
+
+function metricPct(v) {
+  if (!v) return null;
+  return /%\s*$/i.test(String(v)) ? String(v) : `${v}%`;
+}
+
+function buildScreenPickFallbackAnswer(route, region, regime, picks, mode) {
+  const lines = [];
+  const modeLabel = screenModeLabel(mode);
+  lines.push(`I screened ${UNIVERSE_LABELS[route.universe]} and ranked names with a ${modeLabel} lens using HeRAI screeners and stock pages.`);
+  lines.push(`Market regime: ${regime.regime.toUpperCase()} (${regime.note})`);
+  lines.push("");
+  for (let i = 0; i < picks.length; i++) {
+    const c = picks[i];
+    const techLine = c.technicals ? technicalsToText(c.technicals) : "technical snapshot unavailable";
+    const pe = metricValue(c, "P/E");
+    const fwdPe = c.forwardPe != null ? String(c.forwardPe) : null;
+    const roe = metricValue(c, "ROE %");
+    const roce = metricValue(c, "ROCE %");
+    const rev = metricValue(c, "Rev CAGR 5Y %");
+    const prof = metricValue(c, "Profit CAGR 5Y %");
+    const eps = c.epsTtm != null ? String(c.epsTtm) : metricValue(c, "EPS (TTM)");
+    const scoreLine = `score ${c.composite.toFixed(2)} (tech ${c.tech.toFixed(2)}, fund ${c.fund.toFixed(2)}, sentiment ${c.sent.toFixed(2)})`;
+    const setups = (c.setups || []).slice(0, 4).join(", ");
+    const screens = (c.screens || []).slice(0, 5).join(", ");
+    lines.push(`${i + 1}. ${c.ticker}${c.name ? ` (${c.name})` : ""}`);
+    if (mode.technical) lines.push(`- Technical read: ${techLine}`);
+    if (mode.fundamental) {
+      const f = [
+        pe ? `P/E ${pe}` : null,
+        fwdPe ? `Forward P/E ${fwdPe}` : null,
+        eps ? `EPS ${eps}` : null,
+        roe ? `ROE ${metricPct(roe)}` : null,
+        roce ? `ROCE ${metricPct(roce)}` : null,
+        rev ? `Rev CAGR 5Y ${metricPct(rev)}` : null,
+        prof ? `Profit CAGR 5Y ${metricPct(prof)}` : null,
+      ].filter(Boolean).join(", ");
+      lines.push(`- Fundamental read: ${f || "core valuation/growth ratios were limited in this row"}`);
+    }
+    if (setups || screens) lines.push(`- Signals used: ${setups || screens}`);
+    lines.push(`- Why it ranks here: ${scoreLine}.`);
+    lines.push("");
+  }
+  lines.push("Method: ranked from local HeRAI screener hits + stock-page context, with recency boost for fresh technical signals.");
+  return lines.join("\n").trim();
+}
+
+async function runScreenPick(env, origin, region, route, regime, mode, userProviders = []) {
   const wantAll = route.universe === "ALL";
-  const screenNames = Array.from(new Set([...TECH_SCREENS, ...FUND_SCREENS]));
+  const onlyTech = mode && mode.technical && !mode.fundamental;
+  const onlyFund = mode && !mode.technical && mode.fundamental;
+  const screenNames = onlyTech
+    ? Array.from(new Set(TECH_SCREENS))
+    : onlyFund
+    ? Array.from(new Set(FUND_SCREENS))
+    : Array.from(new Set([...TECH_SCREENS, ...FUND_SCREENS]));
+  const activeWeights = pickModeWeights(mode, regime);
 
   let pool = await loadScreenPoolCache(env, origin, region);
   if (!pool || !pool.length) {
@@ -1055,7 +1981,7 @@ async function runScreenPick(env, origin, region, route, regime) {
   if (!pool.length) return null;
 
   const scored = pool
-    .map((c) => ({ ...c, ...scoreCandidate(c, regime.weights) }))
+    .map((c) => ({ ...c, ...scoreCandidate(c, activeWeights) }))
     .sort((a, b) => b.composite - a.composite);
 
   const topN = scored.slice(0, route.count);
@@ -1065,14 +1991,26 @@ async function runScreenPick(env, origin, region, route, regime) {
       const ctx = await fetchStockContext(env, origin, region, c.ticker);
       let technicals = null;
       if (ctx && ctx.rawHtml) technicals = computeTechnicals(extractPriceHistory(ctx.rawHtml));
-      return { ...c, name: c.name || (ctx && ctx.name) || c.ticker, technicals, summary: ctx ? ctx.summary : "" };
+      const valTile = (ctx && ctx.rawSnapshot && ctx.rawSnapshot.ratios && ctx.rawSnapshot.ratios["Valuation"]) || {};
+      const epsTtm = parseNum((ctx && ctx.rawSnapshot && ctx.rawSnapshot.header && (ctx.rawSnapshot.header["EPS (TTM)"] || ctx.rawSnapshot.header.EPS)) || valTile["EPS (TTM)"] || valTile["EPS"]);
+      const forwardPe = parseNum(valTile["Forward P/E"] || valTile["Fwd P/E"] || valTile["Forward PE"]);
+      return {
+        ...c,
+        name: c.name || (ctx && ctx.name) || c.ticker,
+        technicals,
+        summary: ctx ? ctx.summary : "",
+        contextUrl: ctx ? ctx.url : null,
+        epsTtm,
+        forwardPe,
+      };
     })
   );
 
-  const sources = enriched.map((c) => ({
+  const sourcesRaw = enriched.map((c) => ({
     title: c.ticker,
-    url: `https://heraiscreener.com/${region}/stocks/${c.ticker}${region === "india" ? ".NS" : ""}.html`,
+    url: c.contextUrl || `https://heraiscreener.com/${region}/stocks/${c.ticker}${region === "india" ? ".NS" : ""}.html`,
   }));
+  const sources = rankAndFilterSources(region, sourcesRaw, 12);
 
   const evidence = enriched
     .map((c, i) => {
@@ -1102,12 +2040,18 @@ async function runScreenPick(env, origin, region, route, regime) {
   const user =
     `User question: ${route.rawMessage || "top stock ideas"}\n` +
     `Universe: ${UNIVERSE_LABELS[route.universe]}\n` +
-    `Market regime: ${regime.regime.toUpperCase()} — ${regime.note} (weights: technical ${regime.weights.tech}, fundamental ${regime.weights.fund}, sentiment ${regime.weights.sent}).\n\n` +
+    `Scoring lens: ${screenModeLabel(mode)}\n` +
+    `Market regime: ${regime.regime.toUpperCase()} — ${regime.note} (weights: technical ${activeWeights.tech}, fundamental ${activeWeights.fund}, sentiment ${activeWeights.sent}).\n\n` +
     `Ranked candidate pool (already scored from HeRAI's own screeners and price history):\n${evidence}`;
 
-  const synthesisModel = synthesisWorkersAiModel(env);
-  const { text } = await callLLM(env, SCREEN_SYNTH_SYSTEM, user, { maxTokens: 1400, model: synthesisModel });
-  return { answer: text, sources, picks: enriched, regime };
+  try {
+    const synthesisModel = synthesisWorkersAiModel(env);
+    const { text, provider } = await callLLM(env, SCREEN_SYNTH_SYSTEM, user, { maxTokens: 1400, model: synthesisModel, userProviders });
+    return { answer: text, sources, picks: enriched, regime, providerUsed: provider };
+  } catch {
+    const fallback = buildScreenPickFallbackAnswer(route, region, regime, enriched, mode || { technical: true, fundamental: true });
+    return { answer: fallback, sources, picks: enriched, regime, providerUsed: "rule engine" };
+  }
 }
 
 // ── Breakout composer: conviction-filtered, pattern-grouped ─────────────────
@@ -1291,7 +2235,7 @@ function _r(x) {
   return Math.round(x * 100) / 100;
 }
 
-async function runPriceTarget(env, origin, region, ticker, route, regime) {
+async function runPriceTarget(env, origin, region, ticker, route, regime, userProviders = []) {
   const ctx = await fetchStockContext(env, origin, region, ticker);
   if (!ctx || !ctx.rawHtml) return null;
 
@@ -1355,15 +2299,20 @@ async function runPriceTarget(env, origin, region, ticker, route, regime) {
     `Market regime: ${regime.regime.toUpperCase()} — ${regime.note}\n\n` +
     `HeRAI computed the following from its own data:\n${factLines}`;
 
-  const sources = [{ title: ticker, url: ctx.url }];
+  const sources = rankAndFilterSources(region, [{ title: ticker, url: ctx.url }], 6);
   const synthesisModel = synthesisWorkersAiModel(env);
-  const { text } = await callLLM(env, PRICE_TARGET_SYNTH_SYSTEM, user, { maxTokens: 1000, model: synthesisModel });
-  return { answer: text, sources, zone, regime, ticker };
+  const { text, provider } = await callLLM(env, PRICE_TARGET_SYNTH_SYSTEM, user, { maxTokens: 1000, model: synthesisModel, userProviders });
+  return { answer: text, sources, zone, regime, ticker, providerUsed: provider };
 }
 
 // ── Main orchestration ──────────────────────────────────────────────────────
-async function orchestrate(env, origin, message, region, history, mode = "analysis") {
-  if (mode !== "news" && RE_BREAKOUT.test(message) && !RE_SCREEN_PICK.test(message)) {
+async function orchestrate(env, origin, message, region, history, modeConfig, userProviders = []) {
+  const mode = normalizeModes(modeConfig);
+  const internetOnly = isInternetOnlyMode(mode);
+  const allowStructured = mode.technical || mode.fundamental;
+  const diagnostics = { stages: [], failures: [] };
+
+  if (allowStructured && mode.technical && RE_BREAKOUT.test(message) && !RE_SCREEN_PICK.test(message)) {
     try {
       const bo = await breakoutIdeas(env, origin, region);
       if (bo && bo.answer) {
@@ -1375,6 +2324,7 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
           tickers: [],
           citations: bo.citations || [],
           usedWeb: false,
+          providerUsed: "rule engine",
         };
       }
     } catch (e) {
@@ -1382,14 +2332,54 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
     }
   }
 
-  const route = await routeQuery(env, message, history, region);
+  const route = await routeQuery(env, message, history, region, userProviders);
   route.rawMessage = message;
-
-  if (mode === "news") {
-    route.needs = ["news"];
+  if (internetOnly) {
+    route.intent = "INTERNET_RESEARCH";
+    route.needs = [];
+    route.tickers = [];
   }
 
-  if (mode !== "news") {
+  const detectedIntents = detectIntents(message, route, mode);
+  const hasCompoundAsk = /\b(and|also|along with|plus|as well as)\b/i.test(message);
+  const forceMultiIntent = detectedIntents.length > 1 || hasCompoundAsk;
+  if (forceMultiIntent) {
+    try {
+      const planned = await runMultiIntentPlan(env, origin, message, region, route, mode, diagnostics, userProviders);
+      return {
+        ...planned,
+        disclaimer: DISCLAIMER,
+        diagnostics,
+      };
+    } catch (e) {
+      diagFail(diagnostics, "multi-intent-plan", e);
+      // fall through to legacy single-intent pipeline
+    }
+  }
+
+  if (shouldAskClarifying(route, message, allowStructured)) {
+    const label = region === "india" ? "India" : "USA";
+    return {
+      answer:
+        `I want to be precise before I analyse this. Which ${label} stock or ticker should I focus on? ` +
+        `You can reply with one name/ticker (for example ${region === "india" ? "RELIANCE" : "AAPL"}).`,
+      disclaimer: DISCLAIMER,
+      intent: "CLARIFY",
+      agents: [],
+      tickers: [],
+      citations: [],
+      usedWeb: false,
+      providerUsed: null,
+      diagnostics,
+    };
+  }
+
+  const selectedNeeds = [];
+  if (mode.technical) selectedNeeds.push("technical");
+  if (mode.fundamental) selectedNeeds.push("fundamental");
+  route.needs = selectedNeeds;
+
+  if (allowStructured) {
     const isPrice = RE_PRICE_TARGET.test(message) && !RE_SCREEN_PICK.test(message);
     if (isPrice) {
       if (!route.tickers || !route.tickers.length) {
@@ -1398,7 +2388,7 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
       }
       if (route.tickers && route.tickers.length) {
         route.intent = "PRICE_TARGET";
-        route.needs = ["technical", "fundamental", "news"];
+        route.needs = selectedNeeds.length ? selectedNeeds : ["technical", "fundamental"];
       } else {
         const label = region === "india" ? "India" : "USA";
         return {
@@ -1412,6 +2402,8 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
           tickers: [],
           citations: [],
           usedWeb: false,
+          providerUsed: null,
+          diagnostics,
         };
       }
     } else if (
@@ -1423,49 +2415,80 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
       if (nm) {
         route.tickers = [nm.ticker];
         route.intent = "STOCK_DEEP_DIVE";
-        route.needs = ["technical", "fundamental", "news"];
+        route.needs = selectedNeeds.length ? selectedNeeds : ["technical", "fundamental"];
       }
     }
   }
 
-  if (mode !== "news" && (route.intent === "SCREEN_PICK" || route.intent === "PRICE_TARGET")) {
+  if (allowStructured && (route.intent === "SCREEN_PICK" || route.intent === "PRICE_TARGET")) {
     try {
       const regime = await detectMarketRegime(env, origin, region);
 
       if (route.intent === "SCREEN_PICK") {
-        const res = await runScreenPick(env, origin, region, route, regime);
+        const res = await runScreenPick(env, origin, region, route, regime, mode, userProviders);
         if (res && res.answer) {
+          const citations = rankAndFilterSources(region, res.sources || [], 12);
+          const evidence = {
+            region,
+            mode: mode.list,
+            intent: route.intent,
+            universe: route.universe,
+            confidence: Number(route.confidence || 0),
+            regime: { regime: regime.regime, note: regime.note, breadth: regime.breadth },
+            picks: (res.picks || []).map((p) => ({ ticker: p.ticker, name: p.name, composite: p.composite, tech: p.tech, fund: p.fund, sent: p.sent })),
+            sources: citations,
+          };
+          const checked = await verifyAgainstEvidence(env, res.answer, evidence, userProviders);
           return {
-            answer: verify(res.answer),
+            answer: verify(checked),
             disclaimer: DISCLAIMER,
             intent: route.intent,
             agents: ["screener", "technical", "fundamental"],
             tickers: (res.picks || []).map((p) => p.ticker),
             universe: route.universe,
             regime: regime.regime,
-            citations: res.sources || [],
+            citations,
             usedWeb: false,
+            providerUsed: res.providerUsed || null,
+            evidence,
+            diagnostics,
           };
         }
       }
 
       if (route.intent === "PRICE_TARGET" && route.tickers.length) {
-        const res = await runPriceTarget(env, origin, region, route.tickers[0], route, regime);
+        const res = await runPriceTarget(env, origin, region, route.tickers[0], route, regime, userProviders);
         if (res && res.answer) {
+          const citations = rankAndFilterSources(region, res.sources || [], 8);
+          const evidence = {
+            region,
+            mode: mode.list,
+            intent: route.intent,
+            confidence: Number(route.confidence || 0),
+            regime: { regime: regime.regime, note: regime.note, breadth: regime.breadth },
+            ticker: res.ticker,
+            buyZone: res.zone ? { buy: res.zone.buy, zone: res.zone.zone, anchors: res.zone.anchors } : null,
+            sources: citations,
+          };
+          const checked = await verifyAgainstEvidence(env, res.answer, evidence, userProviders);
           return {
-            answer: verify(res.answer),
+            answer: verify(checked),
             disclaimer: DISCLAIMER,
             intent: route.intent,
             agents: ["technical", "fundamental", "valuation"],
             tickers: [res.ticker],
             regime: regime.regime,
             buyZone: res.zone ? { buy: res.zone.buy, zone: res.zone.zone } : null,
-            citations: res.sources || [],
+            citations,
             usedWeb: false,
+            providerUsed: res.providerUsed || null,
+            evidence,
+            diagnostics,
           };
         }
       }
     } catch (e) {
+      diagFail(diagnostics, "specialized-branch", e);
       // Fall through to the generic grounded pipeline on any failure.
     }
   }
@@ -1508,20 +2531,62 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
   const internalThin =
     (wantTech || wantFund) && !stockContexts.length &&
     !contextByKind.news && !contextByKind.macro;
-  if (internalThin) {
-    const web = await webSearch(`${message} stock`);
+  if (internalThin || mode.internet) {
+    const web = await webSearch(`${message} stock`, region);
     if (web) {
       usedWeb = true;
       contextByKind.web = web.text;
-      sources.push({ title: "Web (DuckDuckGo)", url: web.url });
+      if (Array.isArray(web.sources) && web.sources.length) {
+        for (const s of web.sources.slice(0, 8)) sources.push({ title: s.title, url: s.url });
+      } else {
+        sources.push({ title: `Web (${web.engine || "external"})`, url: web.url });
+      }
     }
   }
 
+  const rankedSources = rankAndFilterSourcesForMode(region, sources, mode, 12);
+
   const specialistJobs = [];
-  if (wantTech && contextByKind.technical) specialistJobs.push(runSpecialist(env, "technical", message, contextByKind.technical).then((t) => ({ kind: "technical", text: t })));
-  if (wantFund && contextByKind.fundamental) specialistJobs.push(runSpecialist(env, "fundamental", message, contextByKind.fundamental).then((t) => ({ kind: "fundamental", text: t })));
-  if (wantNews && contextByKind.news) specialistJobs.push(runSpecialist(env, "news", message, contextByKind.news).then((t) => ({ kind: "news", text: t })));
-  if (wantMacro && contextByKind.macro) specialistJobs.push(runSpecialist(env, "macro", message, contextByKind.macro).then((t) => ({ kind: "macro", text: t })));
+  const specialistPrompt = (kind, question, contextText) => ({
+    system: SPECIALIST_SYSTEMS[kind],
+    user: `Question: ${question}\n\nData:\n${contextText}`,
+  });
+  if (wantTech && contextByKind.technical) {
+    specialistJobs.push((async () => {
+      try {
+        const p = specialistPrompt("technical", message, contextByKind.technical);
+        const out = await callLLMWithRetry(env, p.system, p.user, { maxTokens: 350, userProviders }, diagnostics, "specialist-technical", 2);
+        return { kind: "technical", text: out.text };
+      } catch (e) { diagFail(diagnostics, "specialist-technical", e); return null; }
+    })());
+  }
+  if (wantFund && contextByKind.fundamental) {
+    specialistJobs.push((async () => {
+      try {
+        const p = specialistPrompt("fundamental", message, contextByKind.fundamental);
+        const out = await callLLMWithRetry(env, p.system, p.user, { maxTokens: 350, userProviders }, diagnostics, "specialist-fundamental", 2);
+        return { kind: "fundamental", text: out.text };
+      } catch (e) { diagFail(diagnostics, "specialist-fundamental", e); return null; }
+    })());
+  }
+  if (wantNews && contextByKind.news) {
+    specialistJobs.push((async () => {
+      try {
+        const p = specialistPrompt("news", message, contextByKind.news);
+        const out = await callLLMWithRetry(env, p.system, p.user, { maxTokens: 350, userProviders }, diagnostics, "specialist-news", 2);
+        return { kind: "news", text: out.text };
+      } catch (e) { diagFail(diagnostics, "specialist-news", e); return null; }
+    })());
+  }
+  if (wantMacro && contextByKind.macro) {
+    specialistJobs.push((async () => {
+      try {
+        const p = specialistPrompt("macro", message, contextByKind.macro);
+        const out = await callLLMWithRetry(env, p.system, p.user, { maxTokens: 350, userProviders }, diagnostics, "specialist-macro", 2);
+        return { kind: "macro", text: out.text };
+      } catch (e) { diagFail(diagnostics, "specialist-macro", e); return null; }
+    })());
+  }
 
   let notes = (await Promise.all(specialistJobs)).filter((n) => n && n.text);
 
@@ -1529,29 +2594,101 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
     notes = [{ kind: "web", text: contextByKind.web }];
   }
 
+  const evidence = buildEvidencePack(
+    route,
+    region,
+    stockContexts,
+    contextByKind,
+    null,
+    mode,
+    rankedSources
+  );
+
   let answer;
+  let providerUsed = null;
   if (notes.length) {
-    answer = await synthesize(env, message, notes, sources);
+    try {
+      const syn = await synthesize(env, message, notes, rankedSources, evidence, userProviders);
+      answer = syn.text;
+      providerUsed = syn.provider || null;
+      answer = await verifyAgainstEvidence(env, answer, evidence, userProviders);
+    } catch (e) {
+      diagFail(diagnostics, "synthesis", e);
+      const bullets = notes.slice(0, 4).map((n) => `- ${n.kind}: ${clip(n.text, 260)}`);
+      answer = `Synthesis model was unavailable, so here is a direct evidence summary:\n${bullets.join("\n")}`;
+      providerUsed = "rule engine";
+    }
   } else {
     const needsSpecificData =
       route.tickers.length ||
       ["STOCK_DEEP_DIVE", "PRICE_TARGET", "SCREEN_PICK", "COMPARE_STOCKS", "SECTOR_ANALYSIS"].includes(route.intent);
-    if (needsSpecificData) {
-      const askedFor = route.tickers.length ? route.tickers.join(", ") : "that";
-      answer =
-        `I ground every answer in HeRAI's own built data (per-stock pages, screeners, macro), and I could not locate the specific data needed for ${askedFor} in the ${region.toUpperCase()} dataset right now. ` +
-        `Please give me an exact ticker we cover (e.g., AAPL, RELIANCE), ask for a screen-based shortlist (e.g., "10 S&P 500 stocks to consider"), or ask for a buy zone on a named stock, and I'll analyse it from the data.`;
+    if (mode.internet) {
+      try {
+        const synthesisModel = synthesisWorkersAiModel(env);
+        const { text, provider } = await callLLMWithRetry(
+          env,
+          "You are HerAI, a Senior Stock Market Analyst. Provide a concise answer using high-level market knowledge and clearly label uncertainty when exact sourced data is unavailable in this request. Do not give direct buy/sell advice.",
+          message,
+          { maxTokens: 500, model: synthesisModel, userProviders },
+          diagnostics,
+          "internet-fallback",
+          2
+        );
+        answer = text;
+        providerUsed = provider || providerUsed;
+      } catch (e) {
+        diagFail(diagnostics, "internet-fallback", e);
+        if (contextByKind.web) {
+          const webBullets = summarizeWebSignals(contextByKind.web, 7);
+          answer =
+            "Live model inference is temporarily unavailable, but here are the most relevant internet signals I found:\n\n" +
+            (webBullets || clip(contextByKind.web, 1200));
+          providerUsed = "rule engine";
+        } else {
+          answer =
+            "Internet mode is enabled, but live model inference is temporarily unavailable for this request. " +
+            "Please retry in a moment, or provide a session API key in the chat panel to continue with external-analysis fallback.";
+        }
+      }
+    } else if (needsSpecificData) {
+      if ((wantTech || wantFund) && stockContexts.length) {
+        const first = stockContexts[0];
+        answer =
+          `I found grounded data for ${first.ticker}${first.name ? ` (${first.name})` : ""}. ` +
+          `Here is the evidence snapshot from HeRAI data while live specialist synthesis is temporarily unavailable:\n\n` +
+          `${clip(first.summary, 420)}\n\n` +
+          `${wantTech ? "Technical evidence available from the stock page and computed indicators.\n" : ""}` +
+          `${wantFund ? "Fundamental evidence available from valuation, growth, and quality sections.\n" : ""}` +
+          `Please ask a narrower follow-up (for example: \"technical trend only\" or \"valuation vs peers\") and I will return a tighter answer.`;
+        providerUsed = "rule engine";
+      } else {
+        const askedFor = route.tickers.length ? route.tickers.join(", ") : "that";
+        answer =
+          `I ground every answer in HeRAI's own built data (per-stock pages, screeners, macro), and I could not locate the specific data needed for ${askedFor} in the ${region.toUpperCase()} dataset right now. ` +
+          `Please give me an exact ticker we cover (e.g., AAPL, RELIANCE), ask for a screen-based shortlist (e.g., "10 S&P 500 stocks to consider"), or ask for a buy zone on a named stock, and I'll analyse it from the data.`;
+      }
     } else {
-      const synthesisModel = synthesisWorkersAiModel(env);
-      const { text } = await callLLM(
-        env,
-        "You are HerAI, a senior stock-market analyst acting as an educator. Explain the CONCEPT the user asked about (e.g., what RSI/P-E/support means) in 1-3 short paragraphs, using institutional terminology. " +
-          "Do NOT invent specific prices, tickers, targets, or figures. Do NOT give buy/sell advice. Do not role-play a dialogue or ask follow-up questions. " +
-          "If the question actually requires specific stock data, say it should be asked about a named ticker or via a screen.",
-        message,
-        { maxTokens: 600, model: synthesisModel }
-      );
-      answer = text;
+      try {
+        const synthesisModel = synthesisWorkersAiModel(env);
+        const { text, provider } = await callLLMWithRetry(
+          env,
+          "You are HerAI, a Senior Stock Market Analyst acting as an educator. Explain the CONCEPT the user asked about (e.g., what RSI/P-E/support means) in 1-3 short paragraphs, using institutional terminology. " +
+            "Do NOT invent specific prices, tickers, targets, or figures. Do NOT give buy/sell advice. Do not role-play a dialogue or ask follow-up questions. " +
+            "If the question actually requires specific stock data, say it should be asked about a named ticker or via a screen.",
+          message,
+          { maxTokens: 600, model: synthesisModel, userProviders },
+          diagnostics,
+          "concept-answer",
+          2
+        );
+        answer = text;
+        providerUsed = provider || null;
+      } catch (e) {
+        diagFail(diagnostics, "concept-answer", e);
+        answer =
+          "Live model inference is temporarily unavailable, so I can only provide grounded stock-specific analysis right now. " +
+          "Please ask with a specific ticker (for example AAPL or RELIANCE), or try again shortly.";
+      }
     }
   }
 
@@ -1560,17 +2697,22 @@ async function orchestrate(env, origin, message, region, history, mode = "analys
   return {
     answer,
     disclaimer: DISCLAIMER,
-    intent: route.intent,
+    intent: internetOnly ? "INTERNET_RESEARCH" : route.intent,
     agents: notes.map((n) => n.kind),
     tickers: route.tickers,
-    citations: sources,
+    citations: rankedSources,
     usedWeb,
+    providerUsed,
+    evidence,
+    diagnostics,
   };
 }
 
 // ── Question bank (analytics) — capture every customer question ─────────────
 const QLOG_PREFIX = "q:";
+const ALOG_PREFIX = "algo:";
 const QLOG_MAX_READ = 5000;
+const ALOG_MAX_READ = 5000;
 
 function isFallbackAnswer(result) {
   if (!result) return true;
@@ -1621,6 +2763,16 @@ function csvCell(v) {
   return s;
 }
 
+function summarizeWebSignals(webText, maxLines = 6) {
+  const lines = String(webText || "")
+    .split(/\r?\n/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  if (!lines.length) return "";
+  const picks = lines.slice(0, Math.max(1, maxLines));
+  return picks.map((s) => `- ${clip(s, 220)}`).join("\n");
+}
+
 async function handleQuestionsAdmin(request, env) {
   const url = new URL(request.url);
   const key = url.searchParams.get("key") || request.headers.get("x-admin-key") || "";
@@ -1668,6 +2820,130 @@ async function handleQuestionsAdmin(request, env) {
   return json({ total: trimmed.length, fallbacks, byIntent, byRegion, top, entries: trimmed });
 }
 
+async function handleAlgoAdmin(request, env) {
+  const url = new URL(request.url);
+  const key = url.searchParams.get("key") || request.headers.get("x-admin-key") || "";
+  const adminKey = env && env.HERAI_ADMIN_KEY;
+  const hasConfiguredKey = Boolean(adminKey);
+  if (hasConfiguredKey && key && key !== adminKey) {
+    return json({ error: "unauthorized" }, 401);
+  }
+  const kv = env && env.HERAI_KV;
+  if (!kv) return json({ error: "HERAI_KV not bound — algo telemetry is disabled.", entries: [] }, 200);
+
+  const limit = Math.min(parseInt(url.searchParams.get("limit") || "2000", 10) || 2000, ALOG_MAX_READ);
+  const entries = [];
+  let cursor;
+  while (entries.length < ALOG_MAX_READ) {
+    const res = await kv.list({ prefix: ALOG_PREFIX, cursor, limit: 1000 });
+    const gets = await Promise.all(res.keys.map((k) => kv.get(k.name)));
+    for (const g of gets) { if (g) { try { entries.push(JSON.parse(g)); } catch { /* skip */ } } }
+    if (res.list_complete || !res.cursor) break;
+    cursor = res.cursor;
+  }
+  entries.sort((a, b) => (a.ts < b.ts ? 1 : -1));
+  const trimmed = entries.slice(0, limit);
+
+  const total = trimmed.length;
+  let fallbackRuns = 0;
+  let unmetRuns = 0;
+  const byIntent = {};
+  const byRegion = {};
+  const perIntent = {};
+  const missByQuestion = {};
+
+  for (const e of trimmed) {
+    const intent = e.intent || "?";
+    const region = e.region || "?";
+    byIntent[intent] = (byIntent[intent] || 0) + 1;
+    byRegion[region] = (byRegion[region] || 0) + 1;
+
+    if (e.fallbackUsed || e.usedWeb) fallbackRuns++;
+    const coverage = Array.isArray(e.coverage) ? e.coverage : [];
+    const hasUnmet = coverage.some((c) => c && c.met === false) || (Array.isArray(e.unmetIntents) && e.unmetIntents.length > 0);
+    if (hasUnmet) {
+      unmetRuns++;
+      const qn = String(e.q || "").toLowerCase().replace(/\s+/g, " ").trim().slice(0, 140);
+      if (!missByQuestion[qn]) missByQuestion[qn] = { q: e.q, misses: 0 };
+      missByQuestion[qn].misses++;
+    }
+
+    for (const c of coverage) {
+      const k = c && c.kind ? c.kind : "UNKNOWN";
+      if (!perIntent[k]) {
+        perIntent[k] = { runs: 0, met: 0, unmet: 0, webFallbacks: 0, pagesScannedSum: 0, localHitsSum: 0, sampleCount: 0 };
+      }
+      perIntent[k].runs++;
+      if (c && c.met) perIntent[k].met++; else perIntent[k].unmet++;
+    }
+
+    const stats = Array.isArray(e.searchStats) ? e.searchStats : [];
+    for (const s of stats) {
+      const k = s && s.kind ? s.kind : "UNKNOWN";
+      if (!perIntent[k]) {
+        perIntent[k] = { runs: 0, met: 0, unmet: 0, webFallbacks: 0, pagesScannedSum: 0, localHitsSum: 0, sampleCount: 0 };
+      }
+      if (s.usedWeb) perIntent[k].webFallbacks++;
+      perIntent[k].pagesScannedSum += Number(s.pagesScanned || 0);
+      perIntent[k].localHitsSum += Number(s.localHitCount || 0);
+      perIntent[k].sampleCount += 1;
+    }
+  }
+
+  const perIntentSummary = {};
+  for (const [k, v] of Object.entries(perIntent)) {
+    perIntentSummary[k] = {
+      runs: v.runs,
+      met: v.met,
+      unmet: v.unmet,
+      metRatePct: v.runs ? Math.round((v.met * 10000) / v.runs) / 100 : 0,
+      webFallbacks: v.webFallbacks,
+      avgPagesScanned: v.sampleCount ? Math.round((v.pagesScannedSum / v.sampleCount) * 100) / 100 : 0,
+      avgLocalHitCount: v.sampleCount ? Math.round((v.localHitsSum / v.sampleCount) * 100) / 100 : 0,
+    };
+  }
+
+  const topMisses = Object.values(missByQuestion)
+    .sort((a, b) => b.misses - a.misses)
+    .slice(0, 50);
+
+  if (url.searchParams.get("format") === "csv") {
+    const cols = ["ts", "region", "mode", "q", "intent", "usedWeb", "fallbackUsed", "unmetIntents", "answerPreview"];
+    const rows = [cols.join(",")];
+    for (const e of trimmed) {
+      const row = {
+        ts: e.ts,
+        region: e.region,
+        mode: e.mode,
+        q: e.q,
+        intent: e.intent,
+        usedWeb: !!e.usedWeb,
+        fallbackUsed: !!e.fallbackUsed,
+        unmetIntents: Array.isArray(e.unmetIntents) ? e.unmetIntents.join("|") : "",
+        answerPreview: e.answerPreview,
+      };
+      rows.push(cols.map((c) => csvCell(row[c])).join(","));
+    }
+    return new Response(rows.join("\n"), {
+      status: 200,
+      headers: { ...cors(), "Content-Type": "text/csv; charset=utf-8", "Content-Disposition": 'attachment; filename="herai_algo_runs.csv"' },
+    });
+  }
+
+  return json({
+    total,
+    fallbackRuns,
+    fallbackRatePct: total ? Math.round((fallbackRuns * 10000) / total) / 100 : 0,
+    unmetRuns,
+    unmetIntentRatePct: total ? Math.round((unmetRuns * 10000) / total) / 100 : 0,
+    byIntent,
+    byRegion,
+    perIntent: perIntentSummary,
+    topMisses,
+    entries: trimmed,
+  });
+}
+
 // ── HTTP entry ──────────────────────────────────────────────────────────────
 export async function handleHeraiRequest(request, env, ctx) {
   const url = new URL(request.url);
@@ -1693,6 +2969,10 @@ export async function handleHeraiRequest(request, env, ctx) {
     return handleQuestionsAdmin(request, env);
   }
 
+  if (url.pathname === "/api/herai/algo" && request.method === "GET") {
+    return handleAlgoAdmin(request, env);
+  }
+
   if (url.pathname === "/api/herai/chat" && request.method === "POST") {
     let body = {};
     try { body = await request.json(); } catch { /* empty */ }
@@ -1700,30 +2980,39 @@ export async function handleHeraiRequest(request, env, ctx) {
     const message = clip(body.message, MAX_MESSAGE).trim();
     const region = ALLOWED_REGIONS.has(body.region) ? body.region : "usa";
     const history = Array.isArray(body.history) ? body.history.slice(-MAX_HISTORY) : [];
-    const mode = body.mode === "news" ? "news" : "analysis";
+    const mode = normalizeModes(body.modes);
+    const userProviders = normalizeUserProviders(body.userProviders || body.providers || body.apiProviders);
 
     if (!message) return json({ error: "Please enter a question." }, 400);
     if (!hasWorkersAI(env) && !availableProviders(env).length) {
       return json({ error: "HerAI is not configured yet (no Workers AI binding or provider key set)." }, 503);
     }
 
-    const key = await cacheKey(region, `${mode}::${message}`);
-    const cached = history.length ? null : await cacheGet(env, key);
+    const cacheable = !history.length && !userProviders.length;
+    const key = cacheable ? await cacheKey(region, `${mode.cacheKey}::${message}`) : null;
+    const cached = cacheable ? await cacheGet(env, key) : null;
     if (cached) {
-      logQuestion(env, ctx, { message, region, mode }, cached);
+      logQuestion(env, ctx, { message, region, mode: mode.cacheKey }, cached);
+      logAlgoRun(env, ctx, { message, region, mode: mode.cacheKey }, cached);
       return json({ ...cached, cached: true });
     }
 
     try {
-      const result = await orchestrate(env, url.origin, message, region, history, mode);
-      logQuestion(env, ctx, { message, region, mode }, result);
-      if (!history.length) ctx.waitUntil(cachePut(env, key, result));
+      const result = await orchestrate(env, url.origin, message, region, history, mode.list, userProviders);
+      logQuestion(env, ctx, { message, region, mode: mode.cacheKey }, result);
+      logAlgoRun(env, ctx, { message, region, mode: mode.cacheKey }, result);
+      if (cacheable) ctx.waitUntil(cachePut(env, key, result));
       return json(result);
     } catch (e) {
       const msg = String(e && e.message);
-      logQuestion(env, ctx, { message, region, mode }, { error: msg, intent: "ERROR" });
+      try { console.error("HerAI chat error:", (e && e.stack) || e); } catch { /* noop */ }
+      logQuestion(env, ctx, { message, region, mode: mode.cacheKey }, { error: msg, intent: "ERROR" });
+      logAlgoRun(env, ctx, { message, region, mode: mode.cacheKey }, { error: msg, intent: "ERROR", usedWeb: false, intentCoverage: [] });
       if (msg.includes("NO_LLM_KEYS")) {
         return json({ error: "HerAI is not configured yet (no Workers AI binding or provider key set)." }, 503);
+      }
+      if (msg.includes("USER_PROVIDER_FAILED")) {
+        return json({ error: "Provided API key(s) failed. Cloudflare fallback also unavailable.", detail: msg.slice(0, 500) }, 502);
       }
       if (msg.includes("WORKERS_AI_FAILED")) {
         return json({ error: "Workers AI inference failed", detail: msg.slice(0, 500) }, 502);
@@ -1733,4 +3022,52 @@ export async function handleHeraiRequest(request, env, ctx) {
   }
 
   return json({ error: "unknown herai route" }, 404);
+}
+
+function diagFail(diagnostics, stage, error) {
+  if (!diagnostics) return;
+  const msg = String((error && error.message) || error || "unknown");
+  diagnostics.failures.push({ stage, error: clip(msg, 240) });
+}
+
+async function callLLMWithRetry(env, system, user, options, diagnostics, stage, retries = 2) {
+  let lastErr = null;
+  for (let i = 0; i <= retries; i++) {
+    try {
+      const out = await callLLM(env, system, user, options || {});
+      if (diagnostics) diagnostics.stages.push({ stage, attempt: i + 1, ok: true, provider: out.provider || null });
+      return out;
+    } catch (e) {
+      lastErr = e;
+      if (diagnostics) diagnostics.stages.push({ stage, attempt: i + 1, ok: false, provider: null });
+    }
+  }
+  throw lastErr || new Error(`${stage}: failed`);
+}
+
+function logAlgoRun(env, ctx, meta, result) {
+  try {
+    const kv = env && env.HERAI_KV;
+    if (!kv) return;
+    const intentCoverage = (result && result.intentCoverage) || (result && result.evidence && result.evidence.intentCoverage) || [];
+    const searchStats = (result && result.searchStats) || (result && result.evidence && result.evidence.searchStats) || [];
+    const entry = {
+      ts: new Date().toISOString(),
+      region: meta.region,
+      mode: meta.mode,
+      q: String(meta.message || "").slice(0, 500),
+      intent: (result && result.intent) || null,
+      usedWeb: !!(result && result.usedWeb),
+      fallbackUsed: !!(result && result.usedWeb),
+      coverage: intentCoverage,
+      searchStats,
+      unmetIntents: intentCoverage.filter((x) => !x.met).map((x) => x.kind),
+      answerPreview: String((result && result.answer) || (result && result.error) || "").slice(0, 300),
+    };
+    const key = ALOG_PREFIX + Date.now() + ":" + Math.random().toString(36).slice(2, 8);
+    const p = kv.put(key, JSON.stringify(entry));
+    if (ctx && ctx.waitUntil) ctx.waitUntil(p); else p.catch(() => {});
+  } catch {
+    /* telemetry must never break the chat */
+  }
 }
