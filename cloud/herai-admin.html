@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex, nofollow" />
-<title>HerAI · Admin Dashboard</title>
+<title>HerAI · Question Bank (Admin)</title>
 <style>
   :root { --bg:#0f1216; --card:#171b21; --line:#242b34; --txt:#e7ecf2; --mut:#93a1b0;
           --accent:#4f8cff; --bad:#ff5c6c; --good:#38c172; --warn:#f0a92b; }
@@ -60,80 +60,30 @@
   .prev { max-width:360px; color:var(--mut); }
   .err { color:var(--bad); margin-top:10px; }
   .muted { color:var(--mut); }
-  .tabs { display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; }
-  .tab-btn {
-    background:transparent;
-    border:1px solid var(--line);
-    color:var(--txt);
-    padding:8px 12px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:600;
-  }
-  .tab-btn.active { background:var(--accent); border-color:var(--accent); color:#fff; }
 </style>
 </head>
 <body>
 
 <div id="gate" class="gate">
-  <h2>HerAI Admin Dashboard</h2>
-  <p>Open dashboard to view question logs and intent/search algorithm quality metrics.</p>
+  <h2>HerAI Question Bank</h2>
+  <p>The question bank is open for now. Click below to load the dashboard.</p>
   <button class="btn" style="width:100%" onclick="unlock()">Open dashboard</button>
   <div id="gateErr" class="err" hidden></div>
 </div>
 
 <div id="app" hidden>
   <header>
-    <h1>&#129504; HerAI · Admin Dashboard</h1>
+    <h1>&#129504; HerAI · Question Bank</h1>
     <span id="regionInfo" class="muted"></span>
     <span class="sp"></span>
     <select id="regionFilter" class="btn ghost" onchange="render()"></select>
     <button class="btn ghost" onclick="load()">&#8635; Refresh</button>
     <button class="btn" onclick="downloadCsv()">&#8681; Download CSV</button>
-    <button class="btn ghost" onclick="downloadAlgoCsv()">&#8681; Algo CSV</button>
     <button class="btn ghost" onclick="lock()">Lock</button>
   </header>
 
   <div class="wrap">
     <div class="cards" id="cards"></div>
-
-    <div class="tabs" id="tabs"></div>
-
-    <div id="tab-algo" hidden>
-
-    <div class="panels">
-      <div class="panel">
-        <h3>Algorithm Quality Snapshot</h3>
-        <div id="algoSummary"></div>
-      </div>
-      <div class="panel">
-        <h3>Per-intent quality (met rate)</h3>
-        <div id="algoIntent"></div>
-        <h3 style="margin-top:16px">Top misses (for tuning)</h3>
-        <div id="algoMisses"></div>
-      </div>
-    </div>
-
-    <div class="panel" style="margin-bottom:20px">
-      <h3>Algorithm telemetry runs</h3>
-      <div style="overflow:auto; max-height:65vh; border:1px solid var(--line); border-radius:12px;">
-        <table>
-          <thead><tr>
-            <th>Time</th>
-            <th>Region</th>
-            <th>Intent</th>
-            <th>Fallback</th>
-            <th>Unmet intents</th>
-            <th class="q">Question</th>
-          </tr></thead>
-          <tbody id="algoRows"></tbody>
-        </table>
-      </div>
-    </div>
-
-    </div>
-
-    <div id="tab-questions">
 
     <div class="panels">
       <div class="panel">
@@ -170,18 +120,11 @@
         <tbody id="rows"></tbody>
       </table>
     </div>
-
-    </div>
   </div>
 </div>
 
 <script>
-  var KEY = "", DATA = null, ALGO = null, SORT = { c: "ts", dir: -1 };
-  var ACTIVE_TAB = "questions";
-  var ADMIN_TABS = [
-    { id: "questions", label: "Question Bank" },
-    { id: "algo", label: "Algorithm Quality" },
-  ];
+  var KEY = "", DATA = null, SORT = { c: "ts", dir: -1 };
 
   function unlock() {
     KEY = "";
@@ -200,22 +143,14 @@
     var gateErr = document.getElementById("gateErr");
     gateErr.hidden = true;
     try {
-      var headers = { "x-admin-key": KEY };
-      var rq = await fetch("/api/herai/questions?limit=5000", { headers: headers });
-      if (rq.status === 401) { gateErr.textContent = "Access was blocked by the server."; gateErr.hidden = false; return; }
-      DATA = await rq.json();
-
-      var ra = await fetch("/api/herai/algo?limit=3000", { headers: headers });
-      if (ra.ok) {
-        ALGO = await ra.json();
-      } else {
-        ALGO = { error: "Algo endpoint unavailable (status " + ra.status + ")" };
-      }
-
+      var r = await fetch("/api/herai/questions?limit=5000", {
+        headers: { "x-admin-key": KEY }
+      });
+      if (r.status === 401) { gateErr.textContent = "Access was blocked by the server."; gateErr.hidden = false; return; }
+      DATA = await r.json();
       document.getElementById("gate").hidden = true;
       document.getElementById("app").hidden = false;
       buildRegionFilter();
-      renderTabs();
       render();
     } catch (e) {
       gateErr.textContent = "Could not load: " + e; gateErr.hidden = false;
@@ -227,24 +162,6 @@
     var regions = Object.keys((DATA && DATA.byRegion) || {});
     sel.innerHTML = '<option value="">All regions</option>' +
       regions.map(function(x){ return '<option value="'+esc(x)+'">'+esc(x)+'</option>'; }).join("");
-  }
-
-  function renderTabs() {
-    var tabsEl = document.getElementById("tabs");
-    if (!tabsEl) return;
-    tabsEl.innerHTML = ADMIN_TABS.map(function(t){
-      var cls = "tab-btn" + (ACTIVE_TAB === t.id ? " active" : "");
-      return '<button type="button" class="'+cls+'" onclick="setTab(\''+esc(t.id)+'\')">'+esc(t.label)+'</button>';
-    }).join("");
-    var q = document.getElementById("tab-questions");
-    var a = document.getElementById("tab-algo");
-    if (q) q.hidden = ACTIVE_TAB !== "questions";
-    if (a) a.hidden = ACTIVE_TAB !== "algo";
-  }
-
-  function setTab(id) {
-    ACTIVE_TAB = id;
-    renderTabs();
   }
 
   function bars(obj, opts) {
@@ -272,21 +189,13 @@
     var total = DATA.total || entries.length;
     var fb = DATA.fallbacks || 0;
     var uniq = (DATA.top || []).length;
-    var algoTotal = (ALGO && ALGO.total) || 0;
-    var algoFbRate = (ALGO && ALGO.fallbackRatePct) || 0;
-    var algoUnmetRate = (ALGO && ALGO.unmetIntentRatePct) || 0;
-
     document.getElementById("regionInfo").textContent =
-      total + " logged · " + fb + " failed (" + (total? Math.round(fb/total*100):0) + "%) · algo runs " + algoTotal;
+      total + " logged · " + fb + " failed (" + (total? Math.round(fb/total*100):0) + "%)";
     document.getElementById("cards").innerHTML =
       card(total, "Questions logged") +
       card(fb + " · " + (total?Math.round(fb/total*100):0) + "%", "Failed / fell back") +
       card(uniq, "Distinct questions") +
-      card(Object.keys(DATA.byRegion||{}).length, "Regions") +
-      card(algoFbRate + "%", "Algo fallback rate") +
-      card(algoUnmetRate + "%", "Unmet intent rate");
-
-    renderAlgoPanels();
+      card(Object.keys(DATA.byRegion||{}).length, "Regions");
 
     document.getElementById("topQ").innerHTML = bars(DATA.top || [], {
       limit: 12,
@@ -338,75 +247,9 @@
       '</tr>';
     }).join("") || '<tr><td colspan="8" class="muted">No matching questions.</td></tr>';
   }
-
-  function renderAlgoPanels() {
-    var sumEl = document.getElementById("algoSummary");
-    var intentEl = document.getElementById("algoIntent");
-    var missEl = document.getElementById("algoMisses");
-    var rowsEl = document.getElementById("algoRows");
-    if (!sumEl || !intentEl || !missEl) return;
-
-    if (!ALGO || ALGO.error) {
-      var msg = (ALGO && ALGO.error) ? ALGO.error : "Algorithm telemetry not available yet.";
-      sumEl.innerHTML = '<div class="muted">' + esc(msg) + '</div>';
-      intentEl.innerHTML = '<div class="muted">No per-intent data.</div>';
-      missEl.innerHTML = '<div class="muted">No miss data.</div>';
-      if (rowsEl) rowsEl.innerHTML = '<tr><td colspan="6" class="muted">No telemetry rows.</td></tr>';
-      return;
-    }
-
-    var total = Number(ALGO.total || 0);
-    var fb = Number(ALGO.fallbackRuns || 0);
-    var unmet = Number(ALGO.unmetRuns || 0);
-    var byIntentCount = Object.keys(ALGO.byIntent || {}).length;
-    sumEl.innerHTML = [
-      '<div class="bar"><div class="k">Total algo runs</div><div class="v">' + esc(total) + '</div></div>',
-      '<div class="bar"><div class="k">Fallback runs</div><div class="v">' + esc(fb + ' (' + (ALGO.fallbackRatePct || 0) + '%)') + '</div></div>',
-      '<div class="bar"><div class="k">Unmet-intent runs</div><div class="v">' + esc(unmet + ' (' + (ALGO.unmetIntentRatePct || 0) + '%)') + '</div></div>',
-      '<div class="bar"><div class="k">Intent types seen</div><div class="v">' + esc(byIntentCount) + '</div></div>'
-    ].join('');
-
-    var per = ALGO.perIntent || {};
-    var items = Object.keys(per).map(function(k){
-      return { k:k, metRate:Number(per[k].metRatePct||0), web:Number(per[k].webFallbacks||0), avgHits:Number(per[k].avgLocalHitCount||0) };
-    }).sort(function(a,b){ return b.metRate-a.metRate; });
-    intentEl.innerHTML = bars(items, {
-      limit: 14,
-      label: function(i){ return i.k; },
-      val: function(i){ return i.metRate; },
-      sub: function(i){ return i.metRate + '% · web ' + i.web + ' · hits ' + i.avgHits; }
-    });
-
-    var misses = ALGO.topMisses || [];
-    missEl.innerHTML = bars(misses, {
-      limit: 12,
-      label: function(i){ return i.q; },
-      val: function(i){ return Number(i.misses || 0); },
-      sub: function(i){ return String(i.misses || 0); },
-      badFrac: function(){ return 1; }
-    });
-
-    if (rowsEl) {
-      var rows = (ALGO.entries || []).slice(0, 500);
-      rowsEl.innerHTML = rows.map(function(e){
-        var unmet = (e.unmetIntents || []).join(", ");
-        var fb = e.fallbackUsed || e.usedWeb;
-        return '<tr>'+
-          '<td class="mono">'+esc((e.ts||"").replace("T"," ").slice(0,19))+'</td>'+
-          '<td>'+esc(e.region||"")+'</td>'+
-          '<td>'+esc(e.intent||"")+'</td>'+
-          '<td>'+(fb?'<span class="pill bad">yes</span>':'<span class="pill ok">no</span>')+'</td>'+
-          '<td>'+esc(unmet||"-")+'</td>'+
-          '<td class="q">'+esc(e.q||"")+'</td>'+
-        '</tr>';
-      }).join("") || '<tr><td colspan="6" class="muted">No telemetry rows.</td></tr>';
-    }
-  }
-
   function card(n,l){ return '<div class="card"><div class="n">'+esc(n)+'</div><div class="l">'+esc(l)+'</div></div>'; }
   function sortBy(c){ SORT.dir = (SORT.c===c ? -SORT.dir : -1); SORT.c=c; render(); }
   function downloadCsv(){ window.location = "/api/herai/questions?format=csv&limit=5000"; }
-  function downloadAlgoCsv(){ window.location = "/api/herai/algo?format=csv&limit=5000"; }
 
   (function init(){
     load();

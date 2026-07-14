@@ -10,12 +10,10 @@
   var history = [];          // chat turns {role, content}
   var pending = null;        // staged FAQ idea awaiting user edit/send
   var lastSourceKeys = [];   // screener context from the last answer, for follow-ups
-  var currentModes = { technical: true, fundamental: true, internet: false };
-  var SESSION_KEYS = "herai_user_providers_v1";
+  var currentMode = "analysis"; // sticky: "analysis" (default) or "news"
   var messagesEl, inputEl, sendBtn;
   var topEl, restEl, forYouWrap, forYouEl, showMoreBtn, searchEl;
-  var modeTechnicalBtn, modeFundamentalBtn, modeInternetBtn;
-  var keyStatusEl, keyOpenBtn, keyModalEl, keySaveBtn, keyCloseBtns;
+  var modeNewsBtn, modeAnalysisBtn;
 
   // ---------- helpers ----------
   function el(tag, cls, html) {
@@ -71,7 +69,7 @@
     if (id) s.counts[id] = (s.counts[id] || 0) + 1;
     s.recent = ([{ id: id || null, q: text, t: Date.now() }]).concat(s.recent || []).slice(0, 25);
     saveLearn(s);
-    renderSide();
+    renderForYou();
   }
 
   // ---------- chat rendering ----------
@@ -101,9 +99,6 @@
     (data.agents || []).forEach(function (a) {
       badges.appendChild(el("span", "herai-agent-chip", escapeHtml(a)));
     });
-    if (data.providerUsed) {
-      badges.appendChild(el("span", "herai-agent-chip", "provider: " + escapeHtml(data.providerUsed)));
-    }
     if (data.usedWeb) badges.appendChild(el("span", "herai-agent-chip", "web"));
     if (badges.childNodes.length) meta.appendChild(badges);
 
@@ -141,119 +136,23 @@
 
   function setBusy(b) { sendBtn.disabled = b; inputEl.disabled = b; }
 
-  // ---------- mode toggle + API key session state ----------
-  function activeModesList() {
-    var out = [];
-    if (currentModes.technical) out.push("technical");
-    if (currentModes.fundamental) out.push("fundamental");
-    if (currentModes.internet) out.push("internet");
-    return out;
-  }
-
-  function refreshModeUI() {
-    if (modeTechnicalBtn) modeTechnicalBtn.classList.toggle("active", !!currentModes.technical);
-    if (modeFundamentalBtn) modeFundamentalBtn.classList.toggle("active", !!currentModes.fundamental);
-    if (modeInternetBtn) modeInternetBtn.classList.toggle("active", !!currentModes.internet);
-    if (!inputEl) return;
-    var modes = activeModesList();
-    if (modes.length === 1 && modes[0] === "internet") {
-      inputEl.placeholder = "Ask with internet research enabled...";
-    } else if (modes.indexOf("technical") !== -1 && modes.indexOf("fundamental") !== -1) {
-      inputEl.placeholder = "Ask technical + fundamental stock questions...";
-    } else if (modes.indexOf("technical") !== -1) {
-      inputEl.placeholder = "Ask a technical analysis question...";
-    } else {
-      inputEl.placeholder = "Ask a fundamental analysis question...";
+  // ---------- mode toggle (News / Analysis) ----------
+  function setMode(mode) {
+    currentMode = (mode === "news") ? "news" : "analysis";
+    if (modeNewsBtn) modeNewsBtn.classList.toggle("active", currentMode === "news");
+    if (modeAnalysisBtn) modeAnalysisBtn.classList.toggle("active", currentMode === "analysis");
+    if (inputEl) {
+      inputEl.placeholder = currentMode === "news"
+        ? "What's the latest on\u2026 (e.g. Google, Amazon, a sector)"
+        : "Ask a stock-market question\u2026";
     }
-  }
-
-  function toggleMode(key) {
-    currentModes[key] = !currentModes[key];
-    if (!currentModes.technical && !currentModes.fundamental && !currentModes.internet) {
-      currentModes.technical = true;
-    }
-    refreshModeUI();
-  }
-
-  function getSavedProviders() {
-    try {
-      var raw = sessionStorage.getItem(SESSION_KEYS);
-      if (!raw) return [];
-      var parsed = JSON.parse(raw);
-      return Array.isArray(parsed) ? parsed : [];
-    } catch (e) {
-      return [];
-    }
-  }
-
-  function setSavedProviders(list) {
-    try { sessionStorage.setItem(SESSION_KEYS, JSON.stringify(list || [])); } catch (e) {}
-    renderProviderStatus();
-  }
-
-  function renderProviderStatus() {
-    if (!keyStatusEl) return;
-    var list = getSavedProviders();
-    if (!list.length) {
-      keyStatusEl.textContent = "";
-      return;
-    }
-    var names = list.map(function (p) { return p.id; }).join(" -> ");
-    keyStatusEl.textContent = "Using session provider key chain: " + names + " (not stored after tab closes).";
-  }
-
-  function collectProviderForm() {
-    var defs = [
-      { id: "gemini" },
-      { id: "claude" },
-      { id: "openai" },
-      { id: "openrouter" },
-      { id: "ollama" },
-      { id: "groq" },
-      { id: "cerebras" },
-    ];
-    var list = [];
-    defs.forEach(function (d) {
-      var keyEl = document.getElementById("herai-key-" + d.id);
-      if (!keyEl) return;
-      var key = (keyEl.value || "").trim();
-      if (!key) return;
-      var modelEl = document.getElementById("herai-model-" + d.id);
-      var endpointEl = document.getElementById("herai-endpoint-" + d.id);
-      var item = { id: d.id, key: key };
-      if (modelEl && modelEl.value.trim()) item.model = modelEl.value.trim();
-      if (endpointEl && endpointEl.value.trim()) item.endpoint = endpointEl.value.trim();
-      list.push(item);
-    });
-    return list;
-  }
-
-  function openKeyModal() {
-    if (!keyModalEl) return;
-    var current = getSavedProviders();
-    ["gemini", "claude", "openai", "openrouter", "ollama", "groq", "cerebras"].forEach(function (id) {
-      var row = null;
-      for (var i = 0; i < current.length; i++) {
-        if (current[i].id === id) { row = current[i]; break; }
-      }
-      var keyEl = document.getElementById("herai-key-" + id);
-      var modelEl = document.getElementById("herai-model-" + id);
-      var endpointEl = document.getElementById("herai-endpoint-" + id);
-      if (keyEl) keyEl.value = row && row.key ? row.key : "";
-      if (modelEl) modelEl.value = row && row.model ? row.model : "";
-      if (endpointEl) endpointEl.value = row && row.endpoint ? row.endpoint : "";
-    });
-    keyModalEl.classList.remove("herai-hidden");
-  }
-
-  function closeKeyModal() {
-    if (keyModalEl) keyModalEl.classList.add("herai-hidden");
   }
 
   // ---------- ask flows ----------
   function askFaq(id) {
     var entry = FAQ.byId[id];
     if (!entry) return;
+    if (entry.mode) setMode(entry.mode);
     addUser(entry.q);
     recordAsk(id, entry.q);
     if (entry.answer && entry.answer.trim()) {
@@ -285,10 +184,12 @@
   }
 
   // Clicking a left-panel idea fills the input so the user can tweak it first.
-  function prefillQuestion(q, id) {
-    if (!q) return;
-    pending = { q: q, id: id || null };
-    inputEl.value = q;
+  function prefillFaq(id) {
+    var entry = FAQ.byId[id];
+    if (!entry) return;
+    if (entry.mode) setMode(entry.mode);
+    pending = { q: entry.q, id: entry.id };
+    inputEl.value = entry.q;
     inputEl.style.height = "auto";
     inputEl.style.height = Math.min(inputEl.scrollHeight, 130) + "px";
     inputEl.focus();
@@ -300,13 +201,7 @@
     setBusy(true);
     history.push({ role: "user", content: text });
     var typing = addTyping();
-    var payload = {
-      message: text,
-      region: region,
-      history: history.slice(0, -1),
-      modes: activeModesList(),
-      userProviders: getSavedProviders(),
-    };
+    var payload = { message: text, region: region, history: history.slice(0, -1), mode: currentMode };
     if (entry && entry.source && entry.source.length) payload.sources = entry.source;
     else if (lastSourceKeys.length) payload.context_sources = lastSourceKeys;
     try {
@@ -339,7 +234,7 @@
     var b = el("button", "herai-faq-item cat-" + entry.cat);
     b.appendChild(el("span", "dot"));
     b.appendChild(el("span", null, escapeHtml(entry.q)));
-    b.addEventListener("click", function () { prefillQuestion(entry.q, entry.id); });
+    b.addEventListener("click", function () { prefillFaq(entry.id); });
     b.setAttribute("data-q", entry.q.toLowerCase());
     b.setAttribute("data-id", entry.id);
     return b;
@@ -360,47 +255,28 @@
   }
 
   function renderSide() {
-    var recents = loadLearn().recent || [];
-    var uniq = [];
-    var seen = {};
-    recents.forEach(function (r) {
-      var q = String((r && r.q) || "").trim();
-      if (!q) return;
-      var key = q.toLowerCase();
-      if (seen[key]) return;
-      seen[key] = 1;
-      var item = { id: r.id || key, q: q, cat: "recent" };
-      FAQ.byId[item.id] = item;
-      uniq.push(item);
-    });
+    var qs = FAQ.questions;
+    var topIds = FAQ.top && FAQ.top.length ? FAQ.top : qs.slice(0, 10).map(function (e) { return e.id; });
+    var topSet = {};
+    topIds.forEach(function (id) { topSet[id] = 1; });
+
     topEl.innerHTML = "";
     restEl.innerHTML = "";
-    uniq.slice(0, 25).forEach(function (e) { topEl.appendChild(faqButton(e)); });
+    qs.forEach(function (e) {
+      (topSet[e.id] ? topEl : restEl).appendChild(faqButton(e));
+    });
 
-    if (!uniq.length) {
-      topEl.appendChild(el("div", "herai-meta", "Your asked questions will appear here."));
+    var hiddenCount = restEl.childNodes.length;
+    if (hiddenCount > 0) {
+      showMoreBtn.classList.remove("herai-hidden");
+      showMoreBtn.textContent = "Show " + hiddenCount + " more questions";
+    } else {
+      showMoreBtn.classList.add("herai-hidden");
     }
-    if (showMoreBtn) {
-      if (restEl.childNodes.length > 0) {
-        showMoreBtn.classList.remove("herai-hidden");
-        showMoreBtn.textContent = "Show " + restEl.childNodes.length + " more questions";
-      } else {
-        showMoreBtn.classList.add("herai-hidden");
-      }
-    }
-    if (forYouWrap) {
-      if (uniq.length > 0) {
-        forYouWrap.classList.remove("herai-hidden");
-        forYouEl.innerHTML = "";
-        uniq.slice(0, 5).forEach(function (e) { forYouEl.appendChild(faqButton(e)); });
-      } else {
-        forYouWrap.classList.add("herai-hidden");
-      }
-    }
+    renderForYou();
   }
 
   function toggleMore() {
-    if (!restEl || !showMoreBtn) return;
     var hidden = restEl.classList.toggle("herai-hidden");
     showMoreBtn.textContent = hidden
       ? "Show " + restEl.childNodes.length + " more questions"
@@ -409,6 +285,7 @@
 
   function onSearch() {
     var q = (searchEl.value || "").trim().toLowerCase();
+    if (q) restEl.classList.remove("herai-hidden");
     [topEl, restEl].forEach(function (list) {
       Array.prototype.forEach.call(list.querySelectorAll(".herai-faq-item"), function (btn) {
         var match = !q || (btn.getAttribute("data-q") || "").indexOf(q) !== -1;
@@ -419,10 +296,15 @@
 
   // ---------- init ----------
   async function loadFaq() {
-    // Intentionally disabled: left panel now learns from user's own questions.
-    FAQ.questions = [];
-    FAQ.top = [];
-    FAQ.byId = {};
+    try {
+      var res = await fetch("herai_faq.json", { cache: "no-cache" });
+      if (!res.ok) return;
+      var data = await res.json();
+      FAQ.questions = data.questions || [];
+      FAQ.top = data.top || [];
+      FAQ.byId = {};
+      FAQ.questions.forEach(function (e) { FAQ.byId[e.id] = e; });
+    } catch (e) { /* FAQ optional */ }
   }
 
   async function init() {
@@ -435,14 +317,8 @@
     forYouEl = document.getElementById("herai-foryou");
     showMoreBtn = document.getElementById("herai-showmore");
     searchEl = document.getElementById("herai-search");
-    modeTechnicalBtn = document.getElementById("herai-mode-technical");
-    modeFundamentalBtn = document.getElementById("herai-mode-fundamental");
-    modeInternetBtn = document.getElementById("herai-mode-internet");
-    keyStatusEl = document.getElementById("herai-key-status");
-    keyOpenBtn = document.getElementById("herai-open-keys");
-    keyModalEl = document.getElementById("herai-key-modal");
-    keySaveBtn = document.getElementById("herai-save-keys");
-    keyCloseBtns = document.querySelectorAll(".herai-key-close");
+    modeNewsBtn = document.getElementById("herai-mode-news");
+    modeAnalysisBtn = document.getElementById("herai-mode-analysis");
     if (!messagesEl || !inputEl || !sendBtn) return;
 
     sendBtn.addEventListener("click", function () { askText(); });
@@ -455,20 +331,9 @@
     });
     if (showMoreBtn) showMoreBtn.addEventListener("click", toggleMore);
     if (searchEl) searchEl.addEventListener("input", onSearch);
-    if (modeTechnicalBtn) modeTechnicalBtn.addEventListener("click", function () { toggleMode("technical"); inputEl.focus(); });
-    if (modeFundamentalBtn) modeFundamentalBtn.addEventListener("click", function () { toggleMode("fundamental"); inputEl.focus(); });
-    if (modeInternetBtn) modeInternetBtn.addEventListener("click", function () { toggleMode("internet"); inputEl.focus(); });
-    if (keyOpenBtn) keyOpenBtn.addEventListener("click", openKeyModal);
-    if (keySaveBtn) keySaveBtn.addEventListener("click", function () { setSavedProviders(collectProviderForm()); closeKeyModal(); });
-    if (keyCloseBtns && keyCloseBtns.length) {
-      Array.prototype.forEach.call(keyCloseBtns, function (btn) { btn.addEventListener("click", closeKeyModal); });
-    }
-    if (keyModalEl) {
-      keyModalEl.addEventListener("click", function (e) { if (e.target === keyModalEl) closeKeyModal(); });
-    }
-
-    refreshModeUI();
-    renderProviderStatus();
+    if (modeNewsBtn) modeNewsBtn.addEventListener("click", function () { setMode("news"); inputEl.focus(); });
+    if (modeAnalysisBtn) modeAnalysisBtn.addEventListener("click", function () { setMode("analysis"); inputEl.focus(); });
+    setMode(currentMode);
 
     await loadFaq();
     if (topEl) renderSide();
