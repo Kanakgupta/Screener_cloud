@@ -29,7 +29,7 @@
         "reversal",
         "undervalued"
       ],
-      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **IRWD**\n  Setup: Top YTD\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **MU**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n- **ALIT**\n  Setup: 3-month momentum\n  Also strong on: Low P/B, Low EV/EBITDA, High dividend\n- **LPG**\n  Setup: Multi-EMA breakout\n  Also strong on: High earnings growth, High revenue growth, High dividend\n- **VISN**\n  Setup: Top YTD\n  Also strong on: High earnings growth, Low P/B, Low EV/EBITDA\n- **AMD**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High free cash flow, Low debt\n- **DELL**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High free cash flow\n- **CLAR**\n  Setup: Multi-EMA breakout\n  Also strong on: Low debt, Low P/B\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Reference levels above come directly from HeRAI's own screeners — open a ticker for the full picture before acting.",
+      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **IRWD**\n  Setup: Top YTD\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **ALIT**\n  Setup: 3-month momentum\n  Also strong on: Low P/B, Low EV/EBITDA, High dividend\n- **AMD**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High free cash flow, Low debt\n- **LPG**\n  Setup: Multi-EMA breakout\n  Also strong on: High earnings growth, High revenue growth, High dividend\n- **VISN**\n  Setup: Top YTD\n  Also strong on: High earnings growth, Low P/B, Low EV/EBITDA\n- **MU**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n- **DELL**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High free cash flow\n- **CRNX**\n  Setup: 3-month momentum, Multi-EMA breakout\n  Also strong on: High revenue growth\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Reference levels above come directly from HeRAI's own screeners — open a ticker for the full picture before acting.",
       "sources": [
         {
           "title": "Top YTD",
@@ -64,16 +64,16 @@
           "url": "/usa/screens/high-dividend.html"
         },
         {
-          "title": "Multi-EMA breakout",
-          "url": "/usa/screens/ema-multi-up-5d.html"
-        },
-        {
           "title": "High free cash flow",
           "url": "/usa/screens/high-fcf.html"
         },
         {
           "title": "Low debt",
           "url": "/usa/screens/low-debt.html"
+        },
+        {
+          "title": "Multi-EMA breakout",
+          "url": "/usa/screens/ema-multi-up-5d.html"
         }
       ]
     },
@@ -238,7 +238,7 @@
         "dividend",
         "buy-today"
       ],
-      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**High ROE**\n- **URGN** — UroGen Pharma Ltd. · Mkt Cap: $1.91B · Price: 39.19 · P/E: -14.30 · Fwd P/E: 31.89 · Δ P/E: Δ -46.19 · ROCE %: -81.06%\n- **AAPL** — Apple Inc. · Mkt Cap: $4.62T · Price: 314.86 · P/E: 38.07 · PEG: 9.71 · Fwd P/E: 32.82 · Δ P/E: Δ 5.25\n- **EAT** — Brinker International, Inc. · Mkt Cap: $7.95B · Price: 185.33 · P/E: 18.06 · PEG: 1.74 · Fwd P/E: 14.85 · Δ P/E: Δ 3.21\n- **GOSS** — Gossamer Bio, Inc. · Mkt Cap: $68.44M · Price: 0.14 · P/E: -0.18 · Fwd P/E: -1.28 · Δ P/E: Δ 1.10 · ROCE %: -\n- **FTNT** — Fortinet, Inc. · Mkt Cap: $122.23B · Price: 166.83 · P/E: 64.91 · PEG: 2.25 · Fwd P/E: 48.70 · Δ P/E: Δ 16.21\n- **HD** — The Home Depot, Inc. · Mkt Cap: $336.77B · Price: 337.74 · P/E: 23.97 · Fwd P/E: 20.97 · Δ P/E: Δ 3.00 · ROCE %: 28.75%\n\n**High margin**\n- **AUPH** — Aurinia Pharmaceuticals Inc. · Mkt Cap: $2.06B · Price: 15.98 · P/E: 7.40 · Fwd P/E: 14.29 · Δ P/E: Δ -6.89 · ROCE %: 16.20%\n- **AREN** — The Arena Group Holdings, Inc. · Mkt Cap: $43.79M · Price: 0.92 · P/E: 2.00 · PEG: 0.02 · Fwd P/E: 2.00 · Δ P/E: Δ 0.00\n- **BYND** — Beyond Meat, Inc. · Mkt Cap: $319.51M · Price: 0.62 · P/E: -0.57 · Fwd P/E: -1.73 · Δ P/E: Δ 1.16 · ROCE %: -61.80%\n- **NBIS** — Nebius Group N.V. · Mkt Cap: $42.78B · Price: 194.09 · P/E: 75.23 · Fwd P/E: 537.32 · Δ P/E: Δ -462.09 · ROCE %: -5.61%\n- **KG** — Kestrel Group Ltd · Mkt Cap: $78.01M · Price: 9.97 · P/E: 1.82 · Fwd P/E: 0.91 · Δ P/E: Δ 0.91 · ROCE %: -\n- **LAB** — Standard BioTools Inc. · Mkt Cap: $328.83M · Price: 0.84 · P/E: -6.46 · Fwd P/E: -84.00 · Δ P/E: Δ 77.54 · ROCE %: -24.00%\n\n**High free cash flow**\n- **TSM** — Taiwan Semiconductor Manufacturing Company Limited · Mkt Cap: $2.18T · Price: 420.39 · P/E: 36.18 · PEG: 1.85 · Fwd P/E: 21.53 · Δ P/E: Δ 14.65\n- **AAPL** — Apple Inc. · Mkt Cap: $4.62T · Price: 314.86 · P/E: 38.07 · PEG: 9.71 · Fwd P/E: 32.82 · Δ P/E: Δ 5.25\n- **PDD** — PDD Holdings Inc. · Mkt Cap: $119.44B · Price: 83.91 · P/E: 8.80 · PEG: 0.19 · Fwd P/E: 6.77 · Δ P/E: Δ 2.03\n- **BRK-B** — Berkshire Hathaway Inc. · Mkt Cap: $686.70B · Price: 491.09 · P/E: 14.61 · PEG: 1.55 · Fwd P/E: 22.87 · Δ P/E: Δ -8.26\n- **NVDA** — NVIDIA Corporation · Mkt Cap: $5.13T · Price: 211.80 · P/E: 32.43 · PEG: 1.01 · Fwd P/E: 16.64 · Δ P/E: Δ 15.79\n- **MSFT** — Microsoft Corporation · Mkt Cap: $2.86T · Price: 384.93 · P/E: 22.91 · PEG: 2.11 · Fwd P/E: 19.90 · Δ P/E: Δ 3.01\n\n**Low debt**\n- **AGNT** — AGNT, Inc · Mkt Cap: $703.31M · Price: 4.28 · P/E: -42.80 · Fwd P/E: 12.23 · Δ P/E: Δ -55.03 · ROCE %: -8.84%\n- **GPGI** — GPGI, Inc. · Mkt Cap: $4.25B · Price: 14.65 · P/E: -6.34 · Fwd P/E: 11.45 · Δ P/E: Δ -17.79 · ROCE %: -2.76%\n- **IRMD** — IRADIMED CORPORATION · Mkt Cap: $1.17B · Price: 91.67 · P/E: 50.09 · PEG: 2.44 · Fwd P/E: 38.93 · Δ P/E: Δ 11.16\n- **REAX** — The Real Brokerage Inc. · Mkt Cap: $429.22M · Price: 2.00 · P/E: -50.00 · Fwd P/E: -50.00 · Δ P/E: Δ 0.00 · ROCE %: -16.47%\n- **IMVT** — Immunovant, Inc. · Mkt Cap: $7.96B · Price: 38.77 · P/E: -14.00 · Fwd P/E: -15.91 · Δ P/E: Δ 1.91 · ROCE %: -\n- **SLAB** — Silicon Laboratories Inc. · Mkt Cap: $7.19B · Price: 218.00 · P/E: -144.37 · Fwd P/E: 52.55 · Δ P/E: Δ -196.92 · ROCE %: -6.27%\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
+      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**High ROE**\n- **URGN** — UroGen Pharma Ltd. · Mkt Cap: $1.91B · Price: 39.19 · P/E: -14.30 · Fwd P/E: 31.89 · Δ P/E: Δ -46.19 · ROCE %: -81.06%\n- **AAPL** — Apple Inc. · Mkt Cap: $4.62T · Price: 314.86 · P/E: 38.07 · PEG: 9.71 · Fwd P/E: 32.82 · Δ P/E: Δ 5.25\n- **EAT** — Brinker International, Inc. · Mkt Cap: $7.95B · Price: 185.33 · P/E: 18.06 · PEG: 1.74 · Fwd P/E: 14.85 · Δ P/E: Δ 3.21\n- **GOSS** — Gossamer Bio, Inc. · Mkt Cap: $68.44M · Price: 0.14 · P/E: -0.18 · Fwd P/E: -1.28 · Δ P/E: Δ 1.10 · ROCE %: -\n- **FTNT** — Fortinet, Inc. · Mkt Cap: $122.23B · Price: 166.83 · P/E: 64.91 · PEG: 2.25 · Fwd P/E: 48.70 · Δ P/E: Δ 16.21\n- **HD** — The Home Depot, Inc. · Mkt Cap: $336.77B · Price: 337.74 · P/E: 23.97 · Fwd P/E: 20.97 · Δ P/E: Δ 3.00 · ROCE %: 28.75%\n\n**High margin**\n- **AUPH** — Aurinia Pharmaceuticals Inc. · Mkt Cap: $2.06B · Price: 15.98 · P/E: 7.40 · Fwd P/E: 14.29 · Δ P/E: Δ -6.89 · ROCE %: 16.20%\n- **AREN** — The Arena Group Holdings, Inc. · Mkt Cap: $43.79M · Price: 0.92 · P/E: 2.00 · PEG: 0.02 · Fwd P/E: 2.00 · Δ P/E: Δ 0.00\n- **BYND** — Beyond Meat, Inc. · Mkt Cap: $319.51M · Price: 0.62 · P/E: -0.57 · Fwd P/E: -1.73 · Δ P/E: Δ 1.16 · ROCE %: -61.80%\n- **NBIS** — Nebius Group N.V. · Mkt Cap: $42.78B · Price: 194.09 · P/E: 75.23 · Fwd P/E: 537.32 · Δ P/E: Δ -462.09 · ROCE %: -5.61%\n- **KG** — Kestrel Group Ltd · Mkt Cap: $78.01M · Price: 9.97 · P/E: 1.82 · Fwd P/E: 0.91 · Δ P/E: Δ 0.91 · ROCE %: -\n- **LAB** — Standard BioTools Inc. · Mkt Cap: $328.83M · Price: 0.84 · P/E: -6.46 · Fwd P/E: -84.00 · Δ P/E: Δ 77.54 · ROCE %: -24.00%\n\n**High free cash flow**\n- **TSM** — Taiwan Semiconductor Manufacturing Company Limited · Mkt Cap: $2.18T · Price: 420.39 · P/E: 36.18 · PEG: 1.85 · Fwd P/E: 21.53 · Δ P/E: Δ 14.65\n- **AAPL** — Apple Inc. · Mkt Cap: $4.62T · Price: 314.86 · P/E: 38.07 · PEG: 9.71 · Fwd P/E: 32.82 · Δ P/E: Δ 5.25\n- **PDD** — PDD Holdings Inc. · Mkt Cap: $119.44B · Price: 83.91 · P/E: 8.80 · PEG: 0.19 · Fwd P/E: 6.77 · Δ P/E: Δ 2.03\n- **BRK-B** — Berkshire Hathaway Inc. · Mkt Cap: $686.70B · Price: 491.09 · P/E: 14.61 · PEG: 1.55 · Fwd P/E: 22.87 · Δ P/E: Δ -8.26\n- **NVDA** — NVIDIA Corporation · Mkt Cap: $5.13T · Price: 211.80 · P/E: 32.43 · PEG: 1.01 · Fwd P/E: 16.64 · Δ P/E: Δ 15.79\n- **MSFT** — Microsoft Corporation · Mkt Cap: $2.86T · Price: 384.93 · P/E: 22.91 · PEG: 2.11 · Fwd P/E: 19.90 · Δ P/E: Δ 3.01\n\n**Low debt**\n- **AGNT** — AGNT, Inc · Mkt Cap: $703.31M · Price: 4.28 · P/E: -42.80 · Fwd P/E: 12.23 · Δ P/E: Δ -55.03 · ROCE %: -8.84%\n- **CRML** — CRML · Mkt Cap: $642.28M · Price: 7.93 · P/E: -14.16 · Fwd P/E: - · Δ P/E: - · ROCE %: -95.25%\n- **GPGI** — GPGI, Inc. · Mkt Cap: $4.25B · Price: 14.65 · P/E: -6.34 · Fwd P/E: 11.45 · Δ P/E: Δ -17.79 · ROCE %: -2.76%\n- **IRMD** — IRADIMED CORPORATION · Mkt Cap: $1.17B · Price: 91.67 · P/E: 50.09 · PEG: 2.44 · Fwd P/E: 38.93 · Δ P/E: Δ 11.16\n- **REAX** — The Real Brokerage Inc. · Mkt Cap: $429.22M · Price: 2.00 · P/E: -50.00 · Fwd P/E: -50.00 · Δ P/E: Δ 0.00 · ROCE %: -16.47%\n- **IMVT** — Immunovant, Inc. · Mkt Cap: $7.96B · Price: 38.77 · P/E: -14.00 · Fwd P/E: -15.91 · Δ P/E: Δ 1.91 · ROCE %: -\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
       "sources": [
         {
           "title": "High ROE",
@@ -304,7 +304,7 @@
         "reversal",
         "undervalued"
       ],
-      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **IRWD**\n  Setup: Top YTD\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **MU**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n- **ALIT**\n  Setup: 3-month momentum\n  Also strong on: Low P/B, Low EV/EBITDA, High dividend\n- **LPG**\n  Setup: Multi-EMA breakout\n  Also strong on: High earnings growth, High revenue growth, High dividend\n- **VISN**\n  Setup: Top YTD\n  Also strong on: High earnings growth, Low P/B, Low EV/EBITDA\n- **AMD**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High free cash flow, Low debt\n- **DELL**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High free cash flow\n- **CLAR**\n  Setup: Multi-EMA breakout\n  Also strong on: Low debt, Low P/B\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Reference levels above come directly from HeRAI's own screeners — open a ticker for the full picture before acting.",
+      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **IRWD**\n  Setup: Top YTD\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **ALIT**\n  Setup: 3-month momentum\n  Also strong on: Low P/B, Low EV/EBITDA, High dividend\n- **AMD**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High free cash flow, Low debt\n- **LPG**\n  Setup: Multi-EMA breakout\n  Also strong on: High earnings growth, High revenue growth, High dividend\n- **VISN**\n  Setup: Top YTD\n  Also strong on: High earnings growth, Low P/B, Low EV/EBITDA\n- **MU**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n- **DELL**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High free cash flow\n- **CRNX**\n  Setup: 3-month momentum, Multi-EMA breakout\n  Also strong on: High revenue growth\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Reference levels above come directly from HeRAI's own screeners — open a ticker for the full picture before acting.",
       "sources": [
         {
           "title": "Top YTD",
@@ -339,16 +339,16 @@
           "url": "/usa/screens/high-dividend.html"
         },
         {
-          "title": "Multi-EMA breakout",
-          "url": "/usa/screens/ema-multi-up-5d.html"
-        },
-        {
           "title": "High free cash flow",
           "url": "/usa/screens/high-fcf.html"
         },
         {
           "title": "Low debt",
           "url": "/usa/screens/low-debt.html"
+        },
+        {
+          "title": "Multi-EMA breakout",
+          "url": "/usa/screens/ema-multi-up-5d.html"
         }
       ]
     },
@@ -463,7 +463,7 @@
         "momentum",
         "buy-today"
       ],
-      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**Small caps**\n- **TSEOF** — TSEOF · Mkt Cap: $400.94K · Price: 0.01 · P/E: -0.00 · Fwd P/E: - · Δ P/E: - · ROCE %: -16.04%\n- **SNBR** — Sleep Number Corp · Mkt Cap: $691.47K · Price: 0.03 · P/E: -0.00 · Fwd P/E: 0.15 · Δ P/E: Δ -0.15 · ROCE %: 20.04%\n- **GOCO** — GoHealth Inc · Mkt Cap: $6.17M · Price: 0.37 · P/E: -0.02 · Fwd P/E: -0.09 · Δ P/E: Δ 0.07 · ROCE %: -48.92%\n- **PRSO** — Peraso Inc. · Mkt Cap: $11.16M · Price: 0.76 · P/E: -0.94 · Fwd P/E: -4.61 · Δ P/E: Δ 3.67 · ROCE %: -100.06%\n- **GFAI** — Guardforce AI Co., Limited · Mkt Cap: $11.97M · Price: 0.38 · P/E: -1.58 · PEG: -0.07 · Fwd P/E: 12.77 · Δ P/E: Δ -14.35\n- **NEON** — Neonode Inc. · Mkt Cap: $13.93M · Price: 0.83 · P/E: 1.73 · Fwd P/E: -2.18 · Δ P/E: Δ 3.91 · ROCE %: 29.84%\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
+      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**Small caps**\n- **TSEOF** — TSEOF · Mkt Cap: $400.94K · Price: 0.01 · P/E: -0.00 · Fwd P/E: - · Δ P/E: - · ROCE %: -16.04%\n- **SNBR** — Sleep Number Corp · Mkt Cap: $691.47K · Price: 0.03 · P/E: -0.00 · Fwd P/E: 0.15 · Δ P/E: Δ -0.15 · ROCE %: 20.04%\n- **GOCO** — GoHealth Inc · Mkt Cap: $6.17M · Price: 0.37 · P/E: -0.02 · Fwd P/E: -0.09 · Δ P/E: Δ 0.07 · ROCE %: -48.92%\n- **GFAI** — GFAI · Mkt Cap: $9.25M · Price: 0.38 · P/E: -1.27 · PEG: -0.06 · Fwd P/E: - · Δ P/E: -\n- **PRSO** — Peraso Inc. · Mkt Cap: $11.16M · Price: 0.76 · P/E: -0.94 · Fwd P/E: -4.61 · Δ P/E: Δ 3.67 · ROCE %: -100.06%\n- **NEON** — Neonode Inc. · Mkt Cap: $13.93M · Price: 0.83 · P/E: 1.73 · Fwd P/E: -2.18 · Δ P/E: Δ 3.91 · ROCE %: 29.84%\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
       "sources": [
         {
           "title": "Small caps",
