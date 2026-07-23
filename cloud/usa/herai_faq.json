@@ -1,6 +1,6 @@
 {
   "region": "usa",
-  "updated": "2026-07-20",
+  "updated": "2026-07-23",
   "top": [
     "buy-today",
     "reversal",
@@ -29,7 +29,7 @@
         "reversal",
         "undervalued"
       ],
-      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **MU**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High free cash flow, Low debt, High earnings growth, High revenue growth\n- **IRWD**\n  Setup: Top YTD\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **VISN**\n  Setup: Top YTD\n  Also strong on: High earnings growth, Low P/B, Low EV/EBITDA\n- **URGN**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **AMD**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High free cash flow, Low debt\n- **NVDA**\n  Setup: Multi-EMA breakout\n  Also strong on: High ROE, High free cash flow, Low debt\n- **ALIT**\n  Setup: 3-month momentum\n  Also strong on: Low P/B, Low EV/EBITDA, High dividend\n- **RMAX**\n  Setup: 3-month momentum\n  Also strong on: Low P/B, Low EV/EBITDA\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Reference levels above come directly from HeRAI's own screeners — open a ticker for the full picture before acting.",
+      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **MU**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High free cash flow, Low debt, High earnings growth, High revenue growth\n- **IRWD**\n  Setup: Top YTD\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **NVDA**\n  Setup: Multi-EMA breakout\n  Also strong on: High ROE, High free cash flow, Low debt\n- **ALIT**\n  Setup: 3-month momentum\n  Also strong on: Low P/B, Low EV/EBITDA, High dividend\n- **VISN**\n  Setup: Top YTD\n  Also strong on: High earnings growth, Low P/B, Low EV/EBITDA\n- **AMD**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High free cash flow, Low debt\n- **URGN**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **EVC**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High revenue growth\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Reference levels above come directly from HeRAI's own screeners — open a ticker for the full picture before acting.",
       "sources": [
         {
           "title": "3-month momentum",
@@ -68,12 +68,12 @@
           "url": "/usa/screens/low-ev-ebitda.html"
         },
         {
-          "title": "Low P/B",
-          "url": "/usa/screens/low-pb.html"
-        },
-        {
           "title": "Multi-EMA breakout",
           "url": "/usa/screens/ema-multi-up-5d.html"
+        },
+        {
+          "title": "Low P/B",
+          "url": "/usa/screens/low-pb.html"
         },
         {
           "title": "High dividend",
@@ -316,7 +316,7 @@
         "reversal",
         "undervalued"
       ],
-      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **MU**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High free cash flow, Low debt, High earnings growth, High revenue growth\n- **IRWD**\n  Setup: Top YTD\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **VISN**\n  Setup: Top YTD\n  Also strong on: High earnings growth, Low P/B, Low EV/EBITDA\n- **URGN**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **AMD**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High free cash flow, Low debt\n- **NVDA**\n  Setup: Multi-EMA breakout\n  Also strong on: High ROE, High free cash flow, Low debt\n- **ALIT**\n  Setup: 3-month momentum\n  Also strong on: Low P/B, Low EV/EBITDA, High dividend\n- **RMAX**\n  Setup: 3-month momentum\n  Also strong on: Low P/B, Low EV/EBITDA\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Reference levels above come directly from HeRAI's own screeners — open a ticker for the full picture before acting.",
+      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **MU**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High free cash flow, Low debt, High earnings growth, High revenue growth\n- **IRWD**\n  Setup: Top YTD\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **NVDA**\n  Setup: Multi-EMA breakout\n  Also strong on: High ROE, High free cash flow, Low debt\n- **ALIT**\n  Setup: 3-month momentum\n  Also strong on: Low P/B, Low EV/EBITDA, High dividend\n- **VISN**\n  Setup: Top YTD\n  Also strong on: High earnings growth, Low P/B, Low EV/EBITDA\n- **AMD**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High free cash flow, Low debt\n- **URGN**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **EVC**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High revenue growth\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Reference levels above come directly from HeRAI's own screeners — open a ticker for the full picture before acting.",
       "sources": [
         {
           "title": "3-month momentum",
@@ -355,12 +355,12 @@
           "url": "/usa/screens/low-ev-ebitda.html"
         },
         {
-          "title": "Low P/B",
-          "url": "/usa/screens/low-pb.html"
-        },
-        {
           "title": "Multi-EMA breakout",
           "url": "/usa/screens/ema-multi-up-5d.html"
+        },
+        {
+          "title": "Low P/B",
+          "url": "/usa/screens/low-pb.html"
         },
         {
           "title": "High dividend",
@@ -484,7 +484,7 @@
         "momentum",
         "buy-today"
       ],
-      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**Small caps**\n- **TSEOF** — Trinseo PLC · Mkt Cap: $365.60K · Price: 0.01 · P/E: -0.00 · Fwd P/E: -0.00 · Δ P/E: Δ 0.00 · ROCE %: -16.04%\n- **SNBR** — Sleep Number Corp · Mkt Cap: $691.47K · Price: 0.03 · P/E: -0.00 · Fwd P/E: 0.15 · Δ P/E: Δ -0.15 · ROCE %: 20.04%\n- **GOCO** — GoHealth Inc · Mkt Cap: $5.84M · Price: 0.35 · P/E: -0.02 · Fwd P/E: -0.09 · Δ P/E: Δ 0.07 · ROCE %: -48.92%\n- **PRSO** — Peraso Inc. · Mkt Cap: $11.28M · Price: 0.75 · P/E: -0.93 · Fwd P/E: -4.55 · Δ P/E: Δ 3.62 · ROCE %: -100.06%\n- **GFAI** — Guardforce AI Co., Limited · Mkt Cap: $12.09M · Price: 0.39 · P/E: -1.63 · PEG: -0.08 · Fwd P/E: 12.90 · Δ P/E: Δ -14.53\n- **NEON** — Neonode Inc. · Mkt Cap: $14.27M · Price: 0.85 · P/E: 1.77 · Fwd P/E: -2.24 · Δ P/E: Δ 4.01 · ROCE %: 29.84%\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
+      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**Small caps**\n- **TSEOF** — Trinseo PLC · Mkt Cap: $365.60K · Price: 0.01 · P/E: -0.00 · Fwd P/E: -0.00 · Δ P/E: Δ 0.00 · ROCE %: -16.04%\n- **SNBR** — Sleep Number Corp · Mkt Cap: $691.47K · Price: 0.03 · P/E: -0.00 · Fwd P/E: 0.15 · Δ P/E: Δ -0.15 · ROCE %: 20.04%\n- **GOCO** — GoHealth Inc · Mkt Cap: $5.84M · Price: 0.35 · P/E: -0.02 · Fwd P/E: -0.09 · Δ P/E: Δ 0.07 · ROCE %: -48.92%\n- **PRSO** — Peraso Inc. · Mkt Cap: $11.28M · Price: 0.75 · P/E: -0.93 · Fwd P/E: -4.55 · Δ P/E: Δ 3.62 · ROCE %: -100.06%\n- **GFAI** — Guardforce AI Co., Limited · Mkt Cap: $12.19M · Price: 0.39 · P/E: -1.63 · PEG: -0.08 · Fwd P/E: 13.00 · Δ P/E: Δ -14.63\n- **NEON** — Neonode Inc. · Mkt Cap: $14.27M · Price: 0.85 · P/E: 1.77 · Fwd P/E: -2.24 · Δ P/E: Δ 4.01 · ROCE %: 29.84%\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
       "sources": [
         {
           "title": "Small caps",
