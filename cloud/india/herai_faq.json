@@ -1,6 +1,6 @@
 {
   "region": "india",
-  "updated": "2026-07-25",
+  "updated": "2026-07-26",
   "top": [
     "buy-today",
     "reversal",
@@ -29,7 +29,7 @@
         "reversal",
         "undervalued"
       ],
-      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **GAYAPROJ**\n  Setup: Top YTD\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **KRISHANA**\n  Setup: High momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **KERNEX**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **CALSOFT**\n  Setup: 3-month momentum\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value)\n- **SIGMAADV**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **RAJPALAYAM**\n  Setup: Top YTD\n  Also strong on: High earnings growth, Low P/E (value), Low P/B\n- **INDSWFTLAB**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: Low P/E (value)\n- **21STCENMGM**\n  Setup: Multi-EMA breakout\n  Also strong on: Low debt, Low P/E (value)\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Reference levels above come directly from HeRAI's own screeners — open a ticker for the full picture before acting.",
+      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **GAYAPROJ**\n  Setup: Top YTD\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **SIGMAADV**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **KERNEX**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **KRISHANA**\n  Setup: High momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **CALSOFT**\n  Setup: 3-month momentum\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value)\n- **RAJPALAYAM**\n  Setup: Top YTD\n  Also strong on: High earnings growth, Low P/E (value), Low P/B\n- **ALLDIGI**\n  Setup: Multi-EMA breakout\n  Also strong on: High ROE, High dividend\n- **NIBL**\n  Setup: High momentum\n  Also strong on: High ROE, Low P/E (value)\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Reference levels above come directly from HeRAI's own screeners — open a ticker for the full picture before acting.",
       "sources": [
         {
           "title": "Top YTD",
@@ -52,16 +52,16 @@
           "url": "/india/screens/low-ev-ebitda.html"
         },
         {
-          "title": "High momentum",
-          "url": "/india/screens/high-momentum.html"
+          "title": "3-month momentum",
+          "url": "/india/screens/momentum-3m.html"
         },
         {
           "title": "High ROE",
           "url": "/india/screens/high-roe.html"
         },
         {
-          "title": "3-month momentum",
-          "url": "/india/screens/momentum-3m.html"
+          "title": "High momentum",
+          "url": "/india/screens/high-momentum.html"
         },
         {
           "title": "Low P/B",
@@ -72,8 +72,8 @@
           "url": "/india/screens/ema-multi-up-5d.html"
         },
         {
-          "title": "Low debt",
-          "url": "/india/screens/low-debt.html"
+          "title": "High dividend",
+          "url": "/india/screens/high-dividend.html"
         }
       ]
     },
@@ -312,7 +312,7 @@
         "reversal",
         "undervalued"
       ],
-      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **GAYAPROJ**\n  Setup: Top YTD\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **KRISHANA**\n  Setup: High momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **KERNEX**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **CALSOFT**\n  Setup: 3-month momentum\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value)\n- **SIGMAADV**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **RAJPALAYAM**\n  Setup: Top YTD\n  Also strong on: High earnings growth, Low P/E (value), Low P/B\n- **INDSWFTLAB**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: Low P/E (value)\n- **21STCENMGM**\n  Setup: Multi-EMA breakout\n  Also strong on: Low debt, Low P/E (value)\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Reference levels above come directly from HeRAI's own screeners — open a ticker for the full picture before acting.",
+      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **GAYAPROJ**\n  Setup: Top YTD\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **SIGMAADV**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **KERNEX**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **KRISHANA**\n  Setup: High momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **CALSOFT**\n  Setup: 3-month momentum\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value)\n- **RAJPALAYAM**\n  Setup: Top YTD\n  Also strong on: High earnings growth, Low P/E (value), Low P/B\n- **ALLDIGI**\n  Setup: Multi-EMA breakout\n  Also strong on: High ROE, High dividend\n- **NIBL**\n  Setup: High momentum\n  Also strong on: High ROE, Low P/E (value)\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Reference levels above come directly from HeRAI's own screeners — open a ticker for the full picture before acting.",
       "sources": [
         {
           "title": "Top YTD",
@@ -335,16 +335,16 @@
           "url": "/india/screens/low-ev-ebitda.html"
         },
         {
-          "title": "High momentum",
-          "url": "/india/screens/high-momentum.html"
+          "title": "3-month momentum",
+          "url": "/india/screens/momentum-3m.html"
         },
         {
           "title": "High ROE",
           "url": "/india/screens/high-roe.html"
         },
         {
-          "title": "3-month momentum",
-          "url": "/india/screens/momentum-3m.html"
+          "title": "High momentum",
+          "url": "/india/screens/high-momentum.html"
         },
         {
           "title": "Low P/B",
@@ -355,8 +355,8 @@
           "url": "/india/screens/ema-multi-up-5d.html"
         },
         {
-          "title": "Low debt",
-          "url": "/india/screens/low-debt.html"
+          "title": "High dividend",
+          "url": "/india/screens/high-dividend.html"
         }
       ]
     },
