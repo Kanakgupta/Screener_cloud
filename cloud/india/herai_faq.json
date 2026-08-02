@@ -1,6 +1,6 @@
 {
   "region": "india",
-  "updated": "2026-08-01",
+  "updated": "2026-08-02",
   "top": [
     "buy-today",
     "reversal",
@@ -29,15 +29,15 @@
         "reversal",
         "undervalued"
       ],
-      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **SPARC**\n  Setup: 3-month momentum\n  Also strong on: High ROE, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **KRISHANA**\n  Setup: High momentum, 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **CPCAP**\n  Setup: Golden cross\n  Also strong on: Low P/E (value), Low P/B, Low EV/EBITDA, High dividend\n- **GAYAPROJ**\n  Setup: Top YTD\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **SIGMAADV**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **QUESS**\n  Setup: High momentum, 3-month momentum\n  Also strong on: High earnings growth, High dividend\n- **RAJPALAYAM**\n  Setup: Top YTD\n  Also strong on: High earnings growth, Low P/E (value), Low P/B\n- **ALPHAGEO**\n  Setup: High momentum\n  Also strong on: Low debt, Low EV/EBITDA, High dividend\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Reference levels above come directly from HeRAI's own screeners — open a ticker for the full picture before acting.",
+      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **GAYAPROJ**\n  Setup: Top YTD\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **CPCAP**\n  Setup: Golden cross\n  Also strong on: Low P/E (value), Low P/B, Low EV/EBITDA, High dividend\n- **SPARC**\n  Setup: 3-month momentum\n  Also strong on: High ROE, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **KRISHANA**\n  Setup: High momentum, 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **ALPHAGEO**\n  Setup: High momentum\n  Also strong on: Low debt, Low EV/EBITDA, High dividend\n- **KERNEX**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **JSWDULUX**\n  Setup: Golden cross\n  Also strong on: High ROE, High earnings growth, Low EV/EBITDA\n- **SIGMAADV**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Reference levels above come directly from HeRAI's own screeners — open a ticker for the full picture before acting.",
       "sources": [
         {
-          "title": "3-month momentum",
-          "url": "/india/screens/momentum-3m.html"
+          "title": "Top YTD",
+          "url": "/india/screens/top-ytd.html"
         },
         {
-          "title": "High ROE",
-          "url": "/india/screens/high-roe.html"
+          "title": "High earnings growth",
+          "url": "/india/screens/high-earnings-growth.html"
         },
         {
           "title": "High revenue growth",
@@ -52,14 +52,6 @@
           "url": "/india/screens/low-ev-ebitda.html"
         },
         {
-          "title": "High momentum",
-          "url": "/india/screens/high-momentum.html"
-        },
-        {
-          "title": "Top YTD",
-          "url": "/india/screens/top-ytd.html"
-        },
-        {
           "title": "Golden cross",
           "url": "/india/screens/golden-cross.html"
         },
@@ -72,8 +64,16 @@
           "url": "/india/screens/high-dividend.html"
         },
         {
-          "title": "High earnings growth",
-          "url": "/india/screens/high-earnings-growth.html"
+          "title": "3-month momentum",
+          "url": "/india/screens/momentum-3m.html"
+        },
+        {
+          "title": "High ROE",
+          "url": "/india/screens/high-roe.html"
+        },
+        {
+          "title": "High momentum",
+          "url": "/india/screens/high-momentum.html"
         },
         {
           "title": "Low debt",
@@ -96,7 +96,7 @@
         "breakout",
         "buy-today"
       ],
-      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**RSI oversold**\n- **AGL** — ALLCARGO GLOBAL LIMITED · Mkt Cap: ₹1,198.01 Cr · Price: 12.19 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -\n- **NATIONSTD** — National Standard (India) Limited · Mkt Cap: - · Price: 247.90 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -\n- **ELITECON** — Elitecon International Limited · Mkt Cap: - · Price: 15.64 · P/E: 35.55 · Fwd P/E: 71.10 · Δ P/E: Δ -35.55 · ROCE %: -\n- **ESSENTIA** — Integra Essentia Limited · Mkt Cap: ₹118.71 Cr · Price: 1.05 · P/E: 27.80 · Fwd P/E: 55.60 · Δ P/E: Δ -27.80 · ROCE %: 2.16%\n- **TRIVENI** — Triveni Engineering & Industries Limited · Mkt Cap: ₹4,848.59 Cr · Price: 221.50 · P/E: 20.36 · Fwd P/E: 10.77 · Δ P/E: Δ 9.59 · ROCE %: 11.91%\n- **AASTHA** — AASTHA.NS · Mkt Cap: ₹336.58 Cr · Price: 76.25 · P/E: 14.80 · PEG: 0.04 · Fwd P/E: 10.52 · Δ P/E: Δ 4.28\n\n**Near 52-week low**\n- **ABMKNO** — ABM Knowledgeware Limited · Mkt Cap: - · Price: 190.05 · P/E: 40.26 · Fwd P/E: 68.45 · Δ P/E: Δ -28.19 · ROCE %: -\n- **AFSL** — Abans Financial Services Limited · Mkt Cap: ₹1,018.24 Cr · Price: 201.00 · P/E: 9.38 · PEG: 0.85 · Fwd P/E: 9.92 · Δ P/E: Δ -0.54\n- **AGL** — ALLCARGO GLOBAL LIMITED · Mkt Cap: ₹1,198.01 Cr · Price: 12.19 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -\n- **ALPINETEX** — ALPINE TEXWORLD LIMITED · Mkt Cap: ₹266.54 Cr · Price: 69.69 · P/E: 12.42 · PEG: 0.09 · Fwd P/E: 6.21 · Δ P/E: Δ 6.21\n- **AVAILFC** — Available Finance Limited · Mkt Cap: - · Price: 157.73 · P/E: 1.50 · PEG: 0.05 · Fwd P/E: 1.46 · Δ P/E: Δ 0.04\n- **AVROIND** — Avro India Limited · Mkt Cap: ₹113.94 Cr · Price: 8.56 · P/E: 31.01 · PEG: 8.96 · Fwd P/E: 20.52 · Δ P/E: Δ 10.49\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
+      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**RSI oversold**\n- **AGL** — ALLCARGO GLOBAL LIMITED · Mkt Cap: ₹1,198.01 Cr · Price: 12.19 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -\n- **NATIONSTD** — National Standard (India) Limited · Mkt Cap: - · Price: 247.90 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -\n- **ELITECON** — Elitecon International Limited · Mkt Cap: - · Price: 15.64 · P/E: 35.55 · Fwd P/E: 71.10 · Δ P/E: Δ -35.55 · ROCE %: -\n- **ESSENTIA** — Integra Essentia Limited · Mkt Cap: ₹118.71 Cr · Price: 1.05 · P/E: 27.80 · Fwd P/E: 55.60 · Δ P/E: Δ -27.80 · ROCE %: 2.16%\n- **TRIVENI** — Triveni Engineering & Industries Limited · Mkt Cap: ₹4,848.59 Cr · Price: 221.50 · P/E: 20.36 · Fwd P/E: 10.77 · Δ P/E: Δ 9.59 · ROCE %: 11.91%\n- **AASTHA** — AASTHA SPINTEX LIMITED · Mkt Cap: ₹336.58 Cr · Price: 76.25 · P/E: 14.80 · PEG: 0.04 · Fwd P/E: 10.52 · Δ P/E: Δ 4.28\n\n**Near 52-week low**\n- **ABMKNO** — ABM Knowledgeware Limited · Mkt Cap: - · Price: 190.05 · P/E: 40.26 · Fwd P/E: 68.45 · Δ P/E: Δ -28.19 · ROCE %: -\n- **AFSL** — Abans Financial Services Limited · Mkt Cap: ₹1,018.24 Cr · Price: 201.00 · P/E: 9.38 · PEG: 0.85 · Fwd P/E: 9.92 · Δ P/E: Δ -0.54\n- **AGL** — ALLCARGO GLOBAL LIMITED · Mkt Cap: ₹1,198.01 Cr · Price: 12.19 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -\n- **ALPINETEX** — ALPINE TEXWORLD LIMITED · Mkt Cap: ₹266.54 Cr · Price: 69.69 · P/E: 12.42 · PEG: 0.09 · Fwd P/E: 6.21 · Δ P/E: Δ 6.21\n- **AVAILFC** — Available Finance Limited · Mkt Cap: - · Price: 157.73 · P/E: 1.50 · PEG: 0.05 · Fwd P/E: 1.46 · Δ P/E: Δ 0.04\n- **AVROIND** — Avro India Limited · Mkt Cap: ₹113.94 Cr · Price: 8.56 · P/E: 31.01 · PEG: 8.96 · Fwd P/E: 20.52 · Δ P/E: Δ 10.49\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
       "sources": [
         {
           "title": "RSI oversold",
@@ -312,15 +312,15 @@
         "reversal",
         "undervalued"
       ],
-      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **SPARC**\n  Setup: 3-month momentum\n  Also strong on: High ROE, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **KRISHANA**\n  Setup: High momentum, 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **CPCAP**\n  Setup: Golden cross\n  Also strong on: Low P/E (value), Low P/B, Low EV/EBITDA, High dividend\n- **GAYAPROJ**\n  Setup: Top YTD\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **SIGMAADV**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **QUESS**\n  Setup: High momentum, 3-month momentum\n  Also strong on: High earnings growth, High dividend\n- **RAJPALAYAM**\n  Setup: Top YTD\n  Also strong on: High earnings growth, Low P/E (value), Low P/B\n- **ALPHAGEO**\n  Setup: High momentum\n  Also strong on: Low debt, Low EV/EBITDA, High dividend\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Reference levels above come directly from HeRAI's own screeners — open a ticker for the full picture before acting.",
+      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **GAYAPROJ**\n  Setup: Top YTD\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **CPCAP**\n  Setup: Golden cross\n  Also strong on: Low P/E (value), Low P/B, Low EV/EBITDA, High dividend\n- **SPARC**\n  Setup: 3-month momentum\n  Also strong on: High ROE, High revenue growth, Low P/E (value), Low EV/EBITDA\n- **KRISHANA**\n  Setup: High momentum, 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **ALPHAGEO**\n  Setup: High momentum\n  Also strong on: Low debt, Low EV/EBITDA, High dividend\n- **KERNEX**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **JSWDULUX**\n  Setup: Golden cross\n  Also strong on: High ROE, High earnings growth, Low EV/EBITDA\n- **SIGMAADV**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Reference levels above come directly from HeRAI's own screeners — open a ticker for the full picture before acting.",
       "sources": [
         {
-          "title": "3-month momentum",
-          "url": "/india/screens/momentum-3m.html"
+          "title": "Top YTD",
+          "url": "/india/screens/top-ytd.html"
         },
         {
-          "title": "High ROE",
-          "url": "/india/screens/high-roe.html"
+          "title": "High earnings growth",
+          "url": "/india/screens/high-earnings-growth.html"
         },
         {
           "title": "High revenue growth",
@@ -335,14 +335,6 @@
           "url": "/india/screens/low-ev-ebitda.html"
         },
         {
-          "title": "High momentum",
-          "url": "/india/screens/high-momentum.html"
-        },
-        {
-          "title": "Top YTD",
-          "url": "/india/screens/top-ytd.html"
-        },
-        {
           "title": "Golden cross",
           "url": "/india/screens/golden-cross.html"
         },
@@ -355,8 +347,16 @@
           "url": "/india/screens/high-dividend.html"
         },
         {
-          "title": "High earnings growth",
-          "url": "/india/screens/high-earnings-growth.html"
+          "title": "3-month momentum",
+          "url": "/india/screens/momentum-3m.html"
+        },
+        {
+          "title": "High ROE",
+          "url": "/india/screens/high-roe.html"
+        },
+        {
+          "title": "High momentum",
+          "url": "/india/screens/high-momentum.html"
         },
         {
           "title": "Low debt",
@@ -421,7 +421,7 @@
         "good-entry",
         "buy-today"
       ],
-      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**RSI oversold**\n- **AGL** — ALLCARGO GLOBAL LIMITED · Mkt Cap: ₹1,198.01 Cr · Price: 12.19 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -\n- **NATIONSTD** — National Standard (India) Limited · Mkt Cap: - · Price: 247.90 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -\n- **ELITECON** — Elitecon International Limited · Mkt Cap: - · Price: 15.64 · P/E: 35.55 · Fwd P/E: 71.10 · Δ P/E: Δ -35.55 · ROCE %: -\n- **ESSENTIA** — Integra Essentia Limited · Mkt Cap: ₹118.71 Cr · Price: 1.05 · P/E: 27.80 · Fwd P/E: 55.60 · Δ P/E: Δ -27.80 · ROCE %: 2.16%\n- **TRIVENI** — Triveni Engineering & Industries Limited · Mkt Cap: ₹4,848.59 Cr · Price: 221.50 · P/E: 20.36 · Fwd P/E: 10.77 · Δ P/E: Δ 9.59 · ROCE %: 11.91%\n- **AASTHA** — AASTHA.NS · Mkt Cap: ₹336.58 Cr · Price: 76.25 · P/E: 14.80 · PEG: 0.04 · Fwd P/E: 10.52 · Δ P/E: Δ 4.28\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
+      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**RSI oversold**\n- **AGL** — ALLCARGO GLOBAL LIMITED · Mkt Cap: ₹1,198.01 Cr · Price: 12.19 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -\n- **NATIONSTD** — National Standard (India) Limited · Mkt Cap: - · Price: 247.90 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -\n- **ELITECON** — Elitecon International Limited · Mkt Cap: - · Price: 15.64 · P/E: 35.55 · Fwd P/E: 71.10 · Δ P/E: Δ -35.55 · ROCE %: -\n- **ESSENTIA** — Integra Essentia Limited · Mkt Cap: ₹118.71 Cr · Price: 1.05 · P/E: 27.80 · Fwd P/E: 55.60 · Δ P/E: Δ -27.80 · ROCE %: 2.16%\n- **TRIVENI** — Triveni Engineering & Industries Limited · Mkt Cap: ₹4,848.59 Cr · Price: 221.50 · P/E: 20.36 · Fwd P/E: 10.77 · Δ P/E: Δ 9.59 · ROCE %: 11.91%\n- **AASTHA** — AASTHA SPINTEX LIMITED · Mkt Cap: ₹336.58 Cr · Price: 76.25 · P/E: 14.80 · PEG: 0.04 · Fwd P/E: 10.52 · Δ P/E: Δ 4.28\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
       "sources": [
         {
           "title": "RSI oversold",
@@ -480,7 +480,7 @@
         "momentum",
         "buy-today"
       ],
-      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**Small caps**\n- **SHANTI** — Shanti Overseas (India) Limited · Mkt Cap: ₹7.36 Cr · Price: 6.63 · P/E: -0.98 · Fwd P/E: - · Δ P/E: - · ROCE %: -27.05%\n- **EUROTEXIND** — Eurotex Industries and Exports Limited · Mkt Cap: ₹11.24 Cr · Price: 12.85 · P/E: -14.12 · PEG: -0.61 · Fwd P/E: - · Δ P/E: -\n- **ANTGRAPHIC** — ANTGRAPHIC.NS · Mkt Cap: ₹11.32 Cr · Price: 0.73 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -2.23%\n- **CREATIVEYE** — Creative Eye Limited · Mkt Cap: ₹12.01 Cr · Price: 5.99 · P/E: -16.64 · Fwd P/E: - · Δ P/E: - · ROCE %: -29.90%\n- **ARENTERP** — Rajdarshan Industries Limited · Mkt Cap: ₹12.59 Cr · Price: 40.50 · P/E: 53.29 · Fwd P/E: 106.58 · Δ P/E: Δ -53.29 · ROCE %: 0.21%\n- **AURUS** — Aurus Gem Corporation Limited · Mkt Cap: ₹13.42 Cr · Price: 4.55 · P/E: 7.71 · PEG: 0.22 · Fwd P/E: 5.73 · Δ P/E: Δ 1.98\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
+      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**Small caps**\n- **SHANTI** — Shanti Overseas (India) Limited · Mkt Cap: ₹7.36 Cr · Price: 6.63 · P/E: -0.98 · Fwd P/E: - · Δ P/E: - · ROCE %: -27.05%\n- **EUROTEXIND** — Eurotex Industries and Exports Limited · Mkt Cap: ₹11.24 Cr · Price: 12.85 · P/E: -14.12 · PEG: -0.61 · Fwd P/E: - · Δ P/E: -\n- **ANTGRAPHIC** — Antarctica Limited · Mkt Cap: ₹11.32 Cr · Price: 0.73 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -2.23%\n- **CREATIVEYE** — Creative Eye Limited · Mkt Cap: ₹12.01 Cr · Price: 5.99 · P/E: -16.64 · Fwd P/E: - · Δ P/E: - · ROCE %: -29.90%\n- **ARENTERP** — Rajdarshan Industries Limited · Mkt Cap: ₹12.59 Cr · Price: 40.50 · P/E: 53.29 · Fwd P/E: 106.58 · Δ P/E: Δ -53.29 · ROCE %: 0.21%\n- **AURUS** — Aurus Gem Corporation Limited · Mkt Cap: ₹13.42 Cr · Price: 4.55 · P/E: 7.71 · PEG: 0.22 · Fwd P/E: 5.73 · Δ P/E: Δ 1.98\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
       "sources": [
         {
           "title": "Small caps",
