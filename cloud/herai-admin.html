@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow" />
 <title>HerAI · Question Bank (Admin)</title>
 <style>
-  :root { --bg:#0f1216; --card:#171b21; --line:#242b34; --txt:#e7ecf2; --mut:#93a1b0;
+  :root { --bg:#0f1216; --card:#171b21; --line:#242b34; --txt:#e7ecf2; --mut:#93a1b0; 
           --accent:#4f8cff; --bad:#ff5c6c; --good:#38c172; --warn:#f0a92b; }
   * { box-sizing: border-box; }
   body { margin:0; background:var(--bg); color:var(--txt);
@@ -15,7 +15,7 @@
            display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
   header h1 { font-size:17px; margin:0; font-weight:700; }
   header .sp { flex:1; }
-  button, input, select { font:inherit; color:var(--txt); }
+          button, input, select { font:inherit; color:var(--txt); } 
   .btn { background:var(--accent); border:0; color:#fff; padding:8px 14px;
          border-radius:8px; cursor:pointer; font-weight:600; }
   .btn.ghost { background:transparent; border:1px solid var(--line); color:var(--txt); }
@@ -65,7 +65,7 @@
 <body>
 
 <div id="gate" class="gate">
-  <h2>HerAI Question Bank</h2>
+    <h2>HerAI Admin Dashboard</h2>
   <p>The question bank is open for now. Click below to load the dashboard.</p>
   <button class="btn" style="width:100%" onclick="unlock()">Open dashboard</button>
   <div id="gateErr" class="err" hidden></div>
@@ -73,7 +73,7 @@
 
 <div id="app" hidden>
   <header>
-    <h1>&#129504; HerAI · Question Bank</h1>
+      <h1>&#129504; HerAI · Admin Dashboard</h1>
     <span id="regionInfo" class="muted"></span>
     <span class="sp"></span>
     <select id="regionFilter" class="btn ghost" onchange="render()"></select>
@@ -86,16 +86,16 @@
     <div class="cards" id="cards"></div>
 
     <div class="panels">
-      <div class="panel">
-        <h3>Top questions (by frequency · red = failed)</h3>
-        <div id="topQ"></div>
-      </div>
-      <div class="panel">
-        <h3>By intent</h3>
-        <div id="byIntent"></div>
-        <h3 style="margin-top:16px">By region</h3>
-        <div id="byRegion"></div>
-      </div>
+        <div class="panel">
+          <h3>Algorithm Quality Snapshot</h3>
+          <div id="algoSummary"></div>
+        </div>
+        <div class="panel">
+          <h3>Per-intent quality (met rate)</h3>
+          <div id="algoIntent"></div>
+          <h3 style="margin-top:16px">Top misses (for tuning)</h3>
+          <div id="algoMisses"></div>
+        </div>
     </div>
 
     <div class="toolbar">
@@ -132,7 +132,7 @@
     load();
   }
   function lock() {
-    sessionStorage.removeItem("herai_admin_key"); KEY = ""; DATA = null;
+    sessionStorage.removeItem("herai_admin_key"); KEY = ""; ALGO = null;
     document.getElementById("app").hidden = true;
     document.getElementById("gate").hidden = false;
   }
@@ -143,25 +143,20 @@
     var gateErr = document.getElementById("gateErr");
     gateErr.hidden = true;
     try {
-      var r = await fetch("/api/herai/questions?limit=5000", {
-        headers: { "x-admin-key": KEY }
-      });
-      if (r.status === 401) { gateErr.textContent = "Access was blocked by the server."; gateErr.hidden = false; return; }
-      DATA = await r.json();
+      var headers = { "x-admin-key": KEY };
+      var ra = await fetch("/api/herai/algo?limit=3000", { headers: headers });
+      if (ra.status === 401) { gateErr.textContent = "Access was blocked by the server."; gateErr.hidden = false; return; }
+      if (ra.ok) {
+        ALGO = await ra.json();
+      } else {
+        ALGO = { error: "Algo endpoint unavailable (status " + ra.status + ")" };
+      }
       document.getElementById("gate").hidden = true;
       document.getElementById("app").hidden = false;
-      buildRegionFilter();
       render();
     } catch (e) {
       gateErr.textContent = "Could not load: " + e; gateErr.hidden = false;
     }
-  }
-
-  function buildRegionFilter() {
-    var sel = document.getElementById("regionFilter");
-    var regions = Object.keys((DATA && DATA.byRegion) || {});
-    sel.innerHTML = '<option value="">All regions</option>' +
-      regions.map(function(x){ return '<option value="'+esc(x)+'">'+esc(x)+'</option>'; }).join("");
   }
 
   function bars(obj, opts) {
@@ -193,67 +188,86 @@
       total + " logged · " + fb + " failed (" + (total? Math.round(fb/total*100):0) + "%)";
     document.getElementById("cards").innerHTML =
       card(total, "Questions logged") +
-      card(fb + " · " + (total?Math.round(fb/total*100):0) + "%", "Failed / fell back") +
-      card(uniq, "Distinct questions") +
-      card(Object.keys(DATA.byRegion||{}).length, "Regions");
-
-    document.getElementById("topQ").innerHTML = bars(DATA.top || [], {
+        if (!ALGO) return;
+        var total = Number(ALGO.total || 0);
+        var fb = Number(ALGO.fallbackRuns || 0);
+        var unmet = Number(ALGO.unmetRuns || 0);
+        var algoFbRate = (ALGO && ALGO.fallbackRatePct) || 0;
+        var algoUnmetRate = (ALGO && ALGO.unmetIntentRatePct) || 0;
       limit: 12,
-      label: function(i){ return i.q; },
+          "algo runs " + total;
       val: function(i){ return i.count; },
-      sub: function(i){ return i.count + (i.fell? " · "+i.fell+"✗":""); },
-      badFrac: function(i){ return i.count? i.fell/i.count : 0; },
-    });
-    document.getElementById("byIntent").innerHTML = bars(DATA.byIntent || {});
+          card(total, "Algorithm runs") +
+          card(algoFbRate + "%", "Algo fallback rate") +
+          card(algoUnmetRate + "%", "Unmet intent rate") +
+          card(Object.keys((ALGO && ALGO.byIntent) || {}).length, "Intent types seen");
     document.getElementById("byRegion").innerHTML = bars(DATA.byRegion || {});
-
-    // table
-    var q = document.getElementById("search").value.toLowerCase().trim();
-    var onlyFailed = document.getElementById("onlyFailed").checked;
-    var rf = document.getElementById("regionFilter").value;
-    var rows = entries.filter(function(e){
-      if (onlyFailed && !e.fellBack) return false;
-      if (rf && e.region !== rf) return false;
-      if (q) {
-        var hay = (e.q+" "+(e.tickers||[]).join(" ")+" "+(e.intent||"")+" "+
-                  ((e.sources||[]).map(function(s){return s.t+" "+s.u;}).join(" "))).toLowerCase();
-        if (hay.indexOf(q) < 0) return false;
-      }
-      return true;
-    });
-    rows.sort(function(a,b){
-      var c = SORT.c, av=a[c], bv=b[c];
-      if (av==null) av=""; if (bv==null) bv="";
-      return (av<bv?-1:av>bv?1:0) * SORT.dir;
-    });
-    document.getElementById("tableCount").textContent = rows.length + " rows shown";
-    document.getElementById("rows").innerHTML = rows.map(function(e){
-      var flow = [];
-      if (e.agents && e.agents.length) flow.push("agents: "+e.agents.join(", "));
-      if (e.sourceKeys && e.sourceKeys.length) flow.push("keys: "+e.sourceKeys.join(", "));
-      if (e.usedWeb) flow.push("web");
-      var srcs = (e.sources||[]).map(function(s){
-        return s.u ? '<a href="'+esc(s.u)+'" target="_blank" rel="noopener">'+esc(s.t||s.u)+'</a>' : esc(s.t);
-      }).join(", ");
-      return '<tr class="'+(e.fellBack?"fail":"")+'">'+
-        '<td class="mono">'+esc((e.ts||"").replace("T"," ").slice(0,19))+'</td>'+
-        '<td>'+esc(e.region||"")+'</td>'+
-        '<td>'+esc(e.mode||"")+'</td>'+
-        '<td class="q">'+esc(e.q||"")+'</td>'+
-        '<td>'+esc(e.intent||"")+'</td>'+
-        '<td>'+(e.fellBack?'<span class="pill bad">FAILED</span>':'<span class="pill ok">ok</span>')+'</td>'+
-        '<td class="src">'+esc(flow.join(" · "))+(srcs?'<br>'+srcs:"")+'</td>'+
-        '<td class="prev">'+esc(e.answerPreview||"")+'</td>'+
-      '</tr>';
-    }).join("") || '<tr><td colspan="8" class="muted">No matching questions.</td></tr>';
-  }
-  function card(n,l){ return '<div class="card"><div class="n">'+esc(n)+'</div><div class="l">'+esc(l)+'</div></div>'; }
-  function sortBy(c){ SORT.dir = (SORT.c===c ? -SORT.dir : -1); SORT.c=c; render(); }
-  function downloadCsv(){ window.location = "/api/herai/questions?format=csv&limit=5000"; }
-
-  (function init(){
-    load();
-  })();
-</script>
+        renderAlgoPanels();
 </body>
+
+      function renderAlgoPanels() {
+        var sumEl = document.getElementById("algoSummary");
+        var intentEl = document.getElementById("algoIntent");
+        var missEl = document.getElementById("algoMisses");
+        var rowsEl = document.getElementById("algoRows");
+        if (!sumEl || !intentEl || !missEl) return;
+
+        if (!ALGO || ALGO.error) {
+          var msg = (ALGO && ALGO.error) ? ALGO.error : "Algorithm telemetry not available yet.";
+          sumEl.innerHTML = '<div class="muted">' + esc(msg) + '</div>';
+          intentEl.innerHTML = '<div class="muted">No per-intent data.</div>';
+          missEl.innerHTML = '<div class="muted">No miss data.</div>';
+          if (rowsEl) rowsEl.innerHTML = '<tr><td colspan="6" class="muted">No telemetry rows.</td></tr>';
+          return;
+        }
+
+        var total = Number(ALGO.total || 0);
+        var fb = Number(ALGO.fallbackRuns || 0);
+        var unmet = Number(ALGO.unmetRuns || 0);
+        var byIntentCount = Object.keys(ALGO.byIntent || {}).length;
+        sumEl.innerHTML = [
+          '<div class="bar"><div class="k">Total algo runs</div><div class="v">' + esc(total) + '</div></div>',
+          '<div class="bar"><div class="k">Fallback runs</div><div class="v">' + esc(fb + ' (' + (ALGO.fallbackRatePct || 0) + '%)') + '</div></div>',
+          '<div class="bar"><div class="k">Unmet-intent runs</div><div class="v">' + esc(unmet + ' (' + (ALGO.unmetIntentRatePct || 0) + '%)') + '</div></div>',
+          '<div class="bar"><div class="k">Intent types seen</div><div class="v">' + esc(byIntentCount) + '</div></div>'
+        ].join('');
+
+        var per = ALGO.perIntent || {};
+        var items = Object.keys(per).map(function(k){
+          return { k:k, metRate:Number(per[k].metRatePct||0), web:Number(per[k].webFallbacks||0), avgHits:Number(per[k].avgLocalHitCount||0) };
+        }).sort(function(a,b){ return b.metRate-a.metRate; });
+        intentEl.innerHTML = bars(items, {
+          limit: 14,
+          label: function(i){ return i.k; },
+          val: function(i){ return i.metRate; },
+          sub: function(i){ return i.metRate + '% · web ' + i.web + ' · hits ' + i.avgHits; }
+        });
+
+        var misses = ALGO.topMisses || [];
+        missEl.innerHTML = bars(misses, {
+          limit: 12,
+          label: function(i){ return i.q; },
+          val: function(i){ return Number(i.misses || 0); },
+          sub: function(i){ return String(i.misses || 0); },
+          badFrac: function(){ return 1; }
+        });
+
+        if (rowsEl) {
+          var rows = (ALGO.entries || []).slice(0, 500);
+          rowsEl.innerHTML = rows.map(function(e){
+            var unmet = (e.unmetIntents || []).join(", ");
+            var fb = e.fallbackUsed || e.usedWeb;
+            return '<tr>'+
+              '<td class="mono">'+esc((e.ts||"").replace("T"," ").slice(0,19))+'</td>'+
+              '<td>'+esc(e.region||"")+'</td>'+
+              '<td>'+esc(e.intent||"")+'</td>'+
+              '<td>'+(fb?'<span class="pill bad">yes</span>':'<span class="pill ok">no</span>')+'</td>'+
+              '<td>'+esc(unmet||"-")+'</td>'+
+              '<td class="q">'+esc(e.q||"")+'</td>'+
+            '</tr>';
+          }).join("") || '<tr><td colspan="6" class="muted">No telemetry rows.</td></tr>';
+        }
+      }
 </html>
+
+      function downloadAlgoCsv(){ window.location = "/api/herai/algo?format=csv&limit=5000"; }
