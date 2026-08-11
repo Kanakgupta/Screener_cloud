@@ -1,6 +1,6 @@
 {
   "region": "usa",
-  "updated": "2026-08-10",
+  "updated": "2026-08-11",
   "top": [
     "buy-today",
     "reversal",
@@ -29,28 +29,8 @@
         "reversal",
         "undervalued"
       ],
-      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **LQDA**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High revenue growth\n- **WW**\n  Setup: 3-month momentum\n  Also strong on: Low P/E (value), Low EV/EBITDA\n- **XFOR**\n  Setup: High momentum, Multi-EMA breakout\n  Also strong on: High revenue growth\n- **WDC**\n  Setup: Top YTD\n  Also strong on: High ROE, High earnings growth\n- **AUGO**\n  Setup: High momentum\n  Also strong on: High ROE, High earnings growth\n- **OESX**\n  Setup: High momentum, 3-month momentum, Multi-EMA breakout\n- **HELP**\n  Setup: 3-month momentum, Golden cross\n  Also strong on: Low debt\n- **TXG**\n  Setup: High momentum, 3-month momentum, Top YTD\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Entry / stop / target levels are derived from HeRAI's own swing screener rows so the payoff profile stays grounded in the underlying chart setup — open a ticker for the full picture before acting.",
+      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **XFOR**\n  Setup: High momentum, Multi-EMA breakout\n  Also strong on: High revenue growth\n- **HMY**\n  Setup: High momentum\n  Also strong on: High free cash flow, Low EV/EBITDA\n- **AUGO**\n  Setup: High momentum\n  Also strong on: High ROE, High earnings growth\n- **WDC**\n  Setup: Top YTD\n  Also strong on: High ROE, High earnings growth\n- **LQDA**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High revenue growth\n- **MAAS**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High revenue growth\n- **HELP**\n  Setup: 3-month momentum, Golden cross\n  Also strong on: Low debt\n- **TXG**\n  Setup: High momentum, 3-month momentum, Top YTD\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Entry / stop / target levels are derived from HeRAI's own swing screener rows so the payoff profile stays grounded in the underlying chart setup — open a ticker for the full picture before acting.",
       "sources": [
-        {
-          "title": "3-month momentum",
-          "url": "/usa/screens/momentum-3m.html"
-        },
-        {
-          "title": "Top YTD",
-          "url": "/usa/screens/top-ytd.html"
-        },
-        {
-          "title": "High revenue growth",
-          "url": "/usa/screens/high-rev-growth.html"
-        },
-        {
-          "title": "Low P/E (value)",
-          "url": "/usa/screens/low-pe.html"
-        },
-        {
-          "title": "Low EV/EBITDA",
-          "url": "/usa/screens/low-ev-ebitda.html"
-        },
         {
           "title": "High momentum",
           "url": "/usa/screens/high-momentum.html"
@@ -60,12 +40,32 @@
           "url": "/usa/screens/ema-multi-up-5d.html"
         },
         {
+          "title": "High revenue growth",
+          "url": "/usa/screens/high-rev-growth.html"
+        },
+        {
+          "title": "High free cash flow",
+          "url": "/usa/screens/high-fcf.html"
+        },
+        {
+          "title": "Low EV/EBITDA",
+          "url": "/usa/screens/low-ev-ebitda.html"
+        },
+        {
           "title": "High ROE",
           "url": "/usa/screens/high-roe.html"
         },
         {
           "title": "High earnings growth",
           "url": "/usa/screens/high-earnings-growth.html"
+        },
+        {
+          "title": "Top YTD",
+          "url": "/usa/screens/top-ytd.html"
+        },
+        {
+          "title": "3-month momentum",
+          "url": "/usa/screens/momentum-3m.html"
         },
         {
           "title": "Golden cross",
@@ -312,28 +312,8 @@
         "reversal",
         "undervalued"
       ],
-      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **LQDA**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High revenue growth\n- **WW**\n  Setup: 3-month momentum\n  Also strong on: Low P/E (value), Low EV/EBITDA\n- **XFOR**\n  Setup: High momentum, Multi-EMA breakout\n  Also strong on: High revenue growth\n- **WDC**\n  Setup: Top YTD\n  Also strong on: High ROE, High earnings growth\n- **AUGO**\n  Setup: High momentum\n  Also strong on: High ROE, High earnings growth\n- **OESX**\n  Setup: High momentum, 3-month momentum, Multi-EMA breakout\n- **HELP**\n  Setup: 3-month momentum, Golden cross\n  Also strong on: Low debt\n- **TXG**\n  Setup: High momentum, 3-month momentum, Top YTD\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Entry / stop / target levels are derived from HeRAI's own swing screener rows so the payoff profile stays grounded in the underlying chart setup — open a ticker for the full picture before acting.",
+      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **XFOR**\n  Setup: High momentum, Multi-EMA breakout\n  Also strong on: High revenue growth\n- **HMY**\n  Setup: High momentum\n  Also strong on: High free cash flow, Low EV/EBITDA\n- **AUGO**\n  Setup: High momentum\n  Also strong on: High ROE, High earnings growth\n- **WDC**\n  Setup: Top YTD\n  Also strong on: High ROE, High earnings growth\n- **LQDA**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High revenue growth\n- **MAAS**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High revenue growth\n- **HELP**\n  Setup: 3-month momentum, Golden cross\n  Also strong on: Low debt\n- **TXG**\n  Setup: High momentum, 3-month momentum, Top YTD\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Entry / stop / target levels are derived from HeRAI's own swing screener rows so the payoff profile stays grounded in the underlying chart setup — open a ticker for the full picture before acting.",
       "sources": [
-        {
-          "title": "3-month momentum",
-          "url": "/usa/screens/momentum-3m.html"
-        },
-        {
-          "title": "Top YTD",
-          "url": "/usa/screens/top-ytd.html"
-        },
-        {
-          "title": "High revenue growth",
-          "url": "/usa/screens/high-rev-growth.html"
-        },
-        {
-          "title": "Low P/E (value)",
-          "url": "/usa/screens/low-pe.html"
-        },
-        {
-          "title": "Low EV/EBITDA",
-          "url": "/usa/screens/low-ev-ebitda.html"
-        },
         {
           "title": "High momentum",
           "url": "/usa/screens/high-momentum.html"
@@ -343,12 +323,32 @@
           "url": "/usa/screens/ema-multi-up-5d.html"
         },
         {
+          "title": "High revenue growth",
+          "url": "/usa/screens/high-rev-growth.html"
+        },
+        {
+          "title": "High free cash flow",
+          "url": "/usa/screens/high-fcf.html"
+        },
+        {
+          "title": "Low EV/EBITDA",
+          "url": "/usa/screens/low-ev-ebitda.html"
+        },
+        {
           "title": "High ROE",
           "url": "/usa/screens/high-roe.html"
         },
         {
           "title": "High earnings growth",
           "url": "/usa/screens/high-earnings-growth.html"
+        },
+        {
+          "title": "Top YTD",
+          "url": "/usa/screens/top-ytd.html"
+        },
+        {
+          "title": "3-month momentum",
+          "url": "/usa/screens/momentum-3m.html"
         },
         {
           "title": "Golden cross",
