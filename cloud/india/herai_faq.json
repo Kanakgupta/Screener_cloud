@@ -1,6 +1,6 @@
 {
   "region": "india",
-  "updated": "2026-08-21",
+  "updated": "2026-08-23",
   "top": [
     "buy-today",
     "reversal",
@@ -29,27 +29,27 @@
         "reversal",
         "undervalued"
       ],
-      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **GAYAPROJ**\n  Setup: Top YTD, Multi-EMA breakout\n  Also strong on: High earnings growth, Low P/E (value), Low EV/EBITDA\n- **SIGMAADV**\n  Setup: High momentum, 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **CHENNPETRO**\n  Setup: Top YTD\n  Also strong on: High free cash flow, High earnings growth, Low EV/EBITDA, High dividend\n- **KIRIINDUS**\n  Setup: High momentum\n  Also strong on: High ROE, High free cash flow, High earnings growth, Low P/E (value)\n- **VIJIFIN**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n- **IDEA**\n  Setup: Top YTD, Multi-EMA breakout\n  Also strong on: High free cash flow, Low P/E (value)\n- **HINDZINC**\n  Setup: High momentum\n  Also strong on: High ROE, High free cash flow, High dividend\n- **ROLLT**\n  Setup: High momentum, 3-month momentum, Top YTD\n  Also strong on: Low P/E (value)\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Entry / stop / target levels are derived from HeRAI's own swing screener rows so the payoff profile stays grounded in the underlying chart setup — open a ticker for the full picture before acting.",
+      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **CHENNPETRO**\n  Setup: Top YTD\n  Also strong on: High free cash flow, High earnings growth, Low EV/EBITDA, High dividend\n- **SIGMAADV**\n  Setup: High momentum, 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **GAYAPROJ**\n  Setup: Top YTD, Multi-EMA breakout\n  Also strong on: High earnings growth, Low P/E (value), Low EV/EBITDA\n- **KIRIINDUS**\n  Setup: High momentum\n  Also strong on: High ROE, High free cash flow, High earnings growth, Low P/E (value)\n- **PVP**\n  Setup: High momentum, 3-month momentum, Top YTD\n  Also strong on: High revenue growth\n- **VIJIFIN**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n- **ROLLT**\n  Setup: High momentum, 3-month momentum, Top YTD\n  Also strong on: Low P/E (value)\n- **HINDZINC**\n  Setup: High momentum\n  Also strong on: High ROE, High free cash flow, High dividend\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Entry / stop / target levels are derived from HeRAI's own swing screener rows so the payoff profile stays grounded in the underlying chart setup — open a ticker for the full picture before acting.",
       "sources": [
         {
           "title": "Top YTD",
           "url": "/india/screens/top-ytd.html"
         },
         {
-          "title": "Multi-EMA breakout",
-          "url": "/india/screens/ema-multi-up-5d.html"
+          "title": "High free cash flow",
+          "url": "/india/screens/high-fcf.html"
         },
         {
           "title": "High earnings growth",
           "url": "/india/screens/high-earnings-growth.html"
         },
         {
-          "title": "Low P/E (value)",
-          "url": "/india/screens/low-pe.html"
-        },
-        {
           "title": "Low EV/EBITDA",
           "url": "/india/screens/low-ev-ebitda.html"
+        },
+        {
+          "title": "High dividend",
+          "url": "/india/screens/high-dividend.html"
         },
         {
           "title": "High momentum",
@@ -68,12 +68,12 @@
           "url": "/india/screens/high-rev-growth.html"
         },
         {
-          "title": "High free cash flow",
-          "url": "/india/screens/high-fcf.html"
+          "title": "Multi-EMA breakout",
+          "url": "/india/screens/ema-multi-up-5d.html"
         },
         {
-          "title": "High dividend",
-          "url": "/india/screens/high-dividend.html"
+          "title": "Low P/E (value)",
+          "url": "/india/screens/low-pe.html"
         }
       ]
     },
@@ -215,7 +215,7 @@
         "dividend",
         "buy-today"
       ],
-      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**Low P/E (value)**\n- **FLEXITUFF** — Flexituff Ventures International Limited · Mkt Cap: ₹9.06 Cr · Price: 2.76 · P/E: 0.04 · Fwd P/E: 0.08 · Δ P/E: Δ -0.04 · ROCE %: 47.48%\n- **MEP** — MEP Infrastructure Developers Limited · Mkt Cap: ₹12.48 Cr · Price: 0.67 · P/E: 0.05 · Fwd P/E: 0.10 · Δ P/E: Δ -0.05 · ROCE %: 50.27%\n- **SUPREMEINF** — Supreme Infrastructure India Limited · Mkt Cap: ₹860.95 Cr · Price: 88.30 · P/E: 0.12 · PEG: 0.0 · Fwd P/E: 0.06 · Δ P/E: Δ 0.06\n- **GTL** — GTL Limited · Mkt Cap: ₹114.51 Cr · Price: 7.28 · P/E: 0.20 · PEG: 0.0 · Fwd P/E: 0.10 · Δ P/E: Δ 0.10\n- **KRIDHANINF** — Kridhan Infra Limited · Mkt Cap: ₹20.71 Cr · Price: 2.08 · P/E: 0.27 · PEG: 0.01 · Fwd P/E: 0.54 · Δ P/E: Δ -0.27\n- **BLUECOAST** — Blue Coast Hotels Limited · Mkt Cap: ₹41.09 Cr · Price: 23.90 · P/E: 0.40 · PEG: 0.02 · Fwd P/E: 0.80 · Δ P/E: Δ -0.40\n\n**Low P/B**\n- **FEL** — Future Enterprises Limited · Mkt Cap: ₹19.28 Cr · Price: 0.39 · P/E: -0.01 · Fwd P/E: - · Δ P/E: - · ROCE %: -\n- **SANWARIA** — Sanwaria Consumer Limited · Mkt Cap: ₹13.99 Cr · Price: 0.19 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: 0.84%\n- **SEYAIND** — Seya Industries Limited · Mkt Cap: ₹33.08 Cr · Price: 12.45 · P/E: -5.25 · PEG: -0.18 · Fwd P/E: - · Δ P/E: -\n- **FELDVR** — Future Enterprises Limited · Mkt Cap: ₹118.14 Cr · Price: 2.39 · P/E: -0.04 · Fwd P/E: - · Δ P/E: - · ROCE %: -\n- **AGSTRA** — AGS Transact Technologies Limited · Mkt Cap: ₹24.28 Cr · Price: 2.00 · P/E: -0.30 · PEG: -0.21 · Fwd P/E: - · Δ P/E: -\n- **FILATFASH** — Filatex Fashions Limited · Mkt Cap: ₹150.01 Cr · Price: 0.18 · P/E: 16.36 · Fwd P/E: 32.72 · Δ P/E: Δ -16.36 · ROCE %: 0.17%\n\n**Low EV/EBITDA**\n- **JUSTDIAL** — Just Dial Limited · Mkt Cap: ₹5,732.44 Cr · Price: 674.05 · P/E: 11.53 · PEG: 0.26 · Fwd P/E: 9.55 · Δ P/E: Δ 1.98\n- **BCG** — Brightcom Group Limited · Mkt Cap: ₹1,846.95 Cr · Price: 9.15 · P/E: 1.92 · Fwd P/E: 1.42 · Δ P/E: Δ 0.50 · ROCE %: 13.53%\n- **MANAKSIA** — Manaksia Limited · Mkt Cap: ₹385.80 Cr · Price: 58.87 · P/E: 7.37 · Fwd P/E: 7.88 · Δ P/E: Δ -0.51 · ROCE %: 9.75%\n- **HATHWAY** — Hathway Cable and Datacom Limited · Mkt Cap: ₹1,890.47 Cr · Price: 10.68 · P/E: 23.22 · PEG: 2.89 · Fwd P/E: 23.73 · Δ P/E: Δ -0.51\n- **JPOLYINVST** — Jindal Poly Investment and Finance Company Limited · Mkt Cap: ₹1,013.35 Cr · Price: 964.00 · P/E: 1.18 · PEG: 0.03 · Fwd P/E: 0.59 · Δ P/E: Δ 0.59\n- **LAKPRE** — Lakshmi Precision Screws Limited · Mkt Cap: ₹4.88 Cr · Price: 4.46 · P/E: -0.11 · Fwd P/E: - · Δ P/E: - · ROCE %: -\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
+      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**Low P/E (value)**\n- **FLEXITUFF** — Flexituff Ventures International Limited · Mkt Cap: ₹9.06 Cr · Price: 2.76 · P/E: 0.04 · Fwd P/E: 0.08 · Δ P/E: Δ -0.04 · ROCE %: 47.48%\n- **MEP** — MEP Infrastructure Developers Limited · Mkt Cap: ₹12.48 Cr · Price: 0.67 · P/E: 0.05 · Fwd P/E: 0.10 · Δ P/E: Δ -0.05 · ROCE %: 57.87%\n- **SUPREMEINF** — Supreme Infrastructure India Limited · Mkt Cap: ₹860.95 Cr · Price: 88.30 · P/E: 0.12 · PEG: 0.0 · Fwd P/E: 0.06 · Δ P/E: Δ 0.06\n- **GTL** — GTL Limited · Mkt Cap: ₹114.51 Cr · Price: 7.28 · P/E: 0.20 · PEG: 0.0 · Fwd P/E: 0.10 · Δ P/E: Δ 0.10\n- **KRIDHANINF** — Kridhan Infra Limited · Mkt Cap: ₹20.71 Cr · Price: 2.08 · P/E: 0.27 · PEG: 0.01 · Fwd P/E: 0.54 · Δ P/E: Δ -0.27\n- **BLUECOAST** — Blue Coast Hotels Limited · Mkt Cap: ₹41.09 Cr · Price: 23.90 · P/E: 0.40 · PEG: 0.02 · Fwd P/E: 0.80 · Δ P/E: Δ -0.40\n\n**Low P/B**\n- **FEL** — Future Enterprises Limited · Mkt Cap: ₹19.28 Cr · Price: 0.39 · P/E: -0.01 · Fwd P/E: - · Δ P/E: - · ROCE %: -\n- **SANWARIA** — Sanwaria Consumer Limited · Mkt Cap: ₹13.99 Cr · Price: 0.19 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: 0.84%\n- **SEYAIND** — Seya Industries Limited · Mkt Cap: ₹33.08 Cr · Price: 12.45 · P/E: -5.25 · PEG: -0.18 · Fwd P/E: - · Δ P/E: -\n- **FELDVR** — Future Enterprises Limited · Mkt Cap: ₹118.14 Cr · Price: 2.39 · P/E: -0.04 · Fwd P/E: - · Δ P/E: - · ROCE %: -\n- **AGSTRA** — AGS Transact Technologies Limited · Mkt Cap: ₹24.28 Cr · Price: 2.00 · P/E: -0.30 · PEG: -0.21 · Fwd P/E: - · Δ P/E: -\n- **FILATFASH** — Filatex Fashions Limited · Mkt Cap: ₹150.01 Cr · Price: 0.18 · P/E: 16.36 · Fwd P/E: 32.72 · Δ P/E: Δ -16.36 · ROCE %: 0.17%\n\n**Low EV/EBITDA**\n- **JUSTDIAL** — Just Dial Limited · Mkt Cap: ₹5,732.44 Cr · Price: 674.05 · P/E: 11.53 · PEG: 0.26 · Fwd P/E: 9.55 · Δ P/E: Δ 1.98\n- **BCG** — Brightcom Group Limited · Mkt Cap: ₹1,846.95 Cr · Price: 9.15 · P/E: 1.92 · Fwd P/E: 1.42 · Δ P/E: Δ 0.50 · ROCE %: 13.53%\n- **MANAKSIA** — Manaksia Limited · Mkt Cap: ₹385.80 Cr · Price: 58.87 · P/E: 7.37 · Fwd P/E: 7.88 · Δ P/E: Δ -0.51 · ROCE %: 9.75%\n- **HATHWAY** — Hathway Cable and Datacom Limited · Mkt Cap: ₹1,890.47 Cr · Price: 10.68 · P/E: 23.22 · PEG: 2.89 · Fwd P/E: 23.73 · Δ P/E: Δ -0.51\n- **JPOLYINVST** — Jindal Poly Investment and Finance Company Limited · Mkt Cap: ₹1,013.35 Cr · Price: 964.00 · P/E: 1.18 · PEG: 0.03 · Fwd P/E: 0.59 · Δ P/E: Δ 0.59\n- **LAKPRE** — Lakshmi Precision Screws Limited · Mkt Cap: ₹4.88 Cr · Price: 4.46 · P/E: -0.11 · Fwd P/E: - · Δ P/E: - · ROCE %: -\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
       "sources": [
         {
           "title": "Low P/E (value)",
@@ -312,27 +312,27 @@
         "reversal",
         "undervalued"
       ],
-      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **GAYAPROJ**\n  Setup: Top YTD, Multi-EMA breakout\n  Also strong on: High earnings growth, Low P/E (value), Low EV/EBITDA\n- **SIGMAADV**\n  Setup: High momentum, 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **CHENNPETRO**\n  Setup: Top YTD\n  Also strong on: High free cash flow, High earnings growth, Low EV/EBITDA, High dividend\n- **KIRIINDUS**\n  Setup: High momentum\n  Also strong on: High ROE, High free cash flow, High earnings growth, Low P/E (value)\n- **VIJIFIN**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n- **IDEA**\n  Setup: Top YTD, Multi-EMA breakout\n  Also strong on: High free cash flow, Low P/E (value)\n- **HINDZINC**\n  Setup: High momentum\n  Also strong on: High ROE, High free cash flow, High dividend\n- **ROLLT**\n  Setup: High momentum, 3-month momentum, Top YTD\n  Also strong on: Low P/E (value)\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Entry / stop / target levels are derived from HeRAI's own swing screener rows so the payoff profile stays grounded in the underlying chart setup — open a ticker for the full picture before acting.",
+      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **CHENNPETRO**\n  Setup: Top YTD\n  Also strong on: High free cash flow, High earnings growth, Low EV/EBITDA, High dividend\n- **SIGMAADV**\n  Setup: High momentum, 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **GAYAPROJ**\n  Setup: Top YTD, Multi-EMA breakout\n  Also strong on: High earnings growth, Low P/E (value), Low EV/EBITDA\n- **KIRIINDUS**\n  Setup: High momentum\n  Also strong on: High ROE, High free cash flow, High earnings growth, Low P/E (value)\n- **PVP**\n  Setup: High momentum, 3-month momentum, Top YTD\n  Also strong on: High revenue growth\n- **VIJIFIN**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n- **ROLLT**\n  Setup: High momentum, 3-month momentum, Top YTD\n  Also strong on: Low P/E (value)\n- **HINDZINC**\n  Setup: High momentum\n  Also strong on: High ROE, High free cash flow, High dividend\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Entry / stop / target levels are derived from HeRAI's own swing screener rows so the payoff profile stays grounded in the underlying chart setup — open a ticker for the full picture before acting.",
       "sources": [
         {
           "title": "Top YTD",
           "url": "/india/screens/top-ytd.html"
         },
         {
-          "title": "Multi-EMA breakout",
-          "url": "/india/screens/ema-multi-up-5d.html"
+          "title": "High free cash flow",
+          "url": "/india/screens/high-fcf.html"
         },
         {
           "title": "High earnings growth",
           "url": "/india/screens/high-earnings-growth.html"
         },
         {
-          "title": "Low P/E (value)",
-          "url": "/india/screens/low-pe.html"
-        },
-        {
           "title": "Low EV/EBITDA",
           "url": "/india/screens/low-ev-ebitda.html"
+        },
+        {
+          "title": "High dividend",
+          "url": "/india/screens/high-dividend.html"
         },
         {
           "title": "High momentum",
@@ -351,12 +351,12 @@
           "url": "/india/screens/high-rev-growth.html"
         },
         {
-          "title": "High free cash flow",
-          "url": "/india/screens/high-fcf.html"
+          "title": "Multi-EMA breakout",
+          "url": "/india/screens/ema-multi-up-5d.html"
         },
         {
-          "title": "High dividend",
-          "url": "/india/screens/high-dividend.html"
+          "title": "Low P/E (value)",
+          "url": "/india/screens/low-pe.html"
         }
       ]
     },
@@ -441,7 +441,7 @@
         "reversal-oversold",
         "quality"
       ],
-      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**Near 52-week low**\n- **AASTHA** — AASTHA SPINTEX LIMITED · Mkt Cap: ₹322.37 Cr · Price: 73.03 · P/E: 14.18 · PEG: 0.04 · Fwd P/E: 10.08 · Δ P/E: Δ 4.10\n- **ABLBL** — ADITYA BIRLA LIFES BRAN L · Mkt Cap: ₹10,511.13 Cr · Price: 86.12 · P/E: 61.08 · PEG: 0.33 · Fwd P/E: 28.29 · Δ P/E: Δ 32.79\n- **ADVIKCA** — Advik Capital Limited · Mkt Cap: ₹73.02 Cr · Price: 1.20 · P/E: 7.44 · PEG: 0.05 · Fwd P/E: 5.74 · Δ P/E: Δ 1.70\n- **AGSTRA** — AGS Transact Technologies Limited · Mkt Cap: ₹24.28 Cr · Price: 2.00 · P/E: -0.30 · PEG: -0.21 · Fwd P/E: - · Δ P/E: -\n- **APOORVA** — Apoorva Leasing Finance and Investment Company Limited · Mkt Cap: ₹52.95 Cr · Price: 26.51 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: 0.08%\n- **ASSAMENT** — Assam Entrade Limited · Mkt Cap: ₹112.30 Cr · Price: 780.00 · P/E: 37.13 · PEG: 3.76 · Fwd P/E: 56.87 · Δ P/E: Δ -19.74\n\n**Low P/E (value)**\n- **FLEXITUFF** — Flexituff Ventures International Limited · Mkt Cap: ₹9.06 Cr · Price: 2.76 · P/E: 0.04 · Fwd P/E: 0.08 · Δ P/E: Δ -0.04 · ROCE %: 47.48%\n- **MEP** — MEP Infrastructure Developers Limited · Mkt Cap: ₹12.48 Cr · Price: 0.67 · P/E: 0.05 · Fwd P/E: 0.10 · Δ P/E: Δ -0.05 · ROCE %: 50.27%\n- **SUPREMEINF** — Supreme Infrastructure India Limited · Mkt Cap: ₹860.95 Cr · Price: 88.30 · P/E: 0.12 · PEG: 0.0 · Fwd P/E: 0.06 · Δ P/E: Δ 0.06\n- **GTL** — GTL Limited · Mkt Cap: ₹114.51 Cr · Price: 7.28 · P/E: 0.20 · PEG: 0.0 · Fwd P/E: 0.10 · Δ P/E: Δ 0.10\n- **KRIDHANINF** — Kridhan Infra Limited · Mkt Cap: ₹20.71 Cr · Price: 2.08 · P/E: 0.27 · PEG: 0.01 · Fwd P/E: 0.54 · Δ P/E: Δ -0.27\n- **BLUECOAST** — Blue Coast Hotels Limited · Mkt Cap: ₹41.09 Cr · Price: 23.90 · P/E: 0.40 · PEG: 0.02 · Fwd P/E: 0.80 · Δ P/E: Δ -0.40\n\n**Low P/B**\n- **FEL** — Future Enterprises Limited · Mkt Cap: ₹19.28 Cr · Price: 0.39 · P/E: -0.01 · Fwd P/E: - · Δ P/E: - · ROCE %: -\n- **SANWARIA** — Sanwaria Consumer Limited · Mkt Cap: ₹13.99 Cr · Price: 0.19 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: 0.84%\n- **SEYAIND** — Seya Industries Limited · Mkt Cap: ₹33.08 Cr · Price: 12.45 · P/E: -5.25 · PEG: -0.18 · Fwd P/E: - · Δ P/E: -\n- **FELDVR** — Future Enterprises Limited · Mkt Cap: ₹118.14 Cr · Price: 2.39 · P/E: -0.04 · Fwd P/E: - · Δ P/E: - · ROCE %: -\n- **AGSTRA** — AGS Transact Technologies Limited · Mkt Cap: ₹24.28 Cr · Price: 2.00 · P/E: -0.30 · PEG: -0.21 · Fwd P/E: - · Δ P/E: -\n- **FILATFASH** — Filatex Fashions Limited · Mkt Cap: ₹150.01 Cr · Price: 0.18 · P/E: 16.36 · Fwd P/E: 32.72 · Δ P/E: Δ -16.36 · ROCE %: 0.17%\n\n**Low EV/EBITDA**\n- **JUSTDIAL** — Just Dial Limited · Mkt Cap: ₹5,732.44 Cr · Price: 674.05 · P/E: 11.53 · PEG: 0.26 · Fwd P/E: 9.55 · Δ P/E: Δ 1.98\n- **BCG** — Brightcom Group Limited · Mkt Cap: ₹1,846.95 Cr · Price: 9.15 · P/E: 1.92 · Fwd P/E: 1.42 · Δ P/E: Δ 0.50 · ROCE %: 13.53%\n- **MANAKSIA** — Manaksia Limited · Mkt Cap: ₹385.80 Cr · Price: 58.87 · P/E: 7.37 · Fwd P/E: 7.88 · Δ P/E: Δ -0.51 · ROCE %: 9.75%\n- **HATHWAY** — Hathway Cable and Datacom Limited · Mkt Cap: ₹1,890.47 Cr · Price: 10.68 · P/E: 23.22 · PEG: 2.89 · Fwd P/E: 23.73 · Δ P/E: Δ -0.51\n- **JPOLYINVST** — Jindal Poly Investment and Finance Company Limited · Mkt Cap: ₹1,013.35 Cr · Price: 964.00 · P/E: 1.18 · PEG: 0.03 · Fwd P/E: 0.59 · Δ P/E: Δ 0.59\n- **LAKPRE** — Lakshmi Precision Screws Limited · Mkt Cap: ₹4.88 Cr · Price: 4.46 · P/E: -0.11 · Fwd P/E: - · Δ P/E: - · ROCE %: -\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
+      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**Near 52-week low**\n- **AASTHA** — AASTHA SPINTEX LIMITED · Mkt Cap: ₹322.37 Cr · Price: 73.03 · P/E: 14.18 · PEG: 0.04 · Fwd P/E: 10.08 · Δ P/E: Δ 4.10\n- **ABLBL** — ADITYA BIRLA LIFES BRAN L · Mkt Cap: ₹10,511.13 Cr · Price: 86.12 · P/E: 61.08 · PEG: 0.33 · Fwd P/E: 28.29 · Δ P/E: Δ 32.79\n- **ADVIKCA** — Advik Capital Limited · Mkt Cap: ₹73.02 Cr · Price: 1.20 · P/E: 7.44 · PEG: 0.05 · Fwd P/E: 5.74 · Δ P/E: Δ 1.70\n- **AGSTRA** — AGS Transact Technologies Limited · Mkt Cap: ₹24.28 Cr · Price: 2.00 · P/E: -0.30 · PEG: -0.21 · Fwd P/E: - · Δ P/E: -\n- **APOORVA** — Apoorva Leasing Finance and Investment Company Limited · Mkt Cap: ₹52.95 Cr · Price: 26.51 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: 0.08%\n- **ASSAMENT** — Assam Entrade Limited · Mkt Cap: ₹112.30 Cr · Price: 780.00 · P/E: 37.13 · PEG: 3.76 · Fwd P/E: 56.87 · Δ P/E: Δ -19.74\n\n**Low P/E (value)**\n- **FLEXITUFF** — Flexituff Ventures International Limited · Mkt Cap: ₹9.06 Cr · Price: 2.76 · P/E: 0.04 · Fwd P/E: 0.08 · Δ P/E: Δ -0.04 · ROCE %: 47.48%\n- **MEP** — MEP Infrastructure Developers Limited · Mkt Cap: ₹12.48 Cr · Price: 0.67 · P/E: 0.05 · Fwd P/E: 0.10 · Δ P/E: Δ -0.05 · ROCE %: 57.87%\n- **SUPREMEINF** — Supreme Infrastructure India Limited · Mkt Cap: ₹860.95 Cr · Price: 88.30 · P/E: 0.12 · PEG: 0.0 · Fwd P/E: 0.06 · Δ P/E: Δ 0.06\n- **GTL** — GTL Limited · Mkt Cap: ₹114.51 Cr · Price: 7.28 · P/E: 0.20 · PEG: 0.0 · Fwd P/E: 0.10 · Δ P/E: Δ 0.10\n- **KRIDHANINF** — Kridhan Infra Limited · Mkt Cap: ₹20.71 Cr · Price: 2.08 · P/E: 0.27 · PEG: 0.01 · Fwd P/E: 0.54 · Δ P/E: Δ -0.27\n- **BLUECOAST** — Blue Coast Hotels Limited · Mkt Cap: ₹41.09 Cr · Price: 23.90 · P/E: 0.40 · PEG: 0.02 · Fwd P/E: 0.80 · Δ P/E: Δ -0.40\n\n**Low P/B**\n- **FEL** — Future Enterprises Limited · Mkt Cap: ₹19.28 Cr · Price: 0.39 · P/E: -0.01 · Fwd P/E: - · Δ P/E: - · ROCE %: -\n- **SANWARIA** — Sanwaria Consumer Limited · Mkt Cap: ₹13.99 Cr · Price: 0.19 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: 0.84%\n- **SEYAIND** — Seya Industries Limited · Mkt Cap: ₹33.08 Cr · Price: 12.45 · P/E: -5.25 · PEG: -0.18 · Fwd P/E: - · Δ P/E: -\n- **FELDVR** — Future Enterprises Limited · Mkt Cap: ₹118.14 Cr · Price: 2.39 · P/E: -0.04 · Fwd P/E: - · Δ P/E: - · ROCE %: -\n- **AGSTRA** — AGS Transact Technologies Limited · Mkt Cap: ₹24.28 Cr · Price: 2.00 · P/E: -0.30 · PEG: -0.21 · Fwd P/E: - · Δ P/E: -\n- **FILATFASH** — Filatex Fashions Limited · Mkt Cap: ₹150.01 Cr · Price: 0.18 · P/E: 16.36 · Fwd P/E: 32.72 · Δ P/E: Δ -16.36 · ROCE %: 0.17%\n\n**Low EV/EBITDA**\n- **JUSTDIAL** — Just Dial Limited · Mkt Cap: ₹5,732.44 Cr · Price: 674.05 · P/E: 11.53 · PEG: 0.26 · Fwd P/E: 9.55 · Δ P/E: Δ 1.98\n- **BCG** — Brightcom Group Limited · Mkt Cap: ₹1,846.95 Cr · Price: 9.15 · P/E: 1.92 · Fwd P/E: 1.42 · Δ P/E: Δ 0.50 · ROCE %: 13.53%\n- **MANAKSIA** — Manaksia Limited · Mkt Cap: ₹385.80 Cr · Price: 58.87 · P/E: 7.37 · Fwd P/E: 7.88 · Δ P/E: Δ -0.51 · ROCE %: 9.75%\n- **HATHWAY** — Hathway Cable and Datacom Limited · Mkt Cap: ₹1,890.47 Cr · Price: 10.68 · P/E: 23.22 · PEG: 2.89 · Fwd P/E: 23.73 · Δ P/E: Δ -0.51\n- **JPOLYINVST** — Jindal Poly Investment and Finance Company Limited · Mkt Cap: ₹1,013.35 Cr · Price: 964.00 · P/E: 1.18 · PEG: 0.03 · Fwd P/E: 0.59 · Δ P/E: Δ 0.59\n- **LAKPRE** — Lakshmi Precision Screws Limited · Mkt Cap: ₹4.88 Cr · Price: 4.46 · P/E: -0.11 · Fwd P/E: - · Δ P/E: - · ROCE %: -\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
       "sources": [
         {
           "title": "Near 52-week low",
