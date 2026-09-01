@@ -29,7 +29,7 @@
         "reversal",
         "undervalued"
       ],
-      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **ZUARI**\n  Setup: Multi-EMA breakout\n  Also strong on: High ROE, High earnings growth, Low P/E (value), Low EV/EBITDA\n- **CHENNPETRO**\n  Setup: Top YTD\n  Also strong on: High free cash flow, High earnings growth, Low EV/EBITDA, High dividend\n- **SIGMAADV**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **GATECH**\n  Setup: High momentum, 3-month momentum, Top YTD\n  Also strong on: Low debt\n- **FMNL**\n  Setup: High momentum, Multi-EMA breakout\n  Also strong on: Low P/E (value), Low EV/EBITDA\n- **CALSOFT**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n- **VIJIFIN**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n- **GAYAPROJ**\n  Setup: Top YTD\n  Also strong on: High earnings growth, Low P/E (value), Low EV/EBITDA\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Entry / stop / target levels are derived from HeRAI's own swing screener rows so the payoff profile stays grounded in the underlying chart setup — open a ticker for the full picture before acting.",
+      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **ZUARI**\n  Setup: Multi-EMA breakout\n  Also strong on: High ROE, High earnings growth, Low P/E (value), Low EV/EBITDA\n- **CHENNPETRO**\n  Setup: Top YTD\n  Also strong on: High free cash flow, High earnings growth, Low EV/EBITDA, High dividend\n- **VIJIFIN**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n- **FMNL**\n  Setup: High momentum, Multi-EMA breakout\n  Also strong on: Low P/E (value), Low EV/EBITDA\n- **BPCL**\n  Setup: Multi-EMA breakout\n  Also strong on: High free cash flow, Low P/E (value), High dividend\n- **SIGMAADV**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **GAYAPROJ**\n  Setup: Top YTD\n  Also strong on: High earnings growth, Low P/E (value), Low EV/EBITDA\n- **CALSOFT**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Entry / stop / target levels are derived from HeRAI's own swing screener rows so the payoff profile stays grounded in the underlying chart setup — open a ticker for the full picture before acting.",
       "sources": [
         {
           "title": "Multi-EMA breakout",
@@ -74,10 +74,6 @@
         {
           "title": "High momentum",
           "url": "/india/screens/high-momentum.html"
-        },
-        {
-          "title": "Low debt",
-          "url": "/india/screens/low-debt.html"
         }
       ]
     },
@@ -312,7 +308,7 @@
         "reversal",
         "undervalued"
       ],
-      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **ZUARI**\n  Setup: Multi-EMA breakout\n  Also strong on: High ROE, High earnings growth, Low P/E (value), Low EV/EBITDA\n- **CHENNPETRO**\n  Setup: Top YTD\n  Also strong on: High free cash flow, High earnings growth, Low EV/EBITDA, High dividend\n- **SIGMAADV**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **GATECH**\n  Setup: High momentum, 3-month momentum, Top YTD\n  Also strong on: Low debt\n- **FMNL**\n  Setup: High momentum, Multi-EMA breakout\n  Also strong on: Low P/E (value), Low EV/EBITDA\n- **CALSOFT**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n- **VIJIFIN**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n- **GAYAPROJ**\n  Setup: Top YTD\n  Also strong on: High earnings growth, Low P/E (value), Low EV/EBITDA\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Entry / stop / target levels are derived from HeRAI's own swing screener rows so the payoff profile stays grounded in the underlying chart setup — open a ticker for the full picture before acting.",
+      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **ZUARI**\n  Setup: Multi-EMA breakout\n  Also strong on: High ROE, High earnings growth, Low P/E (value), Low EV/EBITDA\n- **CHENNPETRO**\n  Setup: Top YTD\n  Also strong on: High free cash flow, High earnings growth, Low EV/EBITDA, High dividend\n- **VIJIFIN**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n- **FMNL**\n  Setup: High momentum, Multi-EMA breakout\n  Also strong on: Low P/E (value), Low EV/EBITDA\n- **BPCL**\n  Setup: Multi-EMA breakout\n  Also strong on: High free cash flow, Low P/E (value), High dividend\n- **SIGMAADV**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE, High revenue growth\n- **GAYAPROJ**\n  Setup: Top YTD\n  Also strong on: High earnings growth, Low P/E (value), Low EV/EBITDA\n- **CALSOFT**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Entry / stop / target levels are derived from HeRAI's own swing screener rows so the payoff profile stays grounded in the underlying chart setup — open a ticker for the full picture before acting.",
       "sources": [
         {
           "title": "Multi-EMA breakout",
@@ -357,10 +353,6 @@
         {
           "title": "High momentum",
           "url": "/india/screens/high-momentum.html"
-        },
-        {
-          "title": "Low debt",
-          "url": "/india/screens/low-debt.html"
         }
       ]
     },

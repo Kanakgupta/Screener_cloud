@@ -72,7 +72,7 @@
     {
       "@type": "Question",
       "name": "What is the current share price of DSM?",
-      "acceptedAnswer": { "@type": "Answer", "text": "As of 2026-08-31 18:24 PDT, DSM trades at $5.82 on NASDAQ/NYSE. Its 52-week range is $5.38 to $6.12." }
+      "acceptedAnswer": { "@type": "Answer", "text": "As of 2026-08-31 18:41 PDT, DSM trades at $5.82 on NASDAQ/NYSE. Its 52-week range is $5.38 to $6.12." }
     },
     {
       "@type": "Question",
@@ -252,11 +252,16 @@
         
         
         
-        <div class="co-reasons" style="grid-template-columns: repeat(2, 1fr)">
+        <div class="co-reasons" style="grid-template-columns: repeat(3, 1fr)">
           
           <div class="co-reason">
             <div class="co-reason-title">Reasonable Valuation</div>
             <p class="co-reason-text">Trades at an undemanding P/E of 8.8.</p>
+          </div>
+          
+          <div class="co-reason">
+            <div class="co-reason-title">Conservative Balance Sheet</div>
+            <p class="co-reason-text">Carries low leverage with a debt-to-equity ratio of 0.36.</p>
           </div>
           
           <div class="co-reason">
@@ -557,11 +562,11 @@
 <section class="ratio-tile">
   <h3 class="ratio-tile-title">Balance Sheet &amp; Liquidity</h3>
   <div class="ratio-row">
-    <div><div class="ratio-label">Debt/Equity</div><div class="ratio-val">-</div></div>
+    <div><div class="ratio-label">Debt/Equity</div><div class="ratio-val">0.36</div></div>
     <div><div class="ratio-label">Quick Ratio</div><div class="ratio-val">-</div></div>
     <div><div class="ratio-label">Current Ratio</div><div class="ratio-val">-</div></div>
-    <div><div class="ratio-label">Debt</div><div class="ratio-val">-</div></div>
-    <div><div class="ratio-label">Total Assets</div><div class="ratio-val">-</div></div>
+    <div><div class="ratio-label">Debt</div><div class="ratio-val">$117.84M</div></div>
+    <div><div class="ratio-label">Total Assets</div><div class="ratio-val">$495.88M</div></div>
     <div><div class="ratio-label">Current Assets</div><div class="ratio-val">-</div></div>
     <div><div class="ratio-label">Working Capital</div><div class="ratio-val">-</div></div>
   </div>
@@ -882,7 +887,7 @@
   
   <div class="faq-item">
     <h3 class="faq-q">What is the current share price of DSM?</h3>
-    <p class="faq-a">As of 2026-08-31 18:24 PDT, DSM trades at $5.82 on NASDAQ/NYSE. Its 52-week range is $5.38 to $6.12.</p>
+    <p class="faq-a">As of 2026-08-31 18:41 PDT, DSM trades at $5.82 on NASDAQ/NYSE. Its 52-week range is $5.38 to $6.12.</p>
   </div>
   
   <div class="faq-item">
@@ -965,7 +970,7 @@
       </div>
     </nav>
     <div class="footer-bottom">
-      <span>US-equity explorer · Generated 2026-08-31 18:24 PDT</span>
+      <span>US-equity explorer · Generated 2026-08-31 18:41 PDT</span>
       <span class="muted">© 2026 HeRAI Screener · For informational use only · Not investment advice · <a href="/">heraiscreener.com</a></span>
     </div>
     <div class="footer-disclaimer">
@@ -1607,7 +1612,7 @@ function toggleTrend() {
 // About panel removed — profile content is inline in #about section
 
 // ---- Fundamental Growth Chart ----
-const FUND = {"annual": {"periods": ["Nov 2021", "Nov 2022", "Nov 2023", "Nov 2024", "Nov 2025"], "metrics": {"Revenue": {"unit": "money", "values": [null, -70379252.0, 10058351.0, 33489797.0, -4568826.0]}, "Net Income": {"unit": "money", "values": [null, -71449435.0, 9091354.0, 32404479.0, -5516516.0]}, "Operating Cash Flow": {"unit": "money", "values": [null, 38826932.0, 15704755.0, -1869884.0, 20127334.0]}, "Free Cash Flow": {"unit": "money", "values": [null, 38826932.0, 15704755.0, -1869884.0, 20127334.0]}, "Net Margin %": {"unit": "pct", "values": [null, 101.52059445019393, 90.38612790506117, 96.75925775244323, 120.74252773031846]}, "Diluted EPS": {"unit": "eps", "values": [0.5, -1.46, 0.19, 0.66, null]}}}, "quarterly": {"periods": [], "metrics": {}}};
+const FUND = {"annual": {"periods": ["Nov 2021", "Nov 2022", "Nov 2023", "Nov 2024", "Nov 2025"], "metrics": {"Revenue": {"unit": "money", "values": [null, -70379252.0, 10058351.0, 33489797.0, -4568826.0]}, "Net Income": {"unit": "money", "values": [null, -71449435.0, 9091354.0, 32404479.0, -5516516.0]}, "Operating Cash Flow": {"unit": "money", "values": [null, 38826932.0, 15704755.0, -1869884.0, 20127334.0]}, "Free Cash Flow": {"unit": "money", "values": [null, 38826932.0, 15704755.0, -1869884.0, 20127334.0]}, "Net Margin %": {"unit": "pct", "values": [null, 101.52059445019393, 90.38612790506117, 96.75925775244323, 120.74252773031846]}, "Diluted EPS": {"unit": "eps", "values": [0.5, -1.46, 0.19, 0.66, null]}}}, "quarterly": {"periods": ["May 2025", "Nov 2025"], "metrics": {"Total Assets": {"unit": "money", "values": [489200304.0, 495880888.0]}, "Total Equity": {"unit": "money", "values": [304975944.0, 323800729.0]}, "Total Debt": {"unit": "money", "values": [128165000.0, 117845000.0]}, "Cash & Equivalents": {"unit": "money", "values": [2400447.0, 681411.0]}}}};
 let fundChart = null;
 
 function fmtMoney(v) {
