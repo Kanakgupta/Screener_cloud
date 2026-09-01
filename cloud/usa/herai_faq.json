@@ -29,7 +29,7 @@
         "reversal",
         "undervalued"
       ],
-      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **HCWC**\n  Setup: 3-month momentum, Top YTD, Golden cross, Multi-EMA breakout\n- **NXL**\n  Setup: 3-month momentum, Top YTD, Multi-EMA breakout\n  Also strong on: Low debt\n- **REAX**\n  Setup: 3-month momentum, Top YTD, Multi-EMA breakout\n  Also strong on: Low debt\n- **VBIO**\n  Setup: 3-month momentum, Multi-EMA breakout\n  Also strong on: Low P/B\n- **MBAI**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE\n- **GLE**\n  Setup: Golden cross, Multi-EMA breakout\n  Also strong on: Low debt\n- **VEEA**\n  Setup: 3-month momentum, Multi-EMA breakout\n  Also strong on: High revenue growth\n- **LGPS**\n  Setup: High momentum\n  Also strong on: Low P/E (value), Low P/B\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Entry / stop / target levels are derived from HeRAI's own swing screener rows so the payoff profile stays grounded in the underlying chart setup — open a ticker for the full picture before acting.",
+      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **REAX**\n  Setup: 3-month momentum, Top YTD, Multi-EMA breakout\n  Also strong on: Low debt\n- **HCWC**\n  Setup: 3-month momentum, Top YTD, Golden cross, Multi-EMA breakout\n- **NXL**\n  Setup: 3-month momentum, Top YTD, Multi-EMA breakout\n  Also strong on: Low debt\n- **WDC**\n  Setup: Top YTD\n  Also strong on: High ROE, High earnings growth\n- **NXTT**\n  Setup: 3-month momentum\n  Also strong on: High revenue growth, Low P/B\n- **VEEA**\n  Setup: 3-month momentum, Multi-EMA breakout\n  Also strong on: High revenue growth\n- **VBIO**\n  Setup: 3-month momentum, Multi-EMA breakout\n  Also strong on: Low P/B\n- **LGVN**\n  Setup: 3-month momentum, Top YTD, Multi-EMA breakout\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Entry / stop / target levels are derived from HeRAI's own swing screener rows so the payoff profile stays grounded in the underlying chart setup — open a ticker for the full picture before acting.",
       "sources": [
         {
           "title": "3-month momentum",
@@ -40,10 +40,6 @@
           "url": "/usa/screens/top-ytd.html"
         },
         {
-          "title": "Golden cross",
-          "url": "/usa/screens/golden-cross.html"
-        },
-        {
           "title": "Multi-EMA breakout",
           "url": "/usa/screens/ema-multi-up-5d.html"
         },
@@ -52,24 +48,24 @@
           "url": "/usa/screens/low-debt.html"
         },
         {
-          "title": "Low P/B",
-          "url": "/usa/screens/low-pb.html"
+          "title": "Golden cross",
+          "url": "/usa/screens/golden-cross.html"
         },
         {
           "title": "High ROE",
           "url": "/usa/screens/high-roe.html"
         },
         {
+          "title": "High earnings growth",
+          "url": "/usa/screens/high-earnings-growth.html"
+        },
+        {
           "title": "High revenue growth",
           "url": "/usa/screens/high-rev-growth.html"
         },
         {
-          "title": "High momentum",
-          "url": "/usa/screens/high-momentum.html"
-        },
-        {
-          "title": "Low P/E (value)",
-          "url": "/usa/screens/low-pe.html"
+          "title": "Low P/B",
+          "url": "/usa/screens/low-pb.html"
         }
       ]
     },
@@ -88,7 +84,7 @@
         "breakout",
         "buy-today"
       ],
-      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**RSI oversold**\n- **BIOT** — BIOT · Mkt Cap: - · Price: 0.42 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -2.78%\n- **GYGY** — Game Your Game, Inc. · Mkt Cap: $19.13M · Price: 1.19 · P/E: -2.29 · Fwd P/E: - · Δ P/E: - · ROCE %: 46.64%\n- **NCL** — Northann Corp. · Mkt Cap: - · Price: 0.00 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -87.64%\n- **JDZG** — JDZG · Mkt Cap: $300.06K · Price: 3.21 · P/E: -0.67 · Fwd P/E: - · Δ P/E: - · ROCE %: -9.36%\n- **QMLS** — QumulusAI, Inc. · Mkt Cap: $192.93M · Price: 5.87 · P/E: -1.30 · Fwd P/E: - · Δ P/E: - · ROCE %: -14.10%\n- **TWG** — TWG · Mkt Cap: $674.68K · Price: 0.46 · P/E: -0.09 · PEG: -0.0 · Fwd P/E: - · Δ P/E: -\n\n**Near 52-week low**\n- **AAC** — AAC · Mkt Cap: - · Price: 10.06 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -\n- **AADX** — Applied Aerospace & Defense, Inc. · Mkt Cap: $2.25B · Price: 13.20 · P/E: -18.59 · Fwd P/E: 31.43 · Δ P/E: Δ -50.02 · ROCE %: 6.29%\n- **ACR** — ACRES Commercial Realty Corp. · Mkt Cap: $99.34M · Price: 13.93 · P/E: -12.55 · PEG: -1.49 · Fwd P/E: 11.37 · Δ P/E: Δ -23.92\n- **ADBT** — Advasa Holdings, Inc. · Mkt Cap: $2.20B · Price: 4.54 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: 5.80%\n- **AGRZ** — AGRZ · Mkt Cap: $4.97M · Price: 0.22 · P/E: 1.27 · Fwd P/E: 1.36 · Δ P/E: Δ -0.09 · ROCE %: 35.53%\n- **AIAI** — AIAI Holdings Corporation · Mkt Cap: $262.27M · Price: 3.73 · P/E: -1.61 · Fwd P/E: - · Δ P/E: - · ROCE %: -12.00%\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
+      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**RSI oversold**\n- **BIOT** — BIOT · Mkt Cap: - · Price: 0.42 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -2.78%\n- **GYGY** — Game Your Game, Inc. · Mkt Cap: $19.13M · Price: 1.19 · P/E: -2.29 · Fwd P/E: - · Δ P/E: - · ROCE %: 46.64%\n- **NCL** — Northann Corp. · Mkt Cap: - · Price: 0.00 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -87.64%\n- **JDZG** — JDZG · Mkt Cap: $300.06K · Price: 3.21 · P/E: -0.67 · Fwd P/E: - · Δ P/E: - · ROCE %: -9.36%\n- **QMLS** — QumulusAI, Inc. · Mkt Cap: $192.93M · Price: 5.87 · P/E: -1.30 · Fwd P/E: - · Δ P/E: - · ROCE %: -14.10%\n- **OLOX** — Olenox Industries Inc. · Mkt Cap: $1.39M · Price: 0.99 · P/E: 0.01 · Fwd P/E: 0.02 · Δ P/E: Δ -0.01 · ROCE %: -137.55%\n\n**Near 52-week low**\n- **AAC** — AAC · Mkt Cap: - · Price: 10.06 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -\n- **AADX** — Applied Aerospace & Defense, Inc. · Mkt Cap: $2.25B · Price: 13.20 · P/E: -18.59 · Fwd P/E: 31.43 · Δ P/E: Δ -50.02 · ROCE %: 6.29%\n- **ACR** — ACRES Commercial Realty Corp. · Mkt Cap: $99.34M · Price: 13.93 · P/E: -12.55 · PEG: -1.49 · Fwd P/E: 11.37 · Δ P/E: Δ -23.92\n- **ADBT** — Advasa Holdings, Inc. · Mkt Cap: $2.20B · Price: 4.54 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: 5.80%\n- **AGRZ** — AGRZ · Mkt Cap: $4.97M · Price: 0.22 · P/E: 1.27 · Fwd P/E: 1.36 · Δ P/E: Δ -0.09 · ROCE %: 35.53%\n- **AIAI** — AIAI Holdings Corporation · Mkt Cap: $262.27M · Price: 3.73 · P/E: -1.61 · Fwd P/E: - · Δ P/E: - · ROCE %: -12.00%\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
       "sources": [
         {
           "title": "RSI oversold",
@@ -308,7 +304,7 @@
         "reversal",
         "undervalued"
       ],
-      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **HCWC**\n  Setup: 3-month momentum, Top YTD, Golden cross, Multi-EMA breakout\n- **NXL**\n  Setup: 3-month momentum, Top YTD, Multi-EMA breakout\n  Also strong on: Low debt\n- **REAX**\n  Setup: 3-month momentum, Top YTD, Multi-EMA breakout\n  Also strong on: Low debt\n- **VBIO**\n  Setup: 3-month momentum, Multi-EMA breakout\n  Also strong on: Low P/B\n- **MBAI**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High ROE\n- **GLE**\n  Setup: Golden cross, Multi-EMA breakout\n  Also strong on: Low debt\n- **VEEA**\n  Setup: 3-month momentum, Multi-EMA breakout\n  Also strong on: High revenue growth\n- **LGPS**\n  Setup: High momentum\n  Also strong on: Low P/E (value), Low P/B\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Entry / stop / target levels are derived from HeRAI's own swing screener rows so the payoff profile stays grounded in the underlying chart setup — open a ticker for the full picture before acting.",
+      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **REAX**\n  Setup: 3-month momentum, Top YTD, Multi-EMA breakout\n  Also strong on: Low debt\n- **HCWC**\n  Setup: 3-month momentum, Top YTD, Golden cross, Multi-EMA breakout\n- **NXL**\n  Setup: 3-month momentum, Top YTD, Multi-EMA breakout\n  Also strong on: Low debt\n- **WDC**\n  Setup: Top YTD\n  Also strong on: High ROE, High earnings growth\n- **NXTT**\n  Setup: 3-month momentum\n  Also strong on: High revenue growth, Low P/B\n- **VEEA**\n  Setup: 3-month momentum, Multi-EMA breakout\n  Also strong on: High revenue growth\n- **VBIO**\n  Setup: 3-month momentum, Multi-EMA breakout\n  Also strong on: Low P/B\n- **LGVN**\n  Setup: 3-month momentum, Top YTD, Multi-EMA breakout\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Entry / stop / target levels are derived from HeRAI's own swing screener rows so the payoff profile stays grounded in the underlying chart setup — open a ticker for the full picture before acting.",
       "sources": [
         {
           "title": "3-month momentum",
@@ -319,10 +315,6 @@
           "url": "/usa/screens/top-ytd.html"
         },
         {
-          "title": "Golden cross",
-          "url": "/usa/screens/golden-cross.html"
-        },
-        {
           "title": "Multi-EMA breakout",
           "url": "/usa/screens/ema-multi-up-5d.html"
         },
@@ -331,24 +323,24 @@
           "url": "/usa/screens/low-debt.html"
         },
         {
-          "title": "Low P/B",
-          "url": "/usa/screens/low-pb.html"
+          "title": "Golden cross",
+          "url": "/usa/screens/golden-cross.html"
         },
         {
           "title": "High ROE",
           "url": "/usa/screens/high-roe.html"
         },
         {
+          "title": "High earnings growth",
+          "url": "/usa/screens/high-earnings-growth.html"
+        },
+        {
           "title": "High revenue growth",
           "url": "/usa/screens/high-rev-growth.html"
         },
         {
-          "title": "High momentum",
-          "url": "/usa/screens/high-momentum.html"
-        },
-        {
-          "title": "Low P/E (value)",
-          "url": "/usa/screens/low-pe.html"
+          "title": "Low P/B",
+          "url": "/usa/screens/low-pb.html"
         }
       ]
     },
@@ -409,7 +401,7 @@
         "good-entry",
         "buy-today"
       ],
-      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**RSI oversold**\n- **BIOT** — BIOT · Mkt Cap: - · Price: 0.42 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -2.78%\n- **GYGY** — Game Your Game, Inc. · Mkt Cap: $19.13M · Price: 1.19 · P/E: -2.29 · Fwd P/E: - · Δ P/E: - · ROCE %: 46.64%\n- **NCL** — Northann Corp. · Mkt Cap: - · Price: 0.00 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -87.64%\n- **JDZG** — JDZG · Mkt Cap: $300.06K · Price: 3.21 · P/E: -0.67 · Fwd P/E: - · Δ P/E: - · ROCE %: -9.36%\n- **QMLS** — QumulusAI, Inc. · Mkt Cap: $192.93M · Price: 5.87 · P/E: -1.30 · Fwd P/E: - · Δ P/E: - · ROCE %: -14.10%\n- **TWG** — TWG · Mkt Cap: $674.68K · Price: 0.46 · P/E: -0.09 · PEG: -0.0 · Fwd P/E: - · Δ P/E: -\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
+      "answer": "Here are current ideas straight from HeRAI's screeners (already computed from the latest data):\n\n**RSI oversold**\n- **BIOT** — BIOT · Mkt Cap: - · Price: 0.42 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -2.78%\n- **GYGY** — Game Your Game, Inc. · Mkt Cap: $19.13M · Price: 1.19 · P/E: -2.29 · Fwd P/E: - · Δ P/E: - · ROCE %: 46.64%\n- **NCL** — Northann Corp. · Mkt Cap: - · Price: 0.00 · P/E: - · Fwd P/E: - · Δ P/E: - · ROCE %: -87.64%\n- **JDZG** — JDZG · Mkt Cap: $300.06K · Price: 3.21 · P/E: -0.67 · Fwd P/E: - · Δ P/E: - · ROCE %: -9.36%\n- **QMLS** — QumulusAI, Inc. · Mkt Cap: $192.93M · Price: 5.87 · P/E: -1.30 · Fwd P/E: - · Δ P/E: - · ROCE %: -14.10%\n- **OLOX** — Olenox Industries Inc. · Mkt Cap: $1.39M · Price: 0.99 · P/E: 0.01 · Fwd P/E: 0.02 · Δ P/E: Δ -0.01 · ROCE %: -137.55%\n\nThese are screener-generated ideas to research, not buy/sell advice. Open a ticker for full analysis.",
       "sources": [
         {
           "title": "RSI oversold",

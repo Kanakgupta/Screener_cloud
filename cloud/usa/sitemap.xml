@@ -480,6 +480,7 @@
   <url><loc>https://heraiscreener.com/usa/stocks/ATLC.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/ATLN.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/ATLO.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/ATLQ.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/ATLX.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/ATMP.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/ATMU.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
@@ -489,6 +490,7 @@
   <url><loc>https://heraiscreener.com/usa/stocks/ATOM.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/ATOS.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/ATPC.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/ATR.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/ATRA.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/ATRC.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/ATRO.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
@@ -556,6 +558,7 @@
   <url><loc>https://heraiscreener.com/usa/stocks/AXTA.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/AXTI.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/AYA.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/AYI.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/AYTU.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/AZ.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/AZI.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
@@ -625,6 +628,8 @@
   <url><loc>https://heraiscreener.com/usa/stocks/BCG.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/BCH.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/BCHT.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/BCIC.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/BCML.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/BCO.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/BCPC.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/BCRX.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
@@ -966,6 +971,7 @@
   <url><loc>https://heraiscreener.com/usa/stocks/CARS.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/CART.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/CASH.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/CASS.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/CAST.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/CASY.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/CAT.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
@@ -1389,6 +1395,7 @@
   <url><loc>https://heraiscreener.com/usa/stocks/CURX.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/CUZ.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/CV.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/CVBF.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/CVCO.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/CVE.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/CVEO.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
@@ -1410,6 +1417,7 @@
   <url><loc>https://heraiscreener.com/usa/stocks/CW.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/CWAN.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/CWBC.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/CWCO.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/CWD.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/CWEN.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/CWH.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
@@ -1479,6 +1487,7 @@
   <url><loc>https://heraiscreener.com/usa/stocks/DEC.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/DECK.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/DEFT.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/DEI.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/DELL.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/DEO.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/DERM.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
@@ -1865,6 +1874,7 @@
   <url><loc>https://heraiscreener.com/usa/stocks/EXLS.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/EXOD.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/EXOZ.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/EXP.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/EXPD.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/EXPE.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/EXPO.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
@@ -2046,6 +2056,7 @@
   <url><loc>https://heraiscreener.com/usa/stocks/FRD.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/FRGT.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/FRHC.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/FRME.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/FRMI.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/FRMM.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/FRNM.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
@@ -3842,6 +3853,7 @@
   <url><loc>https://heraiscreener.com/usa/stocks/OLP.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/OLPX.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/OM.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/OMC.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/OMCL.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/OMDA.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/OMER.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
@@ -3939,6 +3951,7 @@
   <url><loc>https://heraiscreener.com/usa/stocks/P.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/P5N994.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PAAC.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/PAAI.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PAAS.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PAC.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PACB.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
@@ -3976,6 +3989,7 @@
   <url><loc>https://heraiscreener.com/usa/stocks/PAYO.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PAYP.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PAYS.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/PAYX.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PB.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PBA.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PBAM.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
@@ -3987,6 +4001,7 @@
   <url><loc>https://heraiscreener.com/usa/stocks/PBK.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PBLS.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PBM.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/PBR.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PBT.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PBYI.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PC.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
@@ -4196,6 +4211,7 @@
   <url><loc>https://heraiscreener.com/usa/stocks/PROF.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PROK.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PROP.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/PROV.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PRPL.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PRPO.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PRQR.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
@@ -4223,6 +4239,7 @@
   <url><loc>https://heraiscreener.com/usa/stocks/PSNYW.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PSO.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PSQH.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/PSQL.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PSTL.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PSUS.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/PSX.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
@@ -4552,6 +4569,7 @@
   <url><loc>https://heraiscreener.com/usa/stocks/SAIL.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/SAM.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/SAMG.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/SAMO.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/SAN.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/SANA.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/SANG.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
@@ -4887,6 +4905,7 @@
   <url><loc>https://heraiscreener.com/usa/stocks/STE.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/STEL.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/STEM.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/STEP.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/STEW.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/STEX.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/STFS.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
@@ -5038,7 +5057,10 @@
   <url><loc>https://heraiscreener.com/usa/stocks/TEO.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/TER.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/TEX.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/TFC.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/TFII.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/TFIN.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/TFPM.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/TFSL.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/TFX.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/TG.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
@@ -5144,6 +5166,7 @@
   <url><loc>https://heraiscreener.com/usa/stocks/TRAK.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/TRAW.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/TRAX.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/TRBG.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/TRC.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/TRDA.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/TREE.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
@@ -5637,6 +5660,7 @@
   <url><loc>https://heraiscreener.com/usa/stocks/XGN.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/XHLD.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/XHR.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
+  <url><loc>https://heraiscreener.com/usa/stocks/XLAB.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/XLO.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/XMAX.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
   <url><loc>https://heraiscreener.com/usa/stocks/XMTR.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url>
