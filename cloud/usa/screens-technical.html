@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>US Technical Stock Screener | HeRAI | Free AI Stock Screener — HeRAI</title>
 <meta name="author" content="HeRAI Screener" />
-<meta name="description" content="US Technical Stock Screener for USA — 30 pre-built screeners covering 5757+ stocks across 12 sectors. Updated daily. Free, no login required.">
+<meta name="description" content="US Technical Stock Screener for USA — 31 pre-built screeners covering 5742+ stocks across 12 sectors. Updated daily. Free, no login required.">
 <link rel="canonical" href="https://heraiscreener.com/usa/screens-technical.html" />
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 
@@ -64,7 +64,6 @@
     <a class="region-switch" href="/india/IND_Stock_Screener.html" title="Switch to India" style="margin-left:12px;color:#7a8597;text-decoration:none;font-size:13px;">← Switch market</a>
     
     <span class="nav-spacer"></span>
-    <a href="elite.html" class="nav-cta nav-cta-elite" title="Members discussion forum">★ Elite Club</a>
     <a href="heraiai.html" class="nav-cta nav-cta-herai" title="HerAI">⚡ HerAI</a>
     <form class="search" onsubmit="return goSearch(event)" autocomplete="off">
       <input id="q" type="text" placeholder="Search company or ticker (e.g. AAPL or Apple)…" autocomplete="off"
@@ -78,6 +77,7 @@
       <div class="nav-dd">
         <a href="screens-technical.html" class="nav-dd-trigger">Technical Screens <span class="dd-caret">&#9662;</span></a>
         <div class="nav-dd-menu">
+          <a href="screens/smart-money.html"><strong>Smart Money</strong><span>Liquidity, structure, displacement and volume confluence</span></a>
           <a href="screens-technical.html"><strong>Ready Screens</strong><span>EMA crossovers, price &amp; volume, performance</span></a>
           
           <a href="swing.html"><strong>Swing Screener</strong><span>Daily-chart 2-20 day setups, R:R &ge; 3</span></a>
@@ -113,14 +113,32 @@
 
 <section class="hero">
   <h1>US Technical Stock Screener</h1>
-  <p class="muted">Filter 5757 USA stocks by price action, moving-average crosses (golden cross, death cross, EMA9/21/50/200), RSI, momentum and 52-week extremes. For detected chart patterns (head &amp; shoulders, flags, triangles), see <a href="technical.html">Chart Pattern Screener</a>. For ratio-based ideas, see <a href="screens-fundamental.html">Fundamental Screens</a>.</p>
+  <p class="muted">Filter 5742 USA stocks by price action, moving-average crosses (golden cross, death cross, EMA9/21/50/200), RSI, momentum and 52-week extremes. For detected chart patterns (head &amp; shoulders, flags, triangles), see <a href="technical.html">Chart Pattern Screener</a>. For ratio-based ideas, see <a href="screens-fundamental.html">Fundamental Screens</a>.</p>
   <div class="meta-pills">
-    <span class="pill">5757 companies tracked</span>
-    <span class="pill">30 screens</span>
-    <span class="pill">Updated 2026-09-08 16:28 PDT</span>
+    <span class="pill">5742 companies tracked</span>
+    <span class="pill">31 screens</span>
+    <span class="pill">Updated 2026-09-09 16:45 PDT</span>
   </div>
 </section>
 
+
+  
+  
+  <section class="screen-group">
+    <h2>Smart Money screener</h2>
+    <p class="muted">Confluence-based price-action proxies: liquidity sweeps, structure shifts, displacement and volume.</p>
+    <div class="screen-grid">
+      
+        <a class="screen-card screen-card-smart-money" href="screens/smart-money.html"
+           data-counts='{"AI": 273, "DEFENCE": 74, "FINANCIAL": 693, "NDX": 96, "PHARMA": 744, "R2K": 1501, "R3K": 2188, "SPX": 462, "TECH": 639, "all": 4525}'>
+          <div class="screen-card-name">Smart Money screener</div>
+          <div class="screen-card-desc">Daily OHLCV confluence screen for liquidity sweeps, structure breaks, displacement/FVG proxies and volume-confirmed directional setups. These are observable price-action proxies, not direct institutional-order data.</div>
+          <div class="screen-card-count">4525 stocks</div>
+        </a>
+      
+    </div>
+  </section>
+  
 
   
   
@@ -130,157 +148,157 @@
     <div class="screen-grid">
       
         <a class="screen-card screen-card-golden-cross" href="screens/golden-cross.html"
-           data-counts='{"AI": 1, "DEFENCE": 0, "FINANCIAL": 7, "NDX": 1, "PHARMA": 7, "R2K": 8, "R3K": 14, "SPX": 4, "TECH": 4, "all": 32}'>
+           data-counts='{"AI": 2, "DEFENCE": 1, "FINANCIAL": 5, "NDX": 2, "PHARMA": 4, "R2K": 8, "R3K": 13, "SPX": 5, "TECH": 4, "all": 26}'>
           <div class="screen-card-name">✨ Golden Cross (50DMA ↑ 200DMA) screener</div>
           <div class="screen-card-desc">Stocks where the 50-day MA crossed above the 200-day MA in the last 2 trading days (true crossover event, TradingView-style).</div>
-          <div class="screen-card-count">32 stocks</div>
-        </a>
-      
-        <a class="screen-card screen-card-death-cross" href="screens/death-cross.html"
-           data-counts='{"AI": 4, "DEFENCE": 0, "FINANCIAL": 1, "NDX": 1, "PHARMA": 3, "R2K": 10, "R3K": 14, "SPX": 3, "TECH": 6, "all": 26}'>
-          <div class="screen-card-name">⚠ Death Cross (50DMA ↓ 200DMA) screener</div>
-          <div class="screen-card-desc">Stocks where the 50-day MA crossed below the 200-day MA in the last 2 trading days (true crossover event, TradingView-style).</div>
           <div class="screen-card-count">26 stocks</div>
         </a>
       
+        <a class="screen-card screen-card-death-cross" href="screens/death-cross.html"
+           data-counts='{"AI": 3, "DEFENCE": 0, "FINANCIAL": 2, "NDX": 1, "PHARMA": 4, "R2K": 18, "R3K": 23, "SPX": 5, "TECH": 4, "all": 39}'>
+          <div class="screen-card-name">⚠ Death Cross (50DMA ↓ 200DMA) screener</div>
+          <div class="screen-card-desc">Stocks where the 50-day MA crossed below the 200-day MA in the last 2 trading days (true crossover event, TradingView-style).</div>
+          <div class="screen-card-count">39 stocks</div>
+        </a>
+      
         <a class="screen-card screen-card-ema-10-20-up" href="screens/ema-10-20-up.html"
-           data-counts='{"AI": 20, "DEFENCE": 3, "FINANCIAL": 99, "NDX": 3, "PHARMA": 50, "R2K": 148, "R3K": 172, "SPX": 23, "TECH": 36, "all": 338}'>
+           data-counts='{"AI": 22, "DEFENCE": 2, "FINANCIAL": 86, "NDX": 4, "PHARMA": 48, "R2K": 135, "R3K": 152, "SPX": 22, "TECH": 39, "all": 317}'>
           <div class="screen-card-name">10 EMA ↑ 20 EMA screener</div>
           <div class="screen-card-desc">10-day EMA crossed above the 20-day EMA in the last 5 trading days (event detection).</div>
-          <div class="screen-card-count">338 stocks</div>
+          <div class="screen-card-count">317 stocks</div>
         </a>
       
         <a class="screen-card screen-card-ema-10-20-dn" href="screens/ema-10-20-dn.html"
-           data-counts='{"AI": 24, "DEFENCE": 5, "FINANCIAL": 41, "NDX": 19, "PHARMA": 113, "R2K": 166, "R3K": 265, "SPX": 65, "TECH": 67, "all": 557}'>
+           data-counts='{"AI": 26, "DEFENCE": 4, "FINANCIAL": 82, "NDX": 25, "PHARMA": 121, "R2K": 187, "R3K": 307, "SPX": 77, "TECH": 83, "all": 595}'>
           <div class="screen-card-name">10 EMA ↓ 20 EMA screener</div>
           <div class="screen-card-desc">10-day EMA crossed below the 20-day EMA in the last 5 trading days (event detection).</div>
-          <div class="screen-card-count">557 stocks</div>
+          <div class="screen-card-count">595 stocks</div>
         </a>
       
         <a class="screen-card screen-card-ema-10-50-up" href="screens/ema-10-50-up.html"
-           data-counts='{"AI": 10, "DEFENCE": 1, "FINANCIAL": 39, "NDX": 4, "PHARMA": 25, "R2K": 58, "R3K": 75, "SPX": 8, "TECH": 18, "all": 178}'>
+           data-counts='{"AI": 12, "DEFENCE": 1, "FINANCIAL": 34, "NDX": 5, "PHARMA": 24, "R2K": 57, "R3K": 72, "SPX": 9, "TECH": 20, "all": 177}'>
           <div class="screen-card-name">10 EMA ↑ 50 EMA screener</div>
           <div class="screen-card-desc">10-day EMA crossed above the 50-day EMA in the last 5 trading days (event detection).</div>
-          <div class="screen-card-count">178 stocks</div>
+          <div class="screen-card-count">177 stocks</div>
         </a>
       
         <a class="screen-card screen-card-ema-10-50-dn" href="screens/ema-10-50-dn.html"
-           data-counts='{"AI": 10, "DEFENCE": 12, "FINANCIAL": 29, "NDX": 6, "PHARMA": 67, "R2K": 126, "R3K": 197, "SPX": 42, "TECH": 34, "all": 365}'>
+           data-counts='{"AI": 10, "DEFENCE": 9, "FINANCIAL": 51, "NDX": 9, "PHARMA": 70, "R2K": 119, "R3K": 199, "SPX": 49, "TECH": 37, "all": 372}'>
           <div class="screen-card-name">10 EMA ↓ 50 EMA screener</div>
           <div class="screen-card-desc">10-day EMA crossed below the 50-day EMA in the last 5 trading days (event detection).</div>
-          <div class="screen-card-count">365 stocks</div>
+          <div class="screen-card-count">372 stocks</div>
         </a>
       
         <a class="screen-card screen-card-ema-10-100-up" href="screens/ema-10-100-up.html"
-           data-counts='{"AI": 5, "DEFENCE": 0, "FINANCIAL": 18, "NDX": 3, "PHARMA": 27, "R2K": 48, "R3K": 64, "SPX": 9, "TECH": 19, "all": 141}'>
+           data-counts='{"AI": 12, "DEFENCE": 0, "FINANCIAL": 19, "NDX": 4, "PHARMA": 26, "R2K": 47, "R3K": 56, "SPX": 8, "TECH": 21, "all": 140}'>
           <div class="screen-card-name">10 EMA ↑ 100 EMA screener</div>
           <div class="screen-card-desc">10-day EMA crossed above the 100-day EMA in the last 5 trading days (event detection).</div>
-          <div class="screen-card-count">141 stocks</div>
+          <div class="screen-card-count">140 stocks</div>
         </a>
       
         <a class="screen-card screen-card-ema-10-100-dn" href="screens/ema-10-100-dn.html"
-           data-counts='{"AI": 12, "DEFENCE": 8, "FINANCIAL": 16, "NDX": 3, "PHARMA": 34, "R2K": 93, "R3K": 143, "SPX": 32, "TECH": 24, "all": 277}'>
+           data-counts='{"AI": 8, "DEFENCE": 8, "FINANCIAL": 28, "NDX": 4, "PHARMA": 37, "R2K": 87, "R3K": 135, "SPX": 28, "TECH": 25, "all": 266}'>
           <div class="screen-card-name">10 EMA ↓ 100 EMA screener</div>
           <div class="screen-card-desc">10-day EMA crossed below the 100-day EMA in the last 5 trading days (event detection).</div>
-          <div class="screen-card-count">277 stocks</div>
+          <div class="screen-card-count">266 stocks</div>
         </a>
       
         <a class="screen-card screen-card-ema-10-200-up" href="screens/ema-10-200-up.html"
-           data-counts='{"AI": 2, "DEFENCE": 1, "FINANCIAL": 13, "NDX": 1, "PHARMA": 14, "R2K": 28, "R3K": 35, "SPX": 6, "TECH": 9, "all": 81}'>
+           data-counts='{"AI": 4, "DEFENCE": 0, "FINANCIAL": 8, "NDX": 2, "PHARMA": 17, "R2K": 22, "R3K": 32, "SPX": 6, "TECH": 9, "all": 82}'>
           <div class="screen-card-name">10 EMA ↑ 200 EMA screener</div>
           <div class="screen-card-desc">10-day EMA crossed above the 200-day EMA in the last 5 trading days (event detection).</div>
-          <div class="screen-card-count">81 stocks</div>
+          <div class="screen-card-count">82 stocks</div>
         </a>
       
         <a class="screen-card screen-card-ema-10-200-dn" href="screens/ema-10-200-dn.html"
-           data-counts='{"AI": 14, "DEFENCE": 5, "FINANCIAL": 11, "NDX": 6, "PHARMA": 24, "R2K": 50, "R3K": 98, "SPX": 25, "TECH": 30, "all": 186}'>
+           data-counts='{"AI": 9, "DEFENCE": 5, "FINANCIAL": 20, "NDX": 7, "PHARMA": 31, "R2K": 59, "R3K": 105, "SPX": 26, "TECH": 27, "all": 193}'>
           <div class="screen-card-name">10 EMA ↓ 200 EMA screener</div>
           <div class="screen-card-desc">10-day EMA crossed below the 200-day EMA in the last 5 trading days (event detection).</div>
-          <div class="screen-card-count">186 stocks</div>
+          <div class="screen-card-count">193 stocks</div>
         </a>
       
         <a class="screen-card screen-card-ema-20-50-up" href="screens/ema-20-50-up.html"
-           data-counts='{"AI": 6, "DEFENCE": 0, "FINANCIAL": 10, "NDX": 1, "PHARMA": 25, "R2K": 23, "R3K": 36, "SPX": 8, "TECH": 18, "all": 124}'>
+           data-counts='{"AI": 7, "DEFENCE": 0, "FINANCIAL": 13, "NDX": 1, "PHARMA": 26, "R2K": 26, "R3K": 38, "SPX": 7, "TECH": 18, "all": 127}'>
           <div class="screen-card-name">20 EMA ↑ 50 EMA screener</div>
           <div class="screen-card-desc">20-day EMA crossed above the 50-day EMA in the last 5 trading days (event detection).</div>
-          <div class="screen-card-count">124 stocks</div>
+          <div class="screen-card-count">127 stocks</div>
         </a>
       
         <a class="screen-card screen-card-ema-20-50-dn" href="screens/ema-20-50-dn.html"
-           data-counts='{"AI": 13, "DEFENCE": 13, "FINANCIAL": 33, "NDX": 4, "PHARMA": 33, "R2K": 112, "R3K": 153, "SPX": 28, "TECH": 29, "all": 289}'>
+           data-counts='{"AI": 12, "DEFENCE": 12, "FINANCIAL": 38, "NDX": 7, "PHARMA": 38, "R2K": 93, "R3K": 141, "SPX": 31, "TECH": 27, "all": 278}'>
           <div class="screen-card-name">20 EMA ↓ 50 EMA screener</div>
           <div class="screen-card-desc">20-day EMA crossed below the 50-day EMA in the last 5 trading days (event detection).</div>
-          <div class="screen-card-count">289 stocks</div>
+          <div class="screen-card-count">278 stocks</div>
         </a>
       
         <a class="screen-card screen-card-ema-20-100-up" href="screens/ema-20-100-up.html"
-           data-counts='{"AI": 7, "DEFENCE": 0, "FINANCIAL": 8, "NDX": 3, "PHARMA": 19, "R2K": 31, "R3K": 42, "SPX": 9, "TECH": 9, "all": 96}'>
+           data-counts='{"AI": 6, "DEFENCE": 0, "FINANCIAL": 6, "NDX": 2, "PHARMA": 21, "R2K": 26, "R3K": 33, "SPX": 7, "TECH": 10, "all": 95}'>
           <div class="screen-card-name">20 EMA ↑ 100 EMA screener</div>
           <div class="screen-card-desc">20-day EMA crossed above the 100-day EMA in the last 5 trading days (event detection).</div>
-          <div class="screen-card-count">96 stocks</div>
+          <div class="screen-card-count">95 stocks</div>
         </a>
       
         <a class="screen-card screen-card-ema-20-100-dn" href="screens/ema-20-100-dn.html"
-           data-counts='{"AI": 9, "DEFENCE": 2, "FINANCIAL": 19, "NDX": 2, "PHARMA": 25, "R2K": 85, "R3K": 129, "SPX": 28, "TECH": 24, "all": 207}'>
+           data-counts='{"AI": 7, "DEFENCE": 2, "FINANCIAL": 15, "NDX": 3, "PHARMA": 27, "R2K": 72, "R3K": 121, "SPX": 26, "TECH": 22, "all": 199}'>
           <div class="screen-card-name">20 EMA ↓ 100 EMA screener</div>
           <div class="screen-card-desc">20-day EMA crossed below the 100-day EMA in the last 5 trading days (event detection).</div>
-          <div class="screen-card-count">207 stocks</div>
+          <div class="screen-card-count">199 stocks</div>
         </a>
       
         <a class="screen-card screen-card-ema-20-200-up" href="screens/ema-20-200-up.html"
-           data-counts='{"AI": 5, "DEFENCE": 1, "FINANCIAL": 4, "NDX": 3, "PHARMA": 14, "R2K": 16, "R3K": 26, "SPX": 5, "TECH": 10, "all": 69}'>
+           data-counts='{"AI": 6, "DEFENCE": 0, "FINANCIAL": 5, "NDX": 1, "PHARMA": 15, "R2K": 8, "R3K": 18, "SPX": 4, "TECH": 7, "all": 61}'>
           <div class="screen-card-name">20 EMA ↑ 200 EMA screener</div>
           <div class="screen-card-desc">20-day EMA crossed above the 200-day EMA in the last 5 trading days (event detection).</div>
-          <div class="screen-card-count">69 stocks</div>
+          <div class="screen-card-count">61 stocks</div>
         </a>
       
         <a class="screen-card screen-card-ema-20-200-dn" href="screens/ema-20-200-dn.html"
-           data-counts='{"AI": 11, "DEFENCE": 1, "FINANCIAL": 8, "NDX": 5, "PHARMA": 13, "R2K": 36, "R3K": 74, "SPX": 24, "TECH": 19, "all": 123}'>
+           data-counts='{"AI": 5, "DEFENCE": 2, "FINANCIAL": 8, "NDX": 3, "PHARMA": 14, "R2K": 41, "R3K": 70, "SPX": 16, "TECH": 21, "all": 128}'>
           <div class="screen-card-name">20 EMA ↓ 200 EMA screener</div>
           <div class="screen-card-desc">20-day EMA crossed below the 200-day EMA in the last 5 trading days (event detection).</div>
-          <div class="screen-card-count">123 stocks</div>
+          <div class="screen-card-count">128 stocks</div>
         </a>
       
         <a class="screen-card screen-card-ema-50-100-up" href="screens/ema-50-100-up.html"
-           data-counts='{"AI": 1, "DEFENCE": 0, "FINANCIAL": 9, "NDX": 0, "PHARMA": 23, "R2K": 22, "R3K": 24, "SPX": 4, "TECH": 11, "all": 88}'>
+           data-counts='{"AI": 1, "DEFENCE": 0, "FINANCIAL": 13, "NDX": 0, "PHARMA": 18, "R2K": 17, "R3K": 22, "SPX": 5, "TECH": 9, "all": 74}'>
           <div class="screen-card-name">50 EMA ↑ 100 EMA screener</div>
           <div class="screen-card-desc">50-day EMA crossed above the 100-day EMA in the last 5 trading days (event detection).</div>
-          <div class="screen-card-count">88 stocks</div>
+          <div class="screen-card-count">74 stocks</div>
         </a>
       
         <a class="screen-card screen-card-ema-50-100-dn" href="screens/ema-50-100-dn.html"
-           data-counts='{"AI": 16, "DEFENCE": 2, "FINANCIAL": 7, "NDX": 1, "PHARMA": 21, "R2K": 58, "R3K": 87, "SPX": 16, "TECH": 33, "all": 144}'>
+           data-counts='{"AI": 16, "DEFENCE": 2, "FINANCIAL": 7, "NDX": 3, "PHARMA": 21, "R2K": 49, "R3K": 85, "SPX": 21, "TECH": 34, "all": 146}'>
           <div class="screen-card-name">50 EMA ↓ 100 EMA screener</div>
           <div class="screen-card-desc">50-day EMA crossed below the 100-day EMA in the last 5 trading days (event detection).</div>
-          <div class="screen-card-count">144 stocks</div>
+          <div class="screen-card-count">146 stocks</div>
         </a>
       
         <a class="screen-card screen-card-ema-100-200-up" href="screens/ema-100-200-up.html"
-           data-counts='{"AI": 3, "DEFENCE": 0, "FINANCIAL": 10, "NDX": 1, "PHARMA": 10, "R2K": 14, "R3K": 25, "SPX": 5, "TECH": 10, "all": 48}'>
+           data-counts='{"AI": 0, "DEFENCE": 0, "FINANCIAL": 11, "NDX": 0, "PHARMA": 9, "R2K": 17, "R3K": 23, "SPX": 5, "TECH": 3, "all": 46}'>
           <div class="screen-card-name">100 EMA ↑ 200 EMA screener</div>
           <div class="screen-card-desc">100-day EMA crossed above the 200-day EMA in the last 5 trading days (event detection).</div>
-          <div class="screen-card-count">48 stocks</div>
+          <div class="screen-card-count">46 stocks</div>
         </a>
       
         <a class="screen-card screen-card-ema-100-200-dn" href="screens/ema-100-200-dn.html"
-           data-counts='{"AI": 2, "DEFENCE": 0, "FINANCIAL": 0, "NDX": 0, "PHARMA": 2, "R2K": 13, "R3K": 13, "SPX": 1, "TECH": 5, "all": 32}'>
+           data-counts='{"AI": 3, "DEFENCE": 2, "FINANCIAL": 4, "NDX": 0, "PHARMA": 3, "R2K": 15, "R3K": 23, "SPX": 4, "TECH": 7, "all": 35}'>
           <div class="screen-card-name">100 EMA ↓ 200 EMA screener</div>
           <div class="screen-card-desc">100-day EMA crossed below the 200-day EMA in the last 5 trading days (event detection).</div>
-          <div class="screen-card-count">32 stocks</div>
+          <div class="screen-card-count">35 stocks</div>
         </a>
       
         <a class="screen-card screen-card-ema-multi-up-5d" href="screens/ema-multi-up-5d.html"
-           data-counts='{"AI": 3, "DEFENCE": 1, "FINANCIAL": 9, "NDX": 1, "PHARMA": 16, "R2K": 20, "R3K": 28, "SPX": 2, "TECH": 9, "all": 90}'>
+           data-counts='{"AI": 5, "DEFENCE": 0, "FINANCIAL": 9, "NDX": 2, "PHARMA": 15, "R2K": 20, "R3K": 26, "SPX": 4, "TECH": 13, "all": 88}'>
           <div class="screen-card-name">Multi-EMA bullish stack (≥3 ups in 5d) screener</div>
           <div class="screen-card-desc">Stocks with three or more bullish EMA crossovers in the last 5 trading days — a strong, broad-based momentum shift.</div>
-          <div class="screen-card-count">90 stocks</div>
+          <div class="screen-card-count">88 stocks</div>
         </a>
       
         <a class="screen-card screen-card-ema-multi-dn-5d" href="screens/ema-multi-dn-5d.html"
-           data-counts='{"AI": 6, "DEFENCE": 5, "FINANCIAL": 9, "NDX": 4, "PHARMA": 31, "R2K": 66, "R3K": 103, "SPX": 20, "TECH": 20, "all": 205}'>
+           data-counts='{"AI": 10, "DEFENCE": 6, "FINANCIAL": 22, "NDX": 6, "PHARMA": 31, "R2K": 54, "R3K": 93, "SPX": 18, "TECH": 27, "all": 208}'>
           <div class="screen-card-name">Multi-EMA bearish stack (≥3 downs in 5d) screener</div>
           <div class="screen-card-desc">Stocks with three or more bearish EMA crossovers in the last 5 trading days — a strong, broad-based momentum breakdown.</div>
-          <div class="screen-card-count">205 stocks</div>
+          <div class="screen-card-count">208 stocks</div>
         </a>
       
     </div>
@@ -295,31 +313,31 @@
     <div class="screen-grid">
       
         <a class="screen-card screen-card-near-52w-high" href="screens/near-52w-high.html"
-           data-counts='{"AI": 12, "DEFENCE": 0, "FINANCIAL": 360, "NDX": 7, "PHARMA": 113, "R2K": 375, "R3K": 399, "SPX": 65, "TECH": 35, "all": 1156}'>
+           data-counts='{"AI": 15, "DEFENCE": 0, "FINANCIAL": 371, "NDX": 5, "PHARMA": 88, "R2K": 313, "R3K": 348, "SPX": 61, "TECH": 39, "all": 850}'>
           <div class="screen-card-name">Near 52-Week High screener</div>
           <div class="screen-card-desc">Within 5% of their 52-week high.</div>
-          <div class="screen-card-count">1156 stocks</div>
+          <div class="screen-card-count">850 stocks</div>
         </a>
       
         <a class="screen-card screen-card-near-52w-low" href="screens/near-52w-low.html"
-           data-counts='{"AI": 29, "DEFENCE": 24, "FINANCIAL": 185, "NDX": 15, "PHARMA": 142, "R2K": 238, "R3K": 307, "SPX": 84, "TECH": 114, "all": 1330}'>
+           data-counts='{"AI": 38, "DEFENCE": 25, "FINANCIAL": 225, "NDX": 20, "PHARMA": 170, "R2K": 274, "R3K": 386, "SPX": 99, "TECH": 131, "all": 1137}'>
           <div class="screen-card-name">Near 52-Week Low screener</div>
           <div class="screen-card-desc">Within 10% of their 52-week low.</div>
-          <div class="screen-card-count">1330 stocks</div>
+          <div class="screen-card-count">1137 stocks</div>
         </a>
       
         <a class="screen-card screen-card-rsi-oversold" href="screens/rsi-oversold.html"
-           data-counts='{"AI": 0, "DEFENCE": 0, "FINANCIAL": 2, "NDX": 0, "PHARMA": 6, "R2K": 1, "R3K": 2, "SPX": 1, "TECH": 4, "all": 33}'>
+           data-counts='{"AI": 0, "DEFENCE": 1, "FINANCIAL": 2, "NDX": 0, "PHARMA": 5, "R2K": 5, "R3K": 9, "SPX": 3, "TECH": 5, "all": 35}'>
           <div class="screen-card-name">RSI Oversold (&lt;20) screener</div>
           <div class="screen-card-desc">Deeply oversold based on 14-day RSI (extreme reading).</div>
-          <div class="screen-card-count">33 stocks</div>
+          <div class="screen-card-count">35 stocks</div>
         </a>
       
         <a class="screen-card screen-card-rsi-overbought" href="screens/rsi-overbought.html"
-           data-counts='{"AI": 1, "DEFENCE": 0, "FINANCIAL": 14, "NDX": 1, "PHARMA": 10, "R2K": 6, "R3K": 9, "SPX": 2, "TECH": 1, "all": 56}'>
+           data-counts='{"AI": 1, "DEFENCE": 0, "FINANCIAL": 13, "NDX": 0, "PHARMA": 9, "R2K": 7, "R3K": 11, "SPX": 2, "TECH": 2, "all": 45}'>
           <div class="screen-card-name">RSI Overbought (&gt;80) screener</div>
           <div class="screen-card-desc">Extremely overbought based on 14-day RSI (extreme reading).</div>
-          <div class="screen-card-count">56 stocks</div>
+          <div class="screen-card-count">45 stocks</div>
         </a>
       
     </div>
@@ -334,31 +352,31 @@
     <div class="screen-grid">
       
         <a class="screen-card screen-card-top-ytd" href="screens/top-ytd.html"
-           data-counts='{"AI": 310, "DEFENCE": 88, "FINANCIAL": 837, "NDX": 101, "PHARMA": 944, "R2K": 1876, "R3K": 2566, "SPX": 499, "TECH": 747, "all": 5672}'>
+           data-counts='{"AI": 311, "DEFENCE": 88, "FINANCIAL": 898, "NDX": 100, "PHARMA": 951, "R2K": 1867, "R3K": 2561, "SPX": 499, "TECH": 759, "all": 4981}'>
           <div class="screen-card-name">Top 1Y Performers screener</div>
           <div class="screen-card-desc">Best 1-year price performance.</div>
-          <div class="screen-card-count">5672 stocks</div>
+          <div class="screen-card-count">4981 stocks</div>
         </a>
       
         <a class="screen-card screen-card-worst-ytd" href="screens/worst-ytd.html"
-           data-counts='{"AI": 310, "DEFENCE": 88, "FINANCIAL": 837, "NDX": 101, "PHARMA": 944, "R2K": 1876, "R3K": 2566, "SPX": 499, "TECH": 747, "all": 5672}'>
+           data-counts='{"AI": 311, "DEFENCE": 88, "FINANCIAL": 898, "NDX": 100, "PHARMA": 951, "R2K": 1867, "R3K": 2561, "SPX": 499, "TECH": 759, "all": 4981}'>
           <div class="screen-card-name">Worst 1Y Performers screener</div>
           <div class="screen-card-desc">Weakest 1-year price performance.</div>
-          <div class="screen-card-count">5672 stocks</div>
+          <div class="screen-card-count">4981 stocks</div>
         </a>
       
         <a class="screen-card screen-card-momentum-3m" href="screens/momentum-3m.html"
-           data-counts='{"AI": 307, "DEFENCE": 85, "FINANCIAL": 828, "NDX": 101, "PHARMA": 926, "R2K": 1859, "R3K": 2561, "SPX": 499, "TECH": 737, "all": 5536}'>
+           data-counts='{"AI": 308, "DEFENCE": 84, "FINANCIAL": 877, "NDX": 99, "PHARMA": 933, "R2K": 1848, "R3K": 2548, "SPX": 496, "TECH": 748, "all": 4868}'>
           <div class="screen-card-name">3-Month Momentum Leaders screener</div>
           <div class="screen-card-desc">Strongest 3-month price gainers.</div>
-          <div class="screen-card-count">5536 stocks</div>
+          <div class="screen-card-count">4868 stocks</div>
         </a>
       
         <a class="screen-card screen-card-high-momentum" href="screens/high-momentum.html"
-           data-counts='{"AI": 9, "DEFENCE": 0, "FINANCIAL": 5, "NDX": 2, "PHARMA": 22, "R2K": 20, "R3K": 24, "SPX": 5, "TECH": 13, "all": 68}'>
+           data-counts='{"AI": 2, "DEFENCE": 0, "FINANCIAL": 3, "NDX": 1, "PHARMA": 7, "R2K": 5, "R3K": 5, "SPX": 1, "TECH": 3, "all": 19}'>
           <div class="screen-card-name">High Momentum Stocks screener</div>
           <div class="screen-card-desc">Stocks that ran more than 3% on the latest session with above-average volume (≥ 1.5× 20-day avg) while in a confirmed uptrend (price &gt; 50- and 200-day SMAs). The Setup column flags any breakout, support bounce, or bullish candlestick pattern detected on the latest bar.</div>
-          <div class="screen-card-count">68 stocks</div>
+          <div class="screen-card-count">19 stocks</div>
         </a>
       
     </div>
@@ -372,27 +390,27 @@
   <h2>Browse sectors</h2>
   <div class="sector-tags">
     
-      <a class="sector-tag" href="sectors/unknown.html">Unknown <span class="muted">(1043)</span></a>
+      <a class="sector-tag" href="sectors/healthcare.html">Healthcare <span class="muted">(953)</span></a>
     
-      <a class="sector-tag" href="sectors/healthcare.html">Healthcare <span class="muted">(948)</span></a>
+      <a class="sector-tag" href="sectors/unknown.html">Unknown <span class="muted">(945)</span></a>
     
-      <a class="sector-tag" href="sectors/financial-services.html">Financial Services <span class="muted">(841)</span></a>
+      <a class="sector-tag" href="sectors/financial-services.html">Financial Services <span class="muted">(900)</span></a>
     
-      <a class="sector-tag" href="sectors/technology.html">Technology <span class="muted">(676)</span></a>
+      <a class="sector-tag" href="sectors/technology.html">Technology <span class="muted">(687)</span></a>
     
-      <a class="sector-tag" href="sectors/industrials.html">Industrials <span class="muted">(604)</span></a>
+      <a class="sector-tag" href="sectors/industrials.html">Industrials <span class="muted">(607)</span></a>
     
-      <a class="sector-tag" href="sectors/consumer-cyclical.html">Consumer Cyclical <span class="muted">(455)</span></a>
+      <a class="sector-tag" href="sectors/consumer-cyclical.html">Consumer Cyclical <span class="muted">(452)</span></a>
     
-      <a class="sector-tag" href="sectors/basic-materials.html">Basic Materials <span class="muted">(244)</span></a>
+      <a class="sector-tag" href="sectors/basic-materials.html">Basic Materials <span class="muted">(247)</span></a>
     
-      <a class="sector-tag" href="sectors/real-estate.html">Real Estate <span class="muted">(244)</span></a>
+      <a class="sector-tag" href="sectors/real-estate.html">Real Estate <span class="muted">(241)</span></a>
     
-      <a class="sector-tag" href="sectors/communication-services.html">Communication Services <span class="muted">(210)</span></a>
+      <a class="sector-tag" href="sectors/communication-services.html">Communication Services <span class="muted">(213)</span></a>
     
-      <a class="sector-tag" href="sectors/energy.html">Energy <span class="muted">(202)</span></a>
+      <a class="sector-tag" href="sectors/energy.html">Energy <span class="muted">(204)</span></a>
     
-      <a class="sector-tag" href="sectors/consumer-defensive.html">Consumer Defensive <span class="muted">(195)</span></a>
+      <a class="sector-tag" href="sectors/consumer-defensive.html">Consumer Defensive <span class="muted">(198)</span></a>
     
       <a class="sector-tag" href="sectors/utilities.html">Utilities <span class="muted">(95)</span></a>
     
@@ -451,7 +469,7 @@
       </div>
     </nav>
     <div class="footer-bottom">
-      <span>US-equity explorer · Generated 2026-09-08 16:28 PDT</span>
+      <span>US-equity explorer · Generated 2026-09-09 16:45 PDT</span>
       <span class="muted">© 2026 HeRAI Screener · For informational use only · Not investment advice · <a href="/">heraiscreener.com</a></span>
     </div>
     <div class="footer-disclaimer">

@@ -74,21 +74,6 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is the current share price of Del Monte Corporation (FDP)?",
-      "acceptedAnswer": { "@type": "Answer", "text": "As of 2026-09-08 16:28 PDT, Del Monte Corporation (FDP) trades at $29.33 on NYSE. Its 52-week range is $29.33 to $29.33." }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the market capitalisation of FDP?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Del Monte Corporation (FDP) has a market capitalisation of $1.40B on NYSE." }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the P/E ratio of FDP?",
-      "acceptedAnswer": { "@type": "Answer", "text": "FDP trades at a trailing price-to-earnings (P/E) ratio of 20.23. Its price-to-book (P/B) ratio is 0.69." }
-    },
-    {
-      "@type": "Question",
       "name": "What is the return on equity (ROE) of FDP?",
       "acceptedAnswer": { "@type": "Answer", "text": "FDP has a return on equity (ROE) of 3.57%. Its return on capital employed (ROCE) is 5.62%." }
     },
@@ -131,7 +116,6 @@
     <a class="region-switch" href="/india/IND_Stock_Screener.html" title="Switch to India" style="margin-left:12px;color:#7a8597;text-decoration:none;font-size:13px;">← Switch market</a>
     
     <span class="nav-spacer"></span>
-    <a href="../elite.html" class="nav-cta nav-cta-elite" title="Members discussion forum">★ Elite Club</a>
     <a href="../heraiai.html" class="nav-cta nav-cta-herai" title="HerAI">⚡ HerAI</a>
     <form class="search" onsubmit="return goSearch(event)" autocomplete="off">
       <input id="q" type="text" placeholder="Search company or ticker (e.g. AAPL or Apple)…" autocomplete="off"
@@ -145,6 +129,7 @@
       <div class="nav-dd">
         <a href="../screens-technical.html" class="nav-dd-trigger">Technical Screens <span class="dd-caret">&#9662;</span></a>
         <div class="nav-dd-menu">
+          <a href="../screens/smart-money.html"><strong>Smart Money</strong><span>Liquidity, structure, displacement and volume confluence</span></a>
           <a href="../screens-technical.html"><strong>Ready Screens</strong><span>EMA crossovers, price &amp; volume, performance</span></a>
           
           <a href="../swing.html"><strong>Swing Screener</strong><span>Daily-chart 2-20 day setups, R:R &ge; 3</span></a>
@@ -206,18 +191,13 @@
     </nav>
   </div>
   <div class="company-head-right">
-    <div class="price">$29.33</div>
+    <div class="price">$-</div>
     <div class="pos small">
       - 1Y
     </div>
     <div class="price-strip">
-      <div class="ps-tile"><span>Mkt Cap</span><strong>$1.40B</strong></div>
       
       
-      
-      
-      
-      <div class="ps-tile"><span>P/E</span><strong class="val-blue">20.23</strong></div>
       
       
       
@@ -230,12 +210,6 @@
       
       
       
-      
-      <div class="ps-tile"><span>52W High</span><strong class="val-blue">$29.33</strong></div>
-      
-      
-      
-      <div class="ps-tile"><span>52W Low</span><strong class="val-blue">$29.33</strong></div>
       
       <div class="ps-tile"><span>Book Value</span><strong>$42.35</strong></div>
       <div class="ps-tile"><span>EPS (TTM)</span><strong>$1.45</strong></div>
@@ -495,9 +469,9 @@
 <section class="ratio-tile">
   <h3 class="ratio-tile-title">Valuation</h3>
   <div class="ratio-row">
-    <div><div class="ratio-label">Stock P/E</div><div class="ratio-val">20.23</div></div>
+    <div><div class="ratio-label">Stock P/E</div><div class="ratio-val">-</div></div>
     <div><div class="ratio-label">Industry PE</div><div class="ratio-val">-</div></div>
-    <div><div class="ratio-label">Forward P/E</div><div class="ratio-val">8.70</div></div>
+    <div><div class="ratio-label">Forward P/E</div><div class="ratio-val">-</div></div>
     <div><div class="ratio-label">PEG Ratio</div><div class="ratio-val">-</div></div>
     <div><div class="ratio-label">Book Value</div><div class="ratio-val">$42.35</div></div>
     <div><div class="ratio-label">Price to Book</div><div class="ratio-val">0.69</div></div>
@@ -548,9 +522,9 @@
 <section class="ratio-tile">
   <h3 class="ratio-tile-title">Ownership</h3>
   <div class="ratio-row">
-    <div><div class="ratio-label">Promoter Holding</div><div class="ratio-val">18.20%</div></div>
+    <div><div class="ratio-label">Promoter Holding</div><div class="ratio-val">-</div></div>
     <div><div class="ratio-label">Chg in Prom Hold</div><div class="ratio-val">-</div></div>
-    <div><div class="ratio-label">FII / Inst Holding</div><div class="ratio-val">73.11%</div></div>
+    <div><div class="ratio-label">FII / Inst Holding</div><div class="ratio-val">-</div></div>
     <div><div class="ratio-label">Chg in FII Hold</div><div class="ratio-val">-</div></div>
   </div>
 </section>
@@ -916,16 +890,6 @@
 
 
 
-<section class="card section">
-  <h2 id="investors">Shareholding Pattern</h2>
-  <div class="kpi-grid">
-    <div class="kpi"><div class="kpi-label">Insiders</div><div class="kpi-val">18.20%</div></div>
-    <div class="kpi"><div class="kpi-label">Institutions</div><div class="kpi-val">73.11%</div></div>
-    <div class="kpi"><div class="kpi-label">Public Float</div><div class="kpi-val">-</div></div>
-  </div>
-  
-</section>
-
 
 
 <section class="card section" id="analyst-section">
@@ -961,9 +925,18 @@
       <div class="news-item">
         <div class="news-meta">
           <span class="news-source">Google News</span>
+          <span class="news-date"> hu, 13 Aug 2026</span>
+        </div>
+        <h3 class="news-title"><a href="https://news.google.com/rss/articles/CBMi1wFBVV95cUxPeDNBM2RlZlF3bFh4V2xGX3JXVnBFYTJTUkVuUWlFRFQ1cGluR0ZUVWJmbkZtOFdkVWYtbDI2T1p4M1N3bnZQckFReTFldXJNM01fT0pmZVg2SmVBZHRXb3pROE5CM3FoaFNZbUJwLWlzR2ZoSzR0UnQzRlpYb2tZcVRuejB3NHMwSWVES0IzdWkycHpscXNKcXNIV3hNcGh4TWs5TzNMTDFDbkw0UjdBUFNRRHpJMUpoNXhxME5mS2lmc05kT2N3YmNQX1BjNTAxNWJYbGp2Zw?oc=5" target="_blank" rel="noopener">Wasatch Advisors LP Decreases Stock Holdings in Fresh Del Monte Produce, Inc. $FDP - MarketBeat</a></h3>
+        <p class="news-desc">&lt;a href=&#34;https://news.google.com/rss/articles/CBMi1wFBVV95cUxPeDNBM2RlZlF3bFh4V2xGX3JXVnBFYTJTUkVuUWlFRFQ1cGluR0ZUVWJmbkZtOFdkVWYtbDI2T1p4M1N3bnZQckFReTFldXJNM01fT0pmZVg2SmVBZHRXb3pROE5CM3FoaFNZbUJwLWlzR2ZoSzR0UnQzRlpYb2tZcVRuejB3NHMwSWVES0&hellip;</p>
+      </div>
+    
+      <div class="news-item">
+        <div class="news-meta">
+          <span class="news-source">Google News</span>
           <span class="news-date">Mon, 13 Apr 2026</span>
         </div>
-        <h3 class="news-title"><a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxOZTlLU1lJdldBeDR0T2h5RGhjZzNiUG96UHYwSHd6UDBkOWphdk5mTWlnakNHY3JkODk3Z1kxSndhRXZFdkwxU094M0hfcEtKVE41dWp3d3hycC1HcFIwRnozTEM1RWZRZ1hybFR2MW9hVUQ0MU5uZnIxNTdIMFVTeGtTMHpLaTFkbmFpeU53?oc=5" target="_blank" rel="noopener">3 Reasons to Sell FDP and 1 Stock to Buy Instead - finance.yahoo.com</a></h3>
+        <h3 class="news-title"><a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxOZTlLU1lJdldBeDR0T2h5RGhjZzNiUG96UHYwSHd6UDBkOWphdk5mTWlnakNHY3JkODk3Z1kxSndhRXZFdkwxU094M0hfcEtKVE41dWp3d3hycC1HcFIwRnozTEM1RWZRZ1hybFR2MW9hVUQ0MU5uZnIxNTdIMFVTeGtTMHpLaTFkbmFpeU53?oc=5" target="_blank" rel="noopener">3 Reasons to Sell FDP and 1 Stock to Buy Instead - Yahoo Finance</a></h3>
         <p class="news-desc">&lt;a href=&#34;https://news.google.com/rss/articles/CBMijgFBVV95cUxOZTlLU1lJdldBeDR0T2h5RGhjZzNiUG96UHYwSHd6UDBkOWphdk5mTWlnakNHY3JkODk3Z1kxSndhRXZFdkwxU094M0hfcEtKVE41dWp3d3hycC1HcFIwRnozTEM1RWZRZ1hybFR2MW9hVUQ0MU5uZnIxNTdIMFVTeGtTMHpLaTFkbmFpeU&hellip;</p>
       </div>
     
@@ -974,15 +947,6 @@
         </div>
         <h3 class="news-title"><a href="https://news.google.com/rss/articles/CBMiogFBVV95cUxOSG5TNE5hcVBfYkVZUmszOXF4X043TkJ6Yi03cmdudDhuTWVTMVNEQS1mQVdGNFRId2ZKVXFRcG1uaVVKY3QtSUl0eXdXYjQ0VWlFRmtHRFNmQktPd0FUV3NqUFBBQXdhdDVoWUUyNjFTX0Y0Mm5PVnFITDRDTjJjZFF6eXRUeDhFSUdLREhlSUl0aFJ0UDBldXNaalJSeVY5RFE?oc=5" target="_blank" rel="noopener">Poll: Clear majority rejects the FDP’s stock-based pension plan. - IG Metall</a></h3>
         <p class="news-desc">&lt;a href=&#34;https://news.google.com/rss/articles/CBMiogFBVV95cUxOSG5TNE5hcVBfYkVZUmszOXF4X043TkJ6Yi03cmdudDhuTWVTMVNEQS1mQVdGNFRId2ZKVXFRcG1uaVVKY3QtSUl0eXdXYjQ0VWlFRmtHRFNmQktPd0FUV3NqUFBBQXdhdDVoWUUyNjFTX0Y0Mm5PVnFITDRDTjJjZFF6eXRUeDhFSUdLRE&hellip;</p>
-      </div>
-    
-      <div class="news-item">
-        <div class="news-meta">
-          <span class="news-source">Google News</span>
-          <span class="news-date"> hu, 13 Aug 2026</span>
-        </div>
-        <h3 class="news-title"><a href="https://news.google.com/rss/articles/CBMi1wFBVV95cUxPeDNBM2RlZlF3bFh4V2xGX3JXVnBFYTJTUkVuUWlFRFQ1cGluR0ZUVWJmbkZtOFdkVWYtbDI2T1p4M1N3bnZQckFReTFldXJNM01fT0pmZVg2SmVBZHRXb3pROE5CM3FoaFNZbUJwLWlzR2ZoSzR0UnQzRlpYb2tZcVRuejB3NHMwSWVES0IzdWkycHpscXNKcXNIV3hNcGh4TWs5TzNMTDFDbkw0UjdBUFNRRHpJMUpoNXhxME5mS2lmc05kT2N3YmNQX1BjNTAxNWJYbGp2Zw?oc=5" target="_blank" rel="noopener">Wasatch Advisors LP Decreases Stock Holdings in Fresh Del Monte Produce, Inc. $FDP - marketbeat.com</a></h3>
-        <p class="news-desc">&lt;a href=&#34;https://news.google.com/rss/articles/CBMi1wFBVV95cUxPeDNBM2RlZlF3bFh4V2xGX3JXVnBFYTJTUkVuUWlFRFQ1cGluR0ZUVWJmbkZtOFdkVWYtbDI2T1p4M1N3bnZQckFReTFldXJNM01fT0pmZVg2SmVBZHRXb3pROE5CM3FoaFNZbUJwLWlzR2ZoSzR0UnQzRlpYb2tZcVRuejB3NHMwSWVES0&hellip;</p>
       </div>
     
       <div class="news-item">
@@ -1016,21 +980,6 @@
 
 <section class="card section faq-section">
   <h2 id="faq">FDP — Frequently Asked Questions</h2>
-  
-  <div class="faq-item">
-    <h3 class="faq-q">What is the current share price of Del Monte Corporation (FDP)?</h3>
-    <p class="faq-a">As of 2026-09-08 16:28 PDT, Del Monte Corporation (FDP) trades at $29.33 on NYSE. Its 52-week range is $29.33 to $29.33.</p>
-  </div>
-  
-  <div class="faq-item">
-    <h3 class="faq-q">What is the market capitalisation of FDP?</h3>
-    <p class="faq-a">Del Monte Corporation (FDP) has a market capitalisation of $1.40B on NYSE.</p>
-  </div>
-  
-  <div class="faq-item">
-    <h3 class="faq-q">What is the P/E ratio of FDP?</h3>
-    <p class="faq-a">FDP trades at a trailing price-to-earnings (P/E) ratio of 20.23. Its price-to-book (P/B) ratio is 0.69.</p>
-  </div>
   
   <div class="faq-item">
     <h3 class="faq-q">What is the return on equity (ROE) of FDP?</h3>
@@ -1112,7 +1061,7 @@
       </div>
     </nav>
     <div class="footer-bottom">
-      <span>US-equity explorer · Generated 2026-09-08 16:28 PDT</span>
+      <span>US-equity explorer · Generated 2026-09-09 16:45 PDT</span>
       <span class="muted">© 2026 HeRAI Screener · For informational use only · Not investment advice · <a href="/">heraiscreener.com</a></span>
     </div>
     <div class="footer-disclaimer">
@@ -1497,7 +1446,7 @@ window.addEventListener('resize', initStickyScrollbars);
 <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.3.1/dist/chartjs-adapter-luxon.umd.min.js"></script>
 <script>
-const HIST = [{"d": "2026-07-17", "o": 29.64, "h": 30.165, "l": 28.88, "c": 29.33, "v": 291695}];
+const HIST = [];
 const HOURLY = [];
 
 // ---- EMA helper ----
@@ -1915,7 +1864,7 @@ initFund();
 (function loadAnalyst() {
   const ticker = "FDP";
   const region = "usa";
-  const currentPrice = 29.33;
+  const currentPrice = 0;
   const currencySym  = "$";
   const section = document.getElementById('analyst-section');
   const status  = document.getElementById('analyst-status');

@@ -56,7 +56,7 @@
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the Mega Cap stock screener?","acceptedAnswer":{"@type":"Answer","text":"Largest companies by market capitalization. It scans USA stocks and currently lists 21 matching companies, refreshed every trading day."}},{"@type":"Question","name":"How often is the Mega Cap screen updated?","acceptedAnswer":{"@type":"Answer","text":"The screen is recalculated every trading day after market close using the latest price, volume and fundamental data."}},{"@type":"Question","name":"How many USA stocks match the Mega Cap screen today?","acceptedAnswer":{"@type":"Answer","text":"21 USA stocks currently match the Mega Cap screen."}},{"@type":"Question","name":"Is the USA Mega Cap screener free to use?","acceptedAnswer":{"@type":"Answer","text":"Yes. HeRAI is a completely free AI stock screener \u2014 no signup, login or payment required."}}]}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ItemList","name":"Mega Cap screener \u2014 USA","numberOfItems":21,"itemListElement":[{"@type":"ListItem","position":1,"url":"https://heraiscreener.com/usa/stocks/NVDA.html","name":"NVDA \u2014 NVIDIA Corporation"},{"@type":"ListItem","position":2,"url":"https://heraiscreener.com/usa/stocks/AAPL.html","name":"AAPL \u2014 Apple Inc."},{"@type":"ListItem","position":3,"url":"https://heraiscreener.com/usa/stocks/MSFT.html","name":"MSFT \u2014 Microsoft Corporation"},{"@type":"ListItem","position":4,"url":"https://heraiscreener.com/usa/stocks/AMZN.html","name":"AMZN \u2014 Amazon.com, Inc."},{"@type":"ListItem","position":5,"url":"https://heraiscreener.com/usa/stocks/TSM.html","name":"TSM \u2014 Taiwan Semiconductor Manufacturing Company Limited"},{"@type":"ListItem","position":6,"url":"https://heraiscreener.com/usa/stocks/GOOGL.html","name":"GOOGL \u2014 Alphabet Inc."},{"@type":"ListItem","position":7,"url":"https://heraiscreener.com/usa/stocks/AVGO.html","name":"AVGO \u2014 Broadcom Inc."},{"@type":"ListItem","position":8,"url":"https://heraiscreener.com/usa/stocks/TSLA.html","name":"TSLA \u2014 Tesla, Inc."},{"@type":"ListItem","position":9,"url":"https://heraiscreener.com/usa/stocks/META.html","name":"META \u2014 Meta Platforms, Inc."},{"@type":"ListItem","position":10,"url":"https://heraiscreener.com/usa/stocks/SPCX.html","name":"SPCX \u2014 Space Exploration Technologies Corp."}]}
+{"@context":"https://schema.org","@type":"ItemList","name":"Mega Cap screener \u2014 USA","numberOfItems":21,"itemListElement":[{"@type":"ListItem","position":1,"url":"https://heraiscreener.com/usa/stocks/NVDA.html","name":"NVDA \u2014 NVIDIA Corporation"},{"@type":"ListItem","position":2,"url":"https://heraiscreener.com/usa/stocks/AAPL.html","name":"AAPL \u2014 Apple Inc."},{"@type":"ListItem","position":3,"url":"https://heraiscreener.com/usa/stocks/MSFT.html","name":"MSFT \u2014 Microsoft Corporation"},{"@type":"ListItem","position":4,"url":"https://heraiscreener.com/usa/stocks/AMZN.html","name":"AMZN \u2014 Amazon.com, Inc."},{"@type":"ListItem","position":5,"url":"https://heraiscreener.com/usa/stocks/TSM.html","name":"TSM \u2014 Taiwan Semiconductor Manufacturing Company Limited"},{"@type":"ListItem","position":6,"url":"https://heraiscreener.com/usa/stocks/GOOGL.html","name":"GOOGL \u2014 Alphabet Inc."},{"@type":"ListItem","position":7,"url":"https://heraiscreener.com/usa/stocks/AVGO.html","name":"AVGO \u2014 Broadcom Inc."},{"@type":"ListItem","position":8,"url":"https://heraiscreener.com/usa/stocks/TSLA.html","name":"TSLA \u2014 Tesla, Inc."},{"@type":"ListItem","position":9,"url":"https://heraiscreener.com/usa/stocks/META.html","name":"META \u2014 Meta Platforms, Inc."},{"@type":"ListItem","position":10,"url":"https://heraiscreener.com/usa/stocks/MU.html","name":"MU \u2014 Micron Technology, Inc."}]}
 </script>
 
 
@@ -71,7 +71,6 @@
     <a class="region-switch" href="/india/IND_Stock_Screener.html" title="Switch to India" style="margin-left:12px;color:#7a8597;text-decoration:none;font-size:13px;">← Switch market</a>
     
     <span class="nav-spacer"></span>
-    <a href="../elite.html" class="nav-cta nav-cta-elite" title="Members discussion forum">★ Elite Club</a>
     <a href="../heraiai.html" class="nav-cta nav-cta-herai" title="HerAI">⚡ HerAI</a>
     <form class="search" onsubmit="return goSearch(event)" autocomplete="off">
       <input id="q" type="text" placeholder="Search company or ticker (e.g. AAPL or Apple)…" autocomplete="off"
@@ -85,6 +84,7 @@
       <div class="nav-dd">
         <a href="../screens-technical.html" class="nav-dd-trigger">Technical Screens <span class="dd-caret">&#9662;</span></a>
         <div class="nav-dd-menu">
+          <a href="../screens/smart-money.html"><strong>Smart Money</strong><span>Liquidity, structure, displacement and volume confluence</span></a>
           <a href="../screens-technical.html"><strong>Ready Screens</strong><span>EMA crossovers, price &amp; volume, performance</span></a>
           
           <a href="../swing.html"><strong>Swing Screener</strong><span>Daily-chart 2-20 day setups, R:R &ge; 3</span></a>
@@ -133,16 +133,19 @@
 
 
 
+
   
 
 
 <div class="table-wrap">
+  
   <table class="data-table sortable">
     <thead><tr>
       <th>#</th><th>Ticker</th><th>Name</th>
       <th>Charts</th>
       <th class="num">Mkt Cap</th>
       <th class="num">Price</th>
+      
       
       
       <th class="num">P/E</th>
@@ -176,22 +179,23 @@
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
           </a>
         </td>
-        <td class="num">$5.47T</td>
-        <td class="num">225.73</td>
-        
-        
-        <td class="num">34.57</td>
-        <td class="num">17.51</td>
+        <td class="num">$5.42T</td>
+        <td class="num">223.83</td>
         
         
         
-        <td class="num" style="font-weight:700; color: #16a34a;">Δ 17.06</td>
+        <td class="num">34.28</td>
+        <td class="num">17.36</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 16.92</td>
         <td class="num">74.66%</td>
         <td class="num">52.73%</td>
         <td class="num pos">24.64%</td>
         <td class="num pos">32.12%</td>
         <td class="num">0.46%</td>
-        <td class="num pos">+24.47%</td>
+        <td class="num pos">+31.25%</td>
         <td>Technology</td>
       </tr>
     
@@ -214,21 +218,22 @@
           </a>
         </td>
         <td class="num">$4.61T</td>
-        <td class="num">316.22</td>
-        
-        
-        <td class="num">36.26</td>
-        <td class="num">33.24</td>
+        <td class="num">315.77</td>
         
         
         
-        <td class="num" style="font-weight:700; color: #16a34a;">Δ 3.02</td>
+        <td class="num">36.17</td>
+        <td class="num">32.97</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 3.20</td>
         <td class="num">68.72%</td>
         <td class="num">27.08%</td>
         <td class="num pos">1.81%</td>
         <td class="num pos">3.92%</td>
-        <td class="num">0.35%</td>
-        <td class="num pos">+36.03%</td>
+        <td class="num">0.34%</td>
+        <td class="num pos">+35.24%</td>
         <td>Technology</td>
       </tr>
     
@@ -250,22 +255,23 @@
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
           </a>
         </td>
-        <td class="num">$3.67T</td>
-        <td class="num">493.95</td>
-        
-        
-        <td class="num">27.53</td>
-        <td class="num">21.04</td>
+        <td class="num">$3.65T</td>
+        <td class="num">492.00</td>
         
         
         
-        <td class="num" style="font-weight:700; color: #16a34a;">Δ 6.49</td>
+        <td class="num">27.42</td>
+        <td class="num">20.96</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 6.46</td>
         <td class="num">26.33%</td>
         <td class="num">14.09%</td>
         <td class="num pos">9.93%</td>
         <td class="num pos">11.90%</td>
         <td class="num">0.73%</td>
-        <td class="num neg">-4.36%</td>
+        <td class="num neg">-0.47%</td>
         <td>Technology</td>
       </tr>
     
@@ -287,22 +293,23 @@
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
           </a>
         </td>
-        <td class="num">$2.77T</td>
-        <td class="num">256.97</td>
-        
-        
-        <td class="num">20.66</td>
-        <td class="num">24.87</td>
+        <td class="num">$2.72T</td>
+        <td class="num">252.56</td>
         
         
         
-        <td class="num" style="font-weight:700; color: #dc2626;">Δ -4.21</td>
+        <td class="num">20.30</td>
+        <td class="num">24.28</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #dc2626;">Δ -3.98</td>
         <td class="num">13.33%</td>
         <td class="num">6.59%</td>
         <td class="num pos">24.04%</td>
         <td class="num pos">32.72%</td>
         <td class="num">0.00%</td>
-        <td class="num pos">+14.43%</td>
+        <td class="num pos">+6.01%</td>
         <td>Consumer Cyclical</td>
       </tr>
     
@@ -324,22 +331,23 @@
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
           </a>
         </td>
-        <td class="num">$2.28T</td>
-        <td class="num">439.00</td>
-        
-        
-        <td class="num">38.58</td>
-        <td class="num">20.32</td>
+        <td class="num">$2.25T</td>
+        <td class="num">433.42</td>
         
         
         
-        <td class="num" style="font-weight:700; color: #16a34a;">Δ 18.26</td>
+        <td class="num">38.09</td>
+        <td class="num">20.06</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 18.03</td>
         <td class="num">30.20%</td>
         <td class="num">19.01%</td>
         <td class="num pos">18.94%</td>
         <td class="num pos">19.57%</td>
         <td class="num">0.91%</td>
-        <td class="num pos">+83.84%</td>
+        <td class="num pos">+74.64%</td>
         <td>Technology</td>
       </tr>
     
@@ -361,22 +369,23 @@
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
           </a>
         </td>
-        <td class="num">$1.99T</td>
-        <td class="num">338.36</td>
-        
-        
-        <td class="num">16.98</td>
-        <td class="num">22.96</td>
+        <td class="num">$1.94T</td>
+        <td class="num">330.31</td>
         
         
         
-        <td class="num" style="font-weight:700; color: #dc2626;">Δ -5.98</td>
+        <td class="num">16.57</td>
+        <td class="num">22.42</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #dc2626;">Δ -5.85</td>
         <td class="num">26.20%</td>
         <td class="num">12.96%</td>
         <td class="num pos">17.96%</td>
         <td class="num pos">21.53%</td>
         <td class="num">0.25%</td>
-        <td class="num pos">+68.02%</td>
+        <td class="num pos">+38.20%</td>
         <td>Communication Services</td>
       </tr>
     
@@ -398,22 +407,23 @@
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
           </a>
         </td>
-        <td class="num">$1.75T</td>
-        <td class="num">368.56</td>
-        
-        
-        <td class="num">61.32</td>
-        <td class="num">18.91</td>
+        <td class="num">$1.73T</td>
+        <td class="num">363.92</td>
         
         
         
-        <td class="num" style="font-weight:700; color: #16a34a;">Δ 42.41</td>
+        <td class="num">46.36</td>
+        <td class="num">18.77</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 27.59</td>
         <td class="num">16.70%</td>
-        <td class="num">12.12%</td>
+        <td class="num">15.30%</td>
         <td class="num pos">17.04%</td>
         <td class="num pos">54.08%</td>
-        <td class="num">0.62%</td>
-        <td class="num pos">+20.11%</td>
+        <td class="num">0.71%</td>
+        <td class="num pos">+8.89%</td>
         <td>Technology</td>
       </tr>
     
@@ -436,21 +446,22 @@
           </a>
         </td>
         <td class="num">$1.45T</td>
-        <td class="num">368.16</td>
+        <td class="num">368.18</td>
         
         
-        <td class="num">337.76</td>
+        
+        <td class="num">337.78</td>
         <td class="num">165.90</td>
         
         
         
-        <td class="num" style="font-weight:700; color: #16a34a;">Δ 171.86</td>
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 171.88</td>
         <td class="num">4.10%</td>
         <td class="num">1.93%</td>
         <td class="num pos">52.40%</td>
         <td class="num pos">39.39%</td>
         <td class="num">0.00%</td>
-        <td class="num pos">+8.48%</td>
+        <td class="num pos">+6.11%</td>
         <td>Consumer Cyclical</td>
       </tr>
     
@@ -472,64 +483,28 @@
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
           </a>
         </td>
-        <td class="num">$1.35T</td>
-        <td class="num">613.48</td>
-        
-        
-        <td class="num">23.11</td>
-        <td class="num">17.46</td>
+        <td class="num">$1.44T</td>
+        <td class="num">653.07</td>
         
         
         
-        <td class="num" style="font-weight:700; color: #16a34a;">Δ 5.65</td>
+        <td class="num">24.60</td>
+        <td class="num">18.59</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 6.01</td>
         <td class="num">25.69%</td>
         <td class="num">14.59%</td>
         <td class="num pos">19.89%</td>
         <td class="num pos">37.61%</td>
         <td class="num">0.36%</td>
-        <td class="num neg">-16.27%</td>
+        <td class="num neg">-14.43%</td>
         <td>Communication Services</td>
       </tr>
     
-      <tr data-idx="R3K,AI,DEFENCE">
-        <td>10</td>
-        <td>
-          <a href="../stocks/SPCX.html"><strong>SPCX</strong></a>
-          <span class="idx-badge idx-AI">AI</span>
-        </td>
-        <td><a href="../stocks/SPCX.html">Space Exploration Technologies Corp.</a></td>
-        <td class="chart-links-cell">
-          
-          
-          <a class="chart-icon chart-icon-rh" href="https://www.robinhood.com/stocks/SPCX" target="_blank" rel="noopener" title="Robinhood Quote">
-            <span class="chart-icon-letter">R</span>
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
-          </a>
-          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NASDAQ:SPCX&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
-          </a>
-        </td>
-        <td class="num">$1.16T</td>
-        <td class="num">153.47</td>
-        
-        
-        <td class="num">-139.52</td>
-        <td class="num">82.83</td>
-        
-        
-        
-        <td class="num" style="font-weight:700; color: #dc2626;">Δ -222.35</td>
-        <td class="num">-3.22%</td>
-        <td class="num">-5.36%</td>
-        <td class="num pos">34.08%</td>
-        <td class="num neg">-3.34%</td>
-        <td class="num">0.00%</td>
-        <td class="num neg">-4.65%</td>
-        <td>Industrials</td>
-      </tr>
-    
       <tr data-idx="NDX,SPX,R3K,AI,TECH">
-        <td>11</td>
+        <td>10</td>
         <td>
           <a href="../stocks/MU.html"><strong>MU</strong></a>
           <span class="idx-badge idx-AI">AI</span>
@@ -546,23 +521,62 @@
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
           </a>
         </td>
-        <td class="num">$1.13T</td>
-        <td class="num">1,000.26</td>
-        
-        
-        <td class="num">22.60</td>
-        <td class="num">6.45</td>
+        <td class="num">$1.16T</td>
+        <td class="num">1,026.15</td>
         
         
         
-        <td class="num" style="font-weight:700; color: #16a34a;">Δ 16.15</td>
+        <td class="num">23.19</td>
+        <td class="num">6.62</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 16.57</td>
         <td class="num">13.69%</td>
         <td class="num">34.87%</td>
         <td class="num pos">13.68%</td>
         <td class="num pos">26.02%</td>
         <td class="num">0.06%</td>
-        <td class="num pos">+706.20%</td>
+        <td class="num pos">+659.98%</td>
         <td>Technology</td>
+      </tr>
+    
+      <tr data-idx="R3K,AI,DEFENCE">
+        <td>11</td>
+        <td>
+          <a href="../stocks/SPCX.html"><strong>SPCX</strong></a>
+          <span class="idx-badge idx-AI">AI</span>
+        </td>
+        <td><a href="../stocks/SPCX.html">Space Exploration Technologies Corp.</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.robinhood.com/stocks/SPCX" target="_blank" rel="noopener" title="Robinhood Quote">
+            <span class="chart-icon-letter">R</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NASDAQ:SPCX&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
+        <td class="num">$1.13T</td>
+        <td class="num">148.60</td>
+        
+        
+        
+        <td class="num">-135.09</td>
+        <td class="num">80.20</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #dc2626;">Δ -215.29</td>
+        <td class="num">-3.22%</td>
+        <td class="num">-5.36%</td>
+        <td class="num pos">34.08%</td>
+        <td class="num neg">-3.34%</td>
+        <td class="num">0.00%</td>
+        <td class="num neg">-7.67%</td>
+        <td>Industrials</td>
       </tr>
     
       <tr data-idx="SPX,R3K,PHARMA">
@@ -583,22 +597,23 @@
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
           </a>
         </td>
-        <td class="num">$1.00T</td>
-        <td class="num">1,123.91</td>
-        
-        
-        <td class="num">37.72</td>
-        <td class="num">24.28</td>
+        <td class="num">$999.38B</td>
+        <td class="num">1,121.19</td>
         
         
         
-        <td class="num" style="font-weight:700; color: #16a34a;">Δ 13.44</td>
+        <td class="num">37.62</td>
+        <td class="num">24.23</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 13.39</td>
         <td class="num">-</td>
         <td class="num">20.36%</td>
         <td class="num pos">7.20%</td>
         <td class="num pos">11.41%</td>
         <td class="num">0.58%</td>
-        <td class="num pos">+71.37%</td>
+        <td class="num pos">+50.31%</td>
         <td>Healthcare</td>
       </tr>
     
@@ -620,64 +635,28 @@
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
           </a>
         </td>
-        <td class="num">$939.70B</td>
-        <td class="num">353.51</td>
-        
-        
-        <td class="num">15.15</td>
-        <td class="num">14.14</td>
+        <td class="num">$946.00B</td>
+        <td class="num">355.88</td>
         
         
         
-        <td class="num" style="font-weight:700; color: #16a34a;">Δ 1.01</td>
+        <td class="num">15.25</td>
+        <td class="num">14.23</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 1.02</td>
         <td class="num">-</td>
         <td class="num">1.36%</td>
         <td class="num pos">12.50%</td>
         <td class="num pos">14.83%</td>
         <td class="num">1.68%</td>
-        <td class="num pos">+24.01%</td>
+        <td class="num pos">+21.77%</td>
         <td>Financial Services</td>
       </tr>
     
-      <tr data-idx="SPX,R3K">
-        <td>14</td>
-        <td>
-          <a href="../stocks/WMT.html"><strong>WMT</strong></a>
-          
-        </td>
-        <td><a href="../stocks/WMT.html">Walmart Inc.</a></td>
-        <td class="chart-links-cell">
-          
-          
-          <a class="chart-icon chart-icon-rh" href="https://www.robinhood.com/stocks/WMT" target="_blank" rel="noopener" title="Robinhood Quote">
-            <span class="chart-icon-letter">R</span>
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
-          </a>
-          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NASDAQ:WMT&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
-          </a>
-        </td>
-        <td class="num">$852.63B</td>
-        <td class="num">107.14</td>
-        
-        
-        <td class="num">37.73</td>
-        <td class="num">32.66</td>
-        
-        
-        
-        <td class="num" style="font-weight:700; color: #16a34a;">Δ 5.07</td>
-        <td class="num">16.83%</td>
-        <td class="num">6.83%</td>
-        <td class="num pos">3.82%</td>
-        <td class="num pos">3.24%</td>
-        <td class="num">0.88%</td>
-        <td class="num pos">+6.98%</td>
-        <td>Consumer Defensive</td>
-      </tr>
-    
       <tr data-idx="NDX,SPX,R3K,AI,TECH">
-        <td>15</td>
+        <td>14</td>
         <td>
           <a href="../stocks/AMD.html"><strong>AMD</strong></a>
           <span class="idx-badge idx-AI">AI</span>
@@ -694,23 +673,62 @@
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
           </a>
         </td>
-        <td class="num">$825.61B</td>
-        <td class="num">505.74</td>
-        
-        
-        <td class="num">129.35</td>
-        <td class="num">32.71</td>
+        <td class="num">$852.58B</td>
+        <td class="num">522.26</td>
         
         
         
-        <td class="num" style="font-weight:700; color: #16a34a;">Δ 96.64</td>
+        <td class="num">132.55</td>
+        <td class="num">33.45</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 99.10</td>
         <td class="num">5.47%</td>
         <td class="num">5.13%</td>
         <td class="num pos">11.81%</td>
         <td class="num pos">66.28%</td>
         <td class="num">0.00%</td>
-        <td class="num pos">+174.23%</td>
+        <td class="num pos">+235.17%</td>
         <td>Technology</td>
+      </tr>
+    
+      <tr data-idx="SPX,R3K">
+        <td>15</td>
+        <td>
+          <a href="../stocks/WMT.html"><strong>WMT</strong></a>
+          
+        </td>
+        <td><a href="../stocks/WMT.html">Walmart Inc.</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.robinhood.com/stocks/WMT" target="_blank" rel="noopener" title="Robinhood Quote">
+            <span class="chart-icon-letter">R</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NASDAQ:WMT&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
+        <td class="num">$842.68B</td>
+        <td class="num">105.89</td>
+        
+        
+        
+        <td class="num">37.29</td>
+        <td class="num">32.28</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 5.01</td>
+        <td class="num">16.83%</td>
+        <td class="num">6.83%</td>
+        <td class="num pos">3.82%</td>
+        <td class="num pos">3.24%</td>
+        <td class="num">0.88%</td>
+        <td class="num pos">+4.39%</td>
+        <td>Consumer Defensive</td>
       </tr>
     
       <tr data-idx="SPX,FINANCIAL">
@@ -731,64 +749,28 @@
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
           </a>
         </td>
-        <td class="num">$707.31B</td>
-        <td class="num">505.83</td>
-        
-        
-        <td class="num">15.06</td>
-        <td class="num">23.45</td>
+        <td class="num">$714.24B</td>
+        <td class="num">507.26</td>
         
         
         
-        <td class="num" style="font-weight:700; color: #dc2626;">Δ -8.39</td>
+        <td class="num">12.76</td>
+        <td class="num">22.86</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #dc2626;">Δ -10.10</td>
         <td class="num">-</td>
-        <td class="num">5.39%</td>
+        <td class="num">6.01%</td>
         <td class="num pos">4.18%</td>
         <td class="num pos">9.44%</td>
         <td class="num">0.00%</td>
-        <td class="num pos">+5.98%</td>
+        <td class="num pos">+2.95%</td>
         <td>Financial Services</td>
       </tr>
     
-      <tr data-idx="NDX,AI,TECH">
-        <td>17</td>
-        <td>
-          <a href="../stocks/ASML.html"><strong>ASML</strong></a>
-          <span class="idx-badge idx-AI">AI</span>
-        </td>
-        <td><a href="../stocks/ASML.html">ASML Holding N.V.</a></td>
-        <td class="chart-links-cell">
-          
-          
-          <a class="chart-icon chart-icon-rh" href="https://www.robinhood.com/stocks/ASML" target="_blank" rel="noopener" title="Robinhood Quote">
-            <span class="chart-icon-letter">R</span>
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
-          </a>
-          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NASDAQ:ASML&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
-          </a>
-        </td>
-        <td class="num">$677.88B</td>
-        <td class="num">1,764.85</td>
-        
-        
-        <td class="num">60.19</td>
-        <td class="num">29.78</td>
-        
-        
-        
-        <td class="num" style="font-weight:700; color: #16a34a;">Δ 30.41</td>
-        <td class="num">42.97%</td>
-        <td class="num">16.45%</td>
-        <td class="num pos">15.55%</td>
-        <td class="num pos">19.55%</td>
-        <td class="num">0.53%</td>
-        <td class="num pos">+135.12%</td>
-        <td>Technology</td>
-      </tr>
-    
       <tr data-idx="SPX,R3K">
-        <td>18</td>
+        <td>17</td>
         <td>
           <a href="../stocks/XOM.html"><strong>XOM</strong></a>
           
@@ -805,23 +787,62 @@
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
           </a>
         </td>
-        <td class="num">$665.93B</td>
-        <td class="num">160.66</td>
-        
-        
-        <td class="num">27.00</td>
-        <td class="num">15.18</td>
+        <td class="num">$682.34B</td>
+        <td class="num">164.62</td>
         
         
         
-        <td class="num" style="font-weight:700; color: #16a34a;">Δ 11.82</td>
+        <td class="num">27.67</td>
+        <td class="num">15.56</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 12.11</td>
         <td class="num">9.01%</td>
         <td class="num">5.52%</td>
         <td class="num pos">0.48%</td>
         <td class="num neg">-1.99%</td>
         <td class="num">2.66%</td>
-        <td class="num pos">+54.07%</td>
+        <td class="num pos">+53.09%</td>
         <td>Energy</td>
+      </tr>
+    
+      <tr data-idx="NDX,AI,TECH">
+        <td>18</td>
+        <td>
+          <a href="../stocks/ASML.html"><strong>ASML</strong></a>
+          <span class="idx-badge idx-AI">AI</span>
+        </td>
+        <td><a href="../stocks/ASML.html">ASML Holding N.V.</a></td>
+        <td class="chart-links-cell">
+          
+          
+          <a class="chart-icon chart-icon-rh" href="https://www.robinhood.com/stocks/ASML" target="_blank" rel="noopener" title="Robinhood Quote">
+            <span class="chart-icon-letter">R</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-9"/><path d="M14 7h7v7"/></svg>
+          </a>
+          <a class="chart-icon chart-icon-tv" href="https://www.tradingview.com/chart/?symbol=NASDAQ:ASML&interval=D" target="_blank" rel="noopener" title="TradingView (1D)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </a>
+        </td>
+        <td class="num">$664.51B</td>
+        <td class="num">1,730.05</td>
+        
+        
+        
+        <td class="num">58.71</td>
+        <td class="num">28.77</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 29.94</td>
+        <td class="num">42.97%</td>
+        <td class="num">16.45%</td>
+        <td class="num pos">15.55%</td>
+        <td class="num pos">19.55%</td>
+        <td class="num">0.51%</td>
+        <td class="num pos">+116.29%</td>
+        <td>Technology</td>
       </tr>
     
       <tr data-idx="SPX,R3K,PHARMA">
@@ -842,22 +863,23 @@
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
           </a>
         </td>
-        <td class="num">$648.55B</td>
-        <td class="num">269.12</td>
-        
-        
-        <td class="num">31.26</td>
-        <td class="num">21.87</td>
+        <td class="num">$646.36B</td>
+        <td class="num">268.21</td>
         
         
         
-        <td class="num" style="font-weight:700; color: #16a34a;">Δ 9.39</td>
+        <td class="num">31.15</td>
+        <td class="num">21.79</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 9.36</td>
         <td class="num">14.88%</td>
         <td class="num">8.60%</td>
         <td class="num pos">2.43%</td>
         <td class="num pos">4.76%</td>
         <td class="num">2.09%</td>
-        <td class="num pos">+58.15%</td>
+        <td class="num pos">+54.98%</td>
         <td>Healthcare</td>
       </tr>
     
@@ -879,22 +901,23 @@
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
           </a>
         </td>
-        <td class="num">$628.20B</td>
-        <td class="num">368.64</td>
-        
-        
-        <td class="num">31.40</td>
-        <td class="num">24.61</td>
+        <td class="num">$626.07B</td>
+        <td class="num">367.39</td>
         
         
         
-        <td class="num" style="font-weight:700; color: #16a34a;">Δ 6.79</td>
+        <td class="num">31.29</td>
+        <td class="num">24.53</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #16a34a;">Δ 6.76</td>
         <td class="num">37.15%</td>
         <td class="num">19.11%</td>
         <td class="num pos">14.33%</td>
         <td class="num pos">13.04%</td>
         <td class="num">0.72%</td>
-        <td class="num pos">+8.48%</td>
+        <td class="num pos">+7.66%</td>
         <td>Financial Services</td>
       </tr>
     
@@ -916,28 +939,31 @@
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
           </a>
         </td>
-        <td class="num">$526.95B</td>
-        <td class="num">104.47</td>
-        
-        
-        <td class="num">-49.99</td>
-        <td class="num">50.72</td>
+        <td class="num">$533.40B</td>
+        <td class="num">105.75</td>
         
         
         
-        <td class="num" style="font-weight:700; color: #dc2626;">Δ -100.71</td>
+        <td class="num">-50.60</td>
+        <td class="num">51.34</td>
+        
+        
+        
+        <td class="num" style="font-weight:700; color: #dc2626;">Δ -101.94</td>
         <td class="num">-0.01%</td>
         <td class="num">1.41%</td>
         <td class="num pos">1.80%</td>
         <td class="num pos">-</td>
         <td class="num">0.00%</td>
-        <td class="num pos">+370.16%</td>
+        <td class="num pos">+332.69%</td>
         <td>Technology</td>
       </tr>
     
     </tbody>
   </table>
 </div>
+
+
 
 
 
@@ -1040,7 +1066,7 @@
       </div>
     </nav>
     <div class="footer-bottom">
-      <span>US-equity explorer · Generated 2026-09-08 16:28 PDT</span>
+      <span>US-equity explorer · Generated 2026-09-09 16:45 PDT</span>
       <span class="muted">© 2026 HeRAI Screener · For informational use only · Not investment advice · <a href="/">heraiscreener.com</a></span>
     </div>
     <div class="footer-disclaimer">
@@ -1420,6 +1446,8 @@ window.addEventListener('resize', initStickyScrollbars);
       .catch(e => {}); // Silent failure
   }, 2000); // Delay by 2s to not block initial page render
 })();</script>
+
+
 
 <script src="../assets/sort.js" defer></script>
 <script src="../assets/filter.js" defer></script>

@@ -150,6 +150,7 @@ main.wrap.content > * { min-width: 0; max-width: 100%; }
   text-decoration: none;
 }
 .topnav a.nav-cta-elite {
+  display: none;
   background: linear-gradient(135deg, #f59e0b 0%, #d97706 60%, #b45309 100%);
 }
 .topnav a.nav-cta-herai {

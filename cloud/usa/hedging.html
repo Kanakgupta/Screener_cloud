@@ -64,7 +64,6 @@
     <a class="region-switch" href="/india/IND_Stock_Screener.html" title="Switch to India" style="margin-left:12px;color:#7a8597;text-decoration:none;font-size:13px;">← Switch market</a>
     
     <span class="nav-spacer"></span>
-    <a href="elite.html" class="nav-cta nav-cta-elite" title="Members discussion forum">★ Elite Club</a>
     <a href="heraiai.html" class="nav-cta nav-cta-herai" title="HerAI">⚡ HerAI</a>
     <form class="search" onsubmit="return goSearch(event)" autocomplete="off">
       <input id="q" type="text" placeholder="Search company or ticker (e.g. AAPL or Apple)…" autocomplete="off"
@@ -78,6 +77,7 @@
       <div class="nav-dd">
         <a href="screens-technical.html" class="nav-dd-trigger">Technical Screens <span class="dd-caret">&#9662;</span></a>
         <div class="nav-dd-menu">
+          <a href="screens/smart-money.html"><strong>Smart Money</strong><span>Liquidity, structure, displacement and volume confluence</span></a>
           <a href="screens-technical.html"><strong>Ready Screens</strong><span>EMA crossovers, price &amp; volume, performance</span></a>
           
           <a href="swing.html"><strong>Swing Screener</strong><span>Daily-chart 2-20 day setups, R:R &ge; 3</span></a>
@@ -121,9 +121,9 @@
   <p class="muted">Inverse (reverse), short-volatility hedges and safe-haven ETFs used to hedge long equity exposure during corrections, bear markets, or risk-off regimes. Inverse ETFs rise when the underlying index falls. Leveraged (-2x / -3x) products reset daily and decay over time — use only for short-duration tactical hedges, not buy-and-hold.</p>
   <div class="meta-pills">
     <span class="pill">14 ETFs</span>
+    <span class="pill">+ 6 index futures</span>
     
-    
-    <span class="pill">Updated 2026-09-08</span>
+    <span class="pill">Updated 2026-09-09</span>
   </div>
 </section>
 
@@ -156,9 +156,9 @@
             <td>Inverse S&amp;P 500 (-1x)</td>
             <td><span class="pill" style="font-size:0.72em;">Equity Inverse</span></td>
             <td>Days–Weeks</td>
-            <td class="num">—</td>
-            <td class="num">—</td>
-            <td class="num ">—</td>
+            <td class="num">32.68</td>
+            <td class="num">0.89</td>
+            <td class="num neg">-8.7%</td>
             <td class="small">Broad-market hedge when VIX &lt; 25 and you expect a 5–10% pullback. No daily compounding decay vs -3x cousins, so tolerable to hold up to ~1 month.</td>
           </tr>
         
@@ -168,9 +168,9 @@
             <td>Inverse Nasdaq-100 (-1x)</td>
             <td><span class="pill" style="font-size:0.72em;">Equity Inverse</span></td>
             <td>Days–Weeks</td>
-            <td class="num">—</td>
-            <td class="num">—</td>
-            <td class="num ">—</td>
+            <td class="num">25.87</td>
+            <td class="num">0.95</td>
+            <td class="num neg">-13.4%</td>
             <td class="small">Use when megacap-tech leadership cracks (semis rolling over, MSFT/NVDA below 50DMA). Pair with long defensives (XLP/XLU).</td>
           </tr>
         
@@ -180,9 +180,9 @@
             <td>Inverse Dow 30 (-1x)</td>
             <td><span class="pill" style="font-size:0.72em;">Equity Inverse</span></td>
             <td>Days–Weeks</td>
-            <td class="num">—</td>
-            <td class="num">—</td>
-            <td class="num ">—</td>
+            <td class="num">21.75</td>
+            <td class="num">0.95</td>
+            <td class="num neg">-7.7%</td>
             <td class="small">Hedge concentrated industrial/financial exposure when DJIA breaks below the 100DMA. Lower beta than SH; complements value portfolios.</td>
           </tr>
         
@@ -192,9 +192,9 @@
             <td>Inverse Russell 2000 (-1x)</td>
             <td><span class="pill" style="font-size:0.72em;">Equity Inverse</span></td>
             <td>Days–Weeks</td>
-            <td class="num">—</td>
-            <td class="num">—</td>
-            <td class="num ">—</td>
+            <td class="num">13.85</td>
+            <td class="num">0.95</td>
+            <td class="num neg">-15.2%</td>
             <td class="small">Best during credit-spread widening or rate-shock episodes — small caps lead drawdowns. Buy when IWM loses 200DMA on rising HY OAS.</td>
           </tr>
         
@@ -204,9 +204,9 @@
             <td>Inverse S&amp;P 500 (-2x)</td>
             <td><span class="pill" style="font-size:0.72em;">Equity Inverse</span></td>
             <td>Days only</td>
-            <td class="num">—</td>
-            <td class="num">—</td>
-            <td class="num ">—</td>
+            <td class="num">55.25</td>
+            <td class="num">0.91</td>
+            <td class="num neg">-19.1%</td>
             <td class="small">Tactical hedge into a known catalyst (FOMC, CPI, earnings week). Decay is real beyond 5 days — set a hard exit.</td>
           </tr>
         
@@ -216,9 +216,9 @@
             <td>Inverse Nasdaq-100 (-2x)</td>
             <td><span class="pill" style="font-size:0.72em;">Equity Inverse</span></td>
             <td>Days only</td>
-            <td class="num">—</td>
-            <td class="num">—</td>
-            <td class="num ">—</td>
+            <td class="num">14.26</td>
+            <td class="num">0.95</td>
+            <td class="num neg">-28.4%</td>
             <td class="small">Short-burst hedge for tech-heavy books around earnings or after a parabolic QQQ extension &gt; 2 ATR above 20DMA.</td>
           </tr>
         
@@ -228,9 +228,9 @@
             <td>Inverse S&amp;P 500 (-3x)</td>
             <td><span class="pill" style="font-size:0.72em;">Equity Inverse</span></td>
             <td>Intraday–2 days</td>
-            <td class="num">—</td>
-            <td class="num">—</td>
-            <td class="num ">—</td>
+            <td class="num">35.32</td>
+            <td class="num">0.90</td>
+            <td class="num neg">-29.1%</td>
             <td class="small">Only for confirmed breakdown days (SPY &lt; 20DMA on heavy volume + VIX &gt; 22). Cut losses fast; compounding burns ~3–5% per choppy week.</td>
           </tr>
         
@@ -240,9 +240,9 @@
             <td>Inverse Nasdaq-100 (-3x)</td>
             <td><span class="pill" style="font-size:0.72em;">Equity Inverse</span></td>
             <td>Intraday–2 days</td>
-            <td class="num">—</td>
-            <td class="num">—</td>
-            <td class="num ">—</td>
+            <td class="num">38.64</td>
+            <td class="num">0.95</td>
+            <td class="num neg">-42.5%</td>
             <td class="small">Day-trade vehicle for confirmed tech selloffs. NEVER swing-hold — has lost &gt; 99% since inception due to compounding.</td>
           </tr>
         
@@ -252,9 +252,9 @@
             <td>Inverse Russell 2000 (-3x)</td>
             <td><span class="pill" style="font-size:0.72em;">Equity Inverse</span></td>
             <td>Intraday–2 days</td>
-            <td class="num">—</td>
-            <td class="num">—</td>
-            <td class="num ">—</td>
+            <td class="num">42.09</td>
+            <td class="num">0.99</td>
+            <td class="num neg">-44.8%</td>
             <td class="small">Highest-beta hedge; reserve for credit-event days (HY spreads +50bps, regional bank stress). Position size ≤ 2% of book.</td>
           </tr>
         
@@ -264,9 +264,9 @@
             <td>Inverse Semis (-3x)</td>
             <td><span class="pill" style="font-size:0.72em;">Equity Inverse</span></td>
             <td>Intraday–2 days</td>
-            <td class="num">—</td>
-            <td class="num">—</td>
-            <td class="num ">—</td>
+            <td class="num">43.24</td>
+            <td class="num">1.00</td>
+            <td class="num neg">-92.1%</td>
             <td class="small">Tactical only when SOXX/SMH breaks 50DMA with NVDA/AVGO confirming. AI-cycle reversals can squeeze hard — strict stops.</td>
           </tr>
         
@@ -276,9 +276,9 @@
             <td>Long VIX Short-Term Futures</td>
             <td><span class="pill" style="font-size:0.72em;">Volatility</span></td>
             <td>Days</td>
-            <td class="num">—</td>
-            <td class="num">—</td>
-            <td class="num ">—</td>
+            <td class="num">17.56</td>
+            <td class="num">0.96</td>
+            <td class="num neg">-32.8%</td>
             <td class="small">Buy when VIX &lt; 14 and term structure is in steep contango (cheap insurance). Roll cost ~5–10%/month — exit on first spike.</td>
           </tr>
         
@@ -288,9 +288,9 @@
             <td>Long VIX (1.5x)</td>
             <td><span class="pill" style="font-size:0.72em;">Volatility</span></td>
             <td>Days</td>
-            <td class="num">—</td>
-            <td class="num">—</td>
-            <td class="num ">—</td>
+            <td class="num">18.38</td>
+            <td class="num">1.23</td>
+            <td class="num neg">-49.9%</td>
             <td class="small">Bigger payoff than VIXY in a vol shock but bigger contango bleed. Use only when VIX9D &lt; VIX &lt; VIX3M (term-structure tailwind).</td>
           </tr>
         
@@ -300,9 +300,9 @@
             <td>20+ Year Treasuries</td>
             <td><span class="pill" style="font-size:0.72em;">Long-Duration Bonds</span></td>
             <td>Weeks–Months</td>
-            <td class="num">—</td>
-            <td class="num">—</td>
-            <td class="num ">—</td>
+            <td class="num">81.73</td>
+            <td class="num">0.15</td>
+            <td class="num neg">-2.9%</td>
             <td class="small">Classic risk-off hedge when Fed pivot is in play (10Y yield rolling over from &gt; 4.5%). Loses if inflation surprises higher; check CPI prints.</td>
           </tr>
         
@@ -312,9 +312,9 @@
             <td>Physical Gold</td>
             <td><span class="pill" style="font-size:0.72em;">Precious Metals</span></td>
             <td>Months</td>
-            <td class="num">—</td>
-            <td class="num">—</td>
-            <td class="num ">—</td>
+            <td class="num">403.35</td>
+            <td class="num">0.40</td>
+            <td class="num pos">+5.6%</td>
             <td class="small">Structural hedge for real-rate down moves, USD weakness, geopolitical stress. Allocate 5–10% strategically; add on dips to 50DMA.</td>
           </tr>
         
@@ -331,13 +331,15 @@
   <div class="screen-grid">
     
       <a class="screen-card" href="funds/SH.html">
-        <div class="screen-card-name">ProShares Short S&amp;P 500</div>
+        <div class="screen-card-name">ProShares Short S&amp;P500</div>
         <div class="screen-card-desc">
           <span class="ticker-badge">SH</span>
            &middot; Inverse S&amp;P 500 (-1x)
         </div>
         <div class="screen-card-count">
+          ER 0.89%
           
+            &middot; <span class="neg">YTD -8.7%</span>
           
         </div>
       </a>
@@ -349,7 +351,9 @@
            &middot; Inverse Nasdaq-100 (-1x)
         </div>
         <div class="screen-card-count">
+          ER 0.95%
           
+            &middot; <span class="neg">YTD -13.4%</span>
           
         </div>
       </a>
@@ -361,31 +365,37 @@
            &middot; Inverse Dow Jones (-1x)
         </div>
         <div class="screen-card-count">
+          ER 0.95%
           
+            &middot; <span class="neg">YTD -7.7%</span>
           
         </div>
       </a>
     
       <a class="screen-card" href="funds/RWM.html">
-        <div class="screen-card-name">ProShares Short Russell 2000</div>
+        <div class="screen-card-name">ProShares Short Russell2000</div>
         <div class="screen-card-desc">
           <span class="ticker-badge">RWM</span>
            &middot; Inverse Russell 2000 (-1x)
         </div>
         <div class="screen-card-count">
+          ER 0.95%
           
+            &middot; <span class="neg">YTD -15.2%</span>
           
         </div>
       </a>
     
       <a class="screen-card" href="funds/SDS.html">
-        <div class="screen-card-name">ProShares UltraShort S&amp;P 500</div>
+        <div class="screen-card-name">ProShares UltraShort S&amp;P500</div>
         <div class="screen-card-desc">
           <span class="ticker-badge">SDS</span>
            &middot; Inverse S&amp;P 500 (-2x)
         </div>
         <div class="screen-card-count">
+          ER 0.91%
           
+            &middot; <span class="neg">YTD -19.1%</span>
           
         </div>
       </a>
@@ -397,19 +407,23 @@
            &middot; Inverse Nasdaq-100 (-2x)
         </div>
         <div class="screen-card-count">
+          ER 0.95%
           
+            &middot; <span class="neg">YTD -28.4%</span>
           
         </div>
       </a>
     
       <a class="screen-card" href="funds/SPXU.html">
-        <div class="screen-card-name">ProShares UltraPro Short S&amp;P 500</div>
+        <div class="screen-card-name">ProShares UltraPro Short S&amp;P500</div>
         <div class="screen-card-desc">
           <span class="ticker-badge">SPXU</span>
            &middot; Inverse S&amp;P 500 (-3x)
         </div>
         <div class="screen-card-count">
+          ER 0.90%
           
+            &middot; <span class="neg">YTD -29.1%</span>
           
         </div>
       </a>
@@ -421,7 +435,9 @@
            &middot; Inverse Nasdaq-100 (-3x)
         </div>
         <div class="screen-card-count">
+          ER 0.95%
           
+            &middot; <span class="neg">YTD -42.5%</span>
           
         </div>
       </a>
@@ -433,7 +449,9 @@
            &middot; Inverse Russell 2000 (-3x)
         </div>
         <div class="screen-card-count">
+          ER 0.99%
           
+            &middot; <span class="neg">YTD -44.8%</span>
           
         </div>
       </a>
@@ -445,7 +463,9 @@
            &middot; Inverse Semis (-3x)
         </div>
         <div class="screen-card-count">
+          ER 1.00%
           
+            &middot; <span class="neg">YTD -92.1%</span>
           
         </div>
       </a>
@@ -457,7 +477,9 @@
            &middot; Long Volatility (VIX)
         </div>
         <div class="screen-card-count">
+          ER 0.96%
           
+            &middot; <span class="neg">YTD -32.8%</span>
           
         </div>
       </a>
@@ -469,7 +491,9 @@
            &middot; Long Volatility (1.5x VIX)
         </div>
         <div class="screen-card-count">
+          ER 1.23%
           
+            &middot; <span class="neg">YTD -49.9%</span>
           
         </div>
       </a>
@@ -481,7 +505,9 @@
            &middot; Long Duration Treasuries
         </div>
         <div class="screen-card-count">
+          ER 0.15%
           
+            &middot; <span class="neg">YTD -2.9%</span>
           
         </div>
       </a>
@@ -493,7 +519,9 @@
            &middot; Gold (safe-haven)
         </div>
         <div class="screen-card-count">
+          ER 0.40%
           
+            &middot; <span class="pos">YTD +5.6%</span>
           
         </div>
       </a>
@@ -516,6 +544,469 @@
 
 
 
+
+<section class="card section" style="border-left:4px solid #2563eb; background:#eff6ff;">
+  <h2 style="margin:0 0 6px;">📊 Index Futures — The Institutional Hedge</h2>
+  <p style="margin:0 0 10px; color:#1e3a8a;">
+    
+      For portfolios above ~$25k, <strong>short index futures</strong> are usually the cleanest hedge available — better than inverse ETFs (no decay, perfect tracking) <em>and</em> often better than puts (no theta, no IV, infinite duration with quarterly rolls). They use <strong>~5–10% margin</strong> instead of tying up 100% of capital, and US Section 1256 contracts get a major <strong>60/40 tax</strong> advantage.
+    
+  </p>
+  <p class="small" style="margin:0; color:#1e40af;"><strong>Key trade-off:</strong> futures have <strong>unlimited upside loss</strong>. If the market rips, your short futures lose money in lockstep — the hedge worked (your stocks rose) but you must post variation margin in cash <em>immediately</em>. Use only as part of a <em>hedged</em> book, never as a naked directional bet.</p>
+</section>
+
+<section class="ratio-tile">
+  <h3 class="ratio-tile-title">Available Contracts &mdash; Live Spot &amp; Notional</h3>
+  <p class="muted small" style="margin:6px 0 12px;">Notional per contract = spot × multiplier. Approximate overnight initial margin (broker-dependent — verify with your broker).</p>
+  <table class="data-table" style="width:100%;">
+    <thead>
+      <tr>
+        <th>Contract</th>
+        <th>Underlying</th>
+        <th class="num">Spot</th>
+        <th class="num">Mult ($/pt)</th>
+        <th class="num">Notional / Lot</th>
+        <th class="num">~Margin</th>
+        <th class="num">Tick value</th>
+        <th>Best for</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><strong>MES</strong><div class="small muted">Micro E-mini S&amp;P 500</div></td>
+        <td>S&amp;P 500</td>
+        <td class="num">7,636.36</td>
+        <td class="num">$5</td>
+        <td class="num"><strong>$38,182</strong></td>
+        <td class="num">$1,400</td>
+        <td class="num">$1.25</td>
+        <td class="small muted">$25k–$100k accounts; granular hedging in 1/10th the size of ES.</td>
+      </tr>
+      
+      <tr>
+        <td><strong>ES</strong><div class="small muted">E-mini S&amp;P 500</div></td>
+        <td>S&amp;P 500</td>
+        <td class="num">7,636.36</td>
+        <td class="num">$50</td>
+        <td class="num"><strong>$381,818</strong></td>
+        <td class="num">$14,000</td>
+        <td class="num">$12.50</td>
+        <td class="small muted">$250k+ books; deepest liquidity in the world.</td>
+      </tr>
+      
+      <tr>
+        <td><strong>MNQ</strong><div class="small muted">Micro E-mini Nasdaq-100</div></td>
+        <td>Nasdaq-100</td>
+        <td class="num">26,253.34</td>
+        <td class="num">$2</td>
+        <td class="num"><strong>$52,507</strong></td>
+        <td class="num">$2,200</td>
+        <td class="num">$0.50</td>
+        <td class="small muted">$25k+ tech-heavy books; cleanest QQQ hedge.</td>
+      </tr>
+      
+      <tr>
+        <td><strong>NQ</strong><div class="small muted">E-mini Nasdaq-100</div></td>
+        <td>Nasdaq-100</td>
+        <td class="num">26,253.34</td>
+        <td class="num">$20</td>
+        <td class="num"><strong>$525,067</strong></td>
+        <td class="num">$22,000</td>
+        <td class="num">$5.00</td>
+        <td class="small muted">$200k+ tech-heavy portfolios.</td>
+      </tr>
+      
+      <tr>
+        <td><strong>M2K</strong><div class="small muted">Micro E-mini Russell 2000</div></td>
+        <td>Russell 2000</td>
+        <td class="num">2,921.23</td>
+        <td class="num">$5</td>
+        <td class="num"><strong>$14,606</strong></td>
+        <td class="num">$700</td>
+        <td class="num">$0.50</td>
+        <td class="small muted">$15k+ small-cap exposure; very capital-efficient.</td>
+      </tr>
+      
+      <tr>
+        <td><strong>MYM</strong><div class="small muted">Micro E-mini Dow</div></td>
+        <td>Dow Jones</td>
+        <td class="num">52,380.66</td>
+        <td class="num">$0.5</td>
+        <td class="num"><strong>$26,190</strong></td>
+        <td class="num">$1,000</td>
+        <td class="num">$0.50</td>
+        <td class="small muted">Dow-weighted (blue-chip) books.</td>
+      </tr>
+      
+    </tbody>
+  </table>
+</section>
+
+
+
+<section class="ratio-tile">
+  <h3 class="ratio-tile-title">MES sizing &mdash; how many contracts to short?</h3>
+  <p class="muted small" style="margin:6px 0 12px;">For a portfolio with beta ≈ 1.0 vs. S&amp;P 500. <strong>Full hedge</strong> = neutralizes 100% of delta (rarely used in practice). <strong>Half hedge</strong> = neutralizes 50% (typical retail hedge — softens drawdowns while keeping upside).</p>
+  <table class="data-table" style="max-width:720px;">
+    <thead>
+      <tr>
+        <th>Portfolio size</th>
+        <th class="num">Full hedge (contracts)</th>
+        <th class="num">Half hedge (contracts)</th>
+        <th class="num">Margin for half hedge</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><strong>$50,000</strong></td>
+        <td class="num">1.31</td>
+        <td class="num"><strong>0.65</strong></td>
+        <td class="num">~$910</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$100,000</strong></td>
+        <td class="num">2.62</td>
+        <td class="num"><strong>1.31</strong></td>
+        <td class="num">~$1,834</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$250,000</strong></td>
+        <td class="num">6.55</td>
+        <td class="num"><strong>3.27</strong></td>
+        <td class="num">~$4,578</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$500,000</strong></td>
+        <td class="num">13.1</td>
+        <td class="num"><strong>6.55</strong></td>
+        <td class="num">~$9,170</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$1,000,000</strong></td>
+        <td class="num">26.19</td>
+        <td class="num"><strong>13.1</strong></td>
+        <td class="num">~$18,340</td>
+      </tr>
+      
+    </tbody>
+  </table>
+</section>
+
+<section class="ratio-tile">
+  <h3 class="ratio-tile-title">ES sizing &mdash; how many contracts to short?</h3>
+  <p class="muted small" style="margin:6px 0 12px;">For a portfolio with beta ≈ 1.0 vs. S&amp;P 500. <strong>Full hedge</strong> = neutralizes 100% of delta (rarely used in practice). <strong>Half hedge</strong> = neutralizes 50% (typical retail hedge — softens drawdowns while keeping upside).</p>
+  <table class="data-table" style="max-width:720px;">
+    <thead>
+      <tr>
+        <th>Portfolio size</th>
+        <th class="num">Full hedge (contracts)</th>
+        <th class="num">Half hedge (contracts)</th>
+        <th class="num">Margin for half hedge</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><strong>$50,000</strong></td>
+        <td class="num">0.13</td>
+        <td class="num"><strong>0.07</strong></td>
+        <td class="num">~$980</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$100,000</strong></td>
+        <td class="num">0.26</td>
+        <td class="num"><strong>0.13</strong></td>
+        <td class="num">~$1,820</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$250,000</strong></td>
+        <td class="num">0.65</td>
+        <td class="num"><strong>0.33</strong></td>
+        <td class="num">~$4,620</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$500,000</strong></td>
+        <td class="num">1.31</td>
+        <td class="num"><strong>0.65</strong></td>
+        <td class="num">~$9,100</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$1,000,000</strong></td>
+        <td class="num">2.62</td>
+        <td class="num"><strong>1.31</strong></td>
+        <td class="num">~$18,340</td>
+      </tr>
+      
+    </tbody>
+  </table>
+</section>
+
+<section class="ratio-tile">
+  <h3 class="ratio-tile-title">MNQ sizing &mdash; how many contracts to short?</h3>
+  <p class="muted small" style="margin:6px 0 12px;">For a portfolio with beta ≈ 1.0 vs. Nasdaq-100. <strong>Full hedge</strong> = neutralizes 100% of delta (rarely used in practice). <strong>Half hedge</strong> = neutralizes 50% (typical retail hedge — softens drawdowns while keeping upside).</p>
+  <table class="data-table" style="max-width:720px;">
+    <thead>
+      <tr>
+        <th>Portfolio size</th>
+        <th class="num">Full hedge (contracts)</th>
+        <th class="num">Half hedge (contracts)</th>
+        <th class="num">Margin for half hedge</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><strong>$50,000</strong></td>
+        <td class="num">0.95</td>
+        <td class="num"><strong>0.48</strong></td>
+        <td class="num">~$1,056</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$100,000</strong></td>
+        <td class="num">1.9</td>
+        <td class="num"><strong>0.95</strong></td>
+        <td class="num">~$2,090</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$250,000</strong></td>
+        <td class="num">4.76</td>
+        <td class="num"><strong>2.38</strong></td>
+        <td class="num">~$5,236</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$500,000</strong></td>
+        <td class="num">9.52</td>
+        <td class="num"><strong>4.76</strong></td>
+        <td class="num">~$10,472</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$1,000,000</strong></td>
+        <td class="num">19.05</td>
+        <td class="num"><strong>9.52</strong></td>
+        <td class="num">~$20,944</td>
+      </tr>
+      
+    </tbody>
+  </table>
+</section>
+
+<section class="ratio-tile">
+  <h3 class="ratio-tile-title">NQ sizing &mdash; how many contracts to short?</h3>
+  <p class="muted small" style="margin:6px 0 12px;">For a portfolio with beta ≈ 1.0 vs. Nasdaq-100. <strong>Full hedge</strong> = neutralizes 100% of delta (rarely used in practice). <strong>Half hedge</strong> = neutralizes 50% (typical retail hedge — softens drawdowns while keeping upside).</p>
+  <table class="data-table" style="max-width:720px;">
+    <thead>
+      <tr>
+        <th>Portfolio size</th>
+        <th class="num">Full hedge (contracts)</th>
+        <th class="num">Half hedge (contracts)</th>
+        <th class="num">Margin for half hedge</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><strong>$50,000</strong></td>
+        <td class="num">0.1</td>
+        <td class="num"><strong>0.05</strong></td>
+        <td class="num">~$1,100</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$100,000</strong></td>
+        <td class="num">0.19</td>
+        <td class="num"><strong>0.1</strong></td>
+        <td class="num">~$2,200</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$250,000</strong></td>
+        <td class="num">0.48</td>
+        <td class="num"><strong>0.24</strong></td>
+        <td class="num">~$5,280</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$500,000</strong></td>
+        <td class="num">0.95</td>
+        <td class="num"><strong>0.48</strong></td>
+        <td class="num">~$10,560</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$1,000,000</strong></td>
+        <td class="num">1.9</td>
+        <td class="num"><strong>0.95</strong></td>
+        <td class="num">~$20,900</td>
+      </tr>
+      
+    </tbody>
+  </table>
+</section>
+
+<section class="ratio-tile">
+  <h3 class="ratio-tile-title">M2K sizing &mdash; how many contracts to short?</h3>
+  <p class="muted small" style="margin:6px 0 12px;">For a portfolio with beta ≈ 1.0 vs. Russell 2000. <strong>Full hedge</strong> = neutralizes 100% of delta (rarely used in practice). <strong>Half hedge</strong> = neutralizes 50% (typical retail hedge — softens drawdowns while keeping upside).</p>
+  <table class="data-table" style="max-width:720px;">
+    <thead>
+      <tr>
+        <th>Portfolio size</th>
+        <th class="num">Full hedge (contracts)</th>
+        <th class="num">Half hedge (contracts)</th>
+        <th class="num">Margin for half hedge</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><strong>$50,000</strong></td>
+        <td class="num">3.42</td>
+        <td class="num"><strong>1.71</strong></td>
+        <td class="num">~$1,197</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$100,000</strong></td>
+        <td class="num">6.85</td>
+        <td class="num"><strong>3.42</strong></td>
+        <td class="num">~$2,394</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$250,000</strong></td>
+        <td class="num">17.12</td>
+        <td class="num"><strong>8.56</strong></td>
+        <td class="num">~$5,992</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$500,000</strong></td>
+        <td class="num">34.23</td>
+        <td class="num"><strong>17.12</strong></td>
+        <td class="num">~$11,984</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$1,000,000</strong></td>
+        <td class="num">68.46</td>
+        <td class="num"><strong>34.23</strong></td>
+        <td class="num">~$23,961</td>
+      </tr>
+      
+    </tbody>
+  </table>
+</section>
+
+<section class="ratio-tile">
+  <h3 class="ratio-tile-title">MYM sizing &mdash; how many contracts to short?</h3>
+  <p class="muted small" style="margin:6px 0 12px;">For a portfolio with beta ≈ 1.0 vs. Dow Jones. <strong>Full hedge</strong> = neutralizes 100% of delta (rarely used in practice). <strong>Half hedge</strong> = neutralizes 50% (typical retail hedge — softens drawdowns while keeping upside).</p>
+  <table class="data-table" style="max-width:720px;">
+    <thead>
+      <tr>
+        <th>Portfolio size</th>
+        <th class="num">Full hedge (contracts)</th>
+        <th class="num">Half hedge (contracts)</th>
+        <th class="num">Margin for half hedge</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><strong>$50,000</strong></td>
+        <td class="num">1.91</td>
+        <td class="num"><strong>0.95</strong></td>
+        <td class="num">~$950</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$100,000</strong></td>
+        <td class="num">3.82</td>
+        <td class="num"><strong>1.91</strong></td>
+        <td class="num">~$1,910</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$250,000</strong></td>
+        <td class="num">9.55</td>
+        <td class="num"><strong>4.77</strong></td>
+        <td class="num">~$4,770</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$500,000</strong></td>
+        <td class="num">19.09</td>
+        <td class="num"><strong>9.55</strong></td>
+        <td class="num">~$9,550</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$1,000,000</strong></td>
+        <td class="num">38.18</td>
+        <td class="num"><strong>19.09</strong></td>
+        <td class="num">~$19,090</td>
+      </tr>
+      
+    </tbody>
+  </table>
+</section>
+
+
+<section class="card section">
+  <h3>Why futures beat inverse ETFs for hedging</h3>
+  <table class="data-table" style="width:100%;">
+    <thead>
+      <tr>
+        <th>&nbsp;</th>
+        <th>Inverse ETF (-1x)</th>
+        <th>Leveraged inverse (-3x)</th>
+        <th><strong>Short index futures</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Decay</strong></td><td>~1–3% / yr</td><td>10–40% / yr in chop</td><td class="pos"><strong>None</strong></td></tr>
+      <tr><td><strong>Tracking</strong></td><td>Daily-reset distortion</td><td>Severe in chop</td><td class="pos"><strong>1:1 with index</strong></td></tr>
+      <tr><td><strong>Capital efficiency</strong></td><td>100% cash tied up</td><td>100% cash tied up</td><td class="pos"><strong>~5–10% margin</strong></td></tr>
+      <tr><td><strong>Bid-ask</strong></td><td>1–5 cents</td><td>1–5 cents</td><td class="pos"><strong>Tightest possible</strong></td></tr>
+      <tr><td><strong>Tax</strong></td><td>Short-term gains</td><td>Short-term gains</td><td><strong class="pos">60/40 §1256</strong></td></tr>
+      <tr><td><strong>Liquidity (24×5)</strong></td><td>US hours only</td><td>US hours only</td><td class="pos"><strong>Globex 23h/day</strong></td></tr>
+    </tbody>
+  </table>
+  <p class="small muted" style="margin-top:10px;">US Section 1256 contracts get <strong>60% long-term / 40% short-term</strong> tax treatment regardless of holding period — a major edge vs. inverse ETFs (always short-term).</p>
+</section>
+
+<section class="card section">
+  <h3>Roll discipline &amp; practical rules</h3>
+  <ul class="muted" style="line-height:1.7;">
+    <li>US index futures roll quarterly (Mar / Jun / Sep / Dec). Close the front-month and open the back-month 5–10 days before expiry to avoid lower liquidity in the expiring contract.</li>
+    <li><strong>Stop levels:</strong> Place a buy-stop above a key technical level (recent swing high, 200-day MA). If the market trends hard against your hedge, close it — don't let it eat all the gains in your long book.</li>
+    <li><strong>Beta-adjust:</strong> If your portfolio has beta &gt; 1 (tech-heavy), scale up the contract count. If beta &lt; 1 (defensives, dividend stocks), scale down.</li>
+    <li><strong>IRA / retirement accounts:</strong> US futures are generally not allowed in retirement accounts. Use inverse ETFs or puts there instead.</li>
+    <li><strong>India F&amp;O margin:</strong> SEBI's peak-margin rules require span + exposure margin upfront. Don't take a futures hedge with less than 1.5× the stated margin available in cash, or you'll get margin-called on adverse moves.</li>
+  </ul>
+</section>
+
+<section class="card section" style="border-left:4px solid #dc2626; background:#fef2f2;">
+  <h3 style="margin:0 0 8px; color:#991b1b;">⚠️ Futures Risk Disclosure</h3>
+  <ul style="margin:0; color:#7f1d1d; line-height:1.7;">
+    <li><strong>Unlimited loss</strong> on a directional futures short if the market rallies. The hedge is supposed to lose when stocks gain — but you still need cash on hand for variation margin.</li>
+    <li><strong>Gap risk:</strong> overnight news (earnings, war, central bank shock) can move the index 3–5% before you can react. Futures move in lockstep — a 4% gap on ES = $2,000 loss per contract.</li>
+    <li>Margins listed are <strong>indicative overnight initial</strong> — day-trading margins are lower (~25–50% of overnight) but you must be flat by close. CME may raise margins suddenly during high-volatility regimes.</li>
+    <li>This page is informational. Trading futures requires broker approval, prior derivatives experience and substantial risk capital. Verify all specifications with your broker before placing trades.</li>
+  </ul>
+</section>
 
 
 
@@ -588,7 +1079,7 @@
       </div>
     </nav>
     <div class="footer-bottom">
-      <span>US-equity explorer · Generated 2026-09-08 16:28 PDT</span>
+      <span>US-equity explorer · Generated 2026-09-09 16:45 PDT</span>
       <span class="muted">© 2026 HeRAI Screener · For informational use only · Not investment advice · <a href="/">heraiscreener.com</a></span>
     </div>
     <div class="footer-disclaimer">
