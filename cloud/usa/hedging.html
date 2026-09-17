@@ -121,9 +121,9 @@
   <p class="muted">Inverse (reverse), short-volatility hedges and safe-haven ETFs used to hedge long equity exposure during corrections, bear markets, or risk-off regimes. Inverse ETFs rise when the underlying index falls. Leveraged (-2x / -3x) products reset daily and decay over time — use only for short-duration tactical hedges, not buy-and-hold.</p>
   <div class="meta-pills">
     <span class="pill">14 ETFs</span>
-    <span class="pill">+ 5 index futures</span>
+    <span class="pill">+ 6 index futures</span>
     
-    <span class="pill">Updated 2026-09-15</span>
+    <span class="pill">Updated 2026-09-17</span>
   </div>
 </section>
 
@@ -546,11 +546,22 @@
     <tbody>
       
       <tr>
+        <td><strong>MES</strong><div class="small muted">Micro E-mini S&amp;P 500</div></td>
+        <td>S&amp;P 500</td>
+        <td class="num">7,551.81</td>
+        <td class="num">$5</td>
+        <td class="num"><strong>$37,759</strong></td>
+        <td class="num">$1,400</td>
+        <td class="num">$1.25</td>
+        <td class="small muted">$25k–$100k accounts; granular hedging in 1/10th the size of ES.</td>
+      </tr>
+      
+      <tr>
         <td><strong>ES</strong><div class="small muted">E-mini S&amp;P 500</div></td>
         <td>S&amp;P 500</td>
-        <td class="num">7,619.98</td>
+        <td class="num">7,551.81</td>
         <td class="num">$50</td>
-        <td class="num"><strong>$380,999</strong></td>
+        <td class="num"><strong>$377,591</strong></td>
         <td class="num">$14,000</td>
         <td class="num">$12.50</td>
         <td class="small muted">$250k+ books; deepest liquidity in the world.</td>
@@ -559,9 +570,9 @@
       <tr>
         <td><strong>MNQ</strong><div class="small muted">Micro E-mini Nasdaq-100</div></td>
         <td>Nasdaq-100</td>
-        <td class="num">29,127.16</td>
+        <td class="num">25,978.42</td>
         <td class="num">$2</td>
-        <td class="num"><strong>$58,254</strong></td>
+        <td class="num"><strong>$51,957</strong></td>
         <td class="num">$2,200</td>
         <td class="num">$0.50</td>
         <td class="small muted">$25k+ tech-heavy books; cleanest QQQ hedge.</td>
@@ -570,9 +581,9 @@
       <tr>
         <td><strong>NQ</strong><div class="small muted">E-mini Nasdaq-100</div></td>
         <td>Nasdaq-100</td>
-        <td class="num">29,127.16</td>
+        <td class="num">25,978.42</td>
         <td class="num">$20</td>
-        <td class="num"><strong>$582,543</strong></td>
+        <td class="num"><strong>$519,568</strong></td>
         <td class="num">$22,000</td>
         <td class="num">$5.00</td>
         <td class="small muted">$200k+ tech-heavy portfolios.</td>
@@ -581,9 +592,9 @@
       <tr>
         <td><strong>M2K</strong><div class="small muted">Micro E-mini Russell 2000</div></td>
         <td>Russell 2000</td>
-        <td class="num">2,892.24</td>
+        <td class="num">2,858.81</td>
         <td class="num">$5</td>
-        <td class="num"><strong>$14,461</strong></td>
+        <td class="num"><strong>$14,294</strong></td>
         <td class="num">$700</td>
         <td class="num">$0.50</td>
         <td class="small muted">$15k+ small-cap exposure; very capital-efficient.</td>
@@ -592,9 +603,9 @@
       <tr>
         <td><strong>MYM</strong><div class="small muted">Micro E-mini Dow</div></td>
         <td>Dow Jones</td>
-        <td class="num">52,421.20</td>
+        <td class="num">51,461.90</td>
         <td class="num">$0.5</td>
-        <td class="num"><strong>$26,211</strong></td>
+        <td class="num"><strong>$25,731</strong></td>
         <td class="num">$1,000</td>
         <td class="num">$0.50</td>
         <td class="small muted">Dow-weighted (blue-chip) books.</td>
@@ -605,6 +616,59 @@
 </section>
 
 
+
+<section class="ratio-tile">
+  <h3 class="ratio-tile-title">MES sizing &mdash; how many contracts to short?</h3>
+  <p class="muted small" style="margin:6px 0 12px;">For a portfolio with beta ≈ 1.0 vs. S&amp;P 500. <strong>Full hedge</strong> = neutralizes 100% of delta (rarely used in practice). <strong>Half hedge</strong> = neutralizes 50% (typical retail hedge — softens drawdowns while keeping upside).</p>
+  <table class="data-table" style="max-width:720px;">
+    <thead>
+      <tr>
+        <th>Portfolio size</th>
+        <th class="num">Full hedge (contracts)</th>
+        <th class="num">Half hedge (contracts)</th>
+        <th class="num">Margin for half hedge</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><strong>$50,000</strong></td>
+        <td class="num">1.32</td>
+        <td class="num"><strong>0.66</strong></td>
+        <td class="num">~$924</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$100,000</strong></td>
+        <td class="num">2.65</td>
+        <td class="num"><strong>1.32</strong></td>
+        <td class="num">~$1,848</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$250,000</strong></td>
+        <td class="num">6.62</td>
+        <td class="num"><strong>3.31</strong></td>
+        <td class="num">~$4,634</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$500,000</strong></td>
+        <td class="num">13.24</td>
+        <td class="num"><strong>6.62</strong></td>
+        <td class="num">~$9,268</td>
+      </tr>
+      
+      <tr>
+        <td><strong>$1,000,000</strong></td>
+        <td class="num">26.48</td>
+        <td class="num"><strong>13.24</strong></td>
+        <td class="num">~$18,536</td>
+      </tr>
+      
+    </tbody>
+  </table>
+</section>
 
 <section class="ratio-tile">
   <h3 class="ratio-tile-title">ES sizing &mdash; how many contracts to short?</h3>
@@ -643,16 +707,16 @@
       
       <tr>
         <td><strong>$500,000</strong></td>
-        <td class="num">1.31</td>
+        <td class="num">1.32</td>
         <td class="num"><strong>0.66</strong></td>
         <td class="num">~$9,240</td>
       </tr>
       
       <tr>
         <td><strong>$1,000,000</strong></td>
-        <td class="num">2.62</td>
-        <td class="num"><strong>1.31</strong></td>
-        <td class="num">~$18,340</td>
+        <td class="num">2.65</td>
+        <td class="num"><strong>1.32</strong></td>
+        <td class="num">~$18,480</td>
       </tr>
       
     </tbody>
@@ -675,37 +739,37 @@
       
       <tr>
         <td><strong>$50,000</strong></td>
-        <td class="num">0.86</td>
-        <td class="num"><strong>0.43</strong></td>
-        <td class="num">~$946</td>
+        <td class="num">0.96</td>
+        <td class="num"><strong>0.48</strong></td>
+        <td class="num">~$1,056</td>
       </tr>
       
       <tr>
         <td><strong>$100,000</strong></td>
-        <td class="num">1.72</td>
-        <td class="num"><strong>0.86</strong></td>
-        <td class="num">~$1,892</td>
+        <td class="num">1.92</td>
+        <td class="num"><strong>0.96</strong></td>
+        <td class="num">~$2,112</td>
       </tr>
       
       <tr>
         <td><strong>$250,000</strong></td>
-        <td class="num">4.29</td>
-        <td class="num"><strong>2.15</strong></td>
-        <td class="num">~$4,730</td>
+        <td class="num">4.81</td>
+        <td class="num"><strong>2.41</strong></td>
+        <td class="num">~$5,302</td>
       </tr>
       
       <tr>
         <td><strong>$500,000</strong></td>
-        <td class="num">8.58</td>
-        <td class="num"><strong>4.29</strong></td>
-        <td class="num">~$9,438</td>
+        <td class="num">9.62</td>
+        <td class="num"><strong>4.81</strong></td>
+        <td class="num">~$10,582</td>
       </tr>
       
       <tr>
         <td><strong>$1,000,000</strong></td>
-        <td class="num">17.17</td>
-        <td class="num"><strong>8.58</strong></td>
-        <td class="num">~$18,876</td>
+        <td class="num">19.25</td>
+        <td class="num"><strong>9.62</strong></td>
+        <td class="num">~$21,164</td>
       </tr>
       
     </tbody>
@@ -728,37 +792,37 @@
       
       <tr>
         <td><strong>$50,000</strong></td>
-        <td class="num">0.09</td>
-        <td class="num"><strong>0.04</strong></td>
-        <td class="num">~$880</td>
+        <td class="num">0.1</td>
+        <td class="num"><strong>0.05</strong></td>
+        <td class="num">~$1,100</td>
       </tr>
       
       <tr>
         <td><strong>$100,000</strong></td>
-        <td class="num">0.17</td>
-        <td class="num"><strong>0.09</strong></td>
-        <td class="num">~$1,980</td>
+        <td class="num">0.19</td>
+        <td class="num"><strong>0.1</strong></td>
+        <td class="num">~$2,200</td>
       </tr>
       
       <tr>
         <td><strong>$250,000</strong></td>
-        <td class="num">0.43</td>
-        <td class="num"><strong>0.21</strong></td>
-        <td class="num">~$4,620</td>
+        <td class="num">0.48</td>
+        <td class="num"><strong>0.24</strong></td>
+        <td class="num">~$5,280</td>
       </tr>
       
       <tr>
         <td><strong>$500,000</strong></td>
-        <td class="num">0.86</td>
-        <td class="num"><strong>0.43</strong></td>
-        <td class="num">~$9,460</td>
+        <td class="num">0.96</td>
+        <td class="num"><strong>0.48</strong></td>
+        <td class="num">~$10,560</td>
       </tr>
       
       <tr>
         <td><strong>$1,000,000</strong></td>
-        <td class="num">1.72</td>
-        <td class="num"><strong>0.86</strong></td>
-        <td class="num">~$18,920</td>
+        <td class="num">1.92</td>
+        <td class="num"><strong>0.96</strong></td>
+        <td class="num">~$21,120</td>
       </tr>
       
     </tbody>
@@ -781,37 +845,37 @@
       
       <tr>
         <td><strong>$50,000</strong></td>
-        <td class="num">3.46</td>
-        <td class="num"><strong>1.73</strong></td>
-        <td class="num">~$1,211</td>
+        <td class="num">3.5</td>
+        <td class="num"><strong>1.75</strong></td>
+        <td class="num">~$1,225</td>
       </tr>
       
       <tr>
         <td><strong>$100,000</strong></td>
-        <td class="num">6.92</td>
-        <td class="num"><strong>3.46</strong></td>
-        <td class="num">~$2,422</td>
+        <td class="num">7.0</td>
+        <td class="num"><strong>3.5</strong></td>
+        <td class="num">~$2,450</td>
       </tr>
       
       <tr>
         <td><strong>$250,000</strong></td>
-        <td class="num">17.29</td>
-        <td class="num"><strong>8.64</strong></td>
-        <td class="num">~$6,048</td>
+        <td class="num">17.49</td>
+        <td class="num"><strong>8.74</strong></td>
+        <td class="num">~$6,118</td>
       </tr>
       
       <tr>
         <td><strong>$500,000</strong></td>
-        <td class="num">34.58</td>
-        <td class="num"><strong>17.29</strong></td>
-        <td class="num">~$12,103</td>
+        <td class="num">34.98</td>
+        <td class="num"><strong>17.49</strong></td>
+        <td class="num">~$12,243</td>
       </tr>
       
       <tr>
         <td><strong>$1,000,000</strong></td>
-        <td class="num">69.15</td>
-        <td class="num"><strong>34.58</strong></td>
-        <td class="num">~$24,206</td>
+        <td class="num">69.96</td>
+        <td class="num"><strong>34.98</strong></td>
+        <td class="num">~$24,486</td>
       </tr>
       
     </tbody>
@@ -834,37 +898,37 @@
       
       <tr>
         <td><strong>$50,000</strong></td>
-        <td class="num">1.91</td>
-        <td class="num"><strong>0.95</strong></td>
-        <td class="num">~$950</td>
+        <td class="num">1.94</td>
+        <td class="num"><strong>0.97</strong></td>
+        <td class="num">~$970</td>
       </tr>
       
       <tr>
         <td><strong>$100,000</strong></td>
-        <td class="num">3.82</td>
-        <td class="num"><strong>1.91</strong></td>
-        <td class="num">~$1,910</td>
+        <td class="num">3.89</td>
+        <td class="num"><strong>1.94</strong></td>
+        <td class="num">~$1,940</td>
       </tr>
       
       <tr>
         <td><strong>$250,000</strong></td>
-        <td class="num">9.54</td>
-        <td class="num"><strong>4.77</strong></td>
-        <td class="num">~$4,770</td>
+        <td class="num">9.72</td>
+        <td class="num"><strong>4.86</strong></td>
+        <td class="num">~$4,860</td>
       </tr>
       
       <tr>
         <td><strong>$500,000</strong></td>
-        <td class="num">19.08</td>
-        <td class="num"><strong>9.54</strong></td>
-        <td class="num">~$9,540</td>
+        <td class="num">19.43</td>
+        <td class="num"><strong>9.72</strong></td>
+        <td class="num">~$9,720</td>
       </tr>
       
       <tr>
         <td><strong>$1,000,000</strong></td>
-        <td class="num">38.15</td>
-        <td class="num"><strong>19.08</strong></td>
-        <td class="num">~$19,080</td>
+        <td class="num">38.86</td>
+        <td class="num"><strong>19.43</strong></td>
+        <td class="num">~$19,430</td>
       </tr>
       
     </tbody>
@@ -987,7 +1051,7 @@
       </div>
     </nav>
     <div class="footer-bottom">
-      <span>US-equity explorer · Generated 2026-09-14 17:28 PDT</span>
+      <span>US-equity explorer · Generated 2026-09-16 18:39 PDT</span>
       <span class="muted">© 2026 HeRAI Screener · For informational use only · Not investment advice · <a href="/">heraiscreener.com</a></span>
     </div>
     <div class="footer-disclaimer">
