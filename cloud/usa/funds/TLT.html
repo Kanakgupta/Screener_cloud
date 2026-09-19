@@ -156,7 +156,15 @@
 
 
 
+  
+  
+  
 
+
+
+  
+  
+  
 
 
 
@@ -164,13 +172,64 @@
 <div class="co-snap-card" id="snapshot" style="margin-bottom:24px;">
   <div class="co-snap-header">
     <span class="co-snap-label">📊 Investment Snapshot</span>
-    
+    <span class="co-snap-trend snap-neutral">Moderate</span>
   </div>
 
   
   
 
   
+  
+  <div class="co-snap-section">
+    <span class="co-snap-section-title">Performance Returns</span>
+    <div class="co-snap-returns">
+      
+        
+        <div class="co-snap-ret">
+          <span>1M</span>
+          <strong class="snap-bear">-1.8%</strong>
+        </div>
+        
+      
+        
+        <div class="co-snap-ret">
+          <span>3M</span>
+          <strong class="snap-bear">-5.3%</strong>
+        </div>
+        
+      
+        
+        <div class="co-snap-ret">
+          <span>6M</span>
+          <strong class="snap-bear">-5.0%</strong>
+        </div>
+        
+      
+        
+        <div class="co-snap-ret">
+          <span>YTD</span>
+          <strong class="snap-bear">-3.8%</strong>
+        </div>
+        
+      
+        
+      
+        
+        <div class="co-snap-ret">
+          <span>3Y</span>
+          <strong class="snap-bull">+4.0%</strong>
+        </div>
+        
+      
+        
+        <div class="co-snap-ret">
+          <span>5Y</span>
+          <strong class="snap-bear">-33.4%</strong>
+        </div>
+        
+      
+    </div>
+  </div>
   
 
   
@@ -186,6 +245,36 @@
   </div>
 
   
+  
+  <div class="co-snap-section">
+    <span class="co-snap-section-title">Risk Assessment</span>
+    <ul class="co-snap-signals">
+      
+      <li>
+        <span>Annual Volatility</span>
+        <strong class="snap-bull">
+          9.2% &middot; Low
+        </strong>
+      </li>
+      
+      
+      <li>
+        <span>Worst 1-Year Drawdown</span>
+        <strong class="snap-bull">
+          -8.7% &middot; Resilient — contained loss periods
+        </strong>
+      </li>
+      
+      
+      <li>
+        <span>Risk-Adjusted Return</span>
+        <strong class="snap-bear">
+          Sharpe -0.47 &middot; Poor — high risk, low reward
+        </strong>
+      </li>
+      
+    </ul>
+  </div>
   
 
   <p class="muted small" style="font-style:italic;margin-top:10px;">Auto-generated from fund data and price history. Not investment advice — verify with the fund issuer's factsheet before investing.</p>
@@ -257,6 +346,58 @@
 
 
 
+<section class="ratio-tile" id="performance">
+  <h3 class="ratio-tile-title">Performance Returns</h3>
+  <div class="ratio-row">
+    
+      
+      <div>
+        <div class="ratio-label">1M</div>
+        <div class="ratio-val neg">-1.76%</div>
+      </div>
+      
+    
+      
+      <div>
+        <div class="ratio-label">3M</div>
+        <div class="ratio-val neg">-5.25%</div>
+      </div>
+      
+    
+      
+      <div>
+        <div class="ratio-label">6M</div>
+        <div class="ratio-val neg">-4.96%</div>
+      </div>
+      
+    
+      
+      <div>
+        <div class="ratio-label">YTD</div>
+        <div class="ratio-val neg">-3.77%</div>
+      </div>
+      
+    
+      
+    
+      
+      <div>
+        <div class="ratio-label">3Y</div>
+        <div class="ratio-val pos">+4.02%</div>
+      </div>
+      
+    
+      
+      <div>
+        <div class="ratio-label">5Y</div>
+        <div class="ratio-val neg">-33.40%</div>
+      </div>
+      
+    
+  </div>
+  <p class="muted small" style="margin-top:8px;">Total price return over each window. 3Y/5Y use weekly close history; shorter windows use daily closes.</p>
+</section>
+
 
 
 
@@ -264,7 +405,16 @@
   <h3 class="ratio-tile-title">Risk &amp; Volatility</h3>
   <div class="ratio-row">
     
+    <div><div class="ratio-label">Volatility (ann.)</div>
+      <div class="ratio-val">9.2%</div></div>
     
+    
+    <div><div class="ratio-label">Max Drawdown (1Y)</div>
+      <div class="ratio-val neg">-8.7%</div></div>
+    
+    
+    <div><div class="ratio-label">Sharpe-like</div>
+      <div class="ratio-val">-0.47</div></div>
     
     
   </div>
@@ -274,8 +424,44 @@
 
 
 
+<section class="ratio-tile" id="trend">
+  <h3 class="ratio-tile-title">Technical Trend</h3>
+  <div class="ratio-row">
+    
+    <div><div class="ratio-label">SMA 20</div>
+      <div class="ratio-val">81.85</div></div>
+    
+    
+    <div><div class="ratio-label">SMA 50</div>
+      <div class="ratio-val">82.27</div></div>
+    
+    
+    <div><div class="ratio-label">SMA 200</div>
+      <div class="ratio-val">84.36</div></div>
+    
+    
+    <div><div class="ratio-label">RSI (14)</div>
+      <div class="ratio-val ">35.2</div></div>
+    
+  </div>
+  <p style="margin-top:10px;"><strong>Signal:</strong> Bearish (price &lt; SMA50 &lt; SMA200)</p>
+  <p class="muted small">Computed from daily close history. SMA-50 above SMA-200 is the classic “golden cross” trend regime. RSI &gt; 70 overbought · RSI &lt; 30 oversold.</p>
+</section>
 
 
+
+
+<section class="proscons">
+  <div class="pros">
+    <h3>PROS</h3>
+    <ul><li>Low volatility (~9% annualized).</li></ul>
+  </div>
+  <div class="cons">
+    <h3>CONS</h3>
+    <p class="muted">No notable concerns flagged.</p>
+  </div>
+</section>
+<p class="muted small">* The pros and cons are auto-generated from fund metrics.</p>
 
 
 
@@ -388,7 +574,7 @@
       </div>
     </nav>
     <div class="footer-bottom">
-      <span>US-equity explorer · Generated 2026-09-17 16:27 PDT</span>
+      <span>US-equity explorer · Generated 2026-09-18 22:46 PDT</span>
       <span class="muted">© 2026 HeRAI Screener · For informational use only · Not investment advice · <a href="/">heraiscreener.com</a></span>
     </div>
     <div class="footer-disclaimer">
@@ -773,8 +959,8 @@ window.addEventListener('resize', initStickyScrollbars);
 <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.3.1/dist/chartjs-adapter-luxon.umd.min.js"></script>
 <script>
-const HIST_1Y = [];   // [{date, close}, ...] daily
-const HIST_5Y = [];   // [{date, close}, ...] weekly
+const HIST_1Y = [{"date": "2025-09-19", "close": 85.1201}, {"date": "2025-09-22", "close": 84.8141}, {"date": "2025-09-23", "close": 85.407}, {"date": "2025-09-24", "close": 85.0819}, {"date": "2025-09-25", "close": 85.0819}, {"date": "2025-09-26", "close": 85.0054}, {"date": "2025-09-29", "close": 85.7034}, {"date": "2025-09-30", "close": 85.4548}, {"date": "2025-10-01", "close": 85.6755}, {"date": "2025-10-02", "close": 85.925}, {"date": "2025-10-03", "close": 85.7618}, {"date": "2025-10-06", "close": 85.0806}, {"date": "2025-10-07", "close": 85.5699}, {"date": "2025-10-08", "close": 85.6371}, {"date": "2025-10-09", "close": 85.5699}, {"date": "2025-10-10", "close": 86.9516}, {"date": "2025-10-13", "close": 86.9037}, {"date": "2025-10-14", "close": 87.1819}, {"date": "2025-10-15", "close": 86.99}, {"date": "2025-10-16", "close": 87.6425}, {"date": "2025-10-17", "close": 87.5082}, {"date": "2025-10-20", "close": 87.844}, {"date": "2025-10-21", "close": 88.2758}, {"date": "2025-10-22", "close": 88.3334}, {"date": "2025-10-23", "close": 87.7289}, {"date": "2025-10-24", "close": 87.7672}, {"date": "2025-10-27", "close": 88.0647}, {"date": "2025-10-28", "close": 88.295}, {"date": "2025-10-29", "close": 87.4026}, {"date": "2025-10-30", "close": 86.8941}, {"date": "2025-10-31", "close": 86.635}, {"date": "2025-11-03", "close": 86.4183}, {"date": "2025-11-04", "close": 86.6109}, {"date": "2025-11-05", "close": 85.6672}, {"date": "2025-11-06", "close": 86.4376}, {"date": "2025-11-07", "close": 86.2546}, {"date": "2025-11-10", "close": 86.2354}, {"date": "2025-11-11", "close": 86.6302}, {"date": "2025-11-12", "close": 86.7843}, {"date": "2025-11-13", "close": 86.0717}, {"date": "2025-11-14", "close": 85.5805}, {"date": "2025-11-17", "close": 85.7924}, {"date": "2025-11-18", "close": 85.7635}, {"date": "2025-11-19", "close": 85.5902}, {"date": "2025-11-20", "close": 85.9272}, {"date": "2025-11-21", "close": 86.1872}, {"date": "2025-11-24", "close": 86.6783}, {"date": "2025-11-25", "close": 86.8998}, {"date": "2025-11-26", "close": 87.285}, {"date": "2025-11-28", "close": 86.8709}, {"date": "2025-12-01", "close": 85.7895}, {"date": "2025-12-02", "close": 85.8282}, {"date": "2025-12-03", "close": 86.0698}, {"date": "2025-12-04", "close": 85.6059}, {"date": "2025-12-05", "close": 85.2097}, {"date": "2025-12-08", "close": 84.9294}, {"date": "2025-12-09", "close": 85.0164}, {"date": "2025-12-10", "close": 85.3449}, {"date": "2025-12-11", "close": 85.229}, {"date": "2025-12-12", "close": 84.4075}, {"date": "2025-12-15", "close": 84.4655}, {"date": "2025-12-16", "close": 84.9294}, {"date": "2025-12-17", "close": 84.8521}, {"date": "2025-12-18", "close": 85.258}, {"date": "2025-12-19", "close": 84.9398}, {"date": "2025-12-22", "close": 84.7554}, {"date": "2025-12-23", "close": 84.8913}, {"date": "2025-12-24", "close": 85.4054}, {"date": "2025-12-26", "close": 85.1241}, {"date": "2025-12-29", "close": 85.4443}, {"date": "2025-12-30", "close": 85.2405}, {"date": "2025-12-31", "close": 84.5614}, {"date": "2026-01-02", "close": 84.4353}, {"date": "2026-01-05", "close": 84.8524}, {"date": "2026-01-06", "close": 84.6778}, {"date": "2026-01-07", "close": 85.1726}, {"date": "2026-01-08", "close": 84.7457}, {"date": "2026-01-09", "close": 85.3084}, {"date": "2026-01-12", "close": 85.0562}, {"date": "2026-01-13", "close": 85.2017}, {"date": "2026-01-14", "close": 85.6965}, {"date": "2026-01-15", "close": 85.6771}, {"date": "2026-01-16", "close": 85.1823}, {"date": "2026-01-20", "close": 84.0666}, {"date": "2026-01-21", "close": 84.7069}, {"date": "2026-01-22", "close": 85.0756}, {"date": "2026-01-23", "close": 85.3084}, {"date": "2026-01-26", "close": 85.7159}, {"date": "2026-01-27", "close": 85.1823}, {"date": "2026-01-28", "close": 84.9883}, {"date": "2026-01-29", "close": 85.0077}, {"date": "2026-01-30", "close": 84.5323}, {"date": "2026-02-02", "close": 84.2907}, {"date": "2026-02-03", "close": 84.4953}, {"date": "2026-02-04", "close": 84.281}, {"date": "2026-02-05", "close": 85.1965}, {"date": "2026-02-06", "close": 85.2549}, {"date": "2026-02-09", "close": 85.2354}, {"date": "2026-02-10", "close": 86.2191}, {"date": "2026-02-11", "close": 85.7613}, {"date": "2026-02-12", "close": 86.9008}, {"date": "2026-02-13", "close": 87.378}, {"date": "2026-02-17", "close": 87.5241}, {"date": "2026-02-18", "close": 87.193}, {"date": "2026-02-19", "close": 87.2806}, {"date": "2026-02-20", "close": 87.0761}, {"date": "2026-02-23", "close": 87.3975}, {"date": "2026-02-24", "close": 87.5533}, {"date": "2026-02-25", "close": 87.5631}, {"date": "2026-02-26", "close": 87.9136}, {"date": "2026-02-27", "close": 88.4493}, {"date": "2026-03-02", "close": 87.5611}, {"date": "2026-03-03", "close": 87.3852}, {"date": "2026-03-04", "close": 87.1116}, {"date": "2026-03-05", "close": 86.7598}, {"date": "2026-03-06", "close": 86.4374}, {"date": "2026-03-09", "close": 87.1898}, {"date": "2026-03-10", "close": 86.2615}, {"date": "2026-03-11", "close": 85.1476}, {"date": "2026-03-12", "close": 84.9814}, {"date": "2026-03-13", "close": 84.5613}, {"date": "2026-03-16", "close": 85.216}, {"date": "2026-03-17", "close": 85.4505}, {"date": "2026-03-18", "close": 84.9717}, {"date": "2026-03-19", "close": 85.4896}, {"date": "2026-03-20", "close": 83.8675}, {"date": "2026-03-23", "close": 84.4147}, {"date": "2026-03-24", "close": 84.0434}, {"date": "2026-03-25", "close": 84.8544}, {"date": "2026-03-26", "close": 84.1411}, {"date": "2026-03-27", "close": 83.6818}, {"date": "2026-03-30", "close": 84.7958}, {"date": "2026-03-31", "close": 84.7078}, {"date": "2026-04-01", "close": 84.6245}, {"date": "2026-04-02", "close": 85.1444}, {"date": "2026-04-06", "close": 85.0071}, {"date": "2026-04-07", "close": 84.9973}, {"date": "2026-04-08", "close": 85.2719}, {"date": "2026-04-09", "close": 85.0561}, {"date": "2026-04-10", "close": 84.8501}, {"date": "2026-04-13", "close": 85.1052}, {"date": "2026-04-14", "close": 85.5564}, {"date": "2026-04-15", "close": 85.1836}, {"date": "2026-04-16", "close": 84.6441}, {"date": "2026-04-17", "close": 85.4191}, {"date": "2026-04-20", "close": 85.3995}, {"date": "2026-04-21", "close": 84.9286}, {"date": "2026-04-22", "close": 85.0954}, {"date": "2026-04-23", "close": 84.909}, {"date": "2026-04-24", "close": 85.0659}, {"date": "2026-04-27", "close": 84.6441}, {"date": "2026-04-28", "close": 84.7324}, {"date": "2026-04-29", "close": 84.0751}, {"date": "2026-04-30", "close": 83.9966}, {"date": "2026-05-01", "close": 84.2969}, {"date": "2026-05-04", "close": 83.6569}, {"date": "2026-05-05", "close": 84.1197}, {"date": "2026-05-06", "close": 84.7597}, {"date": "2026-05-07", "close": 84.3363}, {"date": "2026-05-08", "close": 84.7597}, {"date": "2026-05-11", "close": 84.2477}, {"date": "2026-05-12", "close": 83.6864}, {"date": "2026-05-13", "close": 83.4993}, {"date": "2026-05-14", "close": 83.6175}, {"date": "2026-05-15", "close": 82.3768}, {"date": "2026-05-18", "close": 82.2784}, {"date": "2026-05-19", "close": 81.7466}, {"date": "2026-05-20", "close": 82.623}, {"date": "2026-05-21", "close": 82.9282}, {"date": "2026-05-22", "close": 83.3812}, {"date": "2026-05-26", "close": 83.7947}, {"date": "2026-05-27", "close": 83.9917}, {"date": "2026-05-28", "close": 84.4249}, {"date": "2026-05-29", "close": 84.4446}, {"date": "2026-06-01", "close": 84.4901}, {"date": "2026-06-02", "close": 84.668}, {"date": "2026-06-03", "close": 84.3319}, {"date": "2026-06-04", "close": 84.5197}, {"date": "2026-06-05", "close": 84.0848}, {"date": "2026-06-08", "close": 83.6498}, {"date": "2026-06-09", "close": 84.1441}, {"date": "2026-06-10", "close": 83.9068}, {"date": "2026-06-11", "close": 84.9942}, {"date": "2026-06-12", "close": 84.7866}, {"date": "2026-06-15", "close": 84.7372}, {"date": "2026-06-16", "close": 85.2018}, {"date": "2026-06-17", "close": 85.3402}, {"date": "2026-06-18", "close": 85.7554}, {"date": "2026-06-22", "close": 85.103}, {"date": "2026-06-23", "close": 85.2117}, {"date": "2026-06-24", "close": 86.3782}, {"date": "2026-06-25", "close": 86.3485}, {"date": "2026-06-26", "close": 86.3584}, {"date": "2026-06-29", "close": 86.4474}, {"date": "2026-06-30", "close": 85.4292}, {"date": "2026-07-01", "close": 84.8517}, {"date": "2026-07-02", "close": 84.8418}, {"date": "2026-07-06", "close": 84.7823}, {"date": "2026-07-07", "close": 83.8893}, {"date": "2026-07-08", "close": 83.7008}, {"date": "2026-07-09", "close": 83.8298}, {"date": "2026-07-10", "close": 83.8099}, {"date": "2026-07-13", "close": 83.3139}, {"date": "2026-07-14", "close": 83.423}, {"date": "2026-07-15", "close": 83.5817}, {"date": "2026-07-16", "close": 83.552}, {"date": "2026-07-17", "close": 83.8595}, {"date": "2026-07-20", "close": 83.2345}, {"date": "2026-07-21", "close": 83.0063}, {"date": "2026-07-22", "close": 82.788}, {"date": "2026-07-23", "close": 82.5201}, {"date": "2026-07-24", "close": 82.5995}, {"date": "2026-07-27", "close": 83.0956}, {"date": "2026-07-28", "close": 83.5817}, {"date": "2026-07-29", "close": 82.2026}, {"date": "2026-07-30", "close": 82.153}, {"date": "2026-07-31", "close": 81.6073}, {"date": "2026-08-03", "close": 81.8763}, {"date": "2026-08-04", "close": 82.5039}, {"date": "2026-08-05", "close": 82.6832}, {"date": "2026-08-06", "close": 82.205}, {"date": "2026-08-07", "close": 82.4441}, {"date": "2026-08-10", "close": 81.7467}, {"date": "2026-08-11", "close": 81.8763}, {"date": "2026-08-12", "close": 81.7966}, {"date": "2026-08-13", "close": 82.2747}, {"date": "2026-08-14", "close": 81.7268}, {"date": "2026-08-17", "close": 81.0395}, {"date": "2026-08-18", "close": 81.3483}, {"date": "2026-08-19", "close": 82.7031}, {"date": "2026-08-20", "close": 82.0257}, {"date": "2026-08-21", "close": 81.7368}, {"date": "2026-08-24", "close": 82.2448}, {"date": "2026-08-25", "close": 83.1514}, {"date": "2026-08-26", "close": 82.982}, {"date": "2026-08-27", "close": 82.8127}, {"date": "2026-08-28", "close": 82.5636}, {"date": "2026-08-31", "close": 82.205}, {"date": "2026-09-01", "close": 81.87}, {"date": "2026-09-02", "close": 81.95}, {"date": "2026-09-03", "close": 82.07}, {"date": "2026-09-04", "close": 82.21}, {"date": "2026-09-08", "close": 82.2}, {"date": "2026-09-09", "close": 81.73}, {"date": "2026-09-10", "close": 80.78}, {"date": "2026-09-11", "close": 80.87}, {"date": "2026-09-14", "close": 80.93}, {"date": "2026-09-15", "close": 80.71}, {"date": "2026-09-16", "close": 80.88}, {"date": "2026-09-17", "close": 81.78}, {"date": "2026-09-18", "close": 81.25}];   // [{date, close}, ...] daily
+const HIST_5Y = [{"date": "2021-09-26", "close": 123.1556}, {"date": "2021-10-03", "close": 122.0026}, {"date": "2021-10-10", "close": 119.0899}, {"date": "2021-10-17", "close": 121.7339}, {"date": "2021-10-24", "close": 120.9785}, {"date": "2021-10-31", "close": 123.9666}, {"date": "2021-11-07", "close": 125.4778}, {"date": "2021-11-14", "close": 123.8221}, {"date": "2021-11-21", "close": 124.6878}, {"date": "2021-11-28", "close": 126.5115}, {"date": "2021-12-05", "close": 129.8797}, {"date": "2021-12-12", "close": 125.26}, {"date": "2021-12-19", "close": 127.0607}, {"date": "2021-12-26", "close": 125.1147}, {"date": "2022-01-02", "close": 124.8367}, {"date": "2022-01-09", "close": 119.8412}, {"date": "2022-01-16", "close": 119.7065}, {"date": "2022-01-23", "close": 120.9954}, {"date": "2022-01-30", "close": 120.5742}, {"date": "2022-02-06", "close": 117.2665}, {"date": "2022-02-13", "close": 116.6254}, {"date": "2022-02-20", "close": 116.6085}, {"date": "2022-02-27", "close": 115.4612}, {"date": "2022-03-06", "close": 118.4608}, {"date": "2022-03-13", "close": 113.9585}, {"date": "2022-03-20", "close": 112.7168}, {"date": "2022-03-27", "close": 108.6791}, {"date": "2022-04-03", "close": 111.9928}, {"date": "2022-04-10", "close": 105.8508}, {"date": "2022-04-17", "close": 102.1538}, {"date": "2022-04-24", "close": 101.5108}, {"date": "2022-05-01", "close": 101.054}, {"date": "2022-05-08", "close": 96.3279}, {"date": "2022-05-15", "close": 98.2854}, {"date": "2022-05-22", "close": 100.4294}, {"date": "2022-05-29", "close": 100.9125}, {"date": "2022-06-05", "close": 98.5027}, {"date": "2022-06-12", "close": 96.5841}, {"date": "2022-06-19", "close": 95.1494}, {"date": "2022-06-26", "close": 95.5569}, {"date": "2022-07-03", "close": 98.5192}, {"date": "2022-07-10", "close": 95.6951}, {"date": "2022-07-17", "close": 98.7913}, {"date": "2022-07-24", "close": 100.8414}, {"date": "2022-07-31", "close": 99.8887}, {"date": "2022-08-07", "close": 99.2521}, {"date": "2022-08-14", "close": 98.4681}, {"date": "2022-08-21", "close": 96.3291}, {"date": "2022-08-28", "close": 96.8234}, {"date": "2022-09-04", "close": 94.1245}, {"date": "2022-09-11", "close": 92.4935}, {"date": "2022-09-18", "close": 91.4346}, {"date": "2022-09-25", "close": 90.2646}, {"date": "2022-10-02", "close": 87.4892}, {"date": "2022-10-09", "close": 86.4483}, {"date": "2022-10-16", "close": 84.3768}, {"date": "2022-10-23", "close": 79.7543}, {"date": "2022-10-30", "close": 82.8616}, {"date": "2022-11-06", "close": 80.8517}, {"date": "2022-11-13", "close": 84.001}, {"date": "2022-11-20", "close": 85.5026}, {"date": "2022-11-27", "close": 88.3001}, {"date": "2022-12-04", "close": 92.1144}, {"date": "2022-12-11", "close": 91.4607}, {"date": "2022-12-18", "close": 92.3545}, {"date": "2022-12-25", "close": 88.0864}, {"date": "2023-01-01", "close": 85.8446}, {"date": "2023-01-08", "close": 90.6903}, {"date": "2023-01-15", "close": 92.0441}, {"date": "2023-01-22", "close": 91.5698}, {"date": "2023-01-29", "close": 92.0096}, {"date": "2023-02-05", "close": 92.2376}, {"date": "2023-02-12", "close": 89.3763}, {"date": "2023-02-19", "close": 88.5032}, {"date": "2023-02-26", "close": 87.2843}, {"date": "2023-03-05", "close": 88.2966}, {"date": "2023-03-12", "close": 91.503}, {"date": "2023-03-19", "close": 92.5949}, {"date": "2023-03-26", "close": 92.5949}, {"date": "2023-04-02", "close": 92.1789}, {"date": "2023-04-09", "close": 94.2892}, {"date": "2023-04-16", "close": 91.2919}, {"date": "2023-04-23", "close": 90.7011}, {"date": "2023-04-30", "close": 92.4908}, {"date": "2023-05-07", "close": 91.3568}, {"date": "2023-05-14", "close": 90.8168}, {"date": "2023-05-21", "close": 88.0558}, {"date": "2023-05-28", "close": 88.0471}, {"date": "2023-06-04", "close": 89.0671}, {"date": "2023-06-11", "close": 89.006}, {"date": "2023-06-18", "close": 89.5998}, {"date": "2023-06-25", "close": 90.2373}, {"date": "2023-07-02", "close": 89.8967}, {"date": "2023-07-09", "close": 86.7601}, {"date": "2023-07-16", "close": 88.6953}, {"date": "2023-07-23", "close": 89.0806}, {"date": "2023-07-30", "close": 87.3993}, {"date": "2023-08-06", "close": 84.7602}, {"date": "2023-08-13", "close": 83.7416}, {"date": "2023-08-20", "close": 82.3367}, {"date": "2023-08-27", "close": 83.6099}, {"date": "2023-09-03", "close": 83.5348}, {"date": "2023-09-10", "close": 83.1121}, {"date": "2023-09-17", "close": 81.8703}, {"date": "2023-09-24", "close": 80.5228}, {"date": "2023-10-01", "close": 78.1097}, {"date": "2023-10-08", "close": 74.9114}, {"date": "2023-10-15", "close": 77.4029}, {"date": "2023-10-22", "close": 73.542}, {"date": "2023-10-29", "close": 74.5404}, {"date": "2023-11-05", "close": 77.6864}, {"date": "2023-11-12", "close": 78.0055}, {"date": "2023-11-19", "close": 79.8229}, {"date": "2023-11-26", "close": 79.6101}, {"date": "2023-12-03", "close": 82.6992}, {"date": "2023-12-10", "close": 84.0777}, {"date": "2023-12-17", "close": 88.4616}, {"date": "2023-12-24", "close": 87.8638}, {"date": "2023-12-31", "close": 88.2207}, {"date": "2024-01-07", "close": 85.9099}, {"date": "2024-01-14", "close": 86.1151}, {"date": "2024-01-21", "close": 83.9471}, {"date": "2024-01-28", "close": 83.6705}, {"date": "2024-02-04", "close": 85.9894}, {"date": "2024-02-11", "close": 84.0024}, {"date": "2024-02-18", "close": 83.0267}, {"date": "2024-02-25", "close": 84.0202}, {"date": "2024-03-03", "close": 84.823}, {"date": "2024-03-10", "close": 85.9543}, {"date": "2024-03-17", "close": 83.4492}, {"date": "2024-03-24", "close": 84.383}, {"date": "2024-03-31", "close": 84.9577}, {"date": "2024-04-07", "close": 82.329}, {"date": "2024-04-14", "close": 81.338}, {"date": "2024-04-21", "close": 80.3111}, {"date": "2024-04-28", "close": 79.4913}, {"date": "2024-05-05", "close": 81.2162}, {"date": "2024-05-12", "close": 81.4693}, {"date": "2024-05-19", "close": 82.6174}, {"date": "2024-05-26", "close": 82.6084}, {"date": "2024-06-02", "close": 81.7676}, {"date": "2024-06-09", "close": 82.9995}, {"date": "2024-06-16", "close": 85.875}, {"date": "2024-06-23", "close": 85.2309}, {"date": "2024-06-30", "close": 83.2535}, {"date": "2024-07-07", "close": 84.228}, {"date": "2024-07-14", "close": 85.4838}, {"date": "2024-07-21", "close": 84.5556}, {"date": "2024-07-28", "close": 84.6194}, {"date": "2024-08-04", "close": 89.7313}, {"date": "2024-08-11", "close": 87.887}, {"date": "2024-08-18", "close": 88.9643}, {"date": "2024-08-25", "close": 89.8317}, {"date": "2024-09-01", "close": 88.097}, {"date": "2024-09-08", "close": 91.1958}, {"date": "2024-09-15", "close": 91.9744}, {"date": "2024-09-22", "close": 90.5729}, {"date": "2024-09-29", "close": 90.289}, {"date": "2024-10-06", "close": 87.8055}, {"date": "2024-10-13", "close": 86.1054}, {"date": "2024-10-20", "close": 86.2617}, {"date": "2024-10-27", "close": 84.6719}, {"date": "2024-11-03", "close": 83.759}, {"date": "2024-11-10", "close": 85.2804}, {"date": "2024-11-17", "close": 83.0583}, {"date": "2024-11-24", "close": 83.3441}, {"date": "2024-12-01", "close": 86.645}, {"date": "2024-12-08", "close": 87.3344}, {"date": "2024-12-15", "close": 83.4113}, {"date": "2024-12-22", "close": 82.0265}, {"date": "2024-12-29", "close": 80.9026}, {"date": "2025-01-05", "close": 81.079}, {"date": "2025-01-12", "close": 79.3793}, {"date": "2025-01-19", "close": 80.9862}, {"date": "2025-01-26", "close": 81.014}, {"date": "2025-02-02", "close": 81.5156}, {"date": "2025-02-09", "close": 83.214}, {"date": "2025-02-16", "close": 83.1021}, {"date": "2025-02-23", "close": 83.5309}, {"date": "2025-03-02", "close": 86.1596}, {"date": "2025-03-09", "close": 84.2614}, {"date": "2025-03-16", "close": 84.3175}, {"date": "2025-03-23", "close": 84.8131}, {"date": "2025-03-30", "close": 84.2895}, {"date": "2025-04-06", "close": 87.1356}, {"date": "2025-04-13", "close": 81.5424}, {"date": "2025-04-20", "close": 82.143}, {"date": "2025-04-27", "close": 83.4193}, {"date": "2025-05-04", "close": 82.6337}, {"date": "2025-05-11", "close": 81.9932}, {"date": "2025-05-18", "close": 81.2867}, {"date": "2025-05-25", "close": 79.6384}, {"date": "2025-06-01", "close": 81.2679}, {"date": "2025-06-08", "close": 80.6912}, {"date": "2025-06-15", "close": 81.6177}, {"date": "2025-06-22", "close": 81.769}, {"date": "2025-06-29", "close": 82.6198}, {"date": "2025-07-06", "close": 82.5295}, {"date": "2025-07-13", "close": 81.4097}, {"date": "2025-07-20", "close": 80.8878}, {"date": "2025-07-27", "close": 82.0171}, {"date": "2025-08-03", "close": 83.6546}, {"date": "2025-08-10", "close": 83.1498}, {"date": "2025-08-17", "close": 82.302}, {"date": "2025-08-24", "close": 82.9212}, {"date": "2025-08-31", "close": 82.4925}, {"date": "2025-09-07", "close": 84.6803}, {"date": "2025-09-14", "close": 86.0094}, {"date": "2025-09-21", "close": 85.1201}, {"date": "2025-09-28", "close": 85.0054}, {"date": "2025-10-05", "close": 85.7619}, {"date": "2025-10-12", "close": 86.9516}, {"date": "2025-10-19", "close": 87.5082}, {"date": "2025-10-26", "close": 87.7672}, {"date": "2025-11-02", "close": 86.635}, {"date": "2025-11-09", "close": 86.2546}, {"date": "2025-11-16", "close": 85.5805}, {"date": "2025-11-23", "close": 86.1872}, {"date": "2025-11-30", "close": 86.8709}, {"date": "2025-12-07", "close": 85.2097}, {"date": "2025-12-14", "close": 84.4075}, {"date": "2025-12-21", "close": 84.9398}, {"date": "2025-12-28", "close": 85.1241}, {"date": "2026-01-04", "close": 84.4353}, {"date": "2026-01-11", "close": 85.3084}, {"date": "2026-01-18", "close": 85.1823}, {"date": "2026-01-25", "close": 85.3084}, {"date": "2026-02-01", "close": 84.5323}, {"date": "2026-02-08", "close": 85.2549}, {"date": "2026-02-15", "close": 87.378}, {"date": "2026-02-22", "close": 87.0761}, {"date": "2026-03-01", "close": 88.4493}, {"date": "2026-03-08", "close": 86.4374}, {"date": "2026-03-15", "close": 84.5613}, {"date": "2026-03-22", "close": 83.8675}, {"date": "2026-03-29", "close": 83.6818}, {"date": "2026-04-05", "close": 85.1444}, {"date": "2026-04-12", "close": 84.8501}, {"date": "2026-04-19", "close": 85.4191}, {"date": "2026-04-26", "close": 85.0659}, {"date": "2026-05-03", "close": 84.2969}, {"date": "2026-05-10", "close": 84.7597}, {"date": "2026-05-17", "close": 82.3768}, {"date": "2026-05-24", "close": 83.3812}, {"date": "2026-05-31", "close": 84.4446}, {"date": "2026-06-07", "close": 84.0848}, {"date": "2026-06-14", "close": 84.7866}, {"date": "2026-06-21", "close": 85.7554}, {"date": "2026-06-28", "close": 86.3584}, {"date": "2026-07-05", "close": 84.8418}, {"date": "2026-07-12", "close": 83.8099}, {"date": "2026-07-19", "close": 83.8596}, {"date": "2026-07-26", "close": 82.5995}, {"date": "2026-08-02", "close": 81.6073}, {"date": "2026-08-09", "close": 82.4441}, {"date": "2026-08-16", "close": 81.7268}, {"date": "2026-08-23", "close": 81.7368}, {"date": "2026-08-30", "close": 82.5636}, {"date": "2026-09-06", "close": 82.21}, {"date": "2026-09-13", "close": 80.87}, {"date": "2026-09-20", "close": 81.25}];   // [{date, close}, ...] weekly
 const SECTORS = {};
 const CURR_SYM = "$";
 const TICKERS_FOR_NEWS = ["TLT"];
