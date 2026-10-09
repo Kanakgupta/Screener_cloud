@@ -1,0 +1,17 @@
+# HeRAI Screener
+
+> Free AI-powered stock screener for India (NSE) and US (NYSE, Nasdaq) markets. Data and analysis are regenerated every trading day; housing data is refreshed weekly from Zillow (US) and NHB RESIDEX (India).
+
+## Key pages
+- [India Stock Screener — dashboard](https://heraiscreener.com/india/IND_Stock_Screener.html): market regime, sentiment and screens
+- [India Stock Screener — companies at risk of bankruptcy](https://heraiscreener.com/india/bankrupt.html): daily distress scores by sector (Ohlson O-score, Merton distance-to-default, credit rule book) with per-company dossiers under /bankruptcy-risk/
+- [India Stock Screener — housing market & best time to buy](https://heraiscreener.com/india/realestate.html): heat map, price trends, forecasts and buy-timing signals by state, city (Tier 1/2/3) and locality; static reports under /real-estate/
+- [India Stock Screener — all stocks](https://heraiscreener.com/india/stocks.html): fundamentals and technicals for every covered stock
+- [US Stock Screener — dashboard](https://heraiscreener.com/usa/US_Stock_Screener.html): market regime, sentiment and screens
+- [US Stock Screener — companies at risk of bankruptcy](https://heraiscreener.com/usa/bankrupt.html): daily distress scores by sector (Ohlson O-score, Merton distance-to-default, credit rule book) with per-company dossiers under /bankruptcy-risk/
+- [US Stock Screener — housing market & best time to buy](https://heraiscreener.com/usa/realestate.html): heat map, price trends, forecasts and buy-timing signals by state, city (Tier 1/2/3) and locality; static reports under /real-estate/
+- [US Stock Screener — all stocks](https://heraiscreener.com/usa/stocks.html): fundamentals and technicals for every covered stock
+
+## Notes
+- Risk scores are statistical screens, not predictions that a company will file for bankruptcy.
+- Nothing on this site is investment, legal or real-estate advice.
