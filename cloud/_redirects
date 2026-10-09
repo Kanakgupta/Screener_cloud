@@ -1,0 +1,4 @@
+/usa/bankrupt.html /usa/RiskRadar.html 301
+/usa/bankruptcy-risk/* /usa/risk-radar/:splat 301
+/india/bankrupt.html /india/RiskRadar.html 301
+/india/bankruptcy-risk/* /india/risk-radar/:splat 301

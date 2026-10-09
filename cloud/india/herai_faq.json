@@ -29,7 +29,7 @@
         "reversal",
         "undervalued"
       ],
-      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **CHENNPETRO**\n  Setup: Top YTD\n  Also strong on: High free cash flow, High earnings growth, Low P/E (value), Low EV/EBITDA, High dividend\n- **VHL**\n  Setup: Multi-EMA breakout\n  Also strong on: Low debt, Low P/E (value), Low P/B\n- **VIJIFIN**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n- **PANAMAPET**\n  Setup: High momentum\n  Also strong on: High earnings growth, High revenue growth, Low EV/EBITDA\n- **GAYAPROJ**\n  Setup: Top YTD\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value)\n- **CALSOFT**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n- **ONELIFECAP**\n  Setup: High momentum, Top YTD\n  Also strong on: High revenue growth\n- **RAJPALAYAM**\n  Setup: Top YTD\n  Also strong on: High earnings growth, Low P/B\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Entry / stop / target levels are derived from HeRAI's own swing screener rows so the payoff profile stays grounded in the underlying chart setup — open a ticker for the full picture before acting.",
+      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **CHENNPETRO**\n  Setup: Top YTD\n  Also strong on: High free cash flow, High earnings growth, Low P/E (value), Low EV/EBITDA, High dividend\n- **CALSOFT**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n- **VIJIFIN**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n- **GAYAPROJ**\n  Setup: Top YTD\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value)\n- **PANAMAPET**\n  Setup: High momentum\n  Also strong on: High earnings growth, High revenue growth, Low EV/EBITDA\n- **VHL**\n  Setup: Multi-EMA breakout\n  Also strong on: Low debt, Low P/E (value), Low P/B\n- **GPTINFRA**\n  Setup: High momentum, Multi-EMA breakout\n  Also strong on: High dividend\n- **STLTECH**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Entry / stop / target levels are derived from HeRAI's own swing screener rows so the payoff profile stays grounded in the underlying chart setup — open a ticker for the full picture before acting.",
       "sources": [
         {
           "title": "Top YTD",
@@ -56,18 +56,6 @@
           "url": "/india/screens/high-dividend.html"
         },
         {
-          "title": "Multi-EMA breakout",
-          "url": "/india/screens/ema-multi-up-5d.html"
-        },
-        {
-          "title": "Low debt",
-          "url": "/india/screens/low-debt.html"
-        },
-        {
-          "title": "Low P/B",
-          "url": "/india/screens/low-pb.html"
-        },
-        {
           "title": "3-month momentum",
           "url": "/india/screens/momentum-3m.html"
         },
@@ -78,6 +66,18 @@
         {
           "title": "High momentum",
           "url": "/india/screens/high-momentum.html"
+        },
+        {
+          "title": "Multi-EMA breakout",
+          "url": "/india/screens/ema-multi-up-5d.html"
+        },
+        {
+          "title": "Low debt",
+          "url": "/india/screens/low-debt.html"
+        },
+        {
+          "title": "Low P/B",
+          "url": "/india/screens/low-pb.html"
         }
       ]
     },
@@ -312,7 +312,7 @@
         "reversal",
         "undervalued"
       ],
-      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **CHENNPETRO**\n  Setup: Top YTD\n  Also strong on: High free cash flow, High earnings growth, Low P/E (value), Low EV/EBITDA, High dividend\n- **VHL**\n  Setup: Multi-EMA breakout\n  Also strong on: Low debt, Low P/E (value), Low P/B\n- **VIJIFIN**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n- **PANAMAPET**\n  Setup: High momentum\n  Also strong on: High earnings growth, High revenue growth, Low EV/EBITDA\n- **GAYAPROJ**\n  Setup: Top YTD\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value)\n- **CALSOFT**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n- **ONELIFECAP**\n  Setup: High momentum, Top YTD\n  Also strong on: High revenue growth\n- **RAJPALAYAM**\n  Setup: Top YTD\n  Also strong on: High earnings growth, Low P/B\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Entry / stop / target levels are derived from HeRAI's own swing screener rows so the payoff profile stays grounded in the underlying chart setup — open a ticker for the full picture before acting.",
+      "answer": "Here are setups where HeRAI's technical and fundamental screens currently agree (ranked by how many independent signals line up):\n\n- **CHENNPETRO**\n  Setup: Top YTD\n  Also strong on: High free cash flow, High earnings growth, Low P/E (value), Low EV/EBITDA, High dividend\n- **CALSOFT**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n- **VIJIFIN**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth, High revenue growth\n- **GAYAPROJ**\n  Setup: Top YTD\n  Also strong on: High earnings growth, High revenue growth, Low P/E (value)\n- **PANAMAPET**\n  Setup: High momentum\n  Also strong on: High earnings growth, High revenue growth, Low EV/EBITDA\n- **VHL**\n  Setup: Multi-EMA breakout\n  Also strong on: Low debt, Low P/E (value), Low P/B\n- **GPTINFRA**\n  Setup: High momentum, Multi-EMA breakout\n  Also strong on: High dividend\n- **STLTECH**\n  Setup: 3-month momentum, Top YTD\n  Also strong on: High earnings growth\n\nThis is a data-driven shortlist to research further, not a buy or sell call. Entry / stop / target levels are derived from HeRAI's own swing screener rows so the payoff profile stays grounded in the underlying chart setup — open a ticker for the full picture before acting.",
       "sources": [
         {
           "title": "Top YTD",
@@ -339,18 +339,6 @@
           "url": "/india/screens/high-dividend.html"
         },
         {
-          "title": "Multi-EMA breakout",
-          "url": "/india/screens/ema-multi-up-5d.html"
-        },
-        {
-          "title": "Low debt",
-          "url": "/india/screens/low-debt.html"
-        },
-        {
-          "title": "Low P/B",
-          "url": "/india/screens/low-pb.html"
-        },
-        {
           "title": "3-month momentum",
           "url": "/india/screens/momentum-3m.html"
         },
@@ -361,6 +349,18 @@
         {
           "title": "High momentum",
           "url": "/india/screens/high-momentum.html"
+        },
+        {
+          "title": "Multi-EMA breakout",
+          "url": "/india/screens/ema-multi-up-5d.html"
+        },
+        {
+          "title": "Low debt",
+          "url": "/india/screens/low-debt.html"
+        },
+        {
+          "title": "Low P/B",
+          "url": "/india/screens/low-pb.html"
         }
       ]
     },
