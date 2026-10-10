@@ -1,7 +1,2 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap><loc>https://heraiscreener.com/india/sitemap.xml</loc><lastmod>2026-06-09</lastmod></sitemap>
-  <sitemap><loc>https://heraiscreener.com/india/stocks-sitemap.xml</loc><lastmod>2026-06-09</lastmod></sitemap>
-  <sitemap><loc>https://heraiscreener.com/usa/sitemap.xml</loc><lastmod>2026-06-09</lastmod></sitemap>
-  <sitemap><loc>https://heraiscreener.com/usa/stocks-sitemap.xml</loc><lastmod>2026-06-09</lastmod></sitemap>
-</sitemapindex>
+<?xml version='1.0' encoding='utf-8'?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><sitemap><loc>https://heraiscreener.com/india/sitemap.xml</loc><lastmod>2026-10-10</lastmod></sitemap><sitemap><loc>https://heraiscreener.com/usa/sitemap.xml</loc><lastmod>2026-10-09</lastmod></sitemap></sitemapindex>
