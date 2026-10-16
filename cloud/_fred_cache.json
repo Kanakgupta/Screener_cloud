@@ -1,5 +1,5 @@
 {
-  "_fetched_at": "2026-10-15T23:25:58.933044+00:00",
+  "_fetched_at": "2026-10-16T23:25:43.651285+00:00",
   "FEDFUNDS": {
     "id": "FEDFUNDS",
     "label": "Fed Funds Rate",
@@ -87,13 +87,13 @@
   "INDPRO": {
     "id": "INDPRO",
     "label": "Industrial Production",
-    "value": 103.0682,
-    "prev": 103.0454,
-    "change": 0.02,
-    "change_pct": 0.02,
-    "date": "2026-08-01",
+    "value": 103.9506,
+    "prev": 103.2664,
+    "change": 0.68,
+    "change_pct": 0.66,
+    "date": "2026-09-01",
     "unit": "Index",
     "freq": "monthly",
-    "next_release": "2026-10-15"
+    "next_release": "2026-11-15"
   }
 }
