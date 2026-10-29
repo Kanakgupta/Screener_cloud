@@ -1,5 +1,5 @@
 {
-  "_fetched_at": "2026-10-28T23:56:00.261173+00:00",
+  "_fetched_at": "2026-10-29T23:24:43.517565+00:00",
   "FEDFUNDS": {
     "id": "FEDFUNDS",
     "label": "Fed Funds Rate",
@@ -39,14 +39,14 @@
   "GDP": {
     "id": "GDP",
     "label": "GDP (Nominal)",
-    "value": 32563.03,
-    "prev": 31906.274,
-    "change": 656.76,
-    "change_pct": 2.06,
-    "date": "2026-04-01",
+    "value": 33010.036,
+    "prev": 32563.03,
+    "change": 447.01,
+    "change_pct": 1.37,
+    "date": "2026-07-01",
     "unit": "B USD",
     "freq": "quarterly",
-    "next_release": "2026-08-15"
+    "next_release": "2026-11-15"
   },
   "UNRATE": {
     "id": "UNRATE",
