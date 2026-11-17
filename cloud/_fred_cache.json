@@ -1,40 +1,40 @@
 {
-  "_fetched_at": "2026-11-11T00:31:14.011603+00:00",
+  "_fetched_at": "2026-11-17T02:31:17.010295+00:00",
   "FEDFUNDS": {
     "id": "FEDFUNDS",
     "label": "Fed Funds Rate",
-    "value": 3.75,
-    "prev": 3.63,
-    "change": 0.12,
-    "change_pct": 3.31,
-    "date": "2026-09-01",
+    "value": 3.88,
+    "prev": 3.75,
+    "change": 0.13,
+    "change_pct": 3.47,
+    "date": "2026-10-01",
     "unit": "%",
     "freq": "monthly",
-    "next_release": "2026-11-15"
+    "next_release": "2026-12-15"
   },
   "CPIAUCSL": {
     "id": "CPIAUCSL",
     "label": "CPI (All Urban)",
-    "value": 336.298,
-    "prev": 334.131,
-    "change": 2.17,
-    "change_pct": 0.65,
-    "date": "2026-09-01",
+    "value": 337.476,
+    "prev": 336.298,
+    "change": 1.18,
+    "change_pct": 0.35,
+    "date": "2026-10-01",
     "unit": "Index",
     "freq": "monthly",
-    "next_release": "2026-11-15"
+    "next_release": "2026-12-15"
   },
   "PPIFIS": {
     "id": "PPIFIS",
     "label": "PPI (Final Demand)",
-    "value": 159.78,
-    "prev": 157.662,
-    "change": 2.12,
-    "change_pct": 1.34,
-    "date": "2026-09-01",
+    "value": 160.254,
+    "prev": 159.699,
+    "change": 0.55,
+    "change_pct": 0.35,
+    "date": "2026-10-01",
     "unit": "Index",
     "freq": "monthly",
-    "next_release": "2026-11-15"
+    "next_release": "2026-12-15"
   },
   "GDP": {
     "id": "GDP",
@@ -51,26 +51,26 @@
   "UNRATE": {
     "id": "UNRATE",
     "label": "Unemployment Rate",
-    "value": 4.2,
-    "prev": 4.1,
-    "change": 0.1,
-    "change_pct": 2.44,
-    "date": "2026-09-01",
+    "value": 4.1,
+    "prev": 4.2,
+    "change": -0.1,
+    "change_pct": -2.38,
+    "date": "2026-10-01",
     "unit": "%",
     "freq": "monthly",
-    "next_release": "2026-11-15"
+    "next_release": "2026-12-15"
   },
   "PAYEMS": {
     "id": "PAYEMS",
     "label": "Non-Farm Payrolls",
-    "value": 159044.0,
-    "prev": 159015.0,
-    "change": 29.0,
-    "change_pct": 0.02,
-    "date": "2026-09-01",
+    "value": 159293.0,
+    "prev": 159128.0,
+    "change": 165.0,
+    "change_pct": 0.1,
+    "date": "2026-10-01",
     "unit": "K",
     "freq": "monthly",
-    "next_release": "2026-11-15"
+    "next_release": "2026-12-15"
   },
   "UMCSENT": {
     "id": "UMCSENT",
