@@ -1,5 +1,5 @@
 {
-  "_fetched_at": "2026-11-20T00:29:03.704562+00:00",
+  "_fetched_at": "2026-11-21T00:23:36.697574+00:00",
   "FEDFUNDS": {
     "id": "FEDFUNDS",
     "label": "Fed Funds Rate",
@@ -75,14 +75,14 @@
   "UMCSENT": {
     "id": "UMCSENT",
     "label": "Consumer Confidence",
-    "value": 48.1,
-    "prev": 51.7,
-    "change": -3.6,
-    "change_pct": -6.96,
-    "date": "2026-09-01",
+    "value": 48.0,
+    "prev": 48.1,
+    "change": -0.1,
+    "change_pct": -0.21,
+    "date": "2026-10-01",
     "unit": "Index",
     "freq": "monthly",
-    "next_release": "2026-11-15"
+    "next_release": "2026-12-15"
   },
   "INDPRO": {
     "id": "INDPRO",
