@@ -1,5 +1,5 @@
 {
-  "_fetched_at": "2026-11-24T00:24:14.911220+00:00",
+  "_fetched_at": "2026-11-25T00:50:20.034296+00:00",
   "FEDFUNDS": {
     "id": "FEDFUNDS",
     "label": "Fed Funds Rate",
@@ -87,9 +87,9 @@
   "INDPRO": {
     "id": "INDPRO",
     "label": "Industrial Production",
-    "value": 103.3954,
-    "prev": 103.8458,
-    "change": -0.45,
+    "value": 102.2421,
+    "prev": 102.6785,
+    "change": -0.44,
     "change_pct": -0.43,
     "date": "2026-10-01",
     "unit": "Index",
