@@ -1,5 +1,5 @@
 {
-  "_fetched_at": "2026-11-25T00:50:20.034296+00:00",
+  "_fetched_at": "2026-11-26T00:26:53.802981+00:00",
   "FEDFUNDS": {
     "id": "FEDFUNDS",
     "label": "Fed Funds Rate",
@@ -39,10 +39,10 @@
   "GDP": {
     "id": "GDP",
     "label": "GDP (Nominal)",
-    "value": 33010.036,
+    "value": 33056.203,
     "prev": 32563.03,
-    "change": 447.01,
-    "change_pct": 1.37,
+    "change": 493.17,
+    "change_pct": 1.51,
     "date": "2026-07-01",
     "unit": "B USD",
     "freq": "quarterly",
